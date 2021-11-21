@@ -1,0 +1,3674 @@
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"u8x8_d_ssd1306_128x32.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.u8x8_d_ssd1306_128x32_generic,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	u8x8_d_ssd1306_128x32_generic, %function
+  24              	u8x8_d_ssd1306_128x32_generic:
+  25              	.LFB0:
+  26              		.file 1 "..\\u8g2\\csrc\\u8x8_d_ssd1306_128x32.c"
+   1:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** /*
+   2:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+   3:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   u8x8_d_ssd1306_128x32.c
+   4:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+   5:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   Universal 8bit Graphics Library (https://github.com/olikraus/u8g2/)
+   6:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+   7:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   Copyright (c) 2016, olikraus@gmail.com
+   8:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   All rights reserved.
+   9:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  10:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   Redistribution and use in source and binary forms, with or without modification, 
+  11:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   are permitted provided that the following conditions are met:
+  12:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  13:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   * Redistributions of source code must retain the above copyright notice, this list 
+  14:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     of conditions and the following disclaimer.
+  15:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     
+  16:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   * Redistributions in binary form must reproduce the above copyright notice, this 
+  17:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     list of conditions and the following disclaimer in the documentation and/or other 
+  18:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     materials provided with the distribution.
+  19:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  20:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+  21:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+  22:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  23:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+  24:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+  25:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  26:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  27:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+  28:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+  29:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+  30:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  31:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 2
+
+
+  32:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
+  33:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   
+  34:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** */
+  35:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  36:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  37:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** #include "u8x8.h"
+  38:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  39:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  40:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  41:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** /* UG-2832HSWEG02 Datasheet, Section 4.4 */
+  42:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** static const uint8_t u8x8_d_ssd1306_128x32_univision_init_seq[] = {
+  43:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     
+  44:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  45:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   
+  46:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   
+  47:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0ae),		                /* display off */
+  48:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0x0d5, 0x080),		/* clock divide ratio (0x00=1) and oscillator frequency (0x8) */
+  49:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0x0a8, 0x01f),		/* multiplex ratio */
+  50:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0x0d3, 0x000),		/* display offset */
+  51:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x040),		                /* set display start line to 0 */
+  52:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0x08d, 0x014),		/* [2] charge pump setting (p62): 0x014 enable, 0x010 disable */
+  53:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0x020, 0x000),		/* horizontal addressing mode */
+  54:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   
+  55:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0a1),				/* segment remap a0/a1*/
+  56:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0c8),				/* c0: scan dir normal, c8: reverse */
+  57:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   // Flipmode
+  58:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   // U8X8_C(0x0a0),				/* segment remap a0/a1*/
+  59:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   // U8X8_C(0x0c0),				/* c0: scan dir normal, c8: reverse */
+  60:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   
+  61:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0x0da, 0x002),		/* com pin HW config, sequential com pin config (bit 4), disable left/rig
+  62:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0x081, 0x08f),		/* [2] set contrast control */
+  63:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0x0d9, 0x0f1),		/* [2] pre-charge period 0x022/f1*/
+  64:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0x0db, 0x040),		/* vcomh deselect level */
+  65:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   
+  66:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x02e),				/* Deactivate scroll */ 
+  67:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0a4),				/* output ram to display */
+  68:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0a6),				/* none inverted normal display mode */
+  69:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     
+  70:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  71:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END()             			/* end of sequence */
+  72:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** };
+  73:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  74:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** static const uint8_t u8x8_d_ssd1306_128x32_univision_powersave0_seq[] = {
+  75:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  76:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0af),		                /* display on */
+  77:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  78:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END()             			/* end of sequence */
+  79:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** };
+  80:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  81:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** static const uint8_t u8x8_d_ssd1306_128x32_univision_powersave1_seq[] = {
+  82:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  83:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0ae),		                /* display off */
+  84:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  85:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END()             			/* end of sequence */
+  86:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** };
+  87:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  88:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** static const uint8_t u8x8_d_ssd1306_128x32_univision_flip0_seq[] = {
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 3
+
+
+  89:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  90:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0a1),				/* segment remap a0/a1*/
+  91:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0c8),				/* c0: scan dir normal, c8: reverse */
+  92:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  93:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END()             			/* end of sequence */
+  94:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** };
+  95:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+  96:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** static const uint8_t u8x8_d_ssd1306_128x32_univision_flip1_seq[] = {
+  97:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  98:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0a0),				/* segment remap a0/a1*/
+  99:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x0c0),				/* c0: scan dir normal, c8: reverse */
+ 100:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+ 101:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END()             			/* end of sequence */
+ 102:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** };
+ 103:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 104:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 105:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** static uint8_t u8x8_d_ssd1306_128x32_generic(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_
+ 106:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** {
+  27              		.loc 1 106 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  33              		.cfi_def_cfa_offset 24
+  34              		.cfi_offset 3, -24
+  35              		.cfi_offset 4, -20
+  36              		.cfi_offset 5, -16
+  37              		.cfi_offset 6, -12
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0546     		mov	r5, r0
+  41 0004 1446     		mov	r4, r2
+  42 0006 1E46     		mov	r6, r3
+ 107:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   uint8_t x, c;
+ 108:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   uint8_t *ptr;
+ 109:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   switch(msg)
+  43              		.loc 1 109 0
+  44 0008 0A39     		subs	r1, r1, #10
+  45              	.LVL1:
+  46 000a 0529     		cmp	r1, #5
+  47 000c 64D8     		bhi	.L12
+  48 000e DFE801F0 		tbb	[pc, r1]
+  49              	.LVL2:
+  50              	.L4:
+  51 0012 03       		.byte	(.L3-.L4)/2
+  52 0013 0B       		.byte	(.L5-.L4)/2
+  53 0014 63       		.byte	(.L12-.L4)/2
+  54 0015 16       		.byte	(.L6-.L4)/2
+  55 0016 29       		.byte	(.L7-.L4)/2
+  56 0017 38       		.byte	(.L8-.L4)/2
+  57              		.p2align 1
+  58              	.L3:
+ 110:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   {
+ 111:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     /* handled by the calling function
+ 112:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     case U8X8_MSG_DISPLAY_SETUP_MEMORY:
+ 113:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_ssd1306_128x32_univision_display_info);
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 4
+
+
+ 114:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       break;
+ 115:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     */
+ 116:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     case U8X8_MSG_DISPLAY_INIT:
+ 117:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_d_helper_display_init(u8x8);
+  59              		.loc 1 117 0
+  60 0018 FFF7FEFF 		bl	u8x8_d_helper_display_init
+  61              	.LVL3:
+ 118:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1306_128x32_univision_init_seq);    
+  62              		.loc 1 118 0
+  63 001c 2F49     		ldr	r1, .L14
+  64 001e 2846     		mov	r0, r5
+  65 0020 FFF7FEFF 		bl	u8x8_cad_SendSequence
+  66              	.LVL4:
+ 119:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       break;
+ 120:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     case U8X8_MSG_DISPLAY_SET_POWER_SAVE:
+ 121:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       if ( arg_int == 0 )
+ 122:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1306_128x32_univision_powersave0_seq);
+ 123:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       else
+ 124:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1306_128x32_univision_powersave1_seq);
+ 125:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       break;
+ 126:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     case U8X8_MSG_DISPLAY_SET_FLIP_MODE:
+ 127:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       if ( arg_int == 0 )
+ 128:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       {
+ 129:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1306_128x32_univision_flip0_seq);
+ 130:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	u8x8->x_offset = u8x8->display_info->default_x_offset;
+ 131:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       }
+ 132:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       else
+ 133:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       {
+ 134:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1306_128x32_univision_flip1_seq);
+ 135:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	u8x8->x_offset = u8x8->display_info->flipmode_x_offset;
+ 136:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       }
+ 137:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       break;
+ 138:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** #ifdef U8X8_WITH_SET_CONTRAST
+ 139:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     case U8X8_MSG_DISPLAY_SET_CONTRAST:
+ 140:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_StartTransfer(u8x8);
+ 141:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendCmd(u8x8, 0x081 );
+ 142:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendArg(u8x8, arg_int );	/* ssd1306 has range from 0 to 255 */
+ 143:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_EndTransfer(u8x8);
+ 144:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       break;
+ 145:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** #endif
+ 146:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     case U8X8_MSG_DISPLAY_DRAW_TILE:
+ 147:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_StartTransfer(u8x8);
+ 148:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
+ 149:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       x *= 8;
+ 150:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       x += u8x8->x_offset;
+ 151:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendCmd(u8x8, 0x010 | (x>>4) );
+ 152:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendCmd(u8x8, 0x000 | ((x&15)));
+ 153:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendCmd(u8x8, 0x0b0 | (((u8x8_tile_t *)arg_ptr)->y_pos));
+ 154:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       
+ 155:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       do
+ 156:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       {
+ 157:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	c = ((u8x8_tile_t *)arg_ptr)->cnt;
+ 158:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	ptr = ((u8x8_tile_t *)arg_ptr)->tile_ptr;
+ 159:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	u8x8_cad_SendData(u8x8, c*8, ptr); 	/* note: SendData can not handle more than 255 bytes */
+ 160:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	/*
+ 161:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	do
+ 162:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	{
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 5
+
+
+ 163:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	  u8x8_cad_SendData(u8x8, 8, ptr);
+ 164:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	  ptr += 8;
+ 165:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	  c--;
+ 166:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	} while( c > 0 );
+ 167:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	*/
+ 168:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	arg_int--;
+ 169:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       } while( arg_int > 0 );
+ 170:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       
+ 171:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_EndTransfer(u8x8);
+ 172:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       break;
+ 173:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     default:
+ 174:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       return 0;
+ 175:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   }
+ 176:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   return 1;
+  67              		.loc 1 176 0
+  68 0024 0120     		movs	r0, #1
+ 119:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       break;
+  69              		.loc 1 119 0
+  70 0026 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  71              	.LVL5:
+  72              	.L5:
+ 121:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1306_128x32_univision_powersave0_seq);
+  73              		.loc 1 121 0
+  74 0028 22B9     		cbnz	r2, .L9
+ 122:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       else
+  75              		.loc 1 122 0
+  76 002a 2D49     		ldr	r1, .L14+4
+  77 002c FFF7FEFF 		bl	u8x8_cad_SendSequence
+  78              	.LVL6:
+  79              		.loc 1 176 0
+  80 0030 0120     		movs	r0, #1
+  81 0032 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  82              	.LVL7:
+  83              	.L9:
+ 124:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       break;
+  84              		.loc 1 124 0
+  85 0034 2B49     		ldr	r1, .L14+8
+  86 0036 FFF7FEFF 		bl	u8x8_cad_SendSequence
+  87              	.LVL8:
+  88              		.loc 1 176 0
+  89 003a 0120     		movs	r0, #1
+  90 003c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  91              	.LVL9:
+  92              	.L6:
+ 127:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       {
+  93              		.loc 1 127 0
+  94 003e 42B9     		cbnz	r2, .L10
+ 129:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	u8x8->x_offset = u8x8->display_info->default_x_offset;
+  95              		.loc 1 129 0
+  96 0040 2949     		ldr	r1, .L14+12
+  97 0042 FFF7FEFF 		bl	u8x8_cad_SendSequence
+  98              	.LVL10:
+ 130:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       }
+  99              		.loc 1 130 0
+ 100 0046 2B68     		ldr	r3, [r5]
+ 101 0048 9B7C     		ldrb	r3, [r3, #18]	@ zero_extendqisi2
+ 102 004a 85F82230 		strb	r3, [r5, #34]
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 6
+
+
+ 103              		.loc 1 176 0
+ 104 004e 0120     		movs	r0, #1
+ 105 0050 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 106              	.LVL11:
+ 107              	.L10:
+ 134:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	u8x8->x_offset = u8x8->display_info->flipmode_x_offset;
+ 108              		.loc 1 134 0
+ 109 0052 2649     		ldr	r1, .L14+16
+ 110 0054 FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 111              	.LVL12:
+ 135:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       }
+ 112              		.loc 1 135 0
+ 113 0058 2B68     		ldr	r3, [r5]
+ 114 005a DB7C     		ldrb	r3, [r3, #19]	@ zero_extendqisi2
+ 115 005c 85F82230 		strb	r3, [r5, #34]
+ 116              		.loc 1 176 0
+ 117 0060 0120     		movs	r0, #1
+ 118 0062 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 119              	.LVL13:
+ 120              	.L7:
+ 140:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendCmd(u8x8, 0x081 );
+ 121              		.loc 1 140 0
+ 122 0064 FFF7FEFF 		bl	u8x8_cad_StartTransfer
+ 123              	.LVL14:
+ 141:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendArg(u8x8, arg_int );	/* ssd1306 has range from 0 to 255 */
+ 124              		.loc 1 141 0
+ 125 0068 8121     		movs	r1, #129
+ 126 006a 2846     		mov	r0, r5
+ 127 006c FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 128              	.LVL15:
+ 142:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_EndTransfer(u8x8);
+ 129              		.loc 1 142 0
+ 130 0070 2146     		mov	r1, r4
+ 131 0072 2846     		mov	r0, r5
+ 132 0074 FFF7FEFF 		bl	u8x8_cad_SendArg
+ 133              	.LVL16:
+ 143:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       break;
+ 134              		.loc 1 143 0
+ 135 0078 2846     		mov	r0, r5
+ 136 007a FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 137              	.LVL17:
+ 138              		.loc 1 176 0
+ 139 007e 0120     		movs	r0, #1
+ 144:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** #endif
+ 140              		.loc 1 144 0
+ 141 0080 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 142              	.LVL18:
+ 143              	.L8:
+ 147:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
+ 144              		.loc 1 147 0
+ 145 0082 FFF7FEFF 		bl	u8x8_cad_StartTransfer
+ 146              	.LVL19:
+ 148:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       x *= 8;
+ 147              		.loc 1 148 0
+ 148 0086 7779     		ldrb	r7, [r6, #5]	@ zero_extendqisi2
+ 149              	.LVL20:
+ 149:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       x += u8x8->x_offset;
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 7
+
+
+ 150              		.loc 1 149 0
+ 151 0088 FF00     		lsls	r7, r7, #3
+ 152              	.LVL21:
+ 153 008a FFB2     		uxtb	r7, r7
+ 154              	.LVL22:
+ 150:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendCmd(u8x8, 0x010 | (x>>4) );
+ 155              		.loc 1 150 0
+ 156 008c 95F82230 		ldrb	r3, [r5, #34]	@ zero_extendqisi2
+ 157 0090 1F44     		add	r7, r7, r3
+ 158              	.LVL23:
+ 159 0092 FFB2     		uxtb	r7, r7
+ 160              	.LVL24:
+ 151:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendCmd(u8x8, 0x000 | ((x&15)));
+ 161              		.loc 1 151 0
+ 162 0094 3909     		lsrs	r1, r7, #4
+ 163 0096 41F01001 		orr	r1, r1, #16
+ 164 009a 2846     		mov	r0, r5
+ 165 009c FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 166              	.LVL25:
+ 152:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendCmd(u8x8, 0x0b0 | (((u8x8_tile_t *)arg_ptr)->y_pos));
+ 167              		.loc 1 152 0
+ 168 00a0 07F00F01 		and	r1, r7, #15
+ 169 00a4 2846     		mov	r0, r5
+ 170 00a6 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 171              	.LVL26:
+ 153:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       
+ 172              		.loc 1 153 0
+ 173 00aa B179     		ldrb	r1, [r6, #6]	@ zero_extendqisi2
+ 174 00ac 41F0B001 		orr	r1, r1, #176
+ 175 00b0 2846     		mov	r0, r5
+ 176 00b2 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 177              	.LVL27:
+ 178              	.L11:
+ 157:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	ptr = ((u8x8_tile_t *)arg_ptr)->tile_ptr;
+ 179              		.loc 1 157 0 discriminator 1
+ 180 00b6 3179     		ldrb	r1, [r6, #4]	@ zero_extendqisi2
+ 181              	.LVL28:
+ 159:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 	/*
+ 182              		.loc 1 159 0 discriminator 1
+ 183 00b8 C900     		lsls	r1, r1, #3
+ 184              	.LVL29:
+ 185 00ba 3268     		ldr	r2, [r6]
+ 186 00bc 01F0F801 		and	r1, r1, #248
+ 187 00c0 2846     		mov	r0, r5
+ 188 00c2 FFF7FEFF 		bl	u8x8_cad_SendData
+ 189              	.LVL30:
+ 168:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       } while( arg_int > 0 );
+ 190              		.loc 1 168 0 discriminator 1
+ 191 00c6 621E     		subs	r2, r4, #1
+ 192              	.LVL31:
+ 169:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       
+ 193              		.loc 1 169 0 discriminator 1
+ 194 00c8 12F0FF04 		ands	r4, r2, #255
+ 195 00cc F3D1     		bne	.L11
+ 171:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       break;
+ 196              		.loc 1 171 0
+ 197 00ce 2846     		mov	r0, r5
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 8
+
+
+ 198 00d0 FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 199              	.LVL32:
+ 200              		.loc 1 176 0
+ 201 00d4 0120     		movs	r0, #1
+ 172:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     default:
+ 202              		.loc 1 172 0
+ 203 00d6 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 204              	.LVL33:
+ 205              	.L12:
+ 174:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   }
+ 206              		.loc 1 174 0
+ 207 00d8 0020     		movs	r0, #0
+ 208              	.LVL34:
+ 177:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** }
+ 209              		.loc 1 177 0
+ 210 00da F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 211              	.LVL35:
+ 212              	.L15:
+ 213              		.align	2
+ 214              	.L14:
+ 215 00dc 00000000 		.word	.LANCHOR0
+ 216 00e0 38000000 		.word	.LANCHOR0+56
+ 217 00e4 40000000 		.word	.LANCHOR0+64
+ 218 00e8 48000000 		.word	.LANCHOR0+72
+ 219 00ec 50000000 		.word	.LANCHOR0+80
+ 220              		.cfi_endproc
+ 221              	.LFE0:
+ 222              		.size	u8x8_d_ssd1306_128x32_generic, .-u8x8_d_ssd1306_128x32_generic
+ 223              		.section	.text.u8x8_d_ssd1306_128x32_univision,"ax",%progbits
+ 224              		.align	2
+ 225              		.global	u8x8_d_ssd1306_128x32_univision
+ 226              		.thumb
+ 227              		.thumb_func
+ 228              		.type	u8x8_d_ssd1306_128x32_univision, %function
+ 229              	u8x8_d_ssd1306_128x32_univision:
+ 230              	.LFB1:
+ 178:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 179:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 180:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** static const u8x8_display_info_t u8x8_ssd1306_128x32_univision_display_info =
+ 181:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** {
+ 182:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* chip_enable_level = */ 0,
+ 183:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* chip_disable_level = */ 1,
+ 184:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   
+ 185:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* post_chip_enable_wait_ns = */ 20,
+ 186:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* pre_chip_disable_wait_ns = */ 10,
+ 187:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* reset_pulse_width_ms = */ 100, 	/* SSD1306: 3 us */
+ 188:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* post_reset_wait_ms = */ 100, /* far east OLEDs need much longer setup time */
+ 189:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* sda_setup_time_ns = */ 50,		/* SSD1306: 15ns, but cycle time is 100ns, so use 100/2 */
+ 190:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* sck_pulse_width_ns = */ 50,	/* SSD1306: 20ns, but cycle time is 100ns, so use 100/2, AVR: belo
+ 191:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* sck_clock_hz = */ 8000000UL,	/* since Arduino 1.6.0, the SPI bus speed in Hz. Should be  10000
+ 192:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* spi_mode = */ 0,		/* active high, rising edge */
+ 193:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* i2c_bus_clock_100kHz = */ 4,
+ 194:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* data_setup_time_ns = */ 40,
+ 195:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* write_pulse_width_ns = */ 150,	/* SSD1306: cycle time is 300ns, so use 300/2 = 150 */
+ 196:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* tile_width = */ 16,
+ 197:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* tile_hight = */ 4,
+ 198:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* default_x_offset = */ 0,
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 9
+
+
+ 199:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* flipmode_x_offset = */ 0,
+ 200:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* pixel_width = */ 128,
+ 201:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* pixel_height = */ 32
+ 202:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** };
+ 203:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 204:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** uint8_t u8x8_d_ssd1306_128x32_univision(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 205:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** {
+ 231              		.loc 1 205 0
+ 232              		.cfi_startproc
+ 233              		@ args = 0, pretend = 0, frame = 0
+ 234              		@ frame_needed = 0, uses_anonymous_args = 0
+ 235              	.LVL36:
+ 236 0000 08B5     		push	{r3, lr}
+ 237              		.cfi_def_cfa_offset 8
+ 238              		.cfi_offset 3, -8
+ 239              		.cfi_offset 14, -4
+ 206:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     if ( msg == U8X8_MSG_DISPLAY_SETUP_MEMORY )
+ 240              		.loc 1 206 0
+ 241 0002 0929     		cmp	r1, #9
+ 242 0004 04D1     		bne	.L17
+ 207:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     {
+ 208:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_ssd1306_128x32_univision_display_info);
+ 243              		.loc 1 208 0
+ 244 0006 0449     		ldr	r1, .L20
+ 245              	.LVL37:
+ 246 0008 FFF7FEFF 		bl	u8x8_d_helper_display_setup_memory
+ 247              	.LVL38:
+ 209:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       return 1;
+ 248              		.loc 1 209 0
+ 249 000c 0120     		movs	r0, #1
+ 250 000e 08BD     		pop	{r3, pc}
+ 251              	.LVL39:
+ 252              	.L17:
+ 210:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     }
+ 211:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     return u8x8_d_ssd1306_128x32_generic(u8x8, msg, arg_int, arg_ptr);
+ 253              		.loc 1 211 0
+ 254 0010 FFF7FEFF 		bl	u8x8_d_ssd1306_128x32_generic
+ 255              	.LVL40:
+ 212:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** }
+ 256              		.loc 1 212 0
+ 257 0014 08BD     		pop	{r3, pc}
+ 258              	.L21:
+ 259 0016 00BF     		.align	2
+ 260              	.L20:
+ 261 0018 58000000 		.word	.LANCHOR0+88
+ 262              		.cfi_endproc
+ 263              	.LFE1:
+ 264              		.size	u8x8_d_ssd1306_128x32_univision, .-u8x8_d_ssd1306_128x32_univision
+ 265              		.section	.text.u8x8_d_ssd1306_128x32_winstar,"ax",%progbits
+ 266              		.align	2
+ 267              		.global	u8x8_d_ssd1306_128x32_winstar
+ 268              		.thumb
+ 269              		.thumb_func
+ 270              		.type	u8x8_d_ssd1306_128x32_winstar, %function
+ 271              	u8x8_d_ssd1306_128x32_winstar:
+ 272              	.LFB2:
+ 213:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 10
+
+
+ 214:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** /*=============================================*/
+ 215:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** /* issue 756 */
+ 216:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 217:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** #define	    ADDR_MODE	0 //0:horizontal, 1:vertical, 2:page
+ 218:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 219:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 220:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** static const u8x8_display_info_t u8x8_ssd1306_128x32_winstar_display_info =
+ 221:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** {
+ 222:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* chip_enable_level = */ 0,
+ 223:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* chip_disable_level = */ 1,
+ 224:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   
+ 225:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* post_chip_enable_wait_ns = */ 20,
+ 226:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* pre_chip_disable_wait_ns = */ 10,
+ 227:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* reset_pulse_width_ms = */ 100, 	/* SSD1306: 3 us */
+ 228:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* post_reset_wait_ms = */ 100, /* far east OLEDs need much longer setup time */
+ 229:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* sda_setup_time_ns = */ 50,		/* SSD1306: 15ns, but cycle time is 100ns, so use 100/2 */
+ 230:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* sck_pulse_width_ns = */ 50,	/* SSD1306: 20ns, but cycle time is 100ns, so use 100/2, AVR: belo
+ 231:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* sck_clock_hz = */ 8000000UL,	/* since Arduino 1.6.0, the SPI bus speed in Hz. Should be  10000
+ 232:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* spi_mode = */ 0,		/* active high, rising edge */
+ 233:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* i2c_bus_clock_100kHz = */ 4,
+ 234:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* data_setup_time_ns = */ 40,
+ 235:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* write_pulse_width_ns = */ 150,	/* SSD1306: cycle time is 300ns, so use 300/2 = 150 */
+ 236:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* tile_width = */ 16,
+ 237:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* tile_hight = */ 4,
+ 238:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* default_x_offset = */ 125,
+ 239:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* flipmode_x_offset = */ 125,
+ 240:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* pixel_width = */ 128,
+ 241:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* pixel_height = */ 32
+ 242:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** };
+ 243:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 244:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** uint8_t u8x8_d_ssd1306_128x32_winstar(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 245:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** {
+ 273              		.loc 1 245 0
+ 274              		.cfi_startproc
+ 275              		@ args = 0, pretend = 0, frame = 0
+ 276              		@ frame_needed = 0, uses_anonymous_args = 0
+ 277              	.LVL41:
+ 278 0000 08B5     		push	{r3, lr}
+ 279              		.cfi_def_cfa_offset 8
+ 280              		.cfi_offset 3, -8
+ 281              		.cfi_offset 14, -4
+ 246:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     if ( msg == U8X8_MSG_DISPLAY_SETUP_MEMORY )
+ 282              		.loc 1 246 0
+ 283 0002 0929     		cmp	r1, #9
+ 284 0004 04D1     		bne	.L23
+ 247:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     {
+ 248:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_ssd1306_128x32_winstar_display_info);
+ 285              		.loc 1 248 0
+ 286 0006 0449     		ldr	r1, .L26
+ 287              	.LVL42:
+ 288 0008 FFF7FEFF 		bl	u8x8_d_helper_display_setup_memory
+ 289              	.LVL43:
+ 249:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       return 1;
+ 290              		.loc 1 249 0
+ 291 000c 0120     		movs	r0, #1
+ 292 000e 08BD     		pop	{r3, pc}
+ 293              	.LVL44:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 11
+
+
+ 294              	.L23:
+ 250:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     }
+ 251:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     return u8x8_d_ssd1306_128x32_generic(u8x8, msg, arg_int, arg_ptr);
+ 295              		.loc 1 251 0
+ 296 0010 FFF7FEFF 		bl	u8x8_d_ssd1306_128x32_generic
+ 297              	.LVL45:
+ 252:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** }
+ 298              		.loc 1 252 0
+ 299 0014 08BD     		pop	{r3, pc}
+ 300              	.L27:
+ 301 0016 00BF     		.align	2
+ 302              	.L26:
+ 303 0018 70000000 		.word	.LANCHOR0+112
+ 304              		.cfi_endproc
+ 305              	.LFE2:
+ 306              		.size	u8x8_d_ssd1306_128x32_winstar, .-u8x8_d_ssd1306_128x32_winstar
+ 307              		.section	.text.u8x8_d_sh1106_128x32_visionox,"ax",%progbits
+ 308              		.align	2
+ 309              		.global	u8x8_d_sh1106_128x32_visionox
+ 310              		.thumb
+ 311              		.thumb_func
+ 312              		.type	u8x8_d_sh1106_128x32_visionox, %function
+ 313              	u8x8_d_sh1106_128x32_visionox:
+ 314              	.LFB3:
+ 253:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 254:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 255:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** /*=============================================*/
+ 256:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** /* visionox 132x32 OLED, https://github.com/olikraus/u8g2/issues/1250 */
+ 257:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 258:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 259:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** static const uint8_t u8x8_d_sh1106_128x32_visionox_init_seq[] = {
+ 260:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     
+ 261:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+ 262:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   
+ 263:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0xAE),
+ 264:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0xD5, 0x91),
+ 265:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0xA8, 0x1F),
+ 266:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0xD3, 0x10),
+ 267:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x40),
+ 268:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0xAD, 0x8B),
+ 269:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0x33),
+ 270:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0xA1),
+ 271:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0xC8),
+ 272:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0xDA, 0x12),
+ 273:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0x81, 0xAF),
+ 274:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0xD9, 0x1F),
+ 275:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_CA(0xDB, 0x25),
+ 276:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0xA4),
+ 277:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_C(0xA6),
+ 278:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     
+ 279:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+ 280:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   U8X8_END()             			/* end of sequence */
+ 281:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** };
+ 282:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 283:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** static const u8x8_display_info_t u8x8_d_sh1106_128x32_visionox_display_info =
+ 284:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** {
+ 285:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* chip_enable_level = */ 0,
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 12
+
+
+ 286:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* chip_disable_level = */ 1,
+ 287:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   
+ 288:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* post_chip_enable_wait_ns = */ 20,
+ 289:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* pre_chip_disable_wait_ns = */ 10,
+ 290:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* reset_pulse_width_ms = */ 100, 	/* SSD1306: 3 us */
+ 291:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* post_reset_wait_ms = */ 100, /* far east OLEDs need much longer setup time */
+ 292:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* sda_setup_time_ns = */ 50,		/* SSD1306: 15ns, but cycle time is 100ns, so use 100/2 */
+ 293:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* sck_pulse_width_ns = */ 50,	/* SSD1306: 20ns, but cycle time is 100ns, so use 100/2, AVR: belo
+ 294:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* sck_clock_hz = */ 4000000UL,	/* since Arduino 1.6.0, the SPI bus speed in Hz. Should be  10000
+ 295:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* spi_mode = */ 0,		/* active high, rising edge */
+ 296:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* i2c_bus_clock_100kHz = */ 4,
+ 297:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* data_setup_time_ns = */ 40,
+ 298:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* write_pulse_width_ns = */ 150,	/* SSD1306: cycle time is 300ns, so use 300/2 = 150 */
+ 299:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* tile_width = */ 16,
+ 300:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* tile_hight = */ 4,
+ 301:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* default_x_offset = */ 2,
+ 302:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* flipmode_x_offset = */ 2,
+ 303:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* pixel_width = */ 128,
+ 304:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****   /* pixel_height = */ 32
+ 305:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** };
+ 306:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 307:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 308:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** uint8_t u8x8_d_sh1106_128x32_visionox(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 309:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** {
+ 315              		.loc 1 309 0
+ 316              		.cfi_startproc
+ 317              		@ args = 0, pretend = 0, frame = 0
+ 318              		@ frame_needed = 0, uses_anonymous_args = 0
+ 319              	.LVL46:
+ 320 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 321              		.cfi_def_cfa_offset 24
+ 322              		.cfi_offset 3, -24
+ 323              		.cfi_offset 4, -20
+ 324              		.cfi_offset 5, -16
+ 325              		.cfi_offset 6, -12
+ 326              		.cfi_offset 7, -8
+ 327              		.cfi_offset 14, -4
+ 328 0002 0546     		mov	r5, r0
+ 310:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     if ( msg == U8X8_MSG_DISPLAY_SETUP_MEMORY )
+ 329              		.loc 1 310 0
+ 330 0004 0929     		cmp	r1, #9
+ 331 0006 04D1     		bne	.L29
+ 311:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     {
+ 312:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_d_sh1106_128x32_visionox_display_info);
+ 332              		.loc 1 312 0
+ 333 0008 0B49     		ldr	r1, .L33
+ 334              	.LVL47:
+ 335 000a FFF7FEFF 		bl	u8x8_d_helper_display_setup_memory
+ 336              	.LVL48:
+ 313:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       return 1;
+ 337              		.loc 1 313 0
+ 338 000e 0120     		movs	r0, #1
+ 339 0010 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 340              	.LVL49:
+ 341              	.L29:
+ 342 0012 0C46     		mov	r4, r1
+ 343 0014 1646     		mov	r6, r2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 13
+
+
+ 344 0016 1F46     		mov	r7, r3
+ 314:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     }
+ 315:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** 
+ 316:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     if ( msg == U8X8_MSG_DISPLAY_INIT )
+ 345              		.loc 1 316 0
+ 346 0018 0A29     		cmp	r1, #10
+ 347 001a 05D1     		bne	.L31
+ 317:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     {
+ 318:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_d_helper_display_init(u8x8);
+ 348              		.loc 1 318 0
+ 349 001c FFF7FEFF 		bl	u8x8_d_helper_display_init
+ 350              	.LVL50:
+ 319:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_sh1106_128x32_visionox_init_seq);    
+ 351              		.loc 1 319 0
+ 352 0020 0649     		ldr	r1, .L33+4
+ 353 0022 2846     		mov	r0, r5
+ 354 0024 FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 355              	.LVL51:
+ 356              	.L31:
+ 320:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     }
+ 321:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     
+ 322:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c ****     return u8x8_d_ssd1306_128x32_generic(u8x8, msg, arg_int, arg_ptr);
+ 357              		.loc 1 322 0
+ 358 0028 3B46     		mov	r3, r7
+ 359 002a 3246     		mov	r2, r6
+ 360 002c 2146     		mov	r1, r4
+ 361 002e 2846     		mov	r0, r5
+ 362 0030 FFF7FEFF 		bl	u8x8_d_ssd1306_128x32_generic
+ 363              	.LVL52:
+ 323:..\u8g2\csrc/u8x8_d_ssd1306_128x32.c **** }
+ 364              		.loc 1 323 0
+ 365 0034 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 366              	.LVL53:
+ 367              	.L34:
+ 368 0036 00BF     		.align	2
+ 369              	.L33:
+ 370 0038 88000000 		.word	.LANCHOR0+136
+ 371 003c A0000000 		.word	.LANCHOR0+160
+ 372              		.cfi_endproc
+ 373              	.LFE3:
+ 374              		.size	u8x8_d_sh1106_128x32_visionox, .-u8x8_d_sh1106_128x32_visionox
+ 375              		.section	.rodata
+ 376              		.align	2
+ 377              		.set	.LANCHOR0,. + 0
+ 378              		.type	u8x8_d_ssd1306_128x32_univision_init_seq, %object
+ 379              		.size	u8x8_d_ssd1306_128x32_univision_init_seq, 53
+ 380              	u8x8_d_ssd1306_128x32_univision_init_seq:
+ 381 0000 18       		.byte	24
+ 382 0001 15       		.byte	21
+ 383 0002 AE       		.byte	-82
+ 384 0003 15       		.byte	21
+ 385 0004 D5       		.byte	-43
+ 386 0005 16       		.byte	22
+ 387 0006 80       		.byte	-128
+ 388 0007 15       		.byte	21
+ 389 0008 A8       		.byte	-88
+ 390 0009 16       		.byte	22
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 14
+
+
+ 391 000a 1F       		.byte	31
+ 392 000b 15       		.byte	21
+ 393 000c D3       		.byte	-45
+ 394 000d 16       		.byte	22
+ 395 000e 00       		.byte	0
+ 396 000f 15       		.byte	21
+ 397 0010 40       		.byte	64
+ 398 0011 15       		.byte	21
+ 399 0012 8D       		.byte	-115
+ 400 0013 16       		.byte	22
+ 401 0014 14       		.byte	20
+ 402 0015 15       		.byte	21
+ 403 0016 20       		.byte	32
+ 404 0017 16       		.byte	22
+ 405 0018 00       		.byte	0
+ 406 0019 15       		.byte	21
+ 407 001a A1       		.byte	-95
+ 408 001b 15       		.byte	21
+ 409 001c C8       		.byte	-56
+ 410 001d 15       		.byte	21
+ 411 001e DA       		.byte	-38
+ 412 001f 16       		.byte	22
+ 413 0020 02       		.byte	2
+ 414 0021 15       		.byte	21
+ 415 0022 81       		.byte	-127
+ 416 0023 16       		.byte	22
+ 417 0024 8F       		.byte	-113
+ 418 0025 15       		.byte	21
+ 419 0026 D9       		.byte	-39
+ 420 0027 16       		.byte	22
+ 421 0028 F1       		.byte	-15
+ 422 0029 15       		.byte	21
+ 423 002a DB       		.byte	-37
+ 424 002b 16       		.byte	22
+ 425 002c 40       		.byte	64
+ 426 002d 15       		.byte	21
+ 427 002e 2E       		.byte	46
+ 428 002f 15       		.byte	21
+ 429 0030 A4       		.byte	-92
+ 430 0031 15       		.byte	21
+ 431 0032 A6       		.byte	-90
+ 432 0033 19       		.byte	25
+ 433 0034 FF       		.byte	-1
+ 434 0035 000000   		.space	3
+ 435              		.type	u8x8_d_ssd1306_128x32_univision_powersave0_seq, %object
+ 436              		.size	u8x8_d_ssd1306_128x32_univision_powersave0_seq, 5
+ 437              	u8x8_d_ssd1306_128x32_univision_powersave0_seq:
+ 438 0038 18       		.byte	24
+ 439 0039 15       		.byte	21
+ 440 003a AF       		.byte	-81
+ 441 003b 19       		.byte	25
+ 442 003c FF       		.byte	-1
+ 443 003d 000000   		.space	3
+ 444              		.type	u8x8_d_ssd1306_128x32_univision_powersave1_seq, %object
+ 445              		.size	u8x8_d_ssd1306_128x32_univision_powersave1_seq, 5
+ 446              	u8x8_d_ssd1306_128x32_univision_powersave1_seq:
+ 447 0040 18       		.byte	24
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 15
+
+
+ 448 0041 15       		.byte	21
+ 449 0042 AE       		.byte	-82
+ 450 0043 19       		.byte	25
+ 451 0044 FF       		.byte	-1
+ 452 0045 000000   		.space	3
+ 453              		.type	u8x8_d_ssd1306_128x32_univision_flip0_seq, %object
+ 454              		.size	u8x8_d_ssd1306_128x32_univision_flip0_seq, 7
+ 455              	u8x8_d_ssd1306_128x32_univision_flip0_seq:
+ 456 0048 18       		.byte	24
+ 457 0049 15       		.byte	21
+ 458 004a A1       		.byte	-95
+ 459 004b 15       		.byte	21
+ 460 004c C8       		.byte	-56
+ 461 004d 19       		.byte	25
+ 462 004e FF       		.byte	-1
+ 463 004f 00       		.space	1
+ 464              		.type	u8x8_d_ssd1306_128x32_univision_flip1_seq, %object
+ 465              		.size	u8x8_d_ssd1306_128x32_univision_flip1_seq, 7
+ 466              	u8x8_d_ssd1306_128x32_univision_flip1_seq:
+ 467 0050 18       		.byte	24
+ 468 0051 15       		.byte	21
+ 469 0052 A0       		.byte	-96
+ 470 0053 15       		.byte	21
+ 471 0054 C0       		.byte	-64
+ 472 0055 19       		.byte	25
+ 473 0056 FF       		.byte	-1
+ 474 0057 00       		.space	1
+ 475              		.type	u8x8_ssd1306_128x32_univision_display_info, %object
+ 476              		.size	u8x8_ssd1306_128x32_univision_display_info, 24
+ 477              	u8x8_ssd1306_128x32_univision_display_info:
+ 478 0058 00       		.byte	0
+ 479 0059 01       		.byte	1
+ 480 005a 14       		.byte	20
+ 481 005b 0A       		.byte	10
+ 482 005c 64       		.byte	100
+ 483 005d 64       		.byte	100
+ 484 005e 32       		.byte	50
+ 485 005f 32       		.byte	50
+ 486 0060 00127A00 		.word	8000000
+ 487 0064 00       		.byte	0
+ 488 0065 04       		.byte	4
+ 489 0066 28       		.byte	40
+ 490 0067 96       		.byte	-106
+ 491 0068 10       		.byte	16
+ 492 0069 04       		.byte	4
+ 493 006a 00       		.byte	0
+ 494 006b 00       		.byte	0
+ 495 006c 8000     		.short	128
+ 496 006e 2000     		.short	32
+ 497              		.type	u8x8_ssd1306_128x32_winstar_display_info, %object
+ 498              		.size	u8x8_ssd1306_128x32_winstar_display_info, 24
+ 499              	u8x8_ssd1306_128x32_winstar_display_info:
+ 500 0070 00       		.byte	0
+ 501 0071 01       		.byte	1
+ 502 0072 14       		.byte	20
+ 503 0073 0A       		.byte	10
+ 504 0074 64       		.byte	100
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 16
+
+
+ 505 0075 64       		.byte	100
+ 506 0076 32       		.byte	50
+ 507 0077 32       		.byte	50
+ 508 0078 00127A00 		.word	8000000
+ 509 007c 00       		.byte	0
+ 510 007d 04       		.byte	4
+ 511 007e 28       		.byte	40
+ 512 007f 96       		.byte	-106
+ 513 0080 10       		.byte	16
+ 514 0081 04       		.byte	4
+ 515 0082 7D       		.byte	125
+ 516 0083 7D       		.byte	125
+ 517 0084 8000     		.short	128
+ 518 0086 2000     		.short	32
+ 519              		.type	u8x8_d_sh1106_128x32_visionox_display_info, %object
+ 520              		.size	u8x8_d_sh1106_128x32_visionox_display_info, 24
+ 521              	u8x8_d_sh1106_128x32_visionox_display_info:
+ 522 0088 00       		.byte	0
+ 523 0089 01       		.byte	1
+ 524 008a 14       		.byte	20
+ 525 008b 0A       		.byte	10
+ 526 008c 64       		.byte	100
+ 527 008d 64       		.byte	100
+ 528 008e 32       		.byte	50
+ 529 008f 32       		.byte	50
+ 530 0090 00093D00 		.word	4000000
+ 531 0094 00       		.byte	0
+ 532 0095 04       		.byte	4
+ 533 0096 28       		.byte	40
+ 534 0097 96       		.byte	-106
+ 535 0098 10       		.byte	16
+ 536 0099 04       		.byte	4
+ 537 009a 02       		.byte	2
+ 538 009b 02       		.byte	2
+ 539 009c 8000     		.short	128
+ 540 009e 2000     		.short	32
+ 541              		.type	u8x8_d_sh1106_128x32_visionox_init_seq, %object
+ 542              		.size	u8x8_d_sh1106_128x32_visionox_init_seq, 49
+ 543              	u8x8_d_sh1106_128x32_visionox_init_seq:
+ 544 00a0 18       		.byte	24
+ 545 00a1 15       		.byte	21
+ 546 00a2 AE       		.byte	-82
+ 547 00a3 15       		.byte	21
+ 548 00a4 D5       		.byte	-43
+ 549 00a5 16       		.byte	22
+ 550 00a6 91       		.byte	-111
+ 551 00a7 15       		.byte	21
+ 552 00a8 A8       		.byte	-88
+ 553 00a9 16       		.byte	22
+ 554 00aa 1F       		.byte	31
+ 555 00ab 15       		.byte	21
+ 556 00ac D3       		.byte	-45
+ 557 00ad 16       		.byte	22
+ 558 00ae 10       		.byte	16
+ 559 00af 15       		.byte	21
+ 560 00b0 40       		.byte	64
+ 561 00b1 15       		.byte	21
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 17
+
+
+ 562 00b2 AD       		.byte	-83
+ 563 00b3 16       		.byte	22
+ 564 00b4 8B       		.byte	-117
+ 565 00b5 15       		.byte	21
+ 566 00b6 33       		.byte	51
+ 567 00b7 15       		.byte	21
+ 568 00b8 A1       		.byte	-95
+ 569 00b9 15       		.byte	21
+ 570 00ba C8       		.byte	-56
+ 571 00bb 15       		.byte	21
+ 572 00bc DA       		.byte	-38
+ 573 00bd 16       		.byte	22
+ 574 00be 12       		.byte	18
+ 575 00bf 15       		.byte	21
+ 576 00c0 81       		.byte	-127
+ 577 00c1 16       		.byte	22
+ 578 00c2 AF       		.byte	-81
+ 579 00c3 15       		.byte	21
+ 580 00c4 D9       		.byte	-39
+ 581 00c5 16       		.byte	22
+ 582 00c6 1F       		.byte	31
+ 583 00c7 15       		.byte	21
+ 584 00c8 DB       		.byte	-37
+ 585 00c9 16       		.byte	22
+ 586 00ca 25       		.byte	37
+ 587 00cb 15       		.byte	21
+ 588 00cc A4       		.byte	-92
+ 589 00cd 15       		.byte	21
+ 590 00ce A6       		.byte	-90
+ 591 00cf 19       		.byte	25
+ 592 00d0 FF       		.byte	-1
+ 593              		.text
+ 594              	.Letext0:
+ 595              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 596              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 597              		.file 4 "..\\u8g2\\csrc\\u8x8.h"
+ 598              		.section	.debug_info,"",%progbits
+ 599              	.Ldebug_info0:
+ 600 0000 6E080000 		.4byte	0x86e
+ 601 0004 0400     		.2byte	0x4
+ 602 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 603 000a 04       		.byte	0x4
+ 604 000b 01       		.uleb128 0x1
+ 605 000c 50060000 		.4byte	.LASF89
+ 606 0010 0C       		.byte	0xc
+ 607 0011 C0050000 		.4byte	.LASF90
+ 608 0015 3B010000 		.4byte	.LASF91
+ 609 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 610 001d 00000000 		.4byte	0
+ 611 0021 00000000 		.4byte	.Ldebug_line0
+ 612 0025 02       		.uleb128 0x2
+ 613 0026 01       		.byte	0x1
+ 614 0027 06       		.byte	0x6
+ 615 0028 76030000 		.4byte	.LASF0
+ 616 002c 03       		.uleb128 0x3
+ 617 002d BD020000 		.4byte	.LASF3
+ 618 0031 02       		.byte	0x2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 18
+
+
+ 619 0032 1D       		.byte	0x1d
+ 620 0033 37000000 		.4byte	0x37
+ 621 0037 02       		.uleb128 0x2
+ 622 0038 01       		.byte	0x1
+ 623 0039 08       		.byte	0x8
+ 624 003a 39030000 		.4byte	.LASF1
+ 625 003e 02       		.uleb128 0x2
+ 626 003f 02       		.byte	0x2
+ 627 0040 05       		.byte	0x5
+ 628 0041 5A000000 		.4byte	.LASF2
+ 629 0045 03       		.uleb128 0x3
+ 630 0046 30010000 		.4byte	.LASF4
+ 631 004a 02       		.byte	0x2
+ 632 004b 2B       		.byte	0x2b
+ 633 004c 50000000 		.4byte	0x50
+ 634 0050 02       		.uleb128 0x2
+ 635 0051 02       		.byte	0x2
+ 636 0052 07       		.byte	0x7
+ 637 0053 80040000 		.4byte	.LASF5
+ 638 0057 02       		.uleb128 0x2
+ 639 0058 04       		.byte	0x4
+ 640 0059 05       		.byte	0x5
+ 641 005a 99020000 		.4byte	.LASF6
+ 642 005e 03       		.uleb128 0x3
+ 643 005f 25010000 		.4byte	.LASF7
+ 644 0063 02       		.byte	0x2
+ 645 0064 41       		.byte	0x41
+ 646 0065 69000000 		.4byte	0x69
+ 647 0069 02       		.uleb128 0x2
+ 648 006a 04       		.byte	0x4
+ 649 006b 07       		.byte	0x7
+ 650 006c 75050000 		.4byte	.LASF8
+ 651 0070 02       		.uleb128 0x2
+ 652 0071 08       		.byte	0x8
+ 653 0072 05       		.byte	0x5
+ 654 0073 40020000 		.4byte	.LASF9
+ 655 0077 02       		.uleb128 0x2
+ 656 0078 08       		.byte	0x8
+ 657 0079 07       		.byte	0x7
+ 658 007a 82030000 		.4byte	.LASF10
+ 659 007e 04       		.uleb128 0x4
+ 660 007f 04       		.byte	0x4
+ 661 0080 05       		.byte	0x5
+ 662 0081 696E7400 		.ascii	"int\000"
+ 663 0085 02       		.uleb128 0x2
+ 664 0086 04       		.byte	0x4
+ 665 0087 07       		.byte	0x7
+ 666 0088 B3030000 		.4byte	.LASF11
+ 667 008c 03       		.uleb128 0x3
+ 668 008d B0010000 		.4byte	.LASF12
+ 669 0091 03       		.byte	0x3
+ 670 0092 18       		.byte	0x18
+ 671 0093 2C000000 		.4byte	0x2c
+ 672 0097 03       		.uleb128 0x3
+ 673 0098 C0030000 		.4byte	.LASF13
+ 674 009c 03       		.byte	0x3
+ 675 009d 24       		.byte	0x24
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 19
+
+
+ 676 009e 45000000 		.4byte	0x45
+ 677 00a2 03       		.uleb128 0x3
+ 678 00a3 99030000 		.4byte	.LASF14
+ 679 00a7 03       		.byte	0x3
+ 680 00a8 30       		.byte	0x30
+ 681 00a9 5E000000 		.4byte	0x5e
+ 682 00ad 05       		.uleb128 0x5
+ 683 00ae 04       		.byte	0x4
+ 684 00af 02       		.uleb128 0x2
+ 685 00b0 08       		.byte	0x8
+ 686 00b1 04       		.byte	0x4
+ 687 00b2 21030000 		.4byte	.LASF15
+ 688 00b6 03       		.uleb128 0x3
+ 689 00b7 57040000 		.4byte	.LASF16
+ 690 00bb 04       		.byte	0x4
+ 691 00bc CD       		.byte	0xcd
+ 692 00bd C1000000 		.4byte	0xc1
+ 693 00c1 06       		.uleb128 0x6
+ 694 00c2 4D050000 		.4byte	.LASF37
+ 695 00c6 2C       		.byte	0x2c
+ 696 00c7 04       		.byte	0x4
+ 697 00c8 5001     		.2byte	0x150
+ 698 00ca C6010000 		.4byte	0x1c6
+ 699 00ce 07       		.uleb128 0x7
+ 700 00cf 1C050000 		.4byte	.LASF17
+ 701 00d3 04       		.byte	0x4
+ 702 00d4 5201     		.2byte	0x152
+ 703 00d6 74030000 		.4byte	0x374
+ 704 00da 00       		.byte	0
+ 705 00db 07       		.uleb128 0x7
+ 706 00dc 30070000 		.4byte	.LASF18
+ 707 00e0 04       		.byte	0x4
+ 708 00e1 5301     		.2byte	0x153
+ 709 00e3 49030000 		.4byte	0x349
+ 710 00e7 04       		.byte	0x4
+ 711 00e8 07       		.uleb128 0x7
+ 712 00e9 C7020000 		.4byte	.LASF19
+ 713 00ed 04       		.byte	0x4
+ 714 00ee 5401     		.2byte	0x154
+ 715 00f0 14030000 		.4byte	0x314
+ 716 00f4 08       		.byte	0x8
+ 717 00f5 07       		.uleb128 0x7
+ 718 00f6 14060000 		.4byte	.LASF20
+ 719 00fa 04       		.byte	0x4
+ 720 00fb 5501     		.2byte	0x155
+ 721 00fd 14030000 		.4byte	0x314
+ 722 0101 0C       		.byte	0xc
+ 723 0102 07       		.uleb128 0x7
+ 724 0103 87050000 		.4byte	.LASF21
+ 725 0107 04       		.byte	0x4
+ 726 0108 5601     		.2byte	0x156
+ 727 010a 14030000 		.4byte	0x314
+ 728 010e 10       		.byte	0x10
+ 729 010f 07       		.uleb128 0x7
+ 730 0110 64000000 		.4byte	.LASF22
+ 731 0114 04       		.byte	0x4
+ 732 0115 5701     		.2byte	0x157
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 20
+
+
+ 733 0117 14030000 		.4byte	0x314
+ 734 011b 14       		.byte	0x14
+ 735 011c 07       		.uleb128 0x7
+ 736 011d F9010000 		.4byte	.LASF23
+ 737 0121 04       		.byte	0x4
+ 738 0122 5801     		.2byte	0x158
+ 739 0124 A2000000 		.4byte	0xa2
+ 740 0128 18       		.byte	0x18
+ 741 0129 07       		.uleb128 0x7
+ 742 012a 41000000 		.4byte	.LASF24
+ 743 012e 04       		.byte	0x4
+ 744 012f 5901     		.2byte	0x159
+ 745 0131 7F030000 		.4byte	0x37f
+ 746 0135 1C       		.byte	0x1c
+ 747 0136 07       		.uleb128 0x7
+ 748 0137 C9040000 		.4byte	.LASF25
+ 749 013b 04       		.byte	0x4
+ 750 013c 5A01     		.2byte	0x15a
+ 751 013e 97000000 		.4byte	0x97
+ 752 0142 20       		.byte	0x20
+ 753 0143 07       		.uleb128 0x7
+ 754 0144 00000000 		.4byte	.LASF26
+ 755 0148 04       		.byte	0x4
+ 756 0149 5B01     		.2byte	0x15b
+ 757 014b 8C000000 		.4byte	0x8c
+ 758 014f 22       		.byte	0x22
+ 759 0150 07       		.uleb128 0x7
+ 760 0151 09000000 		.4byte	.LASF27
+ 761 0155 04       		.byte	0x4
+ 762 0156 5C01     		.2byte	0x15c
+ 763 0158 8C000000 		.4byte	0x8c
+ 764 015c 23       		.byte	0x23
+ 765 015d 07       		.uleb128 0x7
+ 766 015e A2050000 		.4byte	.LASF28
+ 767 0162 04       		.byte	0x4
+ 768 0163 5D01     		.2byte	0x15d
+ 769 0165 8C000000 		.4byte	0x8c
+ 770 0169 24       		.byte	0x24
+ 771 016a 07       		.uleb128 0x7
+ 772 016b E5050000 		.4byte	.LASF29
+ 773 016f 04       		.byte	0x4
+ 774 0170 6001     		.2byte	0x160
+ 775 0172 8C000000 		.4byte	0x8c
+ 776 0176 25       		.byte	0x25
+ 777 0177 07       		.uleb128 0x7
+ 778 0178 42050000 		.4byte	.LASF30
+ 779 017c 04       		.byte	0x4
+ 780 017d 6201     		.2byte	0x162
+ 781 017f 8C000000 		.4byte	0x8c
+ 782 0183 26       		.byte	0x26
+ 783 0184 07       		.uleb128 0x7
+ 784 0185 4E020000 		.4byte	.LASF31
+ 785 0189 04       		.byte	0x4
+ 786 018a 6301     		.2byte	0x163
+ 787 018c 8C000000 		.4byte	0x8c
+ 788 0190 27       		.byte	0x27
+ 789 0191 07       		.uleb128 0x7
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 21
+
+
+ 790 0192 DE060000 		.4byte	.LASF32
+ 791 0196 04       		.byte	0x4
+ 792 0197 6401     		.2byte	0x164
+ 793 0199 8C000000 		.4byte	0x8c
+ 794 019d 28       		.byte	0x28
+ 795 019e 07       		.uleb128 0x7
+ 796 019f 28020000 		.4byte	.LASF33
+ 797 01a3 04       		.byte	0x4
+ 798 01a4 6501     		.2byte	0x165
+ 799 01a6 8C000000 		.4byte	0x8c
+ 800 01aa 29       		.byte	0x29
+ 801 01ab 07       		.uleb128 0x7
+ 802 01ac FC040000 		.4byte	.LASF34
+ 803 01b0 04       		.byte	0x4
+ 804 01b1 6601     		.2byte	0x166
+ 805 01b3 8C000000 		.4byte	0x8c
+ 806 01b7 2A       		.byte	0x2a
+ 807 01b8 07       		.uleb128 0x7
+ 808 01b9 46000000 		.4byte	.LASF35
+ 809 01bd 04       		.byte	0x4
+ 810 01be 6701     		.2byte	0x167
+ 811 01c0 8C000000 		.4byte	0x8c
+ 812 01c4 2B       		.byte	0x2b
+ 813 01c5 00       		.byte	0
+ 814 01c6 03       		.uleb128 0x3
+ 815 01c7 14020000 		.4byte	.LASF36
+ 816 01cb 04       		.byte	0x4
+ 817 01cc CE       		.byte	0xce
+ 818 01cd D1010000 		.4byte	0x1d1
+ 819 01d1 08       		.uleb128 0x8
+ 820 01d2 C9030000 		.4byte	.LASF38
+ 821 01d6 18       		.byte	0x18
+ 822 01d7 04       		.byte	0x4
+ 823 01d8 E7       		.byte	0xe7
+ 824 01d9 CC020000 		.4byte	0x2cc
+ 825 01dd 09       		.uleb128 0x9
+ 826 01de 2F000000 		.4byte	.LASF39
+ 827 01e2 04       		.byte	0x4
+ 828 01e3 EB       		.byte	0xeb
+ 829 01e4 8C000000 		.4byte	0x8c
+ 830 01e8 00       		.byte	0
+ 831 01e9 09       		.uleb128 0x9
+ 832 01ea 8F050000 		.4byte	.LASF40
+ 833 01ee 04       		.byte	0x4
+ 834 01ef EC       		.byte	0xec
+ 835 01f0 8C000000 		.4byte	0x8c
+ 836 01f4 01       		.byte	0x1
+ 837 01f5 09       		.uleb128 0x9
+ 838 01f6 B8010000 		.4byte	.LASF41
+ 839 01fa 04       		.byte	0x4
+ 840 01fb EE       		.byte	0xee
+ 841 01fc 8C000000 		.4byte	0x8c
+ 842 0200 02       		.byte	0x2
+ 843 0201 09       		.uleb128 0x9
+ 844 0202 38070000 		.4byte	.LASF42
+ 845 0206 04       		.byte	0x4
+ 846 0207 EF       		.byte	0xef
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 22
+
+
+ 847 0208 8C000000 		.4byte	0x8c
+ 848 020c 03       		.byte	0x3
+ 849 020d 09       		.uleb128 0x9
+ 850 020e 24040000 		.4byte	.LASF43
+ 851 0212 04       		.byte	0x4
+ 852 0213 F0       		.byte	0xf0
+ 853 0214 8C000000 		.4byte	0x8c
+ 854 0218 04       		.byte	0x4
+ 855 0219 09       		.uleb128 0x9
+ 856 021a E3000000 		.4byte	.LASF44
+ 857 021e 04       		.byte	0x4
+ 858 021f F1       		.byte	0xf1
+ 859 0220 8C000000 		.4byte	0x8c
+ 860 0224 05       		.byte	0x5
+ 861 0225 09       		.uleb128 0x9
+ 862 0226 B1000000 		.4byte	.LASF45
+ 863 022a 04       		.byte	0x4
+ 864 022b F8       		.byte	0xf8
+ 865 022c 8C000000 		.4byte	0x8c
+ 866 0230 06       		.byte	0x6
+ 867 0231 09       		.uleb128 0x9
+ 868 0232 5A020000 		.4byte	.LASF46
+ 869 0236 04       		.byte	0x4
+ 870 0237 FC       		.byte	0xfc
+ 871 0238 8C000000 		.4byte	0x8c
+ 872 023c 07       		.byte	0x7
+ 873 023d 09       		.uleb128 0x9
+ 874 023e 73040000 		.4byte	.LASF47
+ 875 0242 04       		.byte	0x4
+ 876 0243 FF       		.byte	0xff
+ 877 0244 A2000000 		.4byte	0xa2
+ 878 0248 08       		.byte	0x8
+ 879 0249 07       		.uleb128 0x7
+ 880 024a 1E000000 		.4byte	.LASF48
+ 881 024e 04       		.byte	0x4
+ 882 024f 0901     		.2byte	0x109
+ 883 0251 8C000000 		.4byte	0x8c
+ 884 0255 0C       		.byte	0xc
+ 885 0256 07       		.uleb128 0x7
+ 886 0257 5E040000 		.4byte	.LASF49
+ 887 025b 04       		.byte	0x4
+ 888 025c 0C01     		.2byte	0x10c
+ 889 025e 8C000000 		.4byte	0x8c
+ 890 0262 0D       		.byte	0xd
+ 891 0263 07       		.uleb128 0x7
+ 892 0264 F0020000 		.4byte	.LASF50
+ 893 0268 04       		.byte	0x4
+ 894 0269 1201     		.2byte	0x112
+ 895 026b 8C000000 		.4byte	0x8c
+ 896 026f 0E       		.byte	0xe
+ 897 0270 07       		.uleb128 0x7
+ 898 0271 71010000 		.4byte	.LASF51
+ 899 0275 04       		.byte	0x4
+ 900 0276 1401     		.2byte	0x114
+ 901 0278 8C000000 		.4byte	0x8c
+ 902 027c 0F       		.byte	0xf
+ 903 027d 07       		.uleb128 0x7
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 23
+
+
+ 904 027e 76000000 		.4byte	.LASF52
+ 905 0282 04       		.byte	0x4
+ 906 0283 1701     		.2byte	0x117
+ 907 0285 8C000000 		.4byte	0x8c
+ 908 0289 10       		.byte	0x10
+ 909 028a 07       		.uleb128 0x7
+ 910 028b 2D030000 		.4byte	.LASF53
+ 911 028f 04       		.byte	0x4
+ 912 0290 1801     		.2byte	0x118
+ 913 0292 8C000000 		.4byte	0x8c
+ 914 0296 11       		.byte	0x11
+ 915 0297 07       		.uleb128 0x7
+ 916 0298 03020000 		.4byte	.LASF54
+ 917 029c 04       		.byte	0x4
+ 918 029d 1A01     		.2byte	0x11a
+ 919 029f 8C000000 		.4byte	0x8c
+ 920 02a3 12       		.byte	0x12
+ 921 02a4 07       		.uleb128 0x7
+ 922 02a5 AE050000 		.4byte	.LASF55
+ 923 02a9 04       		.byte	0x4
+ 924 02aa 1B01     		.2byte	0x11b
+ 925 02ac 8C000000 		.4byte	0x8c
+ 926 02b0 13       		.byte	0x13
+ 927 02b1 07       		.uleb128 0x7
+ 928 02b2 36050000 		.4byte	.LASF56
+ 929 02b6 04       		.byte	0x4
+ 930 02b7 2301     		.2byte	0x123
+ 931 02b9 97000000 		.4byte	0x97
+ 932 02bd 14       		.byte	0x14
+ 933 02be 07       		.uleb128 0x7
+ 934 02bf 29050000 		.4byte	.LASF57
+ 935 02c3 04       		.byte	0x4
+ 936 02c4 2401     		.2byte	0x124
+ 937 02c6 97000000 		.4byte	0x97
+ 938 02ca 16       		.byte	0x16
+ 939 02cb 00       		.byte	0
+ 940 02cc 03       		.uleb128 0x3
+ 941 02cd 1B060000 		.4byte	.LASF58
+ 942 02d1 04       		.byte	0x4
+ 943 02d2 CF       		.byte	0xcf
+ 944 02d3 D7020000 		.4byte	0x2d7
+ 945 02d7 08       		.uleb128 0x8
+ 946 02d8 A2030000 		.4byte	.LASF59
+ 947 02dc 08       		.byte	0x8
+ 948 02dd 04       		.byte	0x4
+ 949 02de DE       		.byte	0xde
+ 950 02df 14030000 		.4byte	0x314
+ 951 02e3 09       		.uleb128 0x9
+ 952 02e4 D6010000 		.4byte	.LASF60
+ 953 02e8 04       		.byte	0x4
+ 954 02e9 E0       		.byte	0xe0
+ 955 02ea 6E030000 		.4byte	0x36e
+ 956 02ee 00       		.byte	0
+ 957 02ef 0A       		.uleb128 0xa
+ 958 02f0 636E7400 		.ascii	"cnt\000"
+ 959 02f4 04       		.byte	0x4
+ 960 02f5 E1       		.byte	0xe1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 24
+
+
+ 961 02f6 8C000000 		.4byte	0x8c
+ 962 02fa 04       		.byte	0x4
+ 963 02fb 09       		.uleb128 0x9
+ 964 02fc B7020000 		.4byte	.LASF61
+ 965 0300 04       		.byte	0x4
+ 966 0301 E2       		.byte	0xe2
+ 967 0302 8C000000 		.4byte	0x8c
+ 968 0306 05       		.byte	0x5
+ 969 0307 09       		.uleb128 0x9
+ 970 0308 59050000 		.4byte	.LASF62
+ 971 030c 04       		.byte	0x4
+ 972 030d E3       		.byte	0xe3
+ 973 030e 8C000000 		.4byte	0x8c
+ 974 0312 06       		.byte	0x6
+ 975 0313 00       		.byte	0
+ 976 0314 03       		.uleb128 0x3
+ 977 0315 F9060000 		.4byte	.LASF63
+ 978 0319 04       		.byte	0x4
+ 979 031a D1       		.byte	0xd1
+ 980 031b 1F030000 		.4byte	0x31f
+ 981 031f 0B       		.uleb128 0xb
+ 982 0320 04       		.byte	0x4
+ 983 0321 25030000 		.4byte	0x325
+ 984 0325 0C       		.uleb128 0xc
+ 985 0326 8C000000 		.4byte	0x8c
+ 986 032a 43030000 		.4byte	0x343
+ 987 032e 0D       		.uleb128 0xd
+ 988 032f 43030000 		.4byte	0x343
+ 989 0333 0D       		.uleb128 0xd
+ 990 0334 8C000000 		.4byte	0x8c
+ 991 0338 0D       		.uleb128 0xd
+ 992 0339 8C000000 		.4byte	0x8c
+ 993 033d 0D       		.uleb128 0xd
+ 994 033e AD000000 		.4byte	0xad
+ 995 0342 00       		.byte	0
+ 996 0343 0B       		.uleb128 0xb
+ 997 0344 04       		.byte	0x4
+ 998 0345 B6000000 		.4byte	0xb6
+ 999 0349 03       		.uleb128 0x3
+ 1000 034a 93040000 		.4byte	.LASF64
+ 1001 034e 04       		.byte	0x4
+ 1002 034f D2       		.byte	0xd2
+ 1003 0350 54030000 		.4byte	0x354
+ 1004 0354 0B       		.uleb128 0xb
+ 1005 0355 04       		.byte	0x4
+ 1006 0356 5A030000 		.4byte	0x35a
+ 1007 035a 0C       		.uleb128 0xc
+ 1008 035b 97000000 		.4byte	0x97
+ 1009 035f 6E030000 		.4byte	0x36e
+ 1010 0363 0D       		.uleb128 0xd
+ 1011 0364 43030000 		.4byte	0x343
+ 1012 0368 0D       		.uleb128 0xd
+ 1013 0369 8C000000 		.4byte	0x8c
+ 1014 036d 00       		.byte	0
+ 1015 036e 0B       		.uleb128 0xb
+ 1016 036f 04       		.byte	0x4
+ 1017 0370 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 25
+
+
+ 1018 0374 0B       		.uleb128 0xb
+ 1019 0375 04       		.byte	0x4
+ 1020 0376 7A030000 		.4byte	0x37a
+ 1021 037a 0E       		.uleb128 0xe
+ 1022 037b C6010000 		.4byte	0x1c6
+ 1023 037f 0B       		.uleb128 0xb
+ 1024 0380 04       		.byte	0x4
+ 1025 0381 85030000 		.4byte	0x385
+ 1026 0385 0E       		.uleb128 0xe
+ 1027 0386 8C000000 		.4byte	0x8c
+ 1028 038a 0F       		.uleb128 0xf
+ 1029 038b 03030000 		.4byte	.LASF92
+ 1030 038f 01       		.byte	0x1
+ 1031 0390 69       		.byte	0x69
+ 1032 0391 8C000000 		.4byte	0x8c
+ 1033 0395 00000000 		.4byte	.LFB0
+ 1034 0399 F0000000 		.4byte	.LFE0-.LFB0
+ 1035 039d 01       		.uleb128 0x1
+ 1036 039e 9C       		.byte	0x9c
+ 1037 039f 57050000 		.4byte	0x557
+ 1038 03a3 10       		.uleb128 0x10
+ 1039 03a4 D1010000 		.4byte	.LASF65
+ 1040 03a8 01       		.byte	0x1
+ 1041 03a9 69       		.byte	0x69
+ 1042 03aa 43030000 		.4byte	0x343
+ 1043 03ae 00000000 		.4byte	.LLST0
+ 1044 03b2 11       		.uleb128 0x11
+ 1045 03b3 6D736700 		.ascii	"msg\000"
+ 1046 03b7 01       		.byte	0x1
+ 1047 03b8 69       		.byte	0x69
+ 1048 03b9 8C000000 		.4byte	0x8c
+ 1049 03bd C6000000 		.4byte	.LLST1
+ 1050 03c1 10       		.uleb128 0x10
+ 1051 03c2 DF010000 		.4byte	.LASF66
+ 1052 03c6 01       		.byte	0x1
+ 1053 03c7 69       		.byte	0x69
+ 1054 03c8 8C000000 		.4byte	0x8c
+ 1055 03cc E7000000 		.4byte	.LLST2
+ 1056 03d0 10       		.uleb128 0x10
+ 1057 03d1 27000000 		.4byte	.LASF67
+ 1058 03d5 01       		.byte	0x1
+ 1059 03d6 69       		.byte	0x69
+ 1060 03d7 AD000000 		.4byte	0xad
+ 1061 03db BF010000 		.4byte	.LLST3
+ 1062 03df 12       		.uleb128 0x12
+ 1063 03e0 7800     		.ascii	"x\000"
+ 1064 03e2 01       		.byte	0x1
+ 1065 03e3 6B       		.byte	0x6b
+ 1066 03e4 8C000000 		.4byte	0x8c
+ 1067 03e8 EB010000 		.4byte	.LLST4
+ 1068 03ec 12       		.uleb128 0x12
+ 1069 03ed 6300     		.ascii	"c\000"
+ 1070 03ef 01       		.byte	0x1
+ 1071 03f0 6B       		.byte	0x6b
+ 1072 03f1 8C000000 		.4byte	0x8c
+ 1073 03f5 31020000 		.4byte	.LLST5
+ 1074 03f9 12       		.uleb128 0x12
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 26
+
+
+ 1075 03fa 70747200 		.ascii	"ptr\000"
+ 1076 03fe 01       		.byte	0x1
+ 1077 03ff 6C       		.byte	0x6c
+ 1078 0400 6E030000 		.4byte	0x36e
+ 1079 0404 50020000 		.4byte	.LLST6
+ 1080 0408 13       		.uleb128 0x13
+ 1081 0409 1C000000 		.4byte	.LVL3
+ 1082 040d 11080000 		.4byte	0x811
+ 1083 0411 14       		.uleb128 0x14
+ 1084 0412 24000000 		.4byte	.LVL4
+ 1085 0416 1D080000 		.4byte	0x81d
+ 1086 041a 2E040000 		.4byte	0x42e
+ 1087 041e 15       		.uleb128 0x15
+ 1088 041f 01       		.uleb128 0x1
+ 1089 0420 50       		.byte	0x50
+ 1090 0421 02       		.uleb128 0x2
+ 1091 0422 75       		.byte	0x75
+ 1092 0423 00       		.sleb128 0
+ 1093 0424 15       		.uleb128 0x15
+ 1094 0425 01       		.uleb128 0x1
+ 1095 0426 51       		.byte	0x51
+ 1096 0427 05       		.uleb128 0x5
+ 1097 0428 03       		.byte	0x3
+ 1098 0429 00000000 		.4byte	.LANCHOR0
+ 1099 042d 00       		.byte	0
+ 1100 042e 14       		.uleb128 0x14
+ 1101 042f 30000000 		.4byte	.LVL6
+ 1102 0433 1D080000 		.4byte	0x81d
+ 1103 0437 45040000 		.4byte	0x445
+ 1104 043b 15       		.uleb128 0x15
+ 1105 043c 01       		.uleb128 0x1
+ 1106 043d 51       		.byte	0x51
+ 1107 043e 05       		.uleb128 0x5
+ 1108 043f 03       		.byte	0x3
+ 1109 0440 38000000 		.4byte	.LANCHOR0+56
+ 1110 0444 00       		.byte	0
+ 1111 0445 14       		.uleb128 0x14
+ 1112 0446 3A000000 		.4byte	.LVL8
+ 1113 044a 1D080000 		.4byte	0x81d
+ 1114 044e 5C040000 		.4byte	0x45c
+ 1115 0452 15       		.uleb128 0x15
+ 1116 0453 01       		.uleb128 0x1
+ 1117 0454 51       		.byte	0x51
+ 1118 0455 05       		.uleb128 0x5
+ 1119 0456 03       		.byte	0x3
+ 1120 0457 40000000 		.4byte	.LANCHOR0+64
+ 1121 045b 00       		.byte	0
+ 1122 045c 14       		.uleb128 0x14
+ 1123 045d 46000000 		.4byte	.LVL10
+ 1124 0461 1D080000 		.4byte	0x81d
+ 1125 0465 73040000 		.4byte	0x473
+ 1126 0469 15       		.uleb128 0x15
+ 1127 046a 01       		.uleb128 0x1
+ 1128 046b 51       		.byte	0x51
+ 1129 046c 05       		.uleb128 0x5
+ 1130 046d 03       		.byte	0x3
+ 1131 046e 48000000 		.4byte	.LANCHOR0+72
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 27
+
+
+ 1132 0472 00       		.byte	0
+ 1133 0473 14       		.uleb128 0x14
+ 1134 0474 58000000 		.4byte	.LVL12
+ 1135 0478 1D080000 		.4byte	0x81d
+ 1136 047c 8A040000 		.4byte	0x48a
+ 1137 0480 15       		.uleb128 0x15
+ 1138 0481 01       		.uleb128 0x1
+ 1139 0482 51       		.byte	0x51
+ 1140 0483 05       		.uleb128 0x5
+ 1141 0484 03       		.byte	0x3
+ 1142 0485 50000000 		.4byte	.LANCHOR0+80
+ 1143 0489 00       		.byte	0
+ 1144 048a 13       		.uleb128 0x13
+ 1145 048b 68000000 		.4byte	.LVL14
+ 1146 048f 29080000 		.4byte	0x829
+ 1147 0493 14       		.uleb128 0x14
+ 1148 0494 70000000 		.4byte	.LVL15
+ 1149 0498 35080000 		.4byte	0x835
+ 1150 049c AD040000 		.4byte	0x4ad
+ 1151 04a0 15       		.uleb128 0x15
+ 1152 04a1 01       		.uleb128 0x1
+ 1153 04a2 50       		.byte	0x50
+ 1154 04a3 02       		.uleb128 0x2
+ 1155 04a4 75       		.byte	0x75
+ 1156 04a5 00       		.sleb128 0
+ 1157 04a6 15       		.uleb128 0x15
+ 1158 04a7 01       		.uleb128 0x1
+ 1159 04a8 51       		.byte	0x51
+ 1160 04a9 02       		.uleb128 0x2
+ 1161 04aa 09       		.byte	0x9
+ 1162 04ab 81       		.byte	0x81
+ 1163 04ac 00       		.byte	0
+ 1164 04ad 14       		.uleb128 0x14
+ 1165 04ae 78000000 		.4byte	.LVL16
+ 1166 04b2 41080000 		.4byte	0x841
+ 1167 04b6 C7040000 		.4byte	0x4c7
+ 1168 04ba 15       		.uleb128 0x15
+ 1169 04bb 01       		.uleb128 0x1
+ 1170 04bc 50       		.byte	0x50
+ 1171 04bd 02       		.uleb128 0x2
+ 1172 04be 75       		.byte	0x75
+ 1173 04bf 00       		.sleb128 0
+ 1174 04c0 15       		.uleb128 0x15
+ 1175 04c1 01       		.uleb128 0x1
+ 1176 04c2 51       		.byte	0x51
+ 1177 04c3 02       		.uleb128 0x2
+ 1178 04c4 74       		.byte	0x74
+ 1179 04c5 00       		.sleb128 0
+ 1180 04c6 00       		.byte	0
+ 1181 04c7 14       		.uleb128 0x14
+ 1182 04c8 7E000000 		.4byte	.LVL17
+ 1183 04cc 4D080000 		.4byte	0x84d
+ 1184 04d0 DB040000 		.4byte	0x4db
+ 1185 04d4 15       		.uleb128 0x15
+ 1186 04d5 01       		.uleb128 0x1
+ 1187 04d6 50       		.byte	0x50
+ 1188 04d7 02       		.uleb128 0x2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 28
+
+
+ 1189 04d8 75       		.byte	0x75
+ 1190 04d9 00       		.sleb128 0
+ 1191 04da 00       		.byte	0
+ 1192 04db 13       		.uleb128 0x13
+ 1193 04dc 86000000 		.4byte	.LVL19
+ 1194 04e0 29080000 		.4byte	0x829
+ 1195 04e4 14       		.uleb128 0x14
+ 1196 04e5 A0000000 		.4byte	.LVL25
+ 1197 04e9 35080000 		.4byte	0x835
+ 1198 04ed 02050000 		.4byte	0x502
+ 1199 04f1 15       		.uleb128 0x15
+ 1200 04f2 01       		.uleb128 0x1
+ 1201 04f3 50       		.byte	0x50
+ 1202 04f4 02       		.uleb128 0x2
+ 1203 04f5 75       		.byte	0x75
+ 1204 04f6 00       		.sleb128 0
+ 1205 04f7 15       		.uleb128 0x15
+ 1206 04f8 01       		.uleb128 0x1
+ 1207 04f9 51       		.byte	0x51
+ 1208 04fa 06       		.uleb128 0x6
+ 1209 04fb 77       		.byte	0x77
+ 1210 04fc 00       		.sleb128 0
+ 1211 04fd 34       		.byte	0x34
+ 1212 04fe 25       		.byte	0x25
+ 1213 04ff 40       		.byte	0x40
+ 1214 0500 21       		.byte	0x21
+ 1215 0501 00       		.byte	0
+ 1216 0502 14       		.uleb128 0x14
+ 1217 0503 AA000000 		.4byte	.LVL26
+ 1218 0507 35080000 		.4byte	0x835
+ 1219 050b 1E050000 		.4byte	0x51e
+ 1220 050f 15       		.uleb128 0x15
+ 1221 0510 01       		.uleb128 0x1
+ 1222 0511 50       		.byte	0x50
+ 1223 0512 02       		.uleb128 0x2
+ 1224 0513 75       		.byte	0x75
+ 1225 0514 00       		.sleb128 0
+ 1226 0515 15       		.uleb128 0x15
+ 1227 0516 01       		.uleb128 0x1
+ 1228 0517 51       		.byte	0x51
+ 1229 0518 04       		.uleb128 0x4
+ 1230 0519 77       		.byte	0x77
+ 1231 051a 00       		.sleb128 0
+ 1232 051b 3F       		.byte	0x3f
+ 1233 051c 1A       		.byte	0x1a
+ 1234 051d 00       		.byte	0
+ 1235 051e 14       		.uleb128 0x14
+ 1236 051f B6000000 		.4byte	.LVL27
+ 1237 0523 35080000 		.4byte	0x835
+ 1238 0527 32050000 		.4byte	0x532
+ 1239 052b 15       		.uleb128 0x15
+ 1240 052c 01       		.uleb128 0x1
+ 1241 052d 50       		.byte	0x50
+ 1242 052e 02       		.uleb128 0x2
+ 1243 052f 75       		.byte	0x75
+ 1244 0530 00       		.sleb128 0
+ 1245 0531 00       		.byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 29
+
+
+ 1246 0532 14       		.uleb128 0x14
+ 1247 0533 C6000000 		.4byte	.LVL30
+ 1248 0537 59080000 		.4byte	0x859
+ 1249 053b 46050000 		.4byte	0x546
+ 1250 053f 15       		.uleb128 0x15
+ 1251 0540 01       		.uleb128 0x1
+ 1252 0541 50       		.byte	0x50
+ 1253 0542 02       		.uleb128 0x2
+ 1254 0543 75       		.byte	0x75
+ 1255 0544 00       		.sleb128 0
+ 1256 0545 00       		.byte	0
+ 1257 0546 16       		.uleb128 0x16
+ 1258 0547 D4000000 		.4byte	.LVL32
+ 1259 054b 4D080000 		.4byte	0x84d
+ 1260 054f 15       		.uleb128 0x15
+ 1261 0550 01       		.uleb128 0x1
+ 1262 0551 50       		.byte	0x50
+ 1263 0552 02       		.uleb128 0x2
+ 1264 0553 75       		.byte	0x75
+ 1265 0554 00       		.sleb128 0
+ 1266 0555 00       		.byte	0
+ 1267 0556 00       		.byte	0
+ 1268 0557 17       		.uleb128 0x17
+ 1269 0558 C3000000 		.4byte	.LASF68
+ 1270 055c 01       		.byte	0x1
+ 1271 055d CC       		.byte	0xcc
+ 1272 055e 8C000000 		.4byte	0x8c
+ 1273 0562 00000000 		.4byte	.LFB1
+ 1274 0566 1C000000 		.4byte	.LFE1-.LFB1
+ 1275 056a 01       		.uleb128 0x1
+ 1276 056b 9C       		.byte	0x9c
+ 1277 056c D4050000 		.4byte	0x5d4
+ 1278 0570 10       		.uleb128 0x10
+ 1279 0571 D1010000 		.4byte	.LASF65
+ 1280 0575 01       		.byte	0x1
+ 1281 0576 CC       		.byte	0xcc
+ 1282 0577 43030000 		.4byte	0x343
+ 1283 057b 64020000 		.4byte	.LLST7
+ 1284 057f 11       		.uleb128 0x11
+ 1285 0580 6D736700 		.ascii	"msg\000"
+ 1286 0584 01       		.byte	0x1
+ 1287 0585 CC       		.byte	0xcc
+ 1288 0586 8C000000 		.4byte	0x8c
+ 1289 058a 9E020000 		.4byte	.LLST8
+ 1290 058e 10       		.uleb128 0x10
+ 1291 058f DF010000 		.4byte	.LASF66
+ 1292 0593 01       		.byte	0x1
+ 1293 0594 CC       		.byte	0xcc
+ 1294 0595 8C000000 		.4byte	0x8c
+ 1295 0599 D8020000 		.4byte	.LLST9
+ 1296 059d 10       		.uleb128 0x10
+ 1297 059e 27000000 		.4byte	.LASF67
+ 1298 05a2 01       		.byte	0x1
+ 1299 05a3 CC       		.byte	0xcc
+ 1300 05a4 AD000000 		.4byte	0xad
+ 1301 05a8 12030000 		.4byte	.LLST10
+ 1302 05ac 14       		.uleb128 0x14
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 30
+
+
+ 1303 05ad 0C000000 		.4byte	.LVL38
+ 1304 05b1 65080000 		.4byte	0x865
+ 1305 05b5 CA050000 		.4byte	0x5ca
+ 1306 05b9 15       		.uleb128 0x15
+ 1307 05ba 01       		.uleb128 0x1
+ 1308 05bb 50       		.byte	0x50
+ 1309 05bc 03       		.uleb128 0x3
+ 1310 05bd F3       		.byte	0xf3
+ 1311 05be 01       		.uleb128 0x1
+ 1312 05bf 50       		.byte	0x50
+ 1313 05c0 15       		.uleb128 0x15
+ 1314 05c1 01       		.uleb128 0x1
+ 1315 05c2 51       		.byte	0x51
+ 1316 05c3 05       		.uleb128 0x5
+ 1317 05c4 03       		.byte	0x3
+ 1318 05c5 58000000 		.4byte	.LANCHOR0+88
+ 1319 05c9 00       		.byte	0
+ 1320 05ca 13       		.uleb128 0x13
+ 1321 05cb 14000000 		.4byte	.LVL40
+ 1322 05cf 8A030000 		.4byte	0x38a
+ 1323 05d3 00       		.byte	0
+ 1324 05d4 17       		.uleb128 0x17
+ 1325 05d5 D2020000 		.4byte	.LASF69
+ 1326 05d9 01       		.byte	0x1
+ 1327 05da F4       		.byte	0xf4
+ 1328 05db 8C000000 		.4byte	0x8c
+ 1329 05df 00000000 		.4byte	.LFB2
+ 1330 05e3 1C000000 		.4byte	.LFE2-.LFB2
+ 1331 05e7 01       		.uleb128 0x1
+ 1332 05e8 9C       		.byte	0x9c
+ 1333 05e9 51060000 		.4byte	0x651
+ 1334 05ed 10       		.uleb128 0x10
+ 1335 05ee D1010000 		.4byte	.LASF65
+ 1336 05f2 01       		.byte	0x1
+ 1337 05f3 F4       		.byte	0xf4
+ 1338 05f4 43030000 		.4byte	0x343
+ 1339 05f8 4C030000 		.4byte	.LLST11
+ 1340 05fc 11       		.uleb128 0x11
+ 1341 05fd 6D736700 		.ascii	"msg\000"
+ 1342 0601 01       		.byte	0x1
+ 1343 0602 F4       		.byte	0xf4
+ 1344 0603 8C000000 		.4byte	0x8c
+ 1345 0607 86030000 		.4byte	.LLST12
+ 1346 060b 10       		.uleb128 0x10
+ 1347 060c DF010000 		.4byte	.LASF66
+ 1348 0610 01       		.byte	0x1
+ 1349 0611 F4       		.byte	0xf4
+ 1350 0612 8C000000 		.4byte	0x8c
+ 1351 0616 C0030000 		.4byte	.LLST13
+ 1352 061a 10       		.uleb128 0x10
+ 1353 061b 27000000 		.4byte	.LASF67
+ 1354 061f 01       		.byte	0x1
+ 1355 0620 F4       		.byte	0xf4
+ 1356 0621 AD000000 		.4byte	0xad
+ 1357 0625 FA030000 		.4byte	.LLST14
+ 1358 0629 14       		.uleb128 0x14
+ 1359 062a 0C000000 		.4byte	.LVL43
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 31
+
+
+ 1360 062e 65080000 		.4byte	0x865
+ 1361 0632 47060000 		.4byte	0x647
+ 1362 0636 15       		.uleb128 0x15
+ 1363 0637 01       		.uleb128 0x1
+ 1364 0638 50       		.byte	0x50
+ 1365 0639 03       		.uleb128 0x3
+ 1366 063a F3       		.byte	0xf3
+ 1367 063b 01       		.uleb128 0x1
+ 1368 063c 50       		.byte	0x50
+ 1369 063d 15       		.uleb128 0x15
+ 1370 063e 01       		.uleb128 0x1
+ 1371 063f 51       		.byte	0x51
+ 1372 0640 05       		.uleb128 0x5
+ 1373 0641 03       		.byte	0x3
+ 1374 0642 70000000 		.4byte	.LANCHOR0+112
+ 1375 0646 00       		.byte	0
+ 1376 0647 13       		.uleb128 0x13
+ 1377 0648 14000000 		.4byte	.LVL45
+ 1378 064c 8A030000 		.4byte	0x38a
+ 1379 0650 00       		.byte	0
+ 1380 0651 18       		.uleb128 0x18
+ 1381 0652 39040000 		.4byte	.LASF70
+ 1382 0656 01       		.byte	0x1
+ 1383 0657 3401     		.2byte	0x134
+ 1384 0659 8C000000 		.4byte	0x8c
+ 1385 065d 00000000 		.4byte	.LFB3
+ 1386 0661 40000000 		.4byte	.LFE3-.LFB3
+ 1387 0665 01       		.uleb128 0x1
+ 1388 0666 9C       		.byte	0x9c
+ 1389 0667 11070000 		.4byte	0x711
+ 1390 066b 19       		.uleb128 0x19
+ 1391 066c D1010000 		.4byte	.LASF65
+ 1392 0670 01       		.byte	0x1
+ 1393 0671 3401     		.2byte	0x134
+ 1394 0673 43030000 		.4byte	0x343
+ 1395 0677 34040000 		.4byte	.LLST15
+ 1396 067b 1A       		.uleb128 0x1a
+ 1397 067c 6D736700 		.ascii	"msg\000"
+ 1398 0680 01       		.byte	0x1
+ 1399 0681 3401     		.2byte	0x134
+ 1400 0683 8C000000 		.4byte	0x8c
+ 1401 0687 76040000 		.4byte	.LLST16
+ 1402 068b 19       		.uleb128 0x19
+ 1403 068c DF010000 		.4byte	.LASF66
+ 1404 0690 01       		.byte	0x1
+ 1405 0691 3401     		.2byte	0x134
+ 1406 0693 8C000000 		.4byte	0x8c
+ 1407 0697 B0040000 		.4byte	.LLST17
+ 1408 069b 19       		.uleb128 0x19
+ 1409 069c 27000000 		.4byte	.LASF67
+ 1410 06a0 01       		.byte	0x1
+ 1411 06a1 3401     		.2byte	0x134
+ 1412 06a3 AD000000 		.4byte	0xad
+ 1413 06a7 EA040000 		.4byte	.LLST18
+ 1414 06ab 14       		.uleb128 0x14
+ 1415 06ac 0E000000 		.4byte	.LVL48
+ 1416 06b0 65080000 		.4byte	0x865
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 32
+
+
+ 1417 06b4 C8060000 		.4byte	0x6c8
+ 1418 06b8 15       		.uleb128 0x15
+ 1419 06b9 01       		.uleb128 0x1
+ 1420 06ba 50       		.byte	0x50
+ 1421 06bb 02       		.uleb128 0x2
+ 1422 06bc 75       		.byte	0x75
+ 1423 06bd 00       		.sleb128 0
+ 1424 06be 15       		.uleb128 0x15
+ 1425 06bf 01       		.uleb128 0x1
+ 1426 06c0 51       		.byte	0x51
+ 1427 06c1 05       		.uleb128 0x5
+ 1428 06c2 03       		.byte	0x3
+ 1429 06c3 88000000 		.4byte	.LANCHOR0+136
+ 1430 06c7 00       		.byte	0
+ 1431 06c8 13       		.uleb128 0x13
+ 1432 06c9 20000000 		.4byte	.LVL50
+ 1433 06cd 11080000 		.4byte	0x811
+ 1434 06d1 14       		.uleb128 0x14
+ 1435 06d2 28000000 		.4byte	.LVL51
+ 1436 06d6 1D080000 		.4byte	0x81d
+ 1437 06da EE060000 		.4byte	0x6ee
+ 1438 06de 15       		.uleb128 0x15
+ 1439 06df 01       		.uleb128 0x1
+ 1440 06e0 50       		.byte	0x50
+ 1441 06e1 02       		.uleb128 0x2
+ 1442 06e2 75       		.byte	0x75
+ 1443 06e3 00       		.sleb128 0
+ 1444 06e4 15       		.uleb128 0x15
+ 1445 06e5 01       		.uleb128 0x1
+ 1446 06e6 51       		.byte	0x51
+ 1447 06e7 05       		.uleb128 0x5
+ 1448 06e8 03       		.byte	0x3
+ 1449 06e9 A0000000 		.4byte	.LANCHOR0+160
+ 1450 06ed 00       		.byte	0
+ 1451 06ee 16       		.uleb128 0x16
+ 1452 06ef 34000000 		.4byte	.LVL52
+ 1453 06f3 8A030000 		.4byte	0x38a
+ 1454 06f7 15       		.uleb128 0x15
+ 1455 06f8 01       		.uleb128 0x1
+ 1456 06f9 50       		.byte	0x50
+ 1457 06fa 02       		.uleb128 0x2
+ 1458 06fb 75       		.byte	0x75
+ 1459 06fc 00       		.sleb128 0
+ 1460 06fd 15       		.uleb128 0x15
+ 1461 06fe 01       		.uleb128 0x1
+ 1462 06ff 51       		.byte	0x51
+ 1463 0700 02       		.uleb128 0x2
+ 1464 0701 74       		.byte	0x74
+ 1465 0702 00       		.sleb128 0
+ 1466 0703 15       		.uleb128 0x15
+ 1467 0704 01       		.uleb128 0x1
+ 1468 0705 52       		.byte	0x52
+ 1469 0706 02       		.uleb128 0x2
+ 1470 0707 76       		.byte	0x76
+ 1471 0708 00       		.sleb128 0
+ 1472 0709 15       		.uleb128 0x15
+ 1473 070a 01       		.uleb128 0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 33
+
+
+ 1474 070b 53       		.byte	0x53
+ 1475 070c 02       		.uleb128 0x2
+ 1476 070d 77       		.byte	0x77
+ 1477 070e 00       		.sleb128 0
+ 1478 070f 00       		.byte	0
+ 1479 0710 00       		.byte	0
+ 1480 0711 1B       		.uleb128 0x1b
+ 1481 0712 85030000 		.4byte	0x385
+ 1482 0716 21070000 		.4byte	0x721
+ 1483 071a 1C       		.uleb128 0x1c
+ 1484 071b 21070000 		.4byte	0x721
+ 1485 071f 34       		.byte	0x34
+ 1486 0720 00       		.byte	0
+ 1487 0721 02       		.uleb128 0x2
+ 1488 0722 04       		.byte	0x4
+ 1489 0723 07       		.byte	0x7
+ 1490 0724 A8000000 		.4byte	.LASF71
+ 1491 0728 1D       		.uleb128 0x1d
+ 1492 0729 27060000 		.4byte	.LASF72
+ 1493 072d 01       		.byte	0x1
+ 1494 072e 2A       		.byte	0x2a
+ 1495 072f 39070000 		.4byte	0x739
+ 1496 0733 05       		.uleb128 0x5
+ 1497 0734 03       		.byte	0x3
+ 1498 0735 00000000 		.4byte	u8x8_d_ssd1306_128x32_univision_init_seq
+ 1499 0739 0E       		.uleb128 0xe
+ 1500 073a 11070000 		.4byte	0x711
+ 1501 073e 1B       		.uleb128 0x1b
+ 1502 073f 85030000 		.4byte	0x385
+ 1503 0743 4E070000 		.4byte	0x74e
+ 1504 0747 1C       		.uleb128 0x1c
+ 1505 0748 21070000 		.4byte	0x721
+ 1506 074c 04       		.byte	0x4
+ 1507 074d 00       		.byte	0
+ 1508 074e 1D       		.uleb128 0x1d
+ 1509 074f F6000000 		.4byte	.LASF73
+ 1510 0753 01       		.byte	0x1
+ 1511 0754 4A       		.byte	0x4a
+ 1512 0755 5F070000 		.4byte	0x75f
+ 1513 0759 05       		.uleb128 0x5
+ 1514 075a 03       		.byte	0x3
+ 1515 075b 38000000 		.4byte	u8x8_d_ssd1306_128x32_univision_powersave0_seq
+ 1516 075f 0E       		.uleb128 0xe
+ 1517 0760 3E070000 		.4byte	0x73e
+ 1518 0764 1D       		.uleb128 0x1d
+ 1519 0765 47030000 		.4byte	.LASF74
+ 1520 0769 01       		.byte	0x1
+ 1521 076a 51       		.byte	0x51
+ 1522 076b 75070000 		.4byte	0x775
+ 1523 076f 05       		.uleb128 0x5
+ 1524 0770 03       		.byte	0x3
+ 1525 0771 40000000 		.4byte	u8x8_d_ssd1306_128x32_univision_powersave1_seq
+ 1526 0775 0E       		.uleb128 0xe
+ 1527 0776 3E070000 		.4byte	0x73e
+ 1528 077a 1B       		.uleb128 0x1b
+ 1529 077b 85030000 		.4byte	0x385
+ 1530 077f 8A070000 		.4byte	0x78a
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 34
+
+
+ 1531 0783 1C       		.uleb128 0x1c
+ 1532 0784 21070000 		.4byte	0x721
+ 1533 0788 06       		.byte	0x6
+ 1534 0789 00       		.byte	0
+ 1535 078a 1D       		.uleb128 0x1d
+ 1536 078b D2040000 		.4byte	.LASF75
+ 1537 078f 01       		.byte	0x1
+ 1538 0790 58       		.byte	0x58
+ 1539 0791 9B070000 		.4byte	0x79b
+ 1540 0795 05       		.uleb128 0x5
+ 1541 0796 03       		.byte	0x3
+ 1542 0797 48000000 		.4byte	u8x8_d_ssd1306_128x32_univision_flip0_seq
+ 1543 079b 0E       		.uleb128 0xe
+ 1544 079c 7A070000 		.4byte	0x77a
+ 1545 07a0 1D       		.uleb128 0x1d
+ 1546 07a1 86010000 		.4byte	.LASF76
+ 1547 07a5 01       		.byte	0x1
+ 1548 07a6 60       		.byte	0x60
+ 1549 07a7 B1070000 		.4byte	0x7b1
+ 1550 07ab 05       		.uleb128 0x5
+ 1551 07ac 03       		.byte	0x3
+ 1552 07ad 50000000 		.4byte	u8x8_d_ssd1306_128x32_univision_flip1_seq
+ 1553 07b1 0E       		.uleb128 0xe
+ 1554 07b2 7A070000 		.4byte	0x77a
+ 1555 07b6 1D       		.uleb128 0x1d
+ 1556 07b7 F9030000 		.4byte	.LASF77
+ 1557 07bb 01       		.byte	0x1
+ 1558 07bc B4       		.byte	0xb4
+ 1559 07bd 7A030000 		.4byte	0x37a
+ 1560 07c1 05       		.uleb128 0x5
+ 1561 07c2 03       		.byte	0x3
+ 1562 07c3 58000000 		.4byte	u8x8_ssd1306_128x32_univision_display_info
+ 1563 07c7 1D       		.uleb128 0x1d
+ 1564 07c8 A0040000 		.4byte	.LASF78
+ 1565 07cc 01       		.byte	0x1
+ 1566 07cd DC       		.byte	0xdc
+ 1567 07ce 7A030000 		.4byte	0x37a
+ 1568 07d2 05       		.uleb128 0x5
+ 1569 07d3 03       		.byte	0x3
+ 1570 07d4 70000000 		.4byte	u8x8_ssd1306_128x32_winstar_display_info
+ 1571 07d8 1B       		.uleb128 0x1b
+ 1572 07d9 85030000 		.4byte	0x385
+ 1573 07dd E8070000 		.4byte	0x7e8
+ 1574 07e1 1C       		.uleb128 0x1c
+ 1575 07e2 21070000 		.4byte	0x721
+ 1576 07e6 30       		.byte	0x30
+ 1577 07e7 00       		.byte	0
+ 1578 07e8 1E       		.uleb128 0x1e
+ 1579 07e9 81000000 		.4byte	.LASF79
+ 1580 07ed 01       		.byte	0x1
+ 1581 07ee 0301     		.2byte	0x103
+ 1582 07f0 FA070000 		.4byte	0x7fa
+ 1583 07f4 05       		.uleb128 0x5
+ 1584 07f5 03       		.byte	0x3
+ 1585 07f6 A0000000 		.4byte	u8x8_d_sh1106_128x32_visionox_init_seq
+ 1586 07fa 0E       		.uleb128 0xe
+ 1587 07fb D8070000 		.4byte	0x7d8
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 35
+
+
+ 1588 07ff 1E       		.uleb128 0x1e
+ 1589 0800 05070000 		.4byte	.LASF80
+ 1590 0804 01       		.byte	0x1
+ 1591 0805 1B01     		.2byte	0x11b
+ 1592 0807 7A030000 		.4byte	0x37a
+ 1593 080b 05       		.uleb128 0x5
+ 1594 080c 03       		.byte	0x3
+ 1595 080d 88000000 		.4byte	u8x8_d_sh1106_128x32_visionox_display_info
+ 1596 0811 1F       		.uleb128 0x1f
+ 1597 0812 7E020000 		.4byte	.LASF81
+ 1598 0816 7E020000 		.4byte	.LASF81
+ 1599 081a 04       		.byte	0x4
+ 1600 081b AF01     		.2byte	0x1af
+ 1601 081d 1F       		.uleb128 0x1f
+ 1602 081e 5F050000 		.4byte	.LASF82
+ 1603 0822 5F050000 		.4byte	.LASF82
+ 1604 0826 04       		.byte	0x4
+ 1605 0827 8A02     		.2byte	0x28a
+ 1606 0829 1F       		.uleb128 0x1f
+ 1607 082a E2030000 		.4byte	.LASF83
+ 1608 082e E2030000 		.4byte	.LASF83
+ 1609 0832 04       		.byte	0x4
+ 1610 0833 6B02     		.2byte	0x26b
+ 1611 0835 1F       		.uleb128 0x1f
+ 1612 0836 6D020000 		.4byte	.LASF84
+ 1613 083a 6D020000 		.4byte	.LASF84
+ 1614 083e 04       		.byte	0x4
+ 1615 083f 6702     		.2byte	0x267
+ 1616 0841 1F       		.uleb128 0x1f
+ 1617 0842 0B050000 		.4byte	.LASF85
+ 1618 0846 0B050000 		.4byte	.LASF85
+ 1619 084a 04       		.byte	0x4
+ 1620 084b 6802     		.2byte	0x268
+ 1621 084d 1F       		.uleb128 0x1f
+ 1622 084e A2020000 		.4byte	.LASF86
+ 1623 0852 A2020000 		.4byte	.LASF86
+ 1624 0856 04       		.byte	0x4
+ 1625 0857 6C02     		.2byte	0x26c
+ 1626 0859 1F       		.uleb128 0x1f
+ 1627 085a E7010000 		.4byte	.LASF87
+ 1628 085e E7010000 		.4byte	.LASF87
+ 1629 0862 04       		.byte	0x4
+ 1630 0863 6A02     		.2byte	0x26a
+ 1631 0865 1F       		.uleb128 0x1f
+ 1632 0866 F1050000 		.4byte	.LASF88
+ 1633 086a F1050000 		.4byte	.LASF88
+ 1634 086e 04       		.byte	0x4
+ 1635 086f AE01     		.2byte	0x1ae
+ 1636 0871 00       		.byte	0
+ 1637              		.section	.debug_abbrev,"",%progbits
+ 1638              	.Ldebug_abbrev0:
+ 1639 0000 01       		.uleb128 0x1
+ 1640 0001 11       		.uleb128 0x11
+ 1641 0002 01       		.byte	0x1
+ 1642 0003 25       		.uleb128 0x25
+ 1643 0004 0E       		.uleb128 0xe
+ 1644 0005 13       		.uleb128 0x13
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 36
+
+
+ 1645 0006 0B       		.uleb128 0xb
+ 1646 0007 03       		.uleb128 0x3
+ 1647 0008 0E       		.uleb128 0xe
+ 1648 0009 1B       		.uleb128 0x1b
+ 1649 000a 0E       		.uleb128 0xe
+ 1650 000b 55       		.uleb128 0x55
+ 1651 000c 17       		.uleb128 0x17
+ 1652 000d 11       		.uleb128 0x11
+ 1653 000e 01       		.uleb128 0x1
+ 1654 000f 10       		.uleb128 0x10
+ 1655 0010 17       		.uleb128 0x17
+ 1656 0011 00       		.byte	0
+ 1657 0012 00       		.byte	0
+ 1658 0013 02       		.uleb128 0x2
+ 1659 0014 24       		.uleb128 0x24
+ 1660 0015 00       		.byte	0
+ 1661 0016 0B       		.uleb128 0xb
+ 1662 0017 0B       		.uleb128 0xb
+ 1663 0018 3E       		.uleb128 0x3e
+ 1664 0019 0B       		.uleb128 0xb
+ 1665 001a 03       		.uleb128 0x3
+ 1666 001b 0E       		.uleb128 0xe
+ 1667 001c 00       		.byte	0
+ 1668 001d 00       		.byte	0
+ 1669 001e 03       		.uleb128 0x3
+ 1670 001f 16       		.uleb128 0x16
+ 1671 0020 00       		.byte	0
+ 1672 0021 03       		.uleb128 0x3
+ 1673 0022 0E       		.uleb128 0xe
+ 1674 0023 3A       		.uleb128 0x3a
+ 1675 0024 0B       		.uleb128 0xb
+ 1676 0025 3B       		.uleb128 0x3b
+ 1677 0026 0B       		.uleb128 0xb
+ 1678 0027 49       		.uleb128 0x49
+ 1679 0028 13       		.uleb128 0x13
+ 1680 0029 00       		.byte	0
+ 1681 002a 00       		.byte	0
+ 1682 002b 04       		.uleb128 0x4
+ 1683 002c 24       		.uleb128 0x24
+ 1684 002d 00       		.byte	0
+ 1685 002e 0B       		.uleb128 0xb
+ 1686 002f 0B       		.uleb128 0xb
+ 1687 0030 3E       		.uleb128 0x3e
+ 1688 0031 0B       		.uleb128 0xb
+ 1689 0032 03       		.uleb128 0x3
+ 1690 0033 08       		.uleb128 0x8
+ 1691 0034 00       		.byte	0
+ 1692 0035 00       		.byte	0
+ 1693 0036 05       		.uleb128 0x5
+ 1694 0037 0F       		.uleb128 0xf
+ 1695 0038 00       		.byte	0
+ 1696 0039 0B       		.uleb128 0xb
+ 1697 003a 0B       		.uleb128 0xb
+ 1698 003b 00       		.byte	0
+ 1699 003c 00       		.byte	0
+ 1700 003d 06       		.uleb128 0x6
+ 1701 003e 13       		.uleb128 0x13
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 37
+
+
+ 1702 003f 01       		.byte	0x1
+ 1703 0040 03       		.uleb128 0x3
+ 1704 0041 0E       		.uleb128 0xe
+ 1705 0042 0B       		.uleb128 0xb
+ 1706 0043 0B       		.uleb128 0xb
+ 1707 0044 3A       		.uleb128 0x3a
+ 1708 0045 0B       		.uleb128 0xb
+ 1709 0046 3B       		.uleb128 0x3b
+ 1710 0047 05       		.uleb128 0x5
+ 1711 0048 01       		.uleb128 0x1
+ 1712 0049 13       		.uleb128 0x13
+ 1713 004a 00       		.byte	0
+ 1714 004b 00       		.byte	0
+ 1715 004c 07       		.uleb128 0x7
+ 1716 004d 0D       		.uleb128 0xd
+ 1717 004e 00       		.byte	0
+ 1718 004f 03       		.uleb128 0x3
+ 1719 0050 0E       		.uleb128 0xe
+ 1720 0051 3A       		.uleb128 0x3a
+ 1721 0052 0B       		.uleb128 0xb
+ 1722 0053 3B       		.uleb128 0x3b
+ 1723 0054 05       		.uleb128 0x5
+ 1724 0055 49       		.uleb128 0x49
+ 1725 0056 13       		.uleb128 0x13
+ 1726 0057 38       		.uleb128 0x38
+ 1727 0058 0B       		.uleb128 0xb
+ 1728 0059 00       		.byte	0
+ 1729 005a 00       		.byte	0
+ 1730 005b 08       		.uleb128 0x8
+ 1731 005c 13       		.uleb128 0x13
+ 1732 005d 01       		.byte	0x1
+ 1733 005e 03       		.uleb128 0x3
+ 1734 005f 0E       		.uleb128 0xe
+ 1735 0060 0B       		.uleb128 0xb
+ 1736 0061 0B       		.uleb128 0xb
+ 1737 0062 3A       		.uleb128 0x3a
+ 1738 0063 0B       		.uleb128 0xb
+ 1739 0064 3B       		.uleb128 0x3b
+ 1740 0065 0B       		.uleb128 0xb
+ 1741 0066 01       		.uleb128 0x1
+ 1742 0067 13       		.uleb128 0x13
+ 1743 0068 00       		.byte	0
+ 1744 0069 00       		.byte	0
+ 1745 006a 09       		.uleb128 0x9
+ 1746 006b 0D       		.uleb128 0xd
+ 1747 006c 00       		.byte	0
+ 1748 006d 03       		.uleb128 0x3
+ 1749 006e 0E       		.uleb128 0xe
+ 1750 006f 3A       		.uleb128 0x3a
+ 1751 0070 0B       		.uleb128 0xb
+ 1752 0071 3B       		.uleb128 0x3b
+ 1753 0072 0B       		.uleb128 0xb
+ 1754 0073 49       		.uleb128 0x49
+ 1755 0074 13       		.uleb128 0x13
+ 1756 0075 38       		.uleb128 0x38
+ 1757 0076 0B       		.uleb128 0xb
+ 1758 0077 00       		.byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 38
+
+
+ 1759 0078 00       		.byte	0
+ 1760 0079 0A       		.uleb128 0xa
+ 1761 007a 0D       		.uleb128 0xd
+ 1762 007b 00       		.byte	0
+ 1763 007c 03       		.uleb128 0x3
+ 1764 007d 08       		.uleb128 0x8
+ 1765 007e 3A       		.uleb128 0x3a
+ 1766 007f 0B       		.uleb128 0xb
+ 1767 0080 3B       		.uleb128 0x3b
+ 1768 0081 0B       		.uleb128 0xb
+ 1769 0082 49       		.uleb128 0x49
+ 1770 0083 13       		.uleb128 0x13
+ 1771 0084 38       		.uleb128 0x38
+ 1772 0085 0B       		.uleb128 0xb
+ 1773 0086 00       		.byte	0
+ 1774 0087 00       		.byte	0
+ 1775 0088 0B       		.uleb128 0xb
+ 1776 0089 0F       		.uleb128 0xf
+ 1777 008a 00       		.byte	0
+ 1778 008b 0B       		.uleb128 0xb
+ 1779 008c 0B       		.uleb128 0xb
+ 1780 008d 49       		.uleb128 0x49
+ 1781 008e 13       		.uleb128 0x13
+ 1782 008f 00       		.byte	0
+ 1783 0090 00       		.byte	0
+ 1784 0091 0C       		.uleb128 0xc
+ 1785 0092 15       		.uleb128 0x15
+ 1786 0093 01       		.byte	0x1
+ 1787 0094 27       		.uleb128 0x27
+ 1788 0095 19       		.uleb128 0x19
+ 1789 0096 49       		.uleb128 0x49
+ 1790 0097 13       		.uleb128 0x13
+ 1791 0098 01       		.uleb128 0x1
+ 1792 0099 13       		.uleb128 0x13
+ 1793 009a 00       		.byte	0
+ 1794 009b 00       		.byte	0
+ 1795 009c 0D       		.uleb128 0xd
+ 1796 009d 05       		.uleb128 0x5
+ 1797 009e 00       		.byte	0
+ 1798 009f 49       		.uleb128 0x49
+ 1799 00a0 13       		.uleb128 0x13
+ 1800 00a1 00       		.byte	0
+ 1801 00a2 00       		.byte	0
+ 1802 00a3 0E       		.uleb128 0xe
+ 1803 00a4 26       		.uleb128 0x26
+ 1804 00a5 00       		.byte	0
+ 1805 00a6 49       		.uleb128 0x49
+ 1806 00a7 13       		.uleb128 0x13
+ 1807 00a8 00       		.byte	0
+ 1808 00a9 00       		.byte	0
+ 1809 00aa 0F       		.uleb128 0xf
+ 1810 00ab 2E       		.uleb128 0x2e
+ 1811 00ac 01       		.byte	0x1
+ 1812 00ad 03       		.uleb128 0x3
+ 1813 00ae 0E       		.uleb128 0xe
+ 1814 00af 3A       		.uleb128 0x3a
+ 1815 00b0 0B       		.uleb128 0xb
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 39
+
+
+ 1816 00b1 3B       		.uleb128 0x3b
+ 1817 00b2 0B       		.uleb128 0xb
+ 1818 00b3 27       		.uleb128 0x27
+ 1819 00b4 19       		.uleb128 0x19
+ 1820 00b5 49       		.uleb128 0x49
+ 1821 00b6 13       		.uleb128 0x13
+ 1822 00b7 11       		.uleb128 0x11
+ 1823 00b8 01       		.uleb128 0x1
+ 1824 00b9 12       		.uleb128 0x12
+ 1825 00ba 06       		.uleb128 0x6
+ 1826 00bb 40       		.uleb128 0x40
+ 1827 00bc 18       		.uleb128 0x18
+ 1828 00bd 9742     		.uleb128 0x2117
+ 1829 00bf 19       		.uleb128 0x19
+ 1830 00c0 01       		.uleb128 0x1
+ 1831 00c1 13       		.uleb128 0x13
+ 1832 00c2 00       		.byte	0
+ 1833 00c3 00       		.byte	0
+ 1834 00c4 10       		.uleb128 0x10
+ 1835 00c5 05       		.uleb128 0x5
+ 1836 00c6 00       		.byte	0
+ 1837 00c7 03       		.uleb128 0x3
+ 1838 00c8 0E       		.uleb128 0xe
+ 1839 00c9 3A       		.uleb128 0x3a
+ 1840 00ca 0B       		.uleb128 0xb
+ 1841 00cb 3B       		.uleb128 0x3b
+ 1842 00cc 0B       		.uleb128 0xb
+ 1843 00cd 49       		.uleb128 0x49
+ 1844 00ce 13       		.uleb128 0x13
+ 1845 00cf 02       		.uleb128 0x2
+ 1846 00d0 17       		.uleb128 0x17
+ 1847 00d1 00       		.byte	0
+ 1848 00d2 00       		.byte	0
+ 1849 00d3 11       		.uleb128 0x11
+ 1850 00d4 05       		.uleb128 0x5
+ 1851 00d5 00       		.byte	0
+ 1852 00d6 03       		.uleb128 0x3
+ 1853 00d7 08       		.uleb128 0x8
+ 1854 00d8 3A       		.uleb128 0x3a
+ 1855 00d9 0B       		.uleb128 0xb
+ 1856 00da 3B       		.uleb128 0x3b
+ 1857 00db 0B       		.uleb128 0xb
+ 1858 00dc 49       		.uleb128 0x49
+ 1859 00dd 13       		.uleb128 0x13
+ 1860 00de 02       		.uleb128 0x2
+ 1861 00df 17       		.uleb128 0x17
+ 1862 00e0 00       		.byte	0
+ 1863 00e1 00       		.byte	0
+ 1864 00e2 12       		.uleb128 0x12
+ 1865 00e3 34       		.uleb128 0x34
+ 1866 00e4 00       		.byte	0
+ 1867 00e5 03       		.uleb128 0x3
+ 1868 00e6 08       		.uleb128 0x8
+ 1869 00e7 3A       		.uleb128 0x3a
+ 1870 00e8 0B       		.uleb128 0xb
+ 1871 00e9 3B       		.uleb128 0x3b
+ 1872 00ea 0B       		.uleb128 0xb
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 40
+
+
+ 1873 00eb 49       		.uleb128 0x49
+ 1874 00ec 13       		.uleb128 0x13
+ 1875 00ed 02       		.uleb128 0x2
+ 1876 00ee 17       		.uleb128 0x17
+ 1877 00ef 00       		.byte	0
+ 1878 00f0 00       		.byte	0
+ 1879 00f1 13       		.uleb128 0x13
+ 1880 00f2 898201   		.uleb128 0x4109
+ 1881 00f5 00       		.byte	0
+ 1882 00f6 11       		.uleb128 0x11
+ 1883 00f7 01       		.uleb128 0x1
+ 1884 00f8 31       		.uleb128 0x31
+ 1885 00f9 13       		.uleb128 0x13
+ 1886 00fa 00       		.byte	0
+ 1887 00fb 00       		.byte	0
+ 1888 00fc 14       		.uleb128 0x14
+ 1889 00fd 898201   		.uleb128 0x4109
+ 1890 0100 01       		.byte	0x1
+ 1891 0101 11       		.uleb128 0x11
+ 1892 0102 01       		.uleb128 0x1
+ 1893 0103 31       		.uleb128 0x31
+ 1894 0104 13       		.uleb128 0x13
+ 1895 0105 01       		.uleb128 0x1
+ 1896 0106 13       		.uleb128 0x13
+ 1897 0107 00       		.byte	0
+ 1898 0108 00       		.byte	0
+ 1899 0109 15       		.uleb128 0x15
+ 1900 010a 8A8201   		.uleb128 0x410a
+ 1901 010d 00       		.byte	0
+ 1902 010e 02       		.uleb128 0x2
+ 1903 010f 18       		.uleb128 0x18
+ 1904 0110 9142     		.uleb128 0x2111
+ 1905 0112 18       		.uleb128 0x18
+ 1906 0113 00       		.byte	0
+ 1907 0114 00       		.byte	0
+ 1908 0115 16       		.uleb128 0x16
+ 1909 0116 898201   		.uleb128 0x4109
+ 1910 0119 01       		.byte	0x1
+ 1911 011a 11       		.uleb128 0x11
+ 1912 011b 01       		.uleb128 0x1
+ 1913 011c 31       		.uleb128 0x31
+ 1914 011d 13       		.uleb128 0x13
+ 1915 011e 00       		.byte	0
+ 1916 011f 00       		.byte	0
+ 1917 0120 17       		.uleb128 0x17
+ 1918 0121 2E       		.uleb128 0x2e
+ 1919 0122 01       		.byte	0x1
+ 1920 0123 3F       		.uleb128 0x3f
+ 1921 0124 19       		.uleb128 0x19
+ 1922 0125 03       		.uleb128 0x3
+ 1923 0126 0E       		.uleb128 0xe
+ 1924 0127 3A       		.uleb128 0x3a
+ 1925 0128 0B       		.uleb128 0xb
+ 1926 0129 3B       		.uleb128 0x3b
+ 1927 012a 0B       		.uleb128 0xb
+ 1928 012b 27       		.uleb128 0x27
+ 1929 012c 19       		.uleb128 0x19
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 41
+
+
+ 1930 012d 49       		.uleb128 0x49
+ 1931 012e 13       		.uleb128 0x13
+ 1932 012f 11       		.uleb128 0x11
+ 1933 0130 01       		.uleb128 0x1
+ 1934 0131 12       		.uleb128 0x12
+ 1935 0132 06       		.uleb128 0x6
+ 1936 0133 40       		.uleb128 0x40
+ 1937 0134 18       		.uleb128 0x18
+ 1938 0135 9742     		.uleb128 0x2117
+ 1939 0137 19       		.uleb128 0x19
+ 1940 0138 01       		.uleb128 0x1
+ 1941 0139 13       		.uleb128 0x13
+ 1942 013a 00       		.byte	0
+ 1943 013b 00       		.byte	0
+ 1944 013c 18       		.uleb128 0x18
+ 1945 013d 2E       		.uleb128 0x2e
+ 1946 013e 01       		.byte	0x1
+ 1947 013f 3F       		.uleb128 0x3f
+ 1948 0140 19       		.uleb128 0x19
+ 1949 0141 03       		.uleb128 0x3
+ 1950 0142 0E       		.uleb128 0xe
+ 1951 0143 3A       		.uleb128 0x3a
+ 1952 0144 0B       		.uleb128 0xb
+ 1953 0145 3B       		.uleb128 0x3b
+ 1954 0146 05       		.uleb128 0x5
+ 1955 0147 27       		.uleb128 0x27
+ 1956 0148 19       		.uleb128 0x19
+ 1957 0149 49       		.uleb128 0x49
+ 1958 014a 13       		.uleb128 0x13
+ 1959 014b 11       		.uleb128 0x11
+ 1960 014c 01       		.uleb128 0x1
+ 1961 014d 12       		.uleb128 0x12
+ 1962 014e 06       		.uleb128 0x6
+ 1963 014f 40       		.uleb128 0x40
+ 1964 0150 18       		.uleb128 0x18
+ 1965 0151 9742     		.uleb128 0x2117
+ 1966 0153 19       		.uleb128 0x19
+ 1967 0154 01       		.uleb128 0x1
+ 1968 0155 13       		.uleb128 0x13
+ 1969 0156 00       		.byte	0
+ 1970 0157 00       		.byte	0
+ 1971 0158 19       		.uleb128 0x19
+ 1972 0159 05       		.uleb128 0x5
+ 1973 015a 00       		.byte	0
+ 1974 015b 03       		.uleb128 0x3
+ 1975 015c 0E       		.uleb128 0xe
+ 1976 015d 3A       		.uleb128 0x3a
+ 1977 015e 0B       		.uleb128 0xb
+ 1978 015f 3B       		.uleb128 0x3b
+ 1979 0160 05       		.uleb128 0x5
+ 1980 0161 49       		.uleb128 0x49
+ 1981 0162 13       		.uleb128 0x13
+ 1982 0163 02       		.uleb128 0x2
+ 1983 0164 17       		.uleb128 0x17
+ 1984 0165 00       		.byte	0
+ 1985 0166 00       		.byte	0
+ 1986 0167 1A       		.uleb128 0x1a
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 42
+
+
+ 1987 0168 05       		.uleb128 0x5
+ 1988 0169 00       		.byte	0
+ 1989 016a 03       		.uleb128 0x3
+ 1990 016b 08       		.uleb128 0x8
+ 1991 016c 3A       		.uleb128 0x3a
+ 1992 016d 0B       		.uleb128 0xb
+ 1993 016e 3B       		.uleb128 0x3b
+ 1994 016f 05       		.uleb128 0x5
+ 1995 0170 49       		.uleb128 0x49
+ 1996 0171 13       		.uleb128 0x13
+ 1997 0172 02       		.uleb128 0x2
+ 1998 0173 17       		.uleb128 0x17
+ 1999 0174 00       		.byte	0
+ 2000 0175 00       		.byte	0
+ 2001 0176 1B       		.uleb128 0x1b
+ 2002 0177 01       		.uleb128 0x1
+ 2003 0178 01       		.byte	0x1
+ 2004 0179 49       		.uleb128 0x49
+ 2005 017a 13       		.uleb128 0x13
+ 2006 017b 01       		.uleb128 0x1
+ 2007 017c 13       		.uleb128 0x13
+ 2008 017d 00       		.byte	0
+ 2009 017e 00       		.byte	0
+ 2010 017f 1C       		.uleb128 0x1c
+ 2011 0180 21       		.uleb128 0x21
+ 2012 0181 00       		.byte	0
+ 2013 0182 49       		.uleb128 0x49
+ 2014 0183 13       		.uleb128 0x13
+ 2015 0184 2F       		.uleb128 0x2f
+ 2016 0185 0B       		.uleb128 0xb
+ 2017 0186 00       		.byte	0
+ 2018 0187 00       		.byte	0
+ 2019 0188 1D       		.uleb128 0x1d
+ 2020 0189 34       		.uleb128 0x34
+ 2021 018a 00       		.byte	0
+ 2022 018b 03       		.uleb128 0x3
+ 2023 018c 0E       		.uleb128 0xe
+ 2024 018d 3A       		.uleb128 0x3a
+ 2025 018e 0B       		.uleb128 0xb
+ 2026 018f 3B       		.uleb128 0x3b
+ 2027 0190 0B       		.uleb128 0xb
+ 2028 0191 49       		.uleb128 0x49
+ 2029 0192 13       		.uleb128 0x13
+ 2030 0193 02       		.uleb128 0x2
+ 2031 0194 18       		.uleb128 0x18
+ 2032 0195 00       		.byte	0
+ 2033 0196 00       		.byte	0
+ 2034 0197 1E       		.uleb128 0x1e
+ 2035 0198 34       		.uleb128 0x34
+ 2036 0199 00       		.byte	0
+ 2037 019a 03       		.uleb128 0x3
+ 2038 019b 0E       		.uleb128 0xe
+ 2039 019c 3A       		.uleb128 0x3a
+ 2040 019d 0B       		.uleb128 0xb
+ 2041 019e 3B       		.uleb128 0x3b
+ 2042 019f 05       		.uleb128 0x5
+ 2043 01a0 49       		.uleb128 0x49
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 43
+
+
+ 2044 01a1 13       		.uleb128 0x13
+ 2045 01a2 02       		.uleb128 0x2
+ 2046 01a3 18       		.uleb128 0x18
+ 2047 01a4 00       		.byte	0
+ 2048 01a5 00       		.byte	0
+ 2049 01a6 1F       		.uleb128 0x1f
+ 2050 01a7 2E       		.uleb128 0x2e
+ 2051 01a8 00       		.byte	0
+ 2052 01a9 3F       		.uleb128 0x3f
+ 2053 01aa 19       		.uleb128 0x19
+ 2054 01ab 3C       		.uleb128 0x3c
+ 2055 01ac 19       		.uleb128 0x19
+ 2056 01ad 6E       		.uleb128 0x6e
+ 2057 01ae 0E       		.uleb128 0xe
+ 2058 01af 03       		.uleb128 0x3
+ 2059 01b0 0E       		.uleb128 0xe
+ 2060 01b1 3A       		.uleb128 0x3a
+ 2061 01b2 0B       		.uleb128 0xb
+ 2062 01b3 3B       		.uleb128 0x3b
+ 2063 01b4 05       		.uleb128 0x5
+ 2064 01b5 00       		.byte	0
+ 2065 01b6 00       		.byte	0
+ 2066 01b7 00       		.byte	0
+ 2067              		.section	.debug_loc,"",%progbits
+ 2068              	.Ldebug_loc0:
+ 2069              	.LLST0:
+ 2070 0000 00000000 		.4byte	.LVL0
+ 2071 0004 1B000000 		.4byte	.LVL3-1
+ 2072 0008 0100     		.2byte	0x1
+ 2073 000a 50       		.byte	0x50
+ 2074 000b 1B000000 		.4byte	.LVL3-1
+ 2075 000f 28000000 		.4byte	.LVL5
+ 2076 0013 0100     		.2byte	0x1
+ 2077 0015 55       		.byte	0x55
+ 2078 0016 28000000 		.4byte	.LVL5
+ 2079 001a 2F000000 		.4byte	.LVL6-1
+ 2080 001e 0100     		.2byte	0x1
+ 2081 0020 50       		.byte	0x50
+ 2082 0021 2F000000 		.4byte	.LVL6-1
+ 2083 0025 34000000 		.4byte	.LVL7
+ 2084 0029 0100     		.2byte	0x1
+ 2085 002b 55       		.byte	0x55
+ 2086 002c 34000000 		.4byte	.LVL7
+ 2087 0030 39000000 		.4byte	.LVL8-1
+ 2088 0034 0100     		.2byte	0x1
+ 2089 0036 50       		.byte	0x50
+ 2090 0037 39000000 		.4byte	.LVL8-1
+ 2091 003b 3E000000 		.4byte	.LVL9
+ 2092 003f 0100     		.2byte	0x1
+ 2093 0041 55       		.byte	0x55
+ 2094 0042 3E000000 		.4byte	.LVL9
+ 2095 0046 45000000 		.4byte	.LVL10-1
+ 2096 004a 0100     		.2byte	0x1
+ 2097 004c 50       		.byte	0x50
+ 2098 004d 45000000 		.4byte	.LVL10-1
+ 2099 0051 52000000 		.4byte	.LVL11
+ 2100 0055 0100     		.2byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 44
+
+
+ 2101 0057 55       		.byte	0x55
+ 2102 0058 52000000 		.4byte	.LVL11
+ 2103 005c 57000000 		.4byte	.LVL12-1
+ 2104 0060 0100     		.2byte	0x1
+ 2105 0062 50       		.byte	0x50
+ 2106 0063 57000000 		.4byte	.LVL12-1
+ 2107 0067 64000000 		.4byte	.LVL13
+ 2108 006b 0100     		.2byte	0x1
+ 2109 006d 55       		.byte	0x55
+ 2110 006e 64000000 		.4byte	.LVL13
+ 2111 0072 67000000 		.4byte	.LVL14-1
+ 2112 0076 0100     		.2byte	0x1
+ 2113 0078 50       		.byte	0x50
+ 2114 0079 67000000 		.4byte	.LVL14-1
+ 2115 007d 82000000 		.4byte	.LVL18
+ 2116 0081 0100     		.2byte	0x1
+ 2117 0083 55       		.byte	0x55
+ 2118 0084 82000000 		.4byte	.LVL18
+ 2119 0088 85000000 		.4byte	.LVL19-1
+ 2120 008c 0100     		.2byte	0x1
+ 2121 008e 50       		.byte	0x50
+ 2122 008f 85000000 		.4byte	.LVL19-1
+ 2123 0093 D8000000 		.4byte	.LVL33
+ 2124 0097 0100     		.2byte	0x1
+ 2125 0099 55       		.byte	0x55
+ 2126 009a D8000000 		.4byte	.LVL33
+ 2127 009e DA000000 		.4byte	.LVL34
+ 2128 00a2 0100     		.2byte	0x1
+ 2129 00a4 50       		.byte	0x50
+ 2130 00a5 DA000000 		.4byte	.LVL34
+ 2131 00a9 DC000000 		.4byte	.LVL35
+ 2132 00ad 0100     		.2byte	0x1
+ 2133 00af 55       		.byte	0x55
+ 2134 00b0 DC000000 		.4byte	.LVL35
+ 2135 00b4 F0000000 		.4byte	.LFE0
+ 2136 00b8 0400     		.2byte	0x4
+ 2137 00ba F3       		.byte	0xf3
+ 2138 00bb 01       		.uleb128 0x1
+ 2139 00bc 50       		.byte	0x50
+ 2140 00bd 9F       		.byte	0x9f
+ 2141 00be 00000000 		.4byte	0
+ 2142 00c2 00000000 		.4byte	0
+ 2143              	.LLST1:
+ 2144 00c6 00000000 		.4byte	.LVL0
+ 2145 00ca 0A000000 		.4byte	.LVL1
+ 2146 00ce 0100     		.2byte	0x1
+ 2147 00d0 51       		.byte	0x51
+ 2148 00d1 0A000000 		.4byte	.LVL1
+ 2149 00d5 F0000000 		.4byte	.LFE0
+ 2150 00d9 0400     		.2byte	0x4
+ 2151 00db F3       		.byte	0xf3
+ 2152 00dc 01       		.uleb128 0x1
+ 2153 00dd 51       		.byte	0x51
+ 2154 00de 9F       		.byte	0x9f
+ 2155 00df 00000000 		.4byte	0
+ 2156 00e3 00000000 		.4byte	0
+ 2157              	.LLST2:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 45
+
+
+ 2158 00e7 00000000 		.4byte	.LVL0
+ 2159 00eb 1B000000 		.4byte	.LVL3-1
+ 2160 00ef 0100     		.2byte	0x1
+ 2161 00f1 52       		.byte	0x52
+ 2162 00f2 1B000000 		.4byte	.LVL3-1
+ 2163 00f6 28000000 		.4byte	.LVL5
+ 2164 00fa 0400     		.2byte	0x4
+ 2165 00fc F3       		.byte	0xf3
+ 2166 00fd 01       		.uleb128 0x1
+ 2167 00fe 52       		.byte	0x52
+ 2168 00ff 9F       		.byte	0x9f
+ 2169 0100 28000000 		.4byte	.LVL5
+ 2170 0104 2F000000 		.4byte	.LVL6-1
+ 2171 0108 0100     		.2byte	0x1
+ 2172 010a 52       		.byte	0x52
+ 2173 010b 2F000000 		.4byte	.LVL6-1
+ 2174 010f 34000000 		.4byte	.LVL7
+ 2175 0113 0400     		.2byte	0x4
+ 2176 0115 F3       		.byte	0xf3
+ 2177 0116 01       		.uleb128 0x1
+ 2178 0117 52       		.byte	0x52
+ 2179 0118 9F       		.byte	0x9f
+ 2180 0119 34000000 		.4byte	.LVL7
+ 2181 011d 39000000 		.4byte	.LVL8-1
+ 2182 0121 0100     		.2byte	0x1
+ 2183 0123 52       		.byte	0x52
+ 2184 0124 39000000 		.4byte	.LVL8-1
+ 2185 0128 3E000000 		.4byte	.LVL9
+ 2186 012c 0400     		.2byte	0x4
+ 2187 012e F3       		.byte	0xf3
+ 2188 012f 01       		.uleb128 0x1
+ 2189 0130 52       		.byte	0x52
+ 2190 0131 9F       		.byte	0x9f
+ 2191 0132 3E000000 		.4byte	.LVL9
+ 2192 0136 45000000 		.4byte	.LVL10-1
+ 2193 013a 0100     		.2byte	0x1
+ 2194 013c 52       		.byte	0x52
+ 2195 013d 45000000 		.4byte	.LVL10-1
+ 2196 0141 52000000 		.4byte	.LVL11
+ 2197 0145 0400     		.2byte	0x4
+ 2198 0147 F3       		.byte	0xf3
+ 2199 0148 01       		.uleb128 0x1
+ 2200 0149 52       		.byte	0x52
+ 2201 014a 9F       		.byte	0x9f
+ 2202 014b 52000000 		.4byte	.LVL11
+ 2203 014f 57000000 		.4byte	.LVL12-1
+ 2204 0153 0100     		.2byte	0x1
+ 2205 0155 52       		.byte	0x52
+ 2206 0156 57000000 		.4byte	.LVL12-1
+ 2207 015a 64000000 		.4byte	.LVL13
+ 2208 015e 0400     		.2byte	0x4
+ 2209 0160 F3       		.byte	0xf3
+ 2210 0161 01       		.uleb128 0x1
+ 2211 0162 52       		.byte	0x52
+ 2212 0163 9F       		.byte	0x9f
+ 2213 0164 64000000 		.4byte	.LVL13
+ 2214 0168 67000000 		.4byte	.LVL14-1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 46
+
+
+ 2215 016c 0100     		.2byte	0x1
+ 2216 016e 52       		.byte	0x52
+ 2217 016f 67000000 		.4byte	.LVL14-1
+ 2218 0173 82000000 		.4byte	.LVL18
+ 2219 0177 0400     		.2byte	0x4
+ 2220 0179 F3       		.byte	0xf3
+ 2221 017a 01       		.uleb128 0x1
+ 2222 017b 52       		.byte	0x52
+ 2223 017c 9F       		.byte	0x9f
+ 2224 017d 82000000 		.4byte	.LVL18
+ 2225 0181 85000000 		.4byte	.LVL19-1
+ 2226 0185 0100     		.2byte	0x1
+ 2227 0187 52       		.byte	0x52
+ 2228 0188 85000000 		.4byte	.LVL19-1
+ 2229 018c B6000000 		.4byte	.LVL27
+ 2230 0190 0400     		.2byte	0x4
+ 2231 0192 F3       		.byte	0xf3
+ 2232 0193 01       		.uleb128 0x1
+ 2233 0194 52       		.byte	0x52
+ 2234 0195 9F       		.byte	0x9f
+ 2235 0196 B6000000 		.4byte	.LVL27
+ 2236 019a C8000000 		.4byte	.LVL31
+ 2237 019e 0100     		.2byte	0x1
+ 2238 01a0 54       		.byte	0x54
+ 2239 01a1 C8000000 		.4byte	.LVL31
+ 2240 01a5 D3000000 		.4byte	.LVL32-1
+ 2241 01a9 0100     		.2byte	0x1
+ 2242 01ab 52       		.byte	0x52
+ 2243 01ac D8000000 		.4byte	.LVL33
+ 2244 01b0 F0000000 		.4byte	.LFE0
+ 2245 01b4 0100     		.2byte	0x1
+ 2246 01b6 52       		.byte	0x52
+ 2247 01b7 00000000 		.4byte	0
+ 2248 01bb 00000000 		.4byte	0
+ 2249              	.LLST3:
+ 2250 01bf 00000000 		.4byte	.LVL0
+ 2251 01c3 12000000 		.4byte	.LVL2
+ 2252 01c7 0100     		.2byte	0x1
+ 2253 01c9 53       		.byte	0x53
+ 2254 01ca 12000000 		.4byte	.LVL2
+ 2255 01ce DC000000 		.4byte	.LVL35
+ 2256 01d2 0100     		.2byte	0x1
+ 2257 01d4 56       		.byte	0x56
+ 2258 01d5 DC000000 		.4byte	.LVL35
+ 2259 01d9 F0000000 		.4byte	.LFE0
+ 2260 01dd 0400     		.2byte	0x4
+ 2261 01df F3       		.byte	0xf3
+ 2262 01e0 01       		.uleb128 0x1
+ 2263 01e1 53       		.byte	0x53
+ 2264 01e2 9F       		.byte	0x9f
+ 2265 01e3 00000000 		.4byte	0
+ 2266 01e7 00000000 		.4byte	0
+ 2267              	.LLST4:
+ 2268 01eb 88000000 		.4byte	.LVL20
+ 2269 01ef 8A000000 		.4byte	.LVL21
+ 2270 01f3 0100     		.2byte	0x1
+ 2271 01f5 57       		.byte	0x57
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 47
+
+
+ 2272 01f6 8A000000 		.4byte	.LVL21
+ 2273 01fa 8C000000 		.4byte	.LVL22
+ 2274 01fe 0200     		.2byte	0x2
+ 2275 0200 76       		.byte	0x76
+ 2276 0201 05       		.sleb128 5
+ 2277 0202 8C000000 		.4byte	.LVL22
+ 2278 0206 92000000 		.4byte	.LVL23
+ 2279 020a 0100     		.2byte	0x1
+ 2280 020c 57       		.byte	0x57
+ 2281 020d 92000000 		.4byte	.LVL23
+ 2282 0211 94000000 		.4byte	.LVL24
+ 2283 0215 0700     		.2byte	0x7
+ 2284 0217 76       		.byte	0x76
+ 2285 0218 05       		.sleb128 5
+ 2286 0219 94       		.byte	0x94
+ 2287 021a 01       		.byte	0x1
+ 2288 021b 33       		.byte	0x33
+ 2289 021c 24       		.byte	0x24
+ 2290 021d 9F       		.byte	0x9f
+ 2291 021e 94000000 		.4byte	.LVL24
+ 2292 0222 D8000000 		.4byte	.LVL33
+ 2293 0226 0100     		.2byte	0x1
+ 2294 0228 57       		.byte	0x57
+ 2295 0229 00000000 		.4byte	0
+ 2296 022d 00000000 		.4byte	0
+ 2297              	.LLST5:
+ 2298 0231 B8000000 		.4byte	.LVL28
+ 2299 0235 BA000000 		.4byte	.LVL29
+ 2300 0239 0100     		.2byte	0x1
+ 2301 023b 51       		.byte	0x51
+ 2302 023c BA000000 		.4byte	.LVL29
+ 2303 0240 C5000000 		.4byte	.LVL30-1
+ 2304 0244 0200     		.2byte	0x2
+ 2305 0246 76       		.byte	0x76
+ 2306 0247 04       		.sleb128 4
+ 2307 0248 00000000 		.4byte	0
+ 2308 024c 00000000 		.4byte	0
+ 2309              	.LLST6:
+ 2310 0250 B8000000 		.4byte	.LVL28
+ 2311 0254 C5000000 		.4byte	.LVL30-1
+ 2312 0258 0200     		.2byte	0x2
+ 2313 025a 76       		.byte	0x76
+ 2314 025b 00       		.sleb128 0
+ 2315 025c 00000000 		.4byte	0
+ 2316 0260 00000000 		.4byte	0
+ 2317              	.LLST7:
+ 2318 0264 00000000 		.4byte	.LVL36
+ 2319 0268 0B000000 		.4byte	.LVL38-1
+ 2320 026c 0100     		.2byte	0x1
+ 2321 026e 50       		.byte	0x50
+ 2322 026f 0B000000 		.4byte	.LVL38-1
+ 2323 0273 10000000 		.4byte	.LVL39
+ 2324 0277 0400     		.2byte	0x4
+ 2325 0279 F3       		.byte	0xf3
+ 2326 027a 01       		.uleb128 0x1
+ 2327 027b 50       		.byte	0x50
+ 2328 027c 9F       		.byte	0x9f
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 48
+
+
+ 2329 027d 10000000 		.4byte	.LVL39
+ 2330 0281 13000000 		.4byte	.LVL40-1
+ 2331 0285 0100     		.2byte	0x1
+ 2332 0287 50       		.byte	0x50
+ 2333 0288 13000000 		.4byte	.LVL40-1
+ 2334 028c 1C000000 		.4byte	.LFE1
+ 2335 0290 0400     		.2byte	0x4
+ 2336 0292 F3       		.byte	0xf3
+ 2337 0293 01       		.uleb128 0x1
+ 2338 0294 50       		.byte	0x50
+ 2339 0295 9F       		.byte	0x9f
+ 2340 0296 00000000 		.4byte	0
+ 2341 029a 00000000 		.4byte	0
+ 2342              	.LLST8:
+ 2343 029e 00000000 		.4byte	.LVL36
+ 2344 02a2 08000000 		.4byte	.LVL37
+ 2345 02a6 0100     		.2byte	0x1
+ 2346 02a8 51       		.byte	0x51
+ 2347 02a9 08000000 		.4byte	.LVL37
+ 2348 02ad 10000000 		.4byte	.LVL39
+ 2349 02b1 0400     		.2byte	0x4
+ 2350 02b3 F3       		.byte	0xf3
+ 2351 02b4 01       		.uleb128 0x1
+ 2352 02b5 51       		.byte	0x51
+ 2353 02b6 9F       		.byte	0x9f
+ 2354 02b7 10000000 		.4byte	.LVL39
+ 2355 02bb 13000000 		.4byte	.LVL40-1
+ 2356 02bf 0100     		.2byte	0x1
+ 2357 02c1 51       		.byte	0x51
+ 2358 02c2 13000000 		.4byte	.LVL40-1
+ 2359 02c6 1C000000 		.4byte	.LFE1
+ 2360 02ca 0400     		.2byte	0x4
+ 2361 02cc F3       		.byte	0xf3
+ 2362 02cd 01       		.uleb128 0x1
+ 2363 02ce 51       		.byte	0x51
+ 2364 02cf 9F       		.byte	0x9f
+ 2365 02d0 00000000 		.4byte	0
+ 2366 02d4 00000000 		.4byte	0
+ 2367              	.LLST9:
+ 2368 02d8 00000000 		.4byte	.LVL36
+ 2369 02dc 0B000000 		.4byte	.LVL38-1
+ 2370 02e0 0100     		.2byte	0x1
+ 2371 02e2 52       		.byte	0x52
+ 2372 02e3 0B000000 		.4byte	.LVL38-1
+ 2373 02e7 10000000 		.4byte	.LVL39
+ 2374 02eb 0400     		.2byte	0x4
+ 2375 02ed F3       		.byte	0xf3
+ 2376 02ee 01       		.uleb128 0x1
+ 2377 02ef 52       		.byte	0x52
+ 2378 02f0 9F       		.byte	0x9f
+ 2379 02f1 10000000 		.4byte	.LVL39
+ 2380 02f5 13000000 		.4byte	.LVL40-1
+ 2381 02f9 0100     		.2byte	0x1
+ 2382 02fb 52       		.byte	0x52
+ 2383 02fc 13000000 		.4byte	.LVL40-1
+ 2384 0300 1C000000 		.4byte	.LFE1
+ 2385 0304 0400     		.2byte	0x4
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 49
+
+
+ 2386 0306 F3       		.byte	0xf3
+ 2387 0307 01       		.uleb128 0x1
+ 2388 0308 52       		.byte	0x52
+ 2389 0309 9F       		.byte	0x9f
+ 2390 030a 00000000 		.4byte	0
+ 2391 030e 00000000 		.4byte	0
+ 2392              	.LLST10:
+ 2393 0312 00000000 		.4byte	.LVL36
+ 2394 0316 0B000000 		.4byte	.LVL38-1
+ 2395 031a 0100     		.2byte	0x1
+ 2396 031c 53       		.byte	0x53
+ 2397 031d 0B000000 		.4byte	.LVL38-1
+ 2398 0321 10000000 		.4byte	.LVL39
+ 2399 0325 0400     		.2byte	0x4
+ 2400 0327 F3       		.byte	0xf3
+ 2401 0328 01       		.uleb128 0x1
+ 2402 0329 53       		.byte	0x53
+ 2403 032a 9F       		.byte	0x9f
+ 2404 032b 10000000 		.4byte	.LVL39
+ 2405 032f 13000000 		.4byte	.LVL40-1
+ 2406 0333 0100     		.2byte	0x1
+ 2407 0335 53       		.byte	0x53
+ 2408 0336 13000000 		.4byte	.LVL40-1
+ 2409 033a 1C000000 		.4byte	.LFE1
+ 2410 033e 0400     		.2byte	0x4
+ 2411 0340 F3       		.byte	0xf3
+ 2412 0341 01       		.uleb128 0x1
+ 2413 0342 53       		.byte	0x53
+ 2414 0343 9F       		.byte	0x9f
+ 2415 0344 00000000 		.4byte	0
+ 2416 0348 00000000 		.4byte	0
+ 2417              	.LLST11:
+ 2418 034c 00000000 		.4byte	.LVL41
+ 2419 0350 0B000000 		.4byte	.LVL43-1
+ 2420 0354 0100     		.2byte	0x1
+ 2421 0356 50       		.byte	0x50
+ 2422 0357 0B000000 		.4byte	.LVL43-1
+ 2423 035b 10000000 		.4byte	.LVL44
+ 2424 035f 0400     		.2byte	0x4
+ 2425 0361 F3       		.byte	0xf3
+ 2426 0362 01       		.uleb128 0x1
+ 2427 0363 50       		.byte	0x50
+ 2428 0364 9F       		.byte	0x9f
+ 2429 0365 10000000 		.4byte	.LVL44
+ 2430 0369 13000000 		.4byte	.LVL45-1
+ 2431 036d 0100     		.2byte	0x1
+ 2432 036f 50       		.byte	0x50
+ 2433 0370 13000000 		.4byte	.LVL45-1
+ 2434 0374 1C000000 		.4byte	.LFE2
+ 2435 0378 0400     		.2byte	0x4
+ 2436 037a F3       		.byte	0xf3
+ 2437 037b 01       		.uleb128 0x1
+ 2438 037c 50       		.byte	0x50
+ 2439 037d 9F       		.byte	0x9f
+ 2440 037e 00000000 		.4byte	0
+ 2441 0382 00000000 		.4byte	0
+ 2442              	.LLST12:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 50
+
+
+ 2443 0386 00000000 		.4byte	.LVL41
+ 2444 038a 08000000 		.4byte	.LVL42
+ 2445 038e 0100     		.2byte	0x1
+ 2446 0390 51       		.byte	0x51
+ 2447 0391 08000000 		.4byte	.LVL42
+ 2448 0395 10000000 		.4byte	.LVL44
+ 2449 0399 0400     		.2byte	0x4
+ 2450 039b F3       		.byte	0xf3
+ 2451 039c 01       		.uleb128 0x1
+ 2452 039d 51       		.byte	0x51
+ 2453 039e 9F       		.byte	0x9f
+ 2454 039f 10000000 		.4byte	.LVL44
+ 2455 03a3 13000000 		.4byte	.LVL45-1
+ 2456 03a7 0100     		.2byte	0x1
+ 2457 03a9 51       		.byte	0x51
+ 2458 03aa 13000000 		.4byte	.LVL45-1
+ 2459 03ae 1C000000 		.4byte	.LFE2
+ 2460 03b2 0400     		.2byte	0x4
+ 2461 03b4 F3       		.byte	0xf3
+ 2462 03b5 01       		.uleb128 0x1
+ 2463 03b6 51       		.byte	0x51
+ 2464 03b7 9F       		.byte	0x9f
+ 2465 03b8 00000000 		.4byte	0
+ 2466 03bc 00000000 		.4byte	0
+ 2467              	.LLST13:
+ 2468 03c0 00000000 		.4byte	.LVL41
+ 2469 03c4 0B000000 		.4byte	.LVL43-1
+ 2470 03c8 0100     		.2byte	0x1
+ 2471 03ca 52       		.byte	0x52
+ 2472 03cb 0B000000 		.4byte	.LVL43-1
+ 2473 03cf 10000000 		.4byte	.LVL44
+ 2474 03d3 0400     		.2byte	0x4
+ 2475 03d5 F3       		.byte	0xf3
+ 2476 03d6 01       		.uleb128 0x1
+ 2477 03d7 52       		.byte	0x52
+ 2478 03d8 9F       		.byte	0x9f
+ 2479 03d9 10000000 		.4byte	.LVL44
+ 2480 03dd 13000000 		.4byte	.LVL45-1
+ 2481 03e1 0100     		.2byte	0x1
+ 2482 03e3 52       		.byte	0x52
+ 2483 03e4 13000000 		.4byte	.LVL45-1
+ 2484 03e8 1C000000 		.4byte	.LFE2
+ 2485 03ec 0400     		.2byte	0x4
+ 2486 03ee F3       		.byte	0xf3
+ 2487 03ef 01       		.uleb128 0x1
+ 2488 03f0 52       		.byte	0x52
+ 2489 03f1 9F       		.byte	0x9f
+ 2490 03f2 00000000 		.4byte	0
+ 2491 03f6 00000000 		.4byte	0
+ 2492              	.LLST14:
+ 2493 03fa 00000000 		.4byte	.LVL41
+ 2494 03fe 0B000000 		.4byte	.LVL43-1
+ 2495 0402 0100     		.2byte	0x1
+ 2496 0404 53       		.byte	0x53
+ 2497 0405 0B000000 		.4byte	.LVL43-1
+ 2498 0409 10000000 		.4byte	.LVL44
+ 2499 040d 0400     		.2byte	0x4
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 51
+
+
+ 2500 040f F3       		.byte	0xf3
+ 2501 0410 01       		.uleb128 0x1
+ 2502 0411 53       		.byte	0x53
+ 2503 0412 9F       		.byte	0x9f
+ 2504 0413 10000000 		.4byte	.LVL44
+ 2505 0417 13000000 		.4byte	.LVL45-1
+ 2506 041b 0100     		.2byte	0x1
+ 2507 041d 53       		.byte	0x53
+ 2508 041e 13000000 		.4byte	.LVL45-1
+ 2509 0422 1C000000 		.4byte	.LFE2
+ 2510 0426 0400     		.2byte	0x4
+ 2511 0428 F3       		.byte	0xf3
+ 2512 0429 01       		.uleb128 0x1
+ 2513 042a 53       		.byte	0x53
+ 2514 042b 9F       		.byte	0x9f
+ 2515 042c 00000000 		.4byte	0
+ 2516 0430 00000000 		.4byte	0
+ 2517              	.LLST15:
+ 2518 0434 00000000 		.4byte	.LVL46
+ 2519 0438 0D000000 		.4byte	.LVL48-1
+ 2520 043c 0100     		.2byte	0x1
+ 2521 043e 50       		.byte	0x50
+ 2522 043f 0D000000 		.4byte	.LVL48-1
+ 2523 0443 12000000 		.4byte	.LVL49
+ 2524 0447 0100     		.2byte	0x1
+ 2525 0449 55       		.byte	0x55
+ 2526 044a 12000000 		.4byte	.LVL49
+ 2527 044e 1F000000 		.4byte	.LVL50-1
+ 2528 0452 0100     		.2byte	0x1
+ 2529 0454 50       		.byte	0x50
+ 2530 0455 1F000000 		.4byte	.LVL50-1
+ 2531 0459 36000000 		.4byte	.LVL53
+ 2532 045d 0100     		.2byte	0x1
+ 2533 045f 55       		.byte	0x55
+ 2534 0460 36000000 		.4byte	.LVL53
+ 2535 0464 40000000 		.4byte	.LFE3
+ 2536 0468 0400     		.2byte	0x4
+ 2537 046a F3       		.byte	0xf3
+ 2538 046b 01       		.uleb128 0x1
+ 2539 046c 50       		.byte	0x50
+ 2540 046d 9F       		.byte	0x9f
+ 2541 046e 00000000 		.4byte	0
+ 2542 0472 00000000 		.4byte	0
+ 2543              	.LLST16:
+ 2544 0476 00000000 		.4byte	.LVL46
+ 2545 047a 0A000000 		.4byte	.LVL47
+ 2546 047e 0100     		.2byte	0x1
+ 2547 0480 51       		.byte	0x51
+ 2548 0481 0A000000 		.4byte	.LVL47
+ 2549 0485 12000000 		.4byte	.LVL49
+ 2550 0489 0400     		.2byte	0x4
+ 2551 048b F3       		.byte	0xf3
+ 2552 048c 01       		.uleb128 0x1
+ 2553 048d 51       		.byte	0x51
+ 2554 048e 9F       		.byte	0x9f
+ 2555 048f 12000000 		.4byte	.LVL49
+ 2556 0493 1F000000 		.4byte	.LVL50-1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 52
+
+
+ 2557 0497 0100     		.2byte	0x1
+ 2558 0499 51       		.byte	0x51
+ 2559 049a 1F000000 		.4byte	.LVL50-1
+ 2560 049e 40000000 		.4byte	.LFE3
+ 2561 04a2 0400     		.2byte	0x4
+ 2562 04a4 F3       		.byte	0xf3
+ 2563 04a5 01       		.uleb128 0x1
+ 2564 04a6 51       		.byte	0x51
+ 2565 04a7 9F       		.byte	0x9f
+ 2566 04a8 00000000 		.4byte	0
+ 2567 04ac 00000000 		.4byte	0
+ 2568              	.LLST17:
+ 2569 04b0 00000000 		.4byte	.LVL46
+ 2570 04b4 0D000000 		.4byte	.LVL48-1
+ 2571 04b8 0100     		.2byte	0x1
+ 2572 04ba 52       		.byte	0x52
+ 2573 04bb 0D000000 		.4byte	.LVL48-1
+ 2574 04bf 12000000 		.4byte	.LVL49
+ 2575 04c3 0400     		.2byte	0x4
+ 2576 04c5 F3       		.byte	0xf3
+ 2577 04c6 01       		.uleb128 0x1
+ 2578 04c7 52       		.byte	0x52
+ 2579 04c8 9F       		.byte	0x9f
+ 2580 04c9 12000000 		.4byte	.LVL49
+ 2581 04cd 1F000000 		.4byte	.LVL50-1
+ 2582 04d1 0100     		.2byte	0x1
+ 2583 04d3 52       		.byte	0x52
+ 2584 04d4 1F000000 		.4byte	.LVL50-1
+ 2585 04d8 40000000 		.4byte	.LFE3
+ 2586 04dc 0400     		.2byte	0x4
+ 2587 04de F3       		.byte	0xf3
+ 2588 04df 01       		.uleb128 0x1
+ 2589 04e0 52       		.byte	0x52
+ 2590 04e1 9F       		.byte	0x9f
+ 2591 04e2 00000000 		.4byte	0
+ 2592 04e6 00000000 		.4byte	0
+ 2593              	.LLST18:
+ 2594 04ea 00000000 		.4byte	.LVL46
+ 2595 04ee 0D000000 		.4byte	.LVL48-1
+ 2596 04f2 0100     		.2byte	0x1
+ 2597 04f4 53       		.byte	0x53
+ 2598 04f5 0D000000 		.4byte	.LVL48-1
+ 2599 04f9 12000000 		.4byte	.LVL49
+ 2600 04fd 0400     		.2byte	0x4
+ 2601 04ff F3       		.byte	0xf3
+ 2602 0500 01       		.uleb128 0x1
+ 2603 0501 53       		.byte	0x53
+ 2604 0502 9F       		.byte	0x9f
+ 2605 0503 12000000 		.4byte	.LVL49
+ 2606 0507 1F000000 		.4byte	.LVL50-1
+ 2607 050b 0100     		.2byte	0x1
+ 2608 050d 53       		.byte	0x53
+ 2609 050e 1F000000 		.4byte	.LVL50-1
+ 2610 0512 36000000 		.4byte	.LVL53
+ 2611 0516 0100     		.2byte	0x1
+ 2612 0518 57       		.byte	0x57
+ 2613 0519 36000000 		.4byte	.LVL53
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 53
+
+
+ 2614 051d 40000000 		.4byte	.LFE3
+ 2615 0521 0400     		.2byte	0x4
+ 2616 0523 F3       		.byte	0xf3
+ 2617 0524 01       		.uleb128 0x1
+ 2618 0525 53       		.byte	0x53
+ 2619 0526 9F       		.byte	0x9f
+ 2620 0527 00000000 		.4byte	0
+ 2621 052b 00000000 		.4byte	0
+ 2622              		.section	.debug_aranges,"",%progbits
+ 2623 0000 34000000 		.4byte	0x34
+ 2624 0004 0200     		.2byte	0x2
+ 2625 0006 00000000 		.4byte	.Ldebug_info0
+ 2626 000a 04       		.byte	0x4
+ 2627 000b 00       		.byte	0
+ 2628 000c 0000     		.2byte	0
+ 2629 000e 0000     		.2byte	0
+ 2630 0010 00000000 		.4byte	.LFB0
+ 2631 0014 F0000000 		.4byte	.LFE0-.LFB0
+ 2632 0018 00000000 		.4byte	.LFB1
+ 2633 001c 1C000000 		.4byte	.LFE1-.LFB1
+ 2634 0020 00000000 		.4byte	.LFB2
+ 2635 0024 1C000000 		.4byte	.LFE2-.LFB2
+ 2636 0028 00000000 		.4byte	.LFB3
+ 2637 002c 40000000 		.4byte	.LFE3-.LFB3
+ 2638 0030 00000000 		.4byte	0
+ 2639 0034 00000000 		.4byte	0
+ 2640              		.section	.debug_ranges,"",%progbits
+ 2641              	.Ldebug_ranges0:
+ 2642 0000 00000000 		.4byte	.LFB0
+ 2643 0004 F0000000 		.4byte	.LFE0
+ 2644 0008 00000000 		.4byte	.LFB1
+ 2645 000c 1C000000 		.4byte	.LFE1
+ 2646 0010 00000000 		.4byte	.LFB2
+ 2647 0014 1C000000 		.4byte	.LFE2
+ 2648 0018 00000000 		.4byte	.LFB3
+ 2649 001c 40000000 		.4byte	.LFE3
+ 2650 0020 00000000 		.4byte	0
+ 2651 0024 00000000 		.4byte	0
+ 2652              		.section	.debug_line,"",%progbits
+ 2653              	.Ldebug_line0:
+ 2654 0000 EB010000 		.section	.debug_str,"MS",%progbits,1
+ 2654      02004201 
+ 2654      00000201 
+ 2654      FB0E0D00 
+ 2654      01010101 
+ 2655              	.LASF26:
+ 2656 0000 785F6F66 		.ascii	"x_offset\000"
+ 2656      66736574 
+ 2656      00
+ 2657              	.LASF27:
+ 2658 0009 69735F66 		.ascii	"is_font_inverse_mode\000"
+ 2658      6F6E745F 
+ 2658      696E7665 
+ 2658      7273655F 
+ 2658      6D6F6465 
+ 2659              	.LASF48:
+ 2660 001e 7370695F 		.ascii	"spi_mode\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 54
+
+
+ 2660      6D6F6465 
+ 2660      00
+ 2661              	.LASF67:
+ 2662 0027 6172675F 		.ascii	"arg_ptr\000"
+ 2662      70747200 
+ 2663              	.LASF39:
+ 2664 002f 63686970 		.ascii	"chip_enable_level\000"
+ 2664      5F656E61 
+ 2664      626C655F 
+ 2664      6C657665 
+ 2664      6C00
+ 2665              	.LASF24:
+ 2666 0041 666F6E74 		.ascii	"font\000"
+ 2666      00
+ 2667              	.LASF35:
+ 2668 0046 6465626F 		.ascii	"debounce_result_msg\000"
+ 2668      756E6365 
+ 2668      5F726573 
+ 2668      756C745F 
+ 2668      6D736700 
+ 2669              	.LASF2:
+ 2670 005a 73686F72 		.ascii	"short int\000"
+ 2670      7420696E 
+ 2670      7400
+ 2671              	.LASF22:
+ 2672 0064 6770696F 		.ascii	"gpio_and_delay_cb\000"
+ 2672      5F616E64 
+ 2672      5F64656C 
+ 2672      61795F63 
+ 2672      6200
+ 2673              	.LASF52:
+ 2674 0076 74696C65 		.ascii	"tile_width\000"
+ 2674      5F776964 
+ 2674      746800
+ 2675              	.LASF79:
+ 2676 0081 75387838 		.ascii	"u8x8_d_sh1106_128x32_visionox_init_seq\000"
+ 2676      5F645F73 
+ 2676      68313130 
+ 2676      365F3132 
+ 2676      38783332 
+ 2677              	.LASF71:
+ 2678 00a8 73697A65 		.ascii	"sizetype\000"
+ 2678      74797065 
+ 2678      00
+ 2679              	.LASF45:
+ 2680 00b1 7364615F 		.ascii	"sda_setup_time_ns\000"
+ 2680      73657475 
+ 2680      705F7469 
+ 2680      6D655F6E 
+ 2680      7300
+ 2681              	.LASF68:
+ 2682 00c3 75387838 		.ascii	"u8x8_d_ssd1306_128x32_univision\000"
+ 2682      5F645F73 
+ 2682      73643133 
+ 2682      30365F31 
+ 2682      32387833 
+ 2683              	.LASF44:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 55
+
+
+ 2684 00e3 706F7374 		.ascii	"post_reset_wait_ms\000"
+ 2684      5F726573 
+ 2684      65745F77 
+ 2684      6169745F 
+ 2684      6D7300
+ 2685              	.LASF73:
+ 2686 00f6 75387838 		.ascii	"u8x8_d_ssd1306_128x32_univision_powersave0_seq\000"
+ 2686      5F645F73 
+ 2686      73643133 
+ 2686      30365F31 
+ 2686      32387833 
+ 2687              	.LASF7:
+ 2688 0125 5F5F7569 		.ascii	"__uint32_t\000"
+ 2688      6E743332 
+ 2688      5F7400
+ 2689              	.LASF4:
+ 2690 0130 5F5F7569 		.ascii	"__uint16_t\000"
+ 2690      6E743136 
+ 2690      5F7400
+ 2691              	.LASF91:
+ 2692 013b 433A5C55 		.ascii	"C:\\Users\\brian\\Documents\\PSoC Creator\\Lab7\\La"
+ 2692      73657273 
+ 2692      5C627269 
+ 2692      616E5C44 
+ 2692      6F63756D 
+ 2693 0168 62372E63 		.ascii	"b7.cydsn\000"
+ 2693      7964736E 
+ 2693      00
+ 2694              	.LASF51:
+ 2695 0171 77726974 		.ascii	"write_pulse_width_ns\000"
+ 2695      655F7075 
+ 2695      6C73655F 
+ 2695      77696474 
+ 2695      685F6E73 
+ 2696              	.LASF76:
+ 2697 0186 75387838 		.ascii	"u8x8_d_ssd1306_128x32_univision_flip1_seq\000"
+ 2697      5F645F73 
+ 2697      73643133 
+ 2697      30365F31 
+ 2697      32387833 
+ 2698              	.LASF12:
+ 2699 01b0 75696E74 		.ascii	"uint8_t\000"
+ 2699      385F7400 
+ 2700              	.LASF41:
+ 2701 01b8 706F7374 		.ascii	"post_chip_enable_wait_ns\000"
+ 2701      5F636869 
+ 2701      705F656E 
+ 2701      61626C65 
+ 2701      5F776169 
+ 2702              	.LASF65:
+ 2703 01d1 75387838 		.ascii	"u8x8\000"
+ 2703      00
+ 2704              	.LASF60:
+ 2705 01d6 74696C65 		.ascii	"tile_ptr\000"
+ 2705      5F707472 
+ 2705      00
+ 2706              	.LASF66:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 56
+
+
+ 2707 01df 6172675F 		.ascii	"arg_int\000"
+ 2707      696E7400 
+ 2708              	.LASF87:
+ 2709 01e7 75387838 		.ascii	"u8x8_cad_SendData\000"
+ 2709      5F636164 
+ 2709      5F53656E 
+ 2709      64446174 
+ 2709      6100
+ 2710              	.LASF23:
+ 2711 01f9 6275735F 		.ascii	"bus_clock\000"
+ 2711      636C6F63 
+ 2711      6B00
+ 2712              	.LASF54:
+ 2713 0203 64656661 		.ascii	"default_x_offset\000"
+ 2713      756C745F 
+ 2713      785F6F66 
+ 2713      66736574 
+ 2713      00
+ 2714              	.LASF36:
+ 2715 0214 75387838 		.ascii	"u8x8_display_info_t\000"
+ 2715      5F646973 
+ 2715      706C6179 
+ 2715      5F696E66 
+ 2715      6F5F7400 
+ 2716              	.LASF33:
+ 2717 0228 6465626F 		.ascii	"debounce_last_pin_state\000"
+ 2717      756E6365 
+ 2717      5F6C6173 
+ 2717      745F7069 
+ 2717      6E5F7374 
+ 2718              	.LASF9:
+ 2719 0240 6C6F6E67 		.ascii	"long long int\000"
+ 2719      206C6F6E 
+ 2719      6720696E 
+ 2719      7400
+ 2720              	.LASF31:
+ 2721 024e 6770696F 		.ascii	"gpio_result\000"
+ 2721      5F726573 
+ 2721      756C7400 
+ 2722              	.LASF46:
+ 2723 025a 73636B5F 		.ascii	"sck_pulse_width_ns\000"
+ 2723      70756C73 
+ 2723      655F7769 
+ 2723      6474685F 
+ 2723      6E7300
+ 2724              	.LASF84:
+ 2725 026d 75387838 		.ascii	"u8x8_cad_SendCmd\000"
+ 2725      5F636164 
+ 2725      5F53656E 
+ 2725      64436D64 
+ 2725      00
+ 2726              	.LASF81:
+ 2727 027e 75387838 		.ascii	"u8x8_d_helper_display_init\000"
+ 2727      5F645F68 
+ 2727      656C7065 
+ 2727      725F6469 
+ 2727      73706C61 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 57
+
+
+ 2728              	.LASF6:
+ 2729 0299 6C6F6E67 		.ascii	"long int\000"
+ 2729      20696E74 
+ 2729      00
+ 2730              	.LASF86:
+ 2731 02a2 75387838 		.ascii	"u8x8_cad_EndTransfer\000"
+ 2731      5F636164 
+ 2731      5F456E64 
+ 2731      5472616E 
+ 2731      73666572 
+ 2732              	.LASF61:
+ 2733 02b7 785F706F 		.ascii	"x_pos\000"
+ 2733      7300
+ 2734              	.LASF3:
+ 2735 02bd 5F5F7569 		.ascii	"__uint8_t\000"
+ 2735      6E74385F 
+ 2735      7400
+ 2736              	.LASF19:
+ 2737 02c7 64697370 		.ascii	"display_cb\000"
+ 2737      6C61795F 
+ 2737      636200
+ 2738              	.LASF69:
+ 2739 02d2 75387838 		.ascii	"u8x8_d_ssd1306_128x32_winstar\000"
+ 2739      5F645F73 
+ 2739      73643133 
+ 2739      30365F31 
+ 2739      32387833 
+ 2740              	.LASF50:
+ 2741 02f0 64617461 		.ascii	"data_setup_time_ns\000"
+ 2741      5F736574 
+ 2741      75705F74 
+ 2741      696D655F 
+ 2741      6E7300
+ 2742              	.LASF92:
+ 2743 0303 75387838 		.ascii	"u8x8_d_ssd1306_128x32_generic\000"
+ 2743      5F645F73 
+ 2743      73643133 
+ 2743      30365F31 
+ 2743      32387833 
+ 2744              	.LASF15:
+ 2745 0321 6C6F6E67 		.ascii	"long double\000"
+ 2745      20646F75 
+ 2745      626C6500 
+ 2746              	.LASF53:
+ 2747 032d 74696C65 		.ascii	"tile_height\000"
+ 2747      5F686569 
+ 2747      67687400 
+ 2748              	.LASF1:
+ 2749 0339 756E7369 		.ascii	"unsigned char\000"
+ 2749      676E6564 
+ 2749      20636861 
+ 2749      7200
+ 2750              	.LASF74:
+ 2751 0347 75387838 		.ascii	"u8x8_d_ssd1306_128x32_univision_powersave1_seq\000"
+ 2751      5F645F73 
+ 2751      73643133 
+ 2751      30365F31 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 58
+
+
+ 2751      32387833 
+ 2752              	.LASF0:
+ 2753 0376 7369676E 		.ascii	"signed char\000"
+ 2753      65642063 
+ 2753      68617200 
+ 2754              	.LASF10:
+ 2755 0382 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2755      206C6F6E 
+ 2755      6720756E 
+ 2755      7369676E 
+ 2755      65642069 
+ 2756              	.LASF14:
+ 2757 0399 75696E74 		.ascii	"uint32_t\000"
+ 2757      33325F74 
+ 2757      00
+ 2758              	.LASF59:
+ 2759 03a2 75387838 		.ascii	"u8x8_tile_struct\000"
+ 2759      5F74696C 
+ 2759      655F7374 
+ 2759      72756374 
+ 2759      00
+ 2760              	.LASF11:
+ 2761 03b3 756E7369 		.ascii	"unsigned int\000"
+ 2761      676E6564 
+ 2761      20696E74 
+ 2761      00
+ 2762              	.LASF13:
+ 2763 03c0 75696E74 		.ascii	"uint16_t\000"
+ 2763      31365F74 
+ 2763      00
+ 2764              	.LASF38:
+ 2765 03c9 75387838 		.ascii	"u8x8_display_info_struct\000"
+ 2765      5F646973 
+ 2765      706C6179 
+ 2765      5F696E66 
+ 2765      6F5F7374 
+ 2766              	.LASF83:
+ 2767 03e2 75387838 		.ascii	"u8x8_cad_StartTransfer\000"
+ 2767      5F636164 
+ 2767      5F537461 
+ 2767      72745472 
+ 2767      616E7366 
+ 2768              	.LASF77:
+ 2769 03f9 75387838 		.ascii	"u8x8_ssd1306_128x32_univision_display_info\000"
+ 2769      5F737364 
+ 2769      31333036 
+ 2769      5F313238 
+ 2769      7833325F 
+ 2770              	.LASF43:
+ 2771 0424 72657365 		.ascii	"reset_pulse_width_ms\000"
+ 2771      745F7075 
+ 2771      6C73655F 
+ 2771      77696474 
+ 2771      685F6D73 
+ 2772              	.LASF70:
+ 2773 0439 75387838 		.ascii	"u8x8_d_sh1106_128x32_visionox\000"
+ 2773      5F645F73 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 59
+
+
+ 2773      68313130 
+ 2773      365F3132 
+ 2773      38783332 
+ 2774              	.LASF16:
+ 2775 0457 75387838 		.ascii	"u8x8_t\000"
+ 2775      5F7400
+ 2776              	.LASF49:
+ 2777 045e 6932635F 		.ascii	"i2c_bus_clock_100kHz\000"
+ 2777      6275735F 
+ 2777      636C6F63 
+ 2777      6B5F3130 
+ 2777      306B487A 
+ 2778              	.LASF47:
+ 2779 0473 73636B5F 		.ascii	"sck_clock_hz\000"
+ 2779      636C6F63 
+ 2779      6B5F687A 
+ 2779      00
+ 2780              	.LASF5:
+ 2781 0480 73686F72 		.ascii	"short unsigned int\000"
+ 2781      7420756E 
+ 2781      7369676E 
+ 2781      65642069 
+ 2781      6E7400
+ 2782              	.LASF64:
+ 2783 0493 75387838 		.ascii	"u8x8_char_cb\000"
+ 2783      5F636861 
+ 2783      725F6362 
+ 2783      00
+ 2784              	.LASF78:
+ 2785 04a0 75387838 		.ascii	"u8x8_ssd1306_128x32_winstar_display_info\000"
+ 2785      5F737364 
+ 2785      31333036 
+ 2785      5F313238 
+ 2785      7833325F 
+ 2786              	.LASF25:
+ 2787 04c9 656E636F 		.ascii	"encoding\000"
+ 2787      64696E67 
+ 2787      00
+ 2788              	.LASF75:
+ 2789 04d2 75387838 		.ascii	"u8x8_d_ssd1306_128x32_univision_flip0_seq\000"
+ 2789      5F645F73 
+ 2789      73643133 
+ 2789      30365F31 
+ 2789      32387833 
+ 2790              	.LASF34:
+ 2791 04fc 6465626F 		.ascii	"debounce_state\000"
+ 2791      756E6365 
+ 2791      5F737461 
+ 2791      746500
+ 2792              	.LASF85:
+ 2793 050b 75387838 		.ascii	"u8x8_cad_SendArg\000"
+ 2793      5F636164 
+ 2793      5F53656E 
+ 2793      64417267 
+ 2793      00
+ 2794              	.LASF17:
+ 2795 051c 64697370 		.ascii	"display_info\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 60
+
+
+ 2795      6C61795F 
+ 2795      696E666F 
+ 2795      00
+ 2796              	.LASF57:
+ 2797 0529 70697865 		.ascii	"pixel_height\000"
+ 2797      6C5F6865 
+ 2797      69676874 
+ 2797      00
+ 2798              	.LASF56:
+ 2799 0536 70697865 		.ascii	"pixel_width\000"
+ 2799      6C5F7769 
+ 2799      64746800 
+ 2800              	.LASF30:
+ 2801 0542 75746638 		.ascii	"utf8_state\000"
+ 2801      5F737461 
+ 2801      746500
+ 2802              	.LASF37:
+ 2803 054d 75387838 		.ascii	"u8x8_struct\000"
+ 2803      5F737472 
+ 2803      75637400 
+ 2804              	.LASF62:
+ 2805 0559 795F706F 		.ascii	"y_pos\000"
+ 2805      7300
+ 2806              	.LASF82:
+ 2807 055f 75387838 		.ascii	"u8x8_cad_SendSequence\000"
+ 2807      5F636164 
+ 2807      5F53656E 
+ 2807      64536571 
+ 2807      75656E63 
+ 2808              	.LASF8:
+ 2809 0575 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2809      20756E73 
+ 2809      69676E65 
+ 2809      6420696E 
+ 2809      7400
+ 2810              	.LASF21:
+ 2811 0587 62797465 		.ascii	"byte_cb\000"
+ 2811      5F636200 
+ 2812              	.LASF40:
+ 2813 058f 63686970 		.ascii	"chip_disable_level\000"
+ 2813      5F646973 
+ 2813      61626C65 
+ 2813      5F6C6576 
+ 2813      656C00
+ 2814              	.LASF28:
+ 2815 05a2 6932635F 		.ascii	"i2c_address\000"
+ 2815      61646472 
+ 2815      65737300 
+ 2816              	.LASF55:
+ 2817 05ae 666C6970 		.ascii	"flipmode_x_offset\000"
+ 2817      6D6F6465 
+ 2817      5F785F6F 
+ 2817      66667365 
+ 2817      7400
+ 2818              	.LASF90:
+ 2819 05c0 2E2E5C75 		.ascii	"..\\u8g2\\csrc\\u8x8_d_ssd1306_128x32.c\000"
+ 2819      3867325C 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 61
+
+
+ 2819      63737263 
+ 2819      5C753878 
+ 2819      385F645F 
+ 2820              	.LASF29:
+ 2821 05e5 6932635F 		.ascii	"i2c_started\000"
+ 2821      73746172 
+ 2821      74656400 
+ 2822              	.LASF88:
+ 2823 05f1 75387838 		.ascii	"u8x8_d_helper_display_setup_memory\000"
+ 2823      5F645F68 
+ 2823      656C7065 
+ 2823      725F6469 
+ 2823      73706C61 
+ 2824              	.LASF20:
+ 2825 0614 6361645F 		.ascii	"cad_cb\000"
+ 2825      636200
+ 2826              	.LASF58:
+ 2827 061b 75387838 		.ascii	"u8x8_tile_t\000"
+ 2827      5F74696C 
+ 2827      655F7400 
+ 2828              	.LASF72:
+ 2829 0627 75387838 		.ascii	"u8x8_d_ssd1306_128x32_univision_init_seq\000"
+ 2829      5F645F73 
+ 2829      73643133 
+ 2829      30365F31 
+ 2829      32387833 
+ 2830              	.LASF89:
+ 2831 0650 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2831      43313120 
+ 2831      352E342E 
+ 2831      31203230 
+ 2831      31363036 
+ 2832 0683 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2832      20726576 
+ 2832      6973696F 
+ 2832      6E203233 
+ 2832      37373135 
+ 2833 06b6 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2833      66756E63 
+ 2833      74696F6E 
+ 2833      2D736563 
+ 2833      74696F6E 
+ 2834              	.LASF32:
+ 2835 06de 6465626F 		.ascii	"debounce_default_pin_state\000"
+ 2835      756E6365 
+ 2835      5F646566 
+ 2835      61756C74 
+ 2835      5F70696E 
+ 2836              	.LASF63:
+ 2837 06f9 75387838 		.ascii	"u8x8_msg_cb\000"
+ 2837      5F6D7367 
+ 2837      5F636200 
+ 2838              	.LASF80:
+ 2839 0705 75387838 		.ascii	"u8x8_d_sh1106_128x32_visionox_display_info\000"
+ 2839      5F645F73 
+ 2839      68313130 
+ 2839      365F3132 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\cc4RiXXm.s 			page 62
+
+
+ 2839      38783332 
+ 2840              	.LASF18:
+ 2841 0730 6E657874 		.ascii	"next_cb\000"
+ 2841      5F636200 
+ 2842              	.LASF42:
+ 2843 0738 7072655F 		.ascii	"pre_chip_disable_wait_ns\000"
+ 2843      63686970 
+ 2843      5F646973 
+ 2843      61626C65 
+ 2843      5F776169 
+ 2844              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,3308 @@
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"u8x8_d_ssd1318.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.u8x8_d_ssd1318_generic,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	u8x8_d_ssd1318_generic, %function
+  24              	u8x8_d_ssd1318_generic:
+  25              	.LFB0:
+  26              		.file 1 "..\\u8g2\\csrc\\u8x8_d_ssd1318.c"
+   1:..\u8g2\csrc/u8x8_d_ssd1318.c **** /*
+   2:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+   3:..\u8g2\csrc/u8x8_d_ssd1318.c ****   u8x8_d_ssd1318.c
+   4:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+   5:..\u8g2\csrc/u8x8_d_ssd1318.c ****   Universal 8bit Graphics Library (https://github.com/olikraus/u8g2/)
+   6:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+   7:..\u8g2\csrc/u8x8_d_ssd1318.c ****   Copyright (c) 2019, olikraus@gmail.com
+   8:..\u8g2\csrc/u8x8_d_ssd1318.c ****   All rights reserved.
+   9:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  10:..\u8g2\csrc/u8x8_d_ssd1318.c ****   Redistribution and use in source and binary forms, with or without modification, 
+  11:..\u8g2\csrc/u8x8_d_ssd1318.c ****   are permitted provided that the following conditions are met:
+  12:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  13:..\u8g2\csrc/u8x8_d_ssd1318.c ****   * Redistributions of source code must retain the above copyright notice, this list 
+  14:..\u8g2\csrc/u8x8_d_ssd1318.c ****     of conditions and the following disclaimer.
+  15:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+  16:..\u8g2\csrc/u8x8_d_ssd1318.c ****   * Redistributions in binary form must reproduce the above copyright notice, this 
+  17:..\u8g2\csrc/u8x8_d_ssd1318.c ****     list of conditions and the following disclaimer in the documentation and/or other 
+  18:..\u8g2\csrc/u8x8_d_ssd1318.c ****     materials provided with the distribution.
+  19:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  20:..\u8g2\csrc/u8x8_d_ssd1318.c ****   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+  21:..\u8g2\csrc/u8x8_d_ssd1318.c ****   CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+  22:..\u8g2\csrc/u8x8_d_ssd1318.c ****   INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  23:..\u8g2\csrc/u8x8_d_ssd1318.c ****   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+  24:..\u8g2\csrc/u8x8_d_ssd1318.c ****   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+  25:..\u8g2\csrc/u8x8_d_ssd1318.c ****   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  26:..\u8g2\csrc/u8x8_d_ssd1318.c ****   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  27:..\u8g2\csrc/u8x8_d_ssd1318.c ****   NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+  28:..\u8g2\csrc/u8x8_d_ssd1318.c ****   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+  29:..\u8g2\csrc/u8x8_d_ssd1318.c ****   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+  30:..\u8g2\csrc/u8x8_d_ssd1318.c ****   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  31:..\u8g2\csrc/u8x8_d_ssd1318.c ****   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 2
+
+
+  32:..\u8g2\csrc/u8x8_d_ssd1318.c ****   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
+  33:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  34:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  35:..\u8g2\csrc/u8x8_d_ssd1318.c ****   SSD1318: 128x96 OLED
+  36:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  37:..\u8g2\csrc/u8x8_d_ssd1318.c ****   https://github.com/olikraus/u8g2/issues/784
+  38:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  39:..\u8g2\csrc/u8x8_d_ssd1318.c **** */
+  40:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  41:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  42:..\u8g2\csrc/u8x8_d_ssd1318.c **** #include "u8x8.h"
+  43:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  44:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  45:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  46:..\u8g2\csrc/u8x8_d_ssd1318.c **** /* with internal charge pump (icp) */
+  47:..\u8g2\csrc/u8x8_d_ssd1318.c **** static const uint8_t u8x8_d_ssd1318_128x96_icp_init_seq[] = {
+  48:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+  49:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  50:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  51:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  52:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0fd, 0x012),		/* unlock */
+  53:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0ae),		                /* display off */
+  54:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0ad, 0x0d0),		/* external or internal IREF selection */
+  55:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0a8, 0x05f),		/* multiplex ratio, 96 duty */
+  56:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0d3, 0x000),		/* display offset */
+  57:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0a2, 0x000),		/* start line */
+  58:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  59:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  60:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // four possible charge pump setting from as per sec 6.8.2 of the ssd1318 datasheet
+  61:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // uncomment only one of the below for lines  
+  62:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // default: 
+  63:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // U8X8_CA(0x08d, 0x004, 0x0ac, 0x001),		/* Charge pump setting from sec 6.8.2 of SSD1318 datashe
+  64:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // U8X8_CA(0x08d, 0x044, 0x0ac, 0x001),		/* Charge pump setting from sec 6.8.2 of SSD1318 datashe
+  65:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // U8X8_CA(0x08d, 0x084, 0x0ac, 0x001),		/* Charge pump setting from sec 6.8.2 of SSD1318 datashe
+  66:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CAAA(0x08d, 0x0c4, 0x0ac, 0x001),		/* Charge pump setting from sec 6.8.2 of SSD1318 datashee
+  67:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  68:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  69:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0a1),				/* segment remap a0/a1*/
+  70:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0c0),				/* c0: scan dir normal, c8: reverse */
+  71:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // Flipmode
+  72:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // U8X8_C(0x0a0),				/* segment remap a0/a1*/
+  73:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // U8X8_C(0x0c8),				/* c0: scan dir normal, c8: reverse */
+  74:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  75:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0da, 0x012),		/* com pin HW config, sequential com pin config (bit 4), disable left/rig
+  76:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  77:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x081, 0x00f), 		/* value from issue 784, seems to be a little bit low... */
+  78:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  79:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  80:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0d5, 0x0d1),		/* clock divide ratio (0x00=1) and oscillator frequency (0x8), value from
+  81:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0d9, 0x022), 		/* [2] pre-charge period 0x022/f1, value from issue 784 example code */
+  82:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0db, 0x030), 		/* vcomh deselect level, value from issue 784 example code  */  
+  83:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  84:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  85:..\u8g2\csrc/u8x8_d_ssd1318.c ****   //U8X8_CA(0x020, 0x000),		/* horizontal addressing mode */
+  86:..\u8g2\csrc/u8x8_d_ssd1318.c ****   //U8X8_C(0x02e),				/* Deactivate scroll */ 
+  87:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+  88:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0a4),				/* output ram to display */
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 3
+
+
+  89:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0a6),				/* none inverted normal display mode */
+  90:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+  91:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  92:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END()             			/* end of sequence */
+  93:..\u8g2\csrc/u8x8_d_ssd1318.c **** };
+  94:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  95:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+  96:..\u8g2\csrc/u8x8_d_ssd1318.c **** /* with external charge pump */
+  97:..\u8g2\csrc/u8x8_d_ssd1318.c **** static const uint8_t u8x8_d_ssd1318_128x96_xcp_init_seq[] = {
+  98:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+  99:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+ 100:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 101:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 102:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0fd, 0x012),		/* unlock */
+ 103:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0ae),		                /* display off */
+ 104:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0ad, 0x0d0),		/* external or internal IREF selection */
+ 105:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0a8, 0x05f),		/* multiplex ratio, 96 duty */
+ 106:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0d3, 0x000),		/* display offset */
+ 107:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0a2, 0x000),		/* start line */
+ 108:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 109:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 110:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // not sure if we have to set something for external charge pump
+ 111:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // ...
+ 112:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 113:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 114:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0a1),				/* segment remap a0/a1*/
+ 115:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0c0),				/* c0: scan dir normal, c8: reverse */
+ 116:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // Flipmode
+ 117:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // U8X8_C(0x0a0),				/* segment remap a0/a1*/
+ 118:..\u8g2\csrc/u8x8_d_ssd1318.c ****   // U8X8_C(0x0c8),				/* c0: scan dir normal, c8: reverse */
+ 119:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 120:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0da, 0x012),		/* com pin HW config, sequential com pin config (bit 4), disable left/rig
+ 121:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 122:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x081, 0x00f), 		/* value from issue 784, seems to be a little bit low... */
+ 123:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 124:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 125:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0d5, 0x0d1),		/* clock divide ratio (0x00=1) and oscillator frequency (0x8), value from
+ 126:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0d9, 0x022), 		/* [2] pre-charge period 0x022/f1, value from issue 784 example code */
+ 127:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_CA(0x0db, 0x030), 		/* vcomh deselect level, value from issue 784 example code  */  
+ 128:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 129:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 130:..\u8g2\csrc/u8x8_d_ssd1318.c ****   //U8X8_CA(0x020, 0x000),		/* horizontal addressing mode */
+ 131:..\u8g2\csrc/u8x8_d_ssd1318.c ****   //U8X8_C(0x02e),				/* Deactivate scroll */ 
+ 132:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 133:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0a4),				/* output ram to display */
+ 134:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0a6),				/* none inverted normal display mode */
+ 135:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+ 136:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+ 137:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END()             			/* end of sequence */
+ 138:..\u8g2\csrc/u8x8_d_ssd1318.c **** };
+ 139:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 140:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 141:..\u8g2\csrc/u8x8_d_ssd1318.c **** static const uint8_t u8x8_d_ssd1318_128x96_powersave0_seq[] = {
+ 142:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+ 143:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0af),		                /* display on */
+ 144:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+ 145:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END()             			/* end of sequence */
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 4
+
+
+ 146:..\u8g2\csrc/u8x8_d_ssd1318.c **** };
+ 147:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 148:..\u8g2\csrc/u8x8_d_ssd1318.c **** static const uint8_t u8x8_d_ssd1318_128x96_powersave1_seq[] = {
+ 149:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+ 150:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0ae),		                /* display off */
+ 151:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+ 152:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END()             			/* end of sequence */
+ 153:..\u8g2\csrc/u8x8_d_ssd1318.c **** };
+ 154:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 155:..\u8g2\csrc/u8x8_d_ssd1318.c **** static const uint8_t u8x8_d_ssd1318_128x96_flip0_seq[] = {
+ 156:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+ 157:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0a1),				/* segment remap a0/a1*/
+ 158:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0c0),				/* c0: scan dir normal, c8: reverse */
+ 159:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+ 160:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END()             			/* end of sequence */
+ 161:..\u8g2\csrc/u8x8_d_ssd1318.c **** };
+ 162:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 163:..\u8g2\csrc/u8x8_d_ssd1318.c **** static const uint8_t u8x8_d_ssd1318_128x96_flip1_seq[] = {
+ 164:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+ 165:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0a0),				/* segment remap a0/a1*/
+ 166:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_C(0x0c8),				/* c0: scan dir normal, c8: reverse */
+ 167:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+ 168:..\u8g2\csrc/u8x8_d_ssd1318.c ****   U8X8_END()             			/* end of sequence */
+ 169:..\u8g2\csrc/u8x8_d_ssd1318.c **** };
+ 170:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 171:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 172:..\u8g2\csrc/u8x8_d_ssd1318.c **** static uint8_t u8x8_d_ssd1318_generic(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 173:..\u8g2\csrc/u8x8_d_ssd1318.c **** {
+  27              		.loc 1 173 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  33              		.cfi_def_cfa_offset 24
+  34              		.cfi_offset 3, -24
+  35              		.cfi_offset 4, -20
+  36              		.cfi_offset 5, -16
+  37              		.cfi_offset 6, -12
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0546     		mov	r5, r0
+  41 0004 1446     		mov	r4, r2
+  42 0006 1E46     		mov	r6, r3
+ 174:..\u8g2\csrc/u8x8_d_ssd1318.c ****   uint8_t x, c;
+ 175:..\u8g2\csrc/u8x8_d_ssd1318.c ****   uint8_t *ptr;
+ 176:..\u8g2\csrc/u8x8_d_ssd1318.c ****   switch(msg)
+  43              		.loc 1 176 0
+  44 0008 0B39     		subs	r1, r1, #11
+  45              	.LVL1:
+  46 000a 0429     		cmp	r1, #4
+  47 000c 60D8     		bhi	.L11
+  48 000e DFE801F0 		tbb	[pc, r1]
+  49              	.LVL2:
+  50              	.L4:
+  51 0012 03       		.byte	(.L3-.L4)/2
+  52 0013 5F       		.byte	(.L11-.L4)/2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 5
+
+
+  53 0014 0E       		.byte	(.L5-.L4)/2
+  54 0015 21       		.byte	(.L6-.L4)/2
+  55 0016 30       		.byte	(.L7-.L4)/2
+  56 0017 00       		.p2align 1
+  57              	.L3:
+ 177:..\u8g2\csrc/u8x8_d_ssd1318.c ****   {
+ 178:..\u8g2\csrc/u8x8_d_ssd1318.c ****     /* handled by the calling function
+ 179:..\u8g2\csrc/u8x8_d_ssd1318.c ****     case U8X8_MSG_DISPLAY_SETUP_MEMORY:
+ 180:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_ssd1318_128x96_display_info);
+ 181:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 182:..\u8g2\csrc/u8x8_d_ssd1318.c ****     */
+ 183:..\u8g2\csrc/u8x8_d_ssd1318.c ****     /* handled by the calling function
+ 184:..\u8g2\csrc/u8x8_d_ssd1318.c ****     case U8X8_MSG_DISPLAY_INIT:
+ 185:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_d_helper_display_init(u8x8);
+ 186:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1318_128x96_init_seq);    
+ 187:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 188:..\u8g2\csrc/u8x8_d_ssd1318.c ****     */
+ 189:..\u8g2\csrc/u8x8_d_ssd1318.c ****     case U8X8_MSG_DISPLAY_SET_POWER_SAVE:
+ 190:..\u8g2\csrc/u8x8_d_ssd1318.c ****       if ( arg_int == 0 )
+  58              		.loc 1 190 0
+  59 0018 22B9     		cbnz	r2, .L8
+ 191:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1318_128x96_powersave0_seq);
+  60              		.loc 1 191 0
+  61 001a 2E49     		ldr	r1, .L13
+  62 001c FFF7FEFF 		bl	u8x8_cad_SendSequence
+  63              	.LVL3:
+ 192:..\u8g2\csrc/u8x8_d_ssd1318.c ****       else
+ 193:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1318_128x96_powersave1_seq);
+ 194:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 195:..\u8g2\csrc/u8x8_d_ssd1318.c ****     case U8X8_MSG_DISPLAY_SET_FLIP_MODE:
+ 196:..\u8g2\csrc/u8x8_d_ssd1318.c ****       if ( arg_int == 0 )
+ 197:..\u8g2\csrc/u8x8_d_ssd1318.c ****       {
+ 198:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1318_128x96_flip0_seq);
+ 199:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	u8x8->x_offset = u8x8->display_info->default_x_offset;
+ 200:..\u8g2\csrc/u8x8_d_ssd1318.c ****       }
+ 201:..\u8g2\csrc/u8x8_d_ssd1318.c ****       else
+ 202:..\u8g2\csrc/u8x8_d_ssd1318.c ****       {
+ 203:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1318_128x96_flip1_seq);
+ 204:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	u8x8->x_offset = u8x8->display_info->flipmode_x_offset;
+ 205:..\u8g2\csrc/u8x8_d_ssd1318.c ****       }
+ 206:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 207:..\u8g2\csrc/u8x8_d_ssd1318.c **** #ifdef U8X8_WITH_SET_CONTRAST
+ 208:..\u8g2\csrc/u8x8_d_ssd1318.c ****     case U8X8_MSG_DISPLAY_SET_CONTRAST:
+ 209:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_StartTransfer(u8x8);
+ 210:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendCmd(u8x8, 0x081 );
+ 211:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendArg(u8x8, arg_int );	/* ssd1318 has range from 0 to 255 */
+ 212:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_EndTransfer(u8x8);
+ 213:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 214:..\u8g2\csrc/u8x8_d_ssd1318.c **** #endif
+ 215:..\u8g2\csrc/u8x8_d_ssd1318.c ****     case U8X8_MSG_DISPLAY_DRAW_TILE:
+ 216:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_StartTransfer(u8x8);
+ 217:..\u8g2\csrc/u8x8_d_ssd1318.c ****       x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
+ 218:..\u8g2\csrc/u8x8_d_ssd1318.c ****       x *= 8;
+ 219:..\u8g2\csrc/u8x8_d_ssd1318.c ****       x += u8x8->x_offset;
+ 220:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+ 221:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendCmd(u8x8, 0x040 );	/* set line offset to 0 */
+ 222:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 6
+
+
+ 223:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendCmd(u8x8, 0x010 | (x>>4) );
+ 224:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendArg(u8x8, 0x000 | ((x&15)));					/* probably wrong, should be SendCmd */
+ 225:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendArg(u8x8, 0x0b0 | (((u8x8_tile_t *)arg_ptr)->y_pos));	/* probably wrong, should 
+ 226:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 227:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+ 228:..\u8g2\csrc/u8x8_d_ssd1318.c ****       do
+ 229:..\u8g2\csrc/u8x8_d_ssd1318.c ****       {
+ 230:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	c = ((u8x8_tile_t *)arg_ptr)->cnt;
+ 231:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	ptr = ((u8x8_tile_t *)arg_ptr)->tile_ptr;
+ 232:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	u8x8_cad_SendData(u8x8, c*8, ptr); 	/* note: SendData can not handle more than 255 bytes */
+ 233:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	/*
+ 234:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	do
+ 235:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	{
+ 236:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	  u8x8_cad_SendData(u8x8, 8, ptr);
+ 237:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	  ptr += 8;
+ 238:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	  c--;
+ 239:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	} while( c > 0 );
+ 240:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	*/
+ 241:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	arg_int--;
+ 242:..\u8g2\csrc/u8x8_d_ssd1318.c ****       } while( arg_int > 0 );
+ 243:..\u8g2\csrc/u8x8_d_ssd1318.c ****       
+ 244:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_EndTransfer(u8x8);
+ 245:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 246:..\u8g2\csrc/u8x8_d_ssd1318.c ****     default:
+ 247:..\u8g2\csrc/u8x8_d_ssd1318.c ****       return 0;
+ 248:..\u8g2\csrc/u8x8_d_ssd1318.c ****   }
+ 249:..\u8g2\csrc/u8x8_d_ssd1318.c ****   return 1;
+  64              		.loc 1 249 0
+  65 0020 0120     		movs	r0, #1
+  66 0022 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  67              	.LVL4:
+  68              	.L8:
+ 193:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+  69              		.loc 1 193 0
+  70 0024 2C49     		ldr	r1, .L13+4
+  71 0026 FFF7FEFF 		bl	u8x8_cad_SendSequence
+  72              	.LVL5:
+  73              		.loc 1 249 0
+  74 002a 0120     		movs	r0, #1
+  75 002c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  76              	.LVL6:
+  77              	.L5:
+ 196:..\u8g2\csrc/u8x8_d_ssd1318.c ****       {
+  78              		.loc 1 196 0
+  79 002e 42B9     		cbnz	r2, .L9
+ 198:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	u8x8->x_offset = u8x8->display_info->default_x_offset;
+  80              		.loc 1 198 0
+  81 0030 2A49     		ldr	r1, .L13+8
+  82 0032 FFF7FEFF 		bl	u8x8_cad_SendSequence
+  83              	.LVL7:
+ 199:..\u8g2\csrc/u8x8_d_ssd1318.c ****       }
+  84              		.loc 1 199 0
+  85 0036 2B68     		ldr	r3, [r5]
+  86 0038 9B7C     		ldrb	r3, [r3, #18]	@ zero_extendqisi2
+  87 003a 85F82230 		strb	r3, [r5, #34]
+  88              		.loc 1 249 0
+  89 003e 0120     		movs	r0, #1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 7
+
+
+  90 0040 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  91              	.LVL8:
+  92              	.L9:
+ 203:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	u8x8->x_offset = u8x8->display_info->flipmode_x_offset;
+  93              		.loc 1 203 0
+  94 0042 2749     		ldr	r1, .L13+12
+  95 0044 FFF7FEFF 		bl	u8x8_cad_SendSequence
+  96              	.LVL9:
+ 204:..\u8g2\csrc/u8x8_d_ssd1318.c ****       }
+  97              		.loc 1 204 0
+  98 0048 2B68     		ldr	r3, [r5]
+  99 004a DB7C     		ldrb	r3, [r3, #19]	@ zero_extendqisi2
+ 100 004c 85F82230 		strb	r3, [r5, #34]
+ 101              		.loc 1 249 0
+ 102 0050 0120     		movs	r0, #1
+ 103 0052 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 104              	.LVL10:
+ 105              	.L6:
+ 209:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendCmd(u8x8, 0x081 );
+ 106              		.loc 1 209 0
+ 107 0054 FFF7FEFF 		bl	u8x8_cad_StartTransfer
+ 108              	.LVL11:
+ 210:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendArg(u8x8, arg_int );	/* ssd1318 has range from 0 to 255 */
+ 109              		.loc 1 210 0
+ 110 0058 8121     		movs	r1, #129
+ 111 005a 2846     		mov	r0, r5
+ 112 005c FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 113              	.LVL12:
+ 211:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_EndTransfer(u8x8);
+ 114              		.loc 1 211 0
+ 115 0060 2146     		mov	r1, r4
+ 116 0062 2846     		mov	r0, r5
+ 117 0064 FFF7FEFF 		bl	u8x8_cad_SendArg
+ 118              	.LVL13:
+ 212:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 119              		.loc 1 212 0
+ 120 0068 2846     		mov	r0, r5
+ 121 006a FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 122              	.LVL14:
+ 123              		.loc 1 249 0
+ 124 006e 0120     		movs	r0, #1
+ 213:..\u8g2\csrc/u8x8_d_ssd1318.c **** #endif
+ 125              		.loc 1 213 0
+ 126 0070 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 127              	.LVL15:
+ 128              	.L7:
+ 216:..\u8g2\csrc/u8x8_d_ssd1318.c ****       x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
+ 129              		.loc 1 216 0
+ 130 0072 FFF7FEFF 		bl	u8x8_cad_StartTransfer
+ 131              	.LVL16:
+ 217:..\u8g2\csrc/u8x8_d_ssd1318.c ****       x *= 8;
+ 132              		.loc 1 217 0
+ 133 0076 7779     		ldrb	r7, [r6, #5]	@ zero_extendqisi2
+ 134              	.LVL17:
+ 218:..\u8g2\csrc/u8x8_d_ssd1318.c ****       x += u8x8->x_offset;
+ 135              		.loc 1 218 0
+ 136 0078 FF00     		lsls	r7, r7, #3
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 8
+
+
+ 137              	.LVL18:
+ 138 007a FFB2     		uxtb	r7, r7
+ 139              	.LVL19:
+ 219:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+ 140              		.loc 1 219 0
+ 141 007c 95F82230 		ldrb	r3, [r5, #34]	@ zero_extendqisi2
+ 142 0080 1F44     		add	r7, r7, r3
+ 143              	.LVL20:
+ 144 0082 FFB2     		uxtb	r7, r7
+ 145              	.LVL21:
+ 221:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+ 146              		.loc 1 221 0
+ 147 0084 4021     		movs	r1, #64
+ 148 0086 2846     		mov	r0, r5
+ 149 0088 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 150              	.LVL22:
+ 223:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendArg(u8x8, 0x000 | ((x&15)));					/* probably wrong, should be SendCmd */
+ 151              		.loc 1 223 0
+ 152 008c 3909     		lsrs	r1, r7, #4
+ 153 008e 41F01001 		orr	r1, r1, #16
+ 154 0092 2846     		mov	r0, r5
+ 155 0094 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 156              	.LVL23:
+ 224:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendArg(u8x8, 0x0b0 | (((u8x8_tile_t *)arg_ptr)->y_pos));	/* probably wrong, should 
+ 157              		.loc 1 224 0
+ 158 0098 07F00F01 		and	r1, r7, #15
+ 159 009c 2846     		mov	r0, r5
+ 160 009e FFF7FEFF 		bl	u8x8_cad_SendArg
+ 161              	.LVL24:
+ 225:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 162              		.loc 1 225 0
+ 163 00a2 B179     		ldrb	r1, [r6, #6]	@ zero_extendqisi2
+ 164 00a4 41F0B001 		orr	r1, r1, #176
+ 165 00a8 2846     		mov	r0, r5
+ 166 00aa FFF7FEFF 		bl	u8x8_cad_SendArg
+ 167              	.LVL25:
+ 168              	.L10:
+ 230:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	ptr = ((u8x8_tile_t *)arg_ptr)->tile_ptr;
+ 169              		.loc 1 230 0 discriminator 1
+ 170 00ae 3179     		ldrb	r1, [r6, #4]	@ zero_extendqisi2
+ 171              	.LVL26:
+ 232:..\u8g2\csrc/u8x8_d_ssd1318.c **** 	/*
+ 172              		.loc 1 232 0 discriminator 1
+ 173 00b0 C900     		lsls	r1, r1, #3
+ 174              	.LVL27:
+ 175 00b2 3268     		ldr	r2, [r6]
+ 176 00b4 01F0F801 		and	r1, r1, #248
+ 177 00b8 2846     		mov	r0, r5
+ 178 00ba FFF7FEFF 		bl	u8x8_cad_SendData
+ 179              	.LVL28:
+ 241:..\u8g2\csrc/u8x8_d_ssd1318.c ****       } while( arg_int > 0 );
+ 180              		.loc 1 241 0 discriminator 1
+ 181 00be 621E     		subs	r2, r4, #1
+ 182              	.LVL29:
+ 242:..\u8g2\csrc/u8x8_d_ssd1318.c ****       
+ 183              		.loc 1 242 0 discriminator 1
+ 184 00c0 12F0FF04 		ands	r4, r2, #255
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 9
+
+
+ 185 00c4 F3D1     		bne	.L10
+ 244:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 186              		.loc 1 244 0
+ 187 00c6 2846     		mov	r0, r5
+ 188 00c8 FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 189              	.LVL30:
+ 190              		.loc 1 249 0
+ 191 00cc 0120     		movs	r0, #1
+ 245:..\u8g2\csrc/u8x8_d_ssd1318.c ****     default:
+ 192              		.loc 1 245 0
+ 193 00ce F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 194              	.LVL31:
+ 195              	.L11:
+ 247:..\u8g2\csrc/u8x8_d_ssd1318.c ****   }
+ 196              		.loc 1 247 0
+ 197 00d0 0020     		movs	r0, #0
+ 198              	.LVL32:
+ 250:..\u8g2\csrc/u8x8_d_ssd1318.c **** }
+ 199              		.loc 1 250 0
+ 200 00d2 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 201              	.LVL33:
+ 202              	.L14:
+ 203              		.align	2
+ 204              	.L13:
+ 205 00d4 00000000 		.word	.LANCHOR0
+ 206 00d8 08000000 		.word	.LANCHOR0+8
+ 207 00dc 10000000 		.word	.LANCHOR0+16
+ 208 00e0 18000000 		.word	.LANCHOR0+24
+ 209              		.cfi_endproc
+ 210              	.LFE0:
+ 211              		.size	u8x8_d_ssd1318_generic, .-u8x8_d_ssd1318_generic
+ 212              		.section	.text.u8x8_d_ssd1318_128x96,"ax",%progbits
+ 213              		.align	2
+ 214              		.global	u8x8_d_ssd1318_128x96
+ 215              		.thumb
+ 216              		.thumb_func
+ 217              		.type	u8x8_d_ssd1318_128x96, %function
+ 218              	u8x8_d_ssd1318_128x96:
+ 219              	.LFB1:
+ 251:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 252:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 253:..\u8g2\csrc/u8x8_d_ssd1318.c **** static const u8x8_display_info_t u8x8_ssd1318_128x96_display_info =
+ 254:..\u8g2\csrc/u8x8_d_ssd1318.c **** {
+ 255:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* chip_enable_level = */ 0,
+ 256:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* chip_disable_level = */ 1,
+ 257:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 258:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* post_chip_enable_wait_ns = */ 20,
+ 259:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* pre_chip_disable_wait_ns = */ 10,
+ 260:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* reset_pulse_width_ms = */ 100, 	/* SSD1306: 3 us */
+ 261:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* post_reset_wait_ms = */ 100, /* far east OLEDs need much longer setup time */
+ 262:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* sda_setup_time_ns = */ 50,		/* SSD1306: 15ns, but cycle time is 100ns, so use 100/2 */
+ 263:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* sck_pulse_width_ns = */ 50,	/* SSD1306: 20ns, but cycle time is 100ns, so use 100/2, AVR: belo
+ 264:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* sck_clock_hz = */ 8000000UL,	/* since Arduino 1.6.0, the SPI bus speed in Hz. Should be  10000
+ 265:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* spi_mode = */ 0,		/* active high, rising edge */
+ 266:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* i2c_bus_clock_100kHz = */ 4,
+ 267:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* data_setup_time_ns = */ 40,
+ 268:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* write_pulse_width_ns = */ 150,	/* SSD1306: cycle time is 300ns, so use 300/2 = 150 */
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 10
+
+
+ 269:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* tile_width = */ 16,
+ 270:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* tile_hight = */ 12,
+ 271:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* default_x_offset = */ 0,
+ 272:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* flipmode_x_offset = */ 0,
+ 273:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* pixel_width = */ 128,
+ 274:..\u8g2\csrc/u8x8_d_ssd1318.c ****   /* pixel_height = */ 96
+ 275:..\u8g2\csrc/u8x8_d_ssd1318.c **** };
+ 276:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 277:..\u8g2\csrc/u8x8_d_ssd1318.c **** uint8_t u8x8_d_ssd1318_128x96(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 278:..\u8g2\csrc/u8x8_d_ssd1318.c **** {
+ 220              		.loc 1 278 0
+ 221              		.cfi_startproc
+ 222              		@ args = 0, pretend = 0, frame = 0
+ 223              		@ frame_needed = 0, uses_anonymous_args = 0
+ 224              	.LVL34:
+ 225 0000 38B5     		push	{r3, r4, r5, lr}
+ 226              		.cfi_def_cfa_offset 16
+ 227              		.cfi_offset 3, -16
+ 228              		.cfi_offset 4, -12
+ 229              		.cfi_offset 5, -8
+ 230              		.cfi_offset 14, -4
+ 231 0002 0546     		mov	r5, r0
+ 232 0004 0C46     		mov	r4, r1
+ 279:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+ 280:..\u8g2\csrc/u8x8_d_ssd1318.c ****   if ( u8x8_d_ssd1318_generic(u8x8, msg, arg_int, arg_ptr) != 0 )
+ 233              		.loc 1 280 0
+ 234 0006 FFF7FEFF 		bl	u8x8_d_ssd1318_generic
+ 235              	.LVL35:
+ 236 000a 98B9     		cbnz	r0, .L19
+ 237 000c 0346     		mov	r3, r0
+ 281:..\u8g2\csrc/u8x8_d_ssd1318.c ****     return 1;
+ 282:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 283:..\u8g2\csrc/u8x8_d_ssd1318.c ****   switch(msg)
+ 238              		.loc 1 283 0
+ 239 000e 092C     		cmp	r4, #9
+ 240 0010 0AD0     		beq	.L17
+ 241 0012 0A2C     		cmp	r4, #10
+ 242 0014 0FD1     		bne	.L16
+ 284:..\u8g2\csrc/u8x8_d_ssd1318.c ****   {
+ 285:..\u8g2\csrc/u8x8_d_ssd1318.c ****     case U8X8_MSG_DISPLAY_INIT:
+ 286:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_d_helper_display_init(u8x8);
+ 243              		.loc 1 286 0
+ 244 0016 2846     		mov	r0, r5
+ 245 0018 FFF7FEFF 		bl	u8x8_d_helper_display_init
+ 246              	.LVL36:
+ 287:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1318_128x96_icp_init_seq);    
+ 247              		.loc 1 287 0
+ 248 001c 0749     		ldr	r1, .L21
+ 249 001e 2846     		mov	r0, r5
+ 250 0020 FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 251              	.LVL37:
+ 288:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 289:..\u8g2\csrc/u8x8_d_ssd1318.c ****     case U8X8_MSG_DISPLAY_SETUP_MEMORY:
+ 290:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_ssd1318_128x96_display_info);
+ 291:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 292:..\u8g2\csrc/u8x8_d_ssd1318.c ****     default:
+ 293:..\u8g2\csrc/u8x8_d_ssd1318.c ****       return 0;
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 11
+
+
+ 294:..\u8g2\csrc/u8x8_d_ssd1318.c ****   }
+ 295:..\u8g2\csrc/u8x8_d_ssd1318.c ****   return 1;
+ 252              		.loc 1 295 0
+ 253 0024 0123     		movs	r3, #1
+ 288:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 254              		.loc 1 288 0
+ 255 0026 06E0     		b	.L16
+ 256              	.L17:
+ 290:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 257              		.loc 1 290 0
+ 258 0028 0549     		ldr	r1, .L21+4
+ 259 002a 2846     		mov	r0, r5
+ 260 002c FFF7FEFF 		bl	u8x8_d_helper_display_setup_memory
+ 261              	.LVL38:
+ 262              		.loc 1 295 0
+ 263 0030 0123     		movs	r3, #1
+ 291:..\u8g2\csrc/u8x8_d_ssd1318.c ****     default:
+ 264              		.loc 1 291 0
+ 265 0032 00E0     		b	.L16
+ 266              	.L19:
+ 281:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 267              		.loc 1 281 0
+ 268 0034 0123     		movs	r3, #1
+ 269              	.L16:
+ 296:..\u8g2\csrc/u8x8_d_ssd1318.c **** }
+ 270              		.loc 1 296 0
+ 271 0036 1846     		mov	r0, r3
+ 272 0038 38BD     		pop	{r3, r4, r5, pc}
+ 273              	.LVL39:
+ 274              	.L22:
+ 275 003a 00BF     		.align	2
+ 276              	.L21:
+ 277 003c 20000000 		.word	.LANCHOR0+32
+ 278 0040 60000000 		.word	.LANCHOR0+96
+ 279              		.cfi_endproc
+ 280              	.LFE1:
+ 281              		.size	u8x8_d_ssd1318_128x96, .-u8x8_d_ssd1318_128x96
+ 282              		.section	.text.u8x8_d_ssd1318_128x96_xcp,"ax",%progbits
+ 283              		.align	2
+ 284              		.global	u8x8_d_ssd1318_128x96_xcp
+ 285              		.thumb
+ 286              		.thumb_func
+ 287              		.type	u8x8_d_ssd1318_128x96_xcp, %function
+ 288              	u8x8_d_ssd1318_128x96_xcp:
+ 289              	.LFB2:
+ 297:..\u8g2\csrc/u8x8_d_ssd1318.c **** 
+ 298:..\u8g2\csrc/u8x8_d_ssd1318.c **** uint8_t u8x8_d_ssd1318_128x96_xcp(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 299:..\u8g2\csrc/u8x8_d_ssd1318.c **** {
+ 290              		.loc 1 299 0
+ 291              		.cfi_startproc
+ 292              		@ args = 0, pretend = 0, frame = 0
+ 293              		@ frame_needed = 0, uses_anonymous_args = 0
+ 294              	.LVL40:
+ 295 0000 38B5     		push	{r3, r4, r5, lr}
+ 296              		.cfi_def_cfa_offset 16
+ 297              		.cfi_offset 3, -16
+ 298              		.cfi_offset 4, -12
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 12
+
+
+ 299              		.cfi_offset 5, -8
+ 300              		.cfi_offset 14, -4
+ 301 0002 0546     		mov	r5, r0
+ 302 0004 0C46     		mov	r4, r1
+ 300:..\u8g2\csrc/u8x8_d_ssd1318.c ****     
+ 301:..\u8g2\csrc/u8x8_d_ssd1318.c ****   if ( u8x8_d_ssd1318_generic(u8x8, msg, arg_int, arg_ptr) != 0 )
+ 303              		.loc 1 301 0
+ 304 0006 FFF7FEFF 		bl	u8x8_d_ssd1318_generic
+ 305              	.LVL41:
+ 306 000a 98B9     		cbnz	r0, .L27
+ 307 000c 0346     		mov	r3, r0
+ 302:..\u8g2\csrc/u8x8_d_ssd1318.c ****     return 1;
+ 303:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 304:..\u8g2\csrc/u8x8_d_ssd1318.c ****   switch(msg)
+ 308              		.loc 1 304 0
+ 309 000e 092C     		cmp	r4, #9
+ 310 0010 0AD0     		beq	.L25
+ 311 0012 0A2C     		cmp	r4, #10
+ 312 0014 0FD1     		bne	.L24
+ 305:..\u8g2\csrc/u8x8_d_ssd1318.c ****   {
+ 306:..\u8g2\csrc/u8x8_d_ssd1318.c ****     case U8X8_MSG_DISPLAY_INIT:
+ 307:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_d_helper_display_init(u8x8);
+ 313              		.loc 1 307 0
+ 314 0016 2846     		mov	r0, r5
+ 315 0018 FFF7FEFF 		bl	u8x8_d_helper_display_init
+ 316              	.LVL42:
+ 308:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_ssd1318_128x96_xcp_init_seq);    
+ 317              		.loc 1 308 0
+ 318 001c 0749     		ldr	r1, .L29
+ 319 001e 2846     		mov	r0, r5
+ 320 0020 FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 321              	.LVL43:
+ 309:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 310:..\u8g2\csrc/u8x8_d_ssd1318.c ****     case U8X8_MSG_DISPLAY_SETUP_MEMORY:
+ 311:..\u8g2\csrc/u8x8_d_ssd1318.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_ssd1318_128x96_display_info);
+ 312:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 313:..\u8g2\csrc/u8x8_d_ssd1318.c ****     default:
+ 314:..\u8g2\csrc/u8x8_d_ssd1318.c ****       return 0;
+ 315:..\u8g2\csrc/u8x8_d_ssd1318.c ****   }
+ 316:..\u8g2\csrc/u8x8_d_ssd1318.c ****   return 1;
+ 322              		.loc 1 316 0
+ 323 0024 0123     		movs	r3, #1
+ 309:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 324              		.loc 1 309 0
+ 325 0026 06E0     		b	.L24
+ 326              	.L25:
+ 311:..\u8g2\csrc/u8x8_d_ssd1318.c ****       break;
+ 327              		.loc 1 311 0
+ 328 0028 0549     		ldr	r1, .L29+4
+ 329 002a 2846     		mov	r0, r5
+ 330 002c FFF7FEFF 		bl	u8x8_d_helper_display_setup_memory
+ 331              	.LVL44:
+ 332              		.loc 1 316 0
+ 333 0030 0123     		movs	r3, #1
+ 312:..\u8g2\csrc/u8x8_d_ssd1318.c ****     default:
+ 334              		.loc 1 312 0
+ 335 0032 00E0     		b	.L24
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 13
+
+
+ 336              	.L27:
+ 302:..\u8g2\csrc/u8x8_d_ssd1318.c ****   
+ 337              		.loc 1 302 0
+ 338 0034 0123     		movs	r3, #1
+ 339              	.L24:
+ 317:..\u8g2\csrc/u8x8_d_ssd1318.c **** }
+ 340              		.loc 1 317 0
+ 341 0036 1846     		mov	r0, r3
+ 342 0038 38BD     		pop	{r3, r4, r5, pc}
+ 343              	.LVL45:
+ 344              	.L30:
+ 345 003a 00BF     		.align	2
+ 346              	.L29:
+ 347 003c 78000000 		.word	.LANCHOR0+120
+ 348 0040 60000000 		.word	.LANCHOR0+96
+ 349              		.cfi_endproc
+ 350              	.LFE2:
+ 351              		.size	u8x8_d_ssd1318_128x96_xcp, .-u8x8_d_ssd1318_128x96_xcp
+ 352              		.section	.rodata
+ 353              		.align	2
+ 354              		.set	.LANCHOR0,. + 0
+ 355              		.type	u8x8_d_ssd1318_128x96_powersave0_seq, %object
+ 356              		.size	u8x8_d_ssd1318_128x96_powersave0_seq, 5
+ 357              	u8x8_d_ssd1318_128x96_powersave0_seq:
+ 358 0000 18       		.byte	24
+ 359 0001 15       		.byte	21
+ 360 0002 AF       		.byte	-81
+ 361 0003 19       		.byte	25
+ 362 0004 FF       		.byte	-1
+ 363 0005 000000   		.space	3
+ 364              		.type	u8x8_d_ssd1318_128x96_powersave1_seq, %object
+ 365              		.size	u8x8_d_ssd1318_128x96_powersave1_seq, 5
+ 366              	u8x8_d_ssd1318_128x96_powersave1_seq:
+ 367 0008 18       		.byte	24
+ 368 0009 15       		.byte	21
+ 369 000a AE       		.byte	-82
+ 370 000b 19       		.byte	25
+ 371 000c FF       		.byte	-1
+ 372 000d 000000   		.space	3
+ 373              		.type	u8x8_d_ssd1318_128x96_flip0_seq, %object
+ 374              		.size	u8x8_d_ssd1318_128x96_flip0_seq, 7
+ 375              	u8x8_d_ssd1318_128x96_flip0_seq:
+ 376 0010 18       		.byte	24
+ 377 0011 15       		.byte	21
+ 378 0012 A1       		.byte	-95
+ 379 0013 15       		.byte	21
+ 380 0014 C0       		.byte	-64
+ 381 0015 19       		.byte	25
+ 382 0016 FF       		.byte	-1
+ 383 0017 00       		.space	1
+ 384              		.type	u8x8_d_ssd1318_128x96_flip1_seq, %object
+ 385              		.size	u8x8_d_ssd1318_128x96_flip1_seq, 7
+ 386              	u8x8_d_ssd1318_128x96_flip1_seq:
+ 387 0018 18       		.byte	24
+ 388 0019 15       		.byte	21
+ 389 001a A0       		.byte	-96
+ 390 001b 15       		.byte	21
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 14
+
+
+ 391 001c C8       		.byte	-56
+ 392 001d 19       		.byte	25
+ 393 001e FF       		.byte	-1
+ 394 001f 00       		.space	1
+ 395              		.type	u8x8_d_ssd1318_128x96_icp_init_seq, %object
+ 396              		.size	u8x8_d_ssd1318_128x96_icp_init_seq, 61
+ 397              	u8x8_d_ssd1318_128x96_icp_init_seq:
+ 398 0020 18       		.byte	24
+ 399 0021 15       		.byte	21
+ 400 0022 FD       		.byte	-3
+ 401 0023 16       		.byte	22
+ 402 0024 12       		.byte	18
+ 403 0025 15       		.byte	21
+ 404 0026 AE       		.byte	-82
+ 405 0027 15       		.byte	21
+ 406 0028 AD       		.byte	-83
+ 407 0029 16       		.byte	22
+ 408 002a D0       		.byte	-48
+ 409 002b 15       		.byte	21
+ 410 002c A8       		.byte	-88
+ 411 002d 16       		.byte	22
+ 412 002e 5F       		.byte	95
+ 413 002f 15       		.byte	21
+ 414 0030 D3       		.byte	-45
+ 415 0031 16       		.byte	22
+ 416 0032 00       		.byte	0
+ 417 0033 15       		.byte	21
+ 418 0034 A2       		.byte	-94
+ 419 0035 16       		.byte	22
+ 420 0036 00       		.byte	0
+ 421 0037 15       		.byte	21
+ 422 0038 8D       		.byte	-115
+ 423 0039 16       		.byte	22
+ 424 003a C4       		.byte	-60
+ 425 003b 16       		.byte	22
+ 426 003c AC       		.byte	-84
+ 427 003d 16       		.byte	22
+ 428 003e 01       		.byte	1
+ 429 003f 15       		.byte	21
+ 430 0040 A1       		.byte	-95
+ 431 0041 15       		.byte	21
+ 432 0042 C0       		.byte	-64
+ 433 0043 15       		.byte	21
+ 434 0044 DA       		.byte	-38
+ 435 0045 16       		.byte	22
+ 436 0046 12       		.byte	18
+ 437 0047 15       		.byte	21
+ 438 0048 81       		.byte	-127
+ 439 0049 16       		.byte	22
+ 440 004a 0F       		.byte	15
+ 441 004b 15       		.byte	21
+ 442 004c D5       		.byte	-43
+ 443 004d 16       		.byte	22
+ 444 004e D1       		.byte	-47
+ 445 004f 15       		.byte	21
+ 446 0050 D9       		.byte	-39
+ 447 0051 16       		.byte	22
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 15
+
+
+ 448 0052 22       		.byte	34
+ 449 0053 15       		.byte	21
+ 450 0054 DB       		.byte	-37
+ 451 0055 16       		.byte	22
+ 452 0056 30       		.byte	48
+ 453 0057 15       		.byte	21
+ 454 0058 A4       		.byte	-92
+ 455 0059 15       		.byte	21
+ 456 005a A6       		.byte	-90
+ 457 005b 19       		.byte	25
+ 458 005c FF       		.byte	-1
+ 459 005d 000000   		.space	3
+ 460              		.type	u8x8_ssd1318_128x96_display_info, %object
+ 461              		.size	u8x8_ssd1318_128x96_display_info, 24
+ 462              	u8x8_ssd1318_128x96_display_info:
+ 463 0060 00       		.byte	0
+ 464 0061 01       		.byte	1
+ 465 0062 14       		.byte	20
+ 466 0063 0A       		.byte	10
+ 467 0064 64       		.byte	100
+ 468 0065 64       		.byte	100
+ 469 0066 32       		.byte	50
+ 470 0067 32       		.byte	50
+ 471 0068 00127A00 		.word	8000000
+ 472 006c 00       		.byte	0
+ 473 006d 04       		.byte	4
+ 474 006e 28       		.byte	40
+ 475 006f 96       		.byte	-106
+ 476 0070 10       		.byte	16
+ 477 0071 0C       		.byte	12
+ 478 0072 00       		.byte	0
+ 479 0073 00       		.byte	0
+ 480 0074 8000     		.short	128
+ 481 0076 6000     		.short	96
+ 482              		.type	u8x8_d_ssd1318_128x96_xcp_init_seq, %object
+ 483              		.size	u8x8_d_ssd1318_128x96_xcp_init_seq, 53
+ 484              	u8x8_d_ssd1318_128x96_xcp_init_seq:
+ 485 0078 18       		.byte	24
+ 486 0079 15       		.byte	21
+ 487 007a FD       		.byte	-3
+ 488 007b 16       		.byte	22
+ 489 007c 12       		.byte	18
+ 490 007d 15       		.byte	21
+ 491 007e AE       		.byte	-82
+ 492 007f 15       		.byte	21
+ 493 0080 AD       		.byte	-83
+ 494 0081 16       		.byte	22
+ 495 0082 D0       		.byte	-48
+ 496 0083 15       		.byte	21
+ 497 0084 A8       		.byte	-88
+ 498 0085 16       		.byte	22
+ 499 0086 5F       		.byte	95
+ 500 0087 15       		.byte	21
+ 501 0088 D3       		.byte	-45
+ 502 0089 16       		.byte	22
+ 503 008a 00       		.byte	0
+ 504 008b 15       		.byte	21
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 16
+
+
+ 505 008c A2       		.byte	-94
+ 506 008d 16       		.byte	22
+ 507 008e 00       		.byte	0
+ 508 008f 15       		.byte	21
+ 509 0090 A1       		.byte	-95
+ 510 0091 15       		.byte	21
+ 511 0092 C0       		.byte	-64
+ 512 0093 15       		.byte	21
+ 513 0094 DA       		.byte	-38
+ 514 0095 16       		.byte	22
+ 515 0096 12       		.byte	18
+ 516 0097 15       		.byte	21
+ 517 0098 81       		.byte	-127
+ 518 0099 16       		.byte	22
+ 519 009a 0F       		.byte	15
+ 520 009b 15       		.byte	21
+ 521 009c D5       		.byte	-43
+ 522 009d 16       		.byte	22
+ 523 009e D1       		.byte	-47
+ 524 009f 15       		.byte	21
+ 525 00a0 D9       		.byte	-39
+ 526 00a1 16       		.byte	22
+ 527 00a2 22       		.byte	34
+ 528 00a3 15       		.byte	21
+ 529 00a4 DB       		.byte	-37
+ 530 00a5 16       		.byte	22
+ 531 00a6 30       		.byte	48
+ 532 00a7 15       		.byte	21
+ 533 00a8 A4       		.byte	-92
+ 534 00a9 15       		.byte	21
+ 535 00aa A6       		.byte	-90
+ 536 00ab 19       		.byte	25
+ 537 00ac FF       		.byte	-1
+ 538              		.text
+ 539              	.Letext0:
+ 540              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 541              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 542              		.file 4 "..\\u8g2\\csrc\\u8x8.h"
+ 543              		.section	.debug_info,"",%progbits
+ 544              	.Ldebug_info0:
+ 545 0000 10080000 		.4byte	0x810
+ 546 0004 0400     		.2byte	0x4
+ 547 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 548 000a 04       		.byte	0x4
+ 549 000b 01       		.uleb128 0x1
+ 550 000c B1050000 		.4byte	.LASF86
+ 551 0010 0C       		.byte	0xc
+ 552 0011 20050000 		.4byte	.LASF87
+ 553 0015 5A010000 		.4byte	.LASF88
+ 554 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 555 001d 00000000 		.4byte	0
+ 556 0021 00000000 		.4byte	.Ldebug_line0
+ 557 0025 02       		.uleb128 0x2
+ 558 0026 01       		.byte	0x1
+ 559 0027 06       		.byte	0x6
+ 560 0028 56030000 		.4byte	.LASF0
+ 561 002c 03       		.uleb128 0x3
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 17
+
+
+ 562 002d E5020000 		.4byte	.LASF3
+ 563 0031 02       		.byte	0x2
+ 564 0032 1D       		.byte	0x1d
+ 565 0033 37000000 		.4byte	0x37
+ 566 0037 02       		.uleb128 0x2
+ 567 0038 01       		.byte	0x1
+ 568 0039 08       		.byte	0x8
+ 569 003a 25030000 		.4byte	.LASF1
+ 570 003e 02       		.uleb128 0x2
+ 571 003f 02       		.byte	0x2
+ 572 0040 05       		.byte	0x5
+ 573 0041 7F000000 		.4byte	.LASF2
+ 574 0045 03       		.uleb128 0x3
+ 575 0046 20010000 		.4byte	.LASF4
+ 576 004a 02       		.byte	0x2
+ 577 004b 2B       		.byte	0x2b
+ 578 004c 50000000 		.4byte	0x50
+ 579 0050 02       		.uleb128 0x2
+ 580 0051 02       		.byte	0x2
+ 581 0052 07       		.byte	0x7
+ 582 0053 2E040000 		.4byte	.LASF5
+ 583 0057 02       		.uleb128 0x2
+ 584 0058 04       		.byte	0x4
+ 585 0059 05       		.byte	0x5
+ 586 005a B1020000 		.4byte	.LASF6
+ 587 005e 03       		.uleb128 0x3
+ 588 005f 15010000 		.4byte	.LASF7
+ 589 0063 02       		.byte	0x2
+ 590 0064 41       		.byte	0x41
+ 591 0065 69000000 		.4byte	0x69
+ 592 0069 02       		.uleb128 0x2
+ 593 006a 04       		.byte	0x4
+ 594 006b 07       		.byte	0x7
+ 595 006c E7040000 		.4byte	.LASF8
+ 596 0070 02       		.uleb128 0x2
+ 597 0071 08       		.byte	0x8
+ 598 0072 05       		.byte	0x5
+ 599 0073 35020000 		.4byte	.LASF9
+ 600 0077 02       		.uleb128 0x2
+ 601 0078 08       		.byte	0x8
+ 602 0079 07       		.byte	0x7
+ 603 007a 62030000 		.4byte	.LASF10
+ 604 007e 04       		.uleb128 0x4
+ 605 007f 04       		.byte	0x4
+ 606 0080 05       		.byte	0x5
+ 607 0081 696E7400 		.ascii	"int\000"
+ 608 0085 02       		.uleb128 0x2
+ 609 0086 04       		.byte	0x4
+ 610 0087 07       		.byte	0x7
+ 611 0088 93030000 		.4byte	.LASF11
+ 612 008c 03       		.uleb128 0x3
+ 613 008d A5010000 		.4byte	.LASF12
+ 614 0091 03       		.byte	0x3
+ 615 0092 18       		.byte	0x18
+ 616 0093 2C000000 		.4byte	0x2c
+ 617 0097 03       		.uleb128 0x3
+ 618 0098 A0030000 		.4byte	.LASF13
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 18
+
+
+ 619 009c 03       		.byte	0x3
+ 620 009d 24       		.byte	0x24
+ 621 009e 45000000 		.4byte	0x45
+ 622 00a2 03       		.uleb128 0x3
+ 623 00a3 79030000 		.4byte	.LASF14
+ 624 00a7 03       		.byte	0x3
+ 625 00a8 30       		.byte	0x30
+ 626 00a9 5E000000 		.4byte	0x5e
+ 627 00ad 05       		.uleb128 0x5
+ 628 00ae 04       		.byte	0x4
+ 629 00af 02       		.uleb128 0x2
+ 630 00b0 08       		.byte	0x8
+ 631 00b1 04       		.byte	0x4
+ 632 00b2 0D030000 		.4byte	.LASF15
+ 633 00b6 03       		.uleb128 0x3
+ 634 00b7 EE030000 		.4byte	.LASF16
+ 635 00bb 04       		.byte	0x4
+ 636 00bc CD       		.byte	0xcd
+ 637 00bd C1000000 		.4byte	0xc1
+ 638 00c1 06       		.uleb128 0x6
+ 639 00c2 BF040000 		.4byte	.LASF37
+ 640 00c6 2C       		.byte	0x2c
+ 641 00c7 04       		.byte	0x4
+ 642 00c8 5001     		.2byte	0x150
+ 643 00ca C6010000 		.4byte	0x1c6
+ 644 00ce 07       		.uleb128 0x7
+ 645 00cf 8E040000 		.4byte	.LASF17
+ 646 00d3 04       		.byte	0x4
+ 647 00d4 5201     		.2byte	0x152
+ 648 00d6 74030000 		.4byte	0x374
+ 649 00da 00       		.byte	0
+ 650 00db 07       		.uleb128 0x7
+ 651 00dc 66060000 		.4byte	.LASF18
+ 652 00e0 04       		.byte	0x4
+ 653 00e1 5301     		.2byte	0x153
+ 654 00e3 49030000 		.4byte	0x349
+ 655 00e7 04       		.byte	0x4
+ 656 00e8 07       		.uleb128 0x7
+ 657 00e9 EF020000 		.4byte	.LASF19
+ 658 00ed 04       		.byte	0x4
+ 659 00ee 5401     		.2byte	0x154
+ 660 00f0 14030000 		.4byte	0x314
+ 661 00f4 08       		.byte	0x8
+ 662 00f5 07       		.uleb128 0x7
+ 663 00f6 9E050000 		.4byte	.LASF20
+ 664 00fa 04       		.byte	0x4
+ 665 00fb 5501     		.2byte	0x155
+ 666 00fd 14030000 		.4byte	0x314
+ 667 0101 0C       		.byte	0xc
+ 668 0102 07       		.uleb128 0x7
+ 669 0103 F9040000 		.4byte	.LASF21
+ 670 0107 04       		.byte	0x4
+ 671 0108 5601     		.2byte	0x156
+ 672 010a 14030000 		.4byte	0x314
+ 673 010e 10       		.byte	0x10
+ 674 010f 07       		.uleb128 0x7
+ 675 0110 89000000 		.4byte	.LASF22
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 19
+
+
+ 676 0114 04       		.byte	0x4
+ 677 0115 5701     		.2byte	0x157
+ 678 0117 14030000 		.4byte	0x314
+ 679 011b 14       		.byte	0x14
+ 680 011c 07       		.uleb128 0x7
+ 681 011d EE010000 		.4byte	.LASF23
+ 682 0121 04       		.byte	0x4
+ 683 0122 5801     		.2byte	0x158
+ 684 0124 A2000000 		.4byte	0xa2
+ 685 0128 18       		.byte	0x18
+ 686 0129 07       		.uleb128 0x7
+ 687 012a 66000000 		.4byte	.LASF24
+ 688 012e 04       		.byte	0x4
+ 689 012f 5901     		.2byte	0x159
+ 690 0131 7F030000 		.4byte	0x37f
+ 691 0135 1C       		.byte	0x1c
+ 692 0136 07       		.uleb128 0x7
+ 693 0137 50050000 		.4byte	.LASF25
+ 694 013b 04       		.byte	0x4
+ 695 013c 5A01     		.2byte	0x15a
+ 696 013e 97000000 		.4byte	0x97
+ 697 0142 20       		.byte	0x20
+ 698 0143 07       		.uleb128 0x7
+ 699 0144 25000000 		.4byte	.LASF26
+ 700 0148 04       		.byte	0x4
+ 701 0149 5B01     		.2byte	0x15b
+ 702 014b 8C000000 		.4byte	0x8c
+ 703 014f 22       		.byte	0x22
+ 704 0150 07       		.uleb128 0x7
+ 705 0151 2E000000 		.4byte	.LASF27
+ 706 0155 04       		.byte	0x4
+ 707 0156 5C01     		.2byte	0x15c
+ 708 0158 8C000000 		.4byte	0x8c
+ 709 015c 23       		.byte	0x23
+ 710 015d 07       		.uleb128 0x7
+ 711 015e 14050000 		.4byte	.LASF28
+ 712 0162 04       		.byte	0x4
+ 713 0163 5D01     		.2byte	0x15d
+ 714 0165 8C000000 		.4byte	0x8c
+ 715 0169 24       		.byte	0x24
+ 716 016a 07       		.uleb128 0x7
+ 717 016b 6F050000 		.4byte	.LASF29
+ 718 016f 04       		.byte	0x4
+ 719 0170 6001     		.2byte	0x160
+ 720 0172 8C000000 		.4byte	0x8c
+ 721 0176 25       		.byte	0x25
+ 722 0177 07       		.uleb128 0x7
+ 723 0178 B4040000 		.4byte	.LASF30
+ 724 017c 04       		.byte	0x4
+ 725 017d 6201     		.2byte	0x162
+ 726 017f 8C000000 		.4byte	0x8c
+ 727 0183 26       		.byte	0x26
+ 728 0184 07       		.uleb128 0x7
+ 729 0185 43020000 		.4byte	.LASF31
+ 730 0189 04       		.byte	0x4
+ 731 018a 6301     		.2byte	0x163
+ 732 018c 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 20
+
+
+ 733 0190 27       		.byte	0x27
+ 734 0191 07       		.uleb128 0x7
+ 735 0192 3F060000 		.4byte	.LASF32
+ 736 0196 04       		.byte	0x4
+ 737 0197 6401     		.2byte	0x164
+ 738 0199 8C000000 		.4byte	0x8c
+ 739 019d 28       		.byte	0x28
+ 740 019e 07       		.uleb128 0x7
+ 741 019f 1D020000 		.4byte	.LASF33
+ 742 01a3 04       		.byte	0x4
+ 743 01a4 6501     		.2byte	0x165
+ 744 01a6 8C000000 		.4byte	0x8c
+ 745 01aa 29       		.byte	0x29
+ 746 01ab 07       		.uleb128 0x7
+ 747 01ac 6E040000 		.4byte	.LASF34
+ 748 01b0 04       		.byte	0x4
+ 749 01b1 6601     		.2byte	0x166
+ 750 01b3 8C000000 		.4byte	0x8c
+ 751 01b7 2A       		.byte	0x2a
+ 752 01b8 07       		.uleb128 0x7
+ 753 01b9 6B000000 		.4byte	.LASF35
+ 754 01bd 04       		.byte	0x4
+ 755 01be 6701     		.2byte	0x167
+ 756 01c0 8C000000 		.4byte	0x8c
+ 757 01c4 2B       		.byte	0x2b
+ 758 01c5 00       		.byte	0
+ 759 01c6 03       		.uleb128 0x3
+ 760 01c7 09020000 		.4byte	.LASF36
+ 761 01cb 04       		.byte	0x4
+ 762 01cc CE       		.byte	0xce
+ 763 01cd D1010000 		.4byte	0x1d1
+ 764 01d1 08       		.uleb128 0x8
+ 765 01d2 A9030000 		.4byte	.LASF38
+ 766 01d6 18       		.byte	0x18
+ 767 01d7 04       		.byte	0x4
+ 768 01d8 E7       		.byte	0xe7
+ 769 01d9 CC020000 		.4byte	0x2cc
+ 770 01dd 09       		.uleb128 0x9
+ 771 01de 54000000 		.4byte	.LASF39
+ 772 01e2 04       		.byte	0x4
+ 773 01e3 EB       		.byte	0xeb
+ 774 01e4 8C000000 		.4byte	0x8c
+ 775 01e8 00       		.byte	0
+ 776 01e9 09       		.uleb128 0x9
+ 777 01ea 01050000 		.4byte	.LASF40
+ 778 01ee 04       		.byte	0x4
+ 779 01ef EC       		.byte	0xec
+ 780 01f0 8C000000 		.4byte	0x8c
+ 781 01f4 01       		.byte	0x1
+ 782 01f5 09       		.uleb128 0x9
+ 783 01f6 AD010000 		.4byte	.LASF41
+ 784 01fa 04       		.byte	0x4
+ 785 01fb EE       		.byte	0xee
+ 786 01fc 8C000000 		.4byte	0x8c
+ 787 0200 02       		.byte	0x2
+ 788 0201 09       		.uleb128 0x9
+ 789 0202 6E060000 		.4byte	.LASF42
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 21
+
+
+ 790 0206 04       		.byte	0x4
+ 791 0207 EF       		.byte	0xef
+ 792 0208 8C000000 		.4byte	0x8c
+ 793 020c 03       		.byte	0x3
+ 794 020d 09       		.uleb128 0x9
+ 795 020e D9030000 		.4byte	.LASF43
+ 796 0212 04       		.byte	0x4
+ 797 0213 F0       		.byte	0xf0
+ 798 0214 8C000000 		.4byte	0x8c
+ 799 0218 04       		.byte	0x4
+ 800 0219 09       		.uleb128 0x9
+ 801 021a 02010000 		.4byte	.LASF44
+ 802 021e 04       		.byte	0x4
+ 803 021f F1       		.byte	0xf1
+ 804 0220 8C000000 		.4byte	0x8c
+ 805 0224 05       		.byte	0x5
+ 806 0225 09       		.uleb128 0x9
+ 807 0226 D0000000 		.4byte	.LASF45
+ 808 022a 04       		.byte	0x4
+ 809 022b F8       		.byte	0xf8
+ 810 022c 8C000000 		.4byte	0x8c
+ 811 0230 06       		.byte	0x6
+ 812 0231 09       		.uleb128 0x9
+ 813 0232 72020000 		.4byte	.LASF46
+ 814 0236 04       		.byte	0x4
+ 815 0237 FC       		.byte	0xfc
+ 816 0238 8C000000 		.4byte	0x8c
+ 817 023c 07       		.byte	0x7
+ 818 023d 09       		.uleb128 0x9
+ 819 023e 21040000 		.4byte	.LASF47
+ 820 0242 04       		.byte	0x4
+ 821 0243 FF       		.byte	0xff
+ 822 0244 A2000000 		.4byte	0xa2
+ 823 0248 08       		.byte	0x8
+ 824 0249 07       		.uleb128 0x7
+ 825 024a 43000000 		.4byte	.LASF48
+ 826 024e 04       		.byte	0x4
+ 827 024f 0901     		.2byte	0x109
+ 828 0251 8C000000 		.4byte	0x8c
+ 829 0255 0C       		.byte	0xc
+ 830 0256 07       		.uleb128 0x7
+ 831 0257 0C040000 		.4byte	.LASF49
+ 832 025b 04       		.byte	0x4
+ 833 025c 0C01     		.2byte	0x10c
+ 834 025e 8C000000 		.4byte	0x8c
+ 835 0262 0D       		.byte	0xd
+ 836 0263 07       		.uleb128 0x7
+ 837 0264 FA020000 		.4byte	.LASF50
+ 838 0268 04       		.byte	0x4
+ 839 0269 1201     		.2byte	0x112
+ 840 026b 8C000000 		.4byte	0x8c
+ 841 026f 0E       		.byte	0xe
+ 842 0270 07       		.uleb128 0x7
+ 843 0271 90010000 		.4byte	.LASF51
+ 844 0275 04       		.byte	0x4
+ 845 0276 1401     		.2byte	0x114
+ 846 0278 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 22
+
+
+ 847 027c 0F       		.byte	0xf
+ 848 027d 07       		.uleb128 0x7
+ 849 027e 9B000000 		.4byte	.LASF52
+ 850 0282 04       		.byte	0x4
+ 851 0283 1701     		.2byte	0x117
+ 852 0285 8C000000 		.4byte	0x8c
+ 853 0289 10       		.byte	0x10
+ 854 028a 07       		.uleb128 0x7
+ 855 028b 19030000 		.4byte	.LASF53
+ 856 028f 04       		.byte	0x4
+ 857 0290 1801     		.2byte	0x118
+ 858 0292 8C000000 		.4byte	0x8c
+ 859 0296 11       		.byte	0x11
+ 860 0297 07       		.uleb128 0x7
+ 861 0298 F8010000 		.4byte	.LASF54
+ 862 029c 04       		.byte	0x4
+ 863 029d 1A01     		.2byte	0x11a
+ 864 029f 8C000000 		.4byte	0x8c
+ 865 02a3 12       		.byte	0x12
+ 866 02a4 07       		.uleb128 0x7
+ 867 02a5 3E050000 		.4byte	.LASF55
+ 868 02a9 04       		.byte	0x4
+ 869 02aa 1B01     		.2byte	0x11b
+ 870 02ac 8C000000 		.4byte	0x8c
+ 871 02b0 13       		.byte	0x13
+ 872 02b1 07       		.uleb128 0x7
+ 873 02b2 A8040000 		.4byte	.LASF56
+ 874 02b6 04       		.byte	0x4
+ 875 02b7 2301     		.2byte	0x123
+ 876 02b9 97000000 		.4byte	0x97
+ 877 02bd 14       		.byte	0x14
+ 878 02be 07       		.uleb128 0x7
+ 879 02bf 9B040000 		.4byte	.LASF57
+ 880 02c3 04       		.byte	0x4
+ 881 02c4 2401     		.2byte	0x124
+ 882 02c6 97000000 		.4byte	0x97
+ 883 02ca 16       		.byte	0x16
+ 884 02cb 00       		.byte	0
+ 885 02cc 03       		.uleb128 0x3
+ 886 02cd A5050000 		.4byte	.LASF58
+ 887 02d1 04       		.byte	0x4
+ 888 02d2 CF       		.byte	0xcf
+ 889 02d3 D7020000 		.4byte	0x2d7
+ 890 02d7 08       		.uleb128 0x8
+ 891 02d8 82030000 		.4byte	.LASF59
+ 892 02dc 08       		.byte	0x8
+ 893 02dd 04       		.byte	0x4
+ 894 02de DE       		.byte	0xde
+ 895 02df 14030000 		.4byte	0x314
+ 896 02e3 09       		.uleb128 0x9
+ 897 02e4 CB010000 		.4byte	.LASF60
+ 898 02e8 04       		.byte	0x4
+ 899 02e9 E0       		.byte	0xe0
+ 900 02ea 6E030000 		.4byte	0x36e
+ 901 02ee 00       		.byte	0
+ 902 02ef 0A       		.uleb128 0xa
+ 903 02f0 636E7400 		.ascii	"cnt\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 23
+
+
+ 904 02f4 04       		.byte	0x4
+ 905 02f5 E1       		.byte	0xe1
+ 906 02f6 8C000000 		.4byte	0x8c
+ 907 02fa 04       		.byte	0x4
+ 908 02fb 09       		.uleb128 0x9
+ 909 02fc DF020000 		.4byte	.LASF61
+ 910 0300 04       		.byte	0x4
+ 911 0301 E2       		.byte	0xe2
+ 912 0302 8C000000 		.4byte	0x8c
+ 913 0306 05       		.byte	0x5
+ 914 0307 09       		.uleb128 0x9
+ 915 0308 CB040000 		.4byte	.LASF62
+ 916 030c 04       		.byte	0x4
+ 917 030d E3       		.byte	0xe3
+ 918 030e 8C000000 		.4byte	0x8c
+ 919 0312 06       		.byte	0x6
+ 920 0313 00       		.byte	0
+ 921 0314 03       		.uleb128 0x3
+ 922 0315 5A060000 		.4byte	.LASF63
+ 923 0319 04       		.byte	0x4
+ 924 031a D1       		.byte	0xd1
+ 925 031b 1F030000 		.4byte	0x31f
+ 926 031f 0B       		.uleb128 0xb
+ 927 0320 04       		.byte	0x4
+ 928 0321 25030000 		.4byte	0x325
+ 929 0325 0C       		.uleb128 0xc
+ 930 0326 8C000000 		.4byte	0x8c
+ 931 032a 43030000 		.4byte	0x343
+ 932 032e 0D       		.uleb128 0xd
+ 933 032f 43030000 		.4byte	0x343
+ 934 0333 0D       		.uleb128 0xd
+ 935 0334 8C000000 		.4byte	0x8c
+ 936 0338 0D       		.uleb128 0xd
+ 937 0339 8C000000 		.4byte	0x8c
+ 938 033d 0D       		.uleb128 0xd
+ 939 033e AD000000 		.4byte	0xad
+ 940 0342 00       		.byte	0
+ 941 0343 0B       		.uleb128 0xb
+ 942 0344 04       		.byte	0x4
+ 943 0345 B6000000 		.4byte	0xb6
+ 944 0349 03       		.uleb128 0x3
+ 945 034a 41040000 		.4byte	.LASF64
+ 946 034e 04       		.byte	0x4
+ 947 034f D2       		.byte	0xd2
+ 948 0350 54030000 		.4byte	0x354
+ 949 0354 0B       		.uleb128 0xb
+ 950 0355 04       		.byte	0x4
+ 951 0356 5A030000 		.4byte	0x35a
+ 952 035a 0C       		.uleb128 0xc
+ 953 035b 97000000 		.4byte	0x97
+ 954 035f 6E030000 		.4byte	0x36e
+ 955 0363 0D       		.uleb128 0xd
+ 956 0364 43030000 		.4byte	0x343
+ 957 0368 0D       		.uleb128 0xd
+ 958 0369 8C000000 		.4byte	0x8c
+ 959 036d 00       		.byte	0
+ 960 036e 0B       		.uleb128 0xb
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 24
+
+
+ 961 036f 04       		.byte	0x4
+ 962 0370 8C000000 		.4byte	0x8c
+ 963 0374 0B       		.uleb128 0xb
+ 964 0375 04       		.byte	0x4
+ 965 0376 7A030000 		.4byte	0x37a
+ 966 037a 0E       		.uleb128 0xe
+ 967 037b C6010000 		.4byte	0x1c6
+ 968 037f 0B       		.uleb128 0xb
+ 969 0380 04       		.byte	0x4
+ 970 0381 85030000 		.4byte	0x385
+ 971 0385 0E       		.uleb128 0xe
+ 972 0386 8C000000 		.4byte	0x8c
+ 973 038a 0F       		.uleb128 0xf
+ 974 038b F5030000 		.4byte	.LASF89
+ 975 038f 01       		.byte	0x1
+ 976 0390 AC       		.byte	0xac
+ 977 0391 8C000000 		.4byte	0x8c
+ 978 0395 00000000 		.4byte	.LFB0
+ 979 0399 E4000000 		.4byte	.LFE0-.LFB0
+ 980 039d 01       		.uleb128 0x1
+ 981 039e 9C       		.byte	0x9c
+ 982 039f 4B050000 		.4byte	0x54b
+ 983 03a3 10       		.uleb128 0x10
+ 984 03a4 C6010000 		.4byte	.LASF65
+ 985 03a8 01       		.byte	0x1
+ 986 03a9 AC       		.byte	0xac
+ 987 03aa 43030000 		.4byte	0x343
+ 988 03ae 00000000 		.4byte	.LLST0
+ 989 03b2 11       		.uleb128 0x11
+ 990 03b3 6D736700 		.ascii	"msg\000"
+ 991 03b7 01       		.byte	0x1
+ 992 03b8 AC       		.byte	0xac
+ 993 03b9 8C000000 		.4byte	0x8c
+ 994 03bd B0000000 		.4byte	.LLST1
+ 995 03c1 10       		.uleb128 0x10
+ 996 03c2 D4010000 		.4byte	.LASF66
+ 997 03c6 01       		.byte	0x1
+ 998 03c7 AC       		.byte	0xac
+ 999 03c8 8C000000 		.4byte	0x8c
+ 1000 03cc D1000000 		.4byte	.LLST2
+ 1001 03d0 10       		.uleb128 0x10
+ 1002 03d1 4C000000 		.4byte	.LASF67
+ 1003 03d5 01       		.byte	0x1
+ 1004 03d6 AC       		.byte	0xac
+ 1005 03d7 AD000000 		.4byte	0xad
+ 1006 03db 90010000 		.4byte	.LLST3
+ 1007 03df 12       		.uleb128 0x12
+ 1008 03e0 7800     		.ascii	"x\000"
+ 1009 03e2 01       		.byte	0x1
+ 1010 03e3 AE       		.byte	0xae
+ 1011 03e4 8C000000 		.4byte	0x8c
+ 1012 03e8 BC010000 		.4byte	.LLST4
+ 1013 03ec 12       		.uleb128 0x12
+ 1014 03ed 6300     		.ascii	"c\000"
+ 1015 03ef 01       		.byte	0x1
+ 1016 03f0 AE       		.byte	0xae
+ 1017 03f1 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 25
+
+
+ 1018 03f5 02020000 		.4byte	.LLST5
+ 1019 03f9 12       		.uleb128 0x12
+ 1020 03fa 70747200 		.ascii	"ptr\000"
+ 1021 03fe 01       		.byte	0x1
+ 1022 03ff AF       		.byte	0xaf
+ 1023 0400 6E030000 		.4byte	0x36e
+ 1024 0404 21020000 		.4byte	.LLST6
+ 1025 0408 13       		.uleb128 0x13
+ 1026 0409 20000000 		.4byte	.LVL3
+ 1027 040d B3070000 		.4byte	0x7b3
+ 1028 0411 1F040000 		.4byte	0x41f
+ 1029 0415 14       		.uleb128 0x14
+ 1030 0416 01       		.uleb128 0x1
+ 1031 0417 51       		.byte	0x51
+ 1032 0418 05       		.uleb128 0x5
+ 1033 0419 03       		.byte	0x3
+ 1034 041a 00000000 		.4byte	.LANCHOR0
+ 1035 041e 00       		.byte	0
+ 1036 041f 13       		.uleb128 0x13
+ 1037 0420 2A000000 		.4byte	.LVL5
+ 1038 0424 B3070000 		.4byte	0x7b3
+ 1039 0428 36040000 		.4byte	0x436
+ 1040 042c 14       		.uleb128 0x14
+ 1041 042d 01       		.uleb128 0x1
+ 1042 042e 51       		.byte	0x51
+ 1043 042f 05       		.uleb128 0x5
+ 1044 0430 03       		.byte	0x3
+ 1045 0431 08000000 		.4byte	.LANCHOR0+8
+ 1046 0435 00       		.byte	0
+ 1047 0436 13       		.uleb128 0x13
+ 1048 0437 36000000 		.4byte	.LVL7
+ 1049 043b B3070000 		.4byte	0x7b3
+ 1050 043f 4D040000 		.4byte	0x44d
+ 1051 0443 14       		.uleb128 0x14
+ 1052 0444 01       		.uleb128 0x1
+ 1053 0445 51       		.byte	0x51
+ 1054 0446 05       		.uleb128 0x5
+ 1055 0447 03       		.byte	0x3
+ 1056 0448 10000000 		.4byte	.LANCHOR0+16
+ 1057 044c 00       		.byte	0
+ 1058 044d 13       		.uleb128 0x13
+ 1059 044e 48000000 		.4byte	.LVL9
+ 1060 0452 B3070000 		.4byte	0x7b3
+ 1061 0456 64040000 		.4byte	0x464
+ 1062 045a 14       		.uleb128 0x14
+ 1063 045b 01       		.uleb128 0x1
+ 1064 045c 51       		.byte	0x51
+ 1065 045d 05       		.uleb128 0x5
+ 1066 045e 03       		.byte	0x3
+ 1067 045f 18000000 		.4byte	.LANCHOR0+24
+ 1068 0463 00       		.byte	0
+ 1069 0464 15       		.uleb128 0x15
+ 1070 0465 58000000 		.4byte	.LVL11
+ 1071 0469 BF070000 		.4byte	0x7bf
+ 1072 046d 13       		.uleb128 0x13
+ 1073 046e 60000000 		.4byte	.LVL12
+ 1074 0472 CB070000 		.4byte	0x7cb
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 26
+
+
+ 1075 0476 87040000 		.4byte	0x487
+ 1076 047a 14       		.uleb128 0x14
+ 1077 047b 01       		.uleb128 0x1
+ 1078 047c 50       		.byte	0x50
+ 1079 047d 02       		.uleb128 0x2
+ 1080 047e 75       		.byte	0x75
+ 1081 047f 00       		.sleb128 0
+ 1082 0480 14       		.uleb128 0x14
+ 1083 0481 01       		.uleb128 0x1
+ 1084 0482 51       		.byte	0x51
+ 1085 0483 02       		.uleb128 0x2
+ 1086 0484 09       		.byte	0x9
+ 1087 0485 81       		.byte	0x81
+ 1088 0486 00       		.byte	0
+ 1089 0487 13       		.uleb128 0x13
+ 1090 0488 68000000 		.4byte	.LVL13
+ 1091 048c D7070000 		.4byte	0x7d7
+ 1092 0490 A1040000 		.4byte	0x4a1
+ 1093 0494 14       		.uleb128 0x14
+ 1094 0495 01       		.uleb128 0x1
+ 1095 0496 50       		.byte	0x50
+ 1096 0497 02       		.uleb128 0x2
+ 1097 0498 75       		.byte	0x75
+ 1098 0499 00       		.sleb128 0
+ 1099 049a 14       		.uleb128 0x14
+ 1100 049b 01       		.uleb128 0x1
+ 1101 049c 51       		.byte	0x51
+ 1102 049d 02       		.uleb128 0x2
+ 1103 049e 74       		.byte	0x74
+ 1104 049f 00       		.sleb128 0
+ 1105 04a0 00       		.byte	0
+ 1106 04a1 13       		.uleb128 0x13
+ 1107 04a2 6E000000 		.4byte	.LVL14
+ 1108 04a6 E3070000 		.4byte	0x7e3
+ 1109 04aa B5040000 		.4byte	0x4b5
+ 1110 04ae 14       		.uleb128 0x14
+ 1111 04af 01       		.uleb128 0x1
+ 1112 04b0 50       		.byte	0x50
+ 1113 04b1 02       		.uleb128 0x2
+ 1114 04b2 75       		.byte	0x75
+ 1115 04b3 00       		.sleb128 0
+ 1116 04b4 00       		.byte	0
+ 1117 04b5 15       		.uleb128 0x15
+ 1118 04b6 76000000 		.4byte	.LVL16
+ 1119 04ba BF070000 		.4byte	0x7bf
+ 1120 04be 13       		.uleb128 0x13
+ 1121 04bf 8C000000 		.4byte	.LVL22
+ 1122 04c3 CB070000 		.4byte	0x7cb
+ 1123 04c7 D8040000 		.4byte	0x4d8
+ 1124 04cb 14       		.uleb128 0x14
+ 1125 04cc 01       		.uleb128 0x1
+ 1126 04cd 50       		.byte	0x50
+ 1127 04ce 02       		.uleb128 0x2
+ 1128 04cf 75       		.byte	0x75
+ 1129 04d0 00       		.sleb128 0
+ 1130 04d1 14       		.uleb128 0x14
+ 1131 04d2 01       		.uleb128 0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 27
+
+
+ 1132 04d3 51       		.byte	0x51
+ 1133 04d4 02       		.uleb128 0x2
+ 1134 04d5 08       		.byte	0x8
+ 1135 04d6 40       		.byte	0x40
+ 1136 04d7 00       		.byte	0
+ 1137 04d8 13       		.uleb128 0x13
+ 1138 04d9 98000000 		.4byte	.LVL23
+ 1139 04dd CB070000 		.4byte	0x7cb
+ 1140 04e1 F6040000 		.4byte	0x4f6
+ 1141 04e5 14       		.uleb128 0x14
+ 1142 04e6 01       		.uleb128 0x1
+ 1143 04e7 50       		.byte	0x50
+ 1144 04e8 02       		.uleb128 0x2
+ 1145 04e9 75       		.byte	0x75
+ 1146 04ea 00       		.sleb128 0
+ 1147 04eb 14       		.uleb128 0x14
+ 1148 04ec 01       		.uleb128 0x1
+ 1149 04ed 51       		.byte	0x51
+ 1150 04ee 06       		.uleb128 0x6
+ 1151 04ef 77       		.byte	0x77
+ 1152 04f0 00       		.sleb128 0
+ 1153 04f1 34       		.byte	0x34
+ 1154 04f2 25       		.byte	0x25
+ 1155 04f3 40       		.byte	0x40
+ 1156 04f4 21       		.byte	0x21
+ 1157 04f5 00       		.byte	0
+ 1158 04f6 13       		.uleb128 0x13
+ 1159 04f7 A2000000 		.4byte	.LVL24
+ 1160 04fb D7070000 		.4byte	0x7d7
+ 1161 04ff 12050000 		.4byte	0x512
+ 1162 0503 14       		.uleb128 0x14
+ 1163 0504 01       		.uleb128 0x1
+ 1164 0505 50       		.byte	0x50
+ 1165 0506 02       		.uleb128 0x2
+ 1166 0507 75       		.byte	0x75
+ 1167 0508 00       		.sleb128 0
+ 1168 0509 14       		.uleb128 0x14
+ 1169 050a 01       		.uleb128 0x1
+ 1170 050b 51       		.byte	0x51
+ 1171 050c 04       		.uleb128 0x4
+ 1172 050d 77       		.byte	0x77
+ 1173 050e 00       		.sleb128 0
+ 1174 050f 3F       		.byte	0x3f
+ 1175 0510 1A       		.byte	0x1a
+ 1176 0511 00       		.byte	0
+ 1177 0512 13       		.uleb128 0x13
+ 1178 0513 AE000000 		.4byte	.LVL25
+ 1179 0517 D7070000 		.4byte	0x7d7
+ 1180 051b 26050000 		.4byte	0x526
+ 1181 051f 14       		.uleb128 0x14
+ 1182 0520 01       		.uleb128 0x1
+ 1183 0521 50       		.byte	0x50
+ 1184 0522 02       		.uleb128 0x2
+ 1185 0523 75       		.byte	0x75
+ 1186 0524 00       		.sleb128 0
+ 1187 0525 00       		.byte	0
+ 1188 0526 13       		.uleb128 0x13
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 28
+
+
+ 1189 0527 BE000000 		.4byte	.LVL28
+ 1190 052b EF070000 		.4byte	0x7ef
+ 1191 052f 3A050000 		.4byte	0x53a
+ 1192 0533 14       		.uleb128 0x14
+ 1193 0534 01       		.uleb128 0x1
+ 1194 0535 50       		.byte	0x50
+ 1195 0536 02       		.uleb128 0x2
+ 1196 0537 75       		.byte	0x75
+ 1197 0538 00       		.sleb128 0
+ 1198 0539 00       		.byte	0
+ 1199 053a 16       		.uleb128 0x16
+ 1200 053b CC000000 		.4byte	.LVL30
+ 1201 053f E3070000 		.4byte	0x7e3
+ 1202 0543 14       		.uleb128 0x14
+ 1203 0544 01       		.uleb128 0x1
+ 1204 0545 50       		.byte	0x50
+ 1205 0546 02       		.uleb128 0x2
+ 1206 0547 75       		.byte	0x75
+ 1207 0548 00       		.sleb128 0
+ 1208 0549 00       		.byte	0
+ 1209 054a 00       		.byte	0
+ 1210 054b 17       		.uleb128 0x17
+ 1211 054c D1040000 		.4byte	.LASF68
+ 1212 0550 01       		.byte	0x1
+ 1213 0551 1501     		.2byte	0x115
+ 1214 0553 8C000000 		.4byte	0x8c
+ 1215 0557 00000000 		.4byte	.LFB1
+ 1216 055b 44000000 		.4byte	.LFE1-.LFB1
+ 1217 055f 01       		.uleb128 0x1
+ 1218 0560 9C       		.byte	0x9c
+ 1219 0561 11060000 		.4byte	0x611
+ 1220 0565 18       		.uleb128 0x18
+ 1221 0566 C6010000 		.4byte	.LASF65
+ 1222 056a 01       		.byte	0x1
+ 1223 056b 1501     		.2byte	0x115
+ 1224 056d 43030000 		.4byte	0x343
+ 1225 0571 35020000 		.4byte	.LLST7
+ 1226 0575 19       		.uleb128 0x19
+ 1227 0576 6D736700 		.ascii	"msg\000"
+ 1228 057a 01       		.byte	0x1
+ 1229 057b 1501     		.2byte	0x115
+ 1230 057d 8C000000 		.4byte	0x8c
+ 1231 0581 61020000 		.4byte	.LLST8
+ 1232 0585 18       		.uleb128 0x18
+ 1233 0586 D4010000 		.4byte	.LASF66
+ 1234 058a 01       		.byte	0x1
+ 1235 058b 1501     		.2byte	0x115
+ 1236 058d 8C000000 		.4byte	0x8c
+ 1237 0591 82020000 		.4byte	.LLST9
+ 1238 0595 18       		.uleb128 0x18
+ 1239 0596 4C000000 		.4byte	.LASF67
+ 1240 059a 01       		.byte	0x1
+ 1241 059b 1501     		.2byte	0x115
+ 1242 059d AD000000 		.4byte	0xad
+ 1243 05a1 A3020000 		.4byte	.LLST10
+ 1244 05a5 13       		.uleb128 0x13
+ 1245 05a6 0A000000 		.4byte	.LVL35
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 29
+
+
+ 1246 05aa 8A030000 		.4byte	0x38a
+ 1247 05ae C6050000 		.4byte	0x5c6
+ 1248 05b2 14       		.uleb128 0x14
+ 1249 05b3 01       		.uleb128 0x1
+ 1250 05b4 50       		.byte	0x50
+ 1251 05b5 02       		.uleb128 0x2
+ 1252 05b6 75       		.byte	0x75
+ 1253 05b7 00       		.sleb128 0
+ 1254 05b8 14       		.uleb128 0x14
+ 1255 05b9 01       		.uleb128 0x1
+ 1256 05ba 51       		.byte	0x51
+ 1257 05bb 02       		.uleb128 0x2
+ 1258 05bc 74       		.byte	0x74
+ 1259 05bd 00       		.sleb128 0
+ 1260 05be 14       		.uleb128 0x14
+ 1261 05bf 01       		.uleb128 0x1
+ 1262 05c0 53       		.byte	0x53
+ 1263 05c1 03       		.uleb128 0x3
+ 1264 05c2 F3       		.byte	0xf3
+ 1265 05c3 01       		.uleb128 0x1
+ 1266 05c4 53       		.byte	0x53
+ 1267 05c5 00       		.byte	0
+ 1268 05c6 13       		.uleb128 0x13
+ 1269 05c7 1C000000 		.4byte	.LVL36
+ 1270 05cb FB070000 		.4byte	0x7fb
+ 1271 05cf DA050000 		.4byte	0x5da
+ 1272 05d3 14       		.uleb128 0x14
+ 1273 05d4 01       		.uleb128 0x1
+ 1274 05d5 50       		.byte	0x50
+ 1275 05d6 02       		.uleb128 0x2
+ 1276 05d7 75       		.byte	0x75
+ 1277 05d8 00       		.sleb128 0
+ 1278 05d9 00       		.byte	0
+ 1279 05da 13       		.uleb128 0x13
+ 1280 05db 24000000 		.4byte	.LVL37
+ 1281 05df B3070000 		.4byte	0x7b3
+ 1282 05e3 F7050000 		.4byte	0x5f7
+ 1283 05e7 14       		.uleb128 0x14
+ 1284 05e8 01       		.uleb128 0x1
+ 1285 05e9 50       		.byte	0x50
+ 1286 05ea 02       		.uleb128 0x2
+ 1287 05eb 75       		.byte	0x75
+ 1288 05ec 00       		.sleb128 0
+ 1289 05ed 14       		.uleb128 0x14
+ 1290 05ee 01       		.uleb128 0x1
+ 1291 05ef 51       		.byte	0x51
+ 1292 05f0 05       		.uleb128 0x5
+ 1293 05f1 03       		.byte	0x3
+ 1294 05f2 20000000 		.4byte	.LANCHOR0+32
+ 1295 05f6 00       		.byte	0
+ 1296 05f7 16       		.uleb128 0x16
+ 1297 05f8 30000000 		.4byte	.LVL38
+ 1298 05fc 07080000 		.4byte	0x807
+ 1299 0600 14       		.uleb128 0x14
+ 1300 0601 01       		.uleb128 0x1
+ 1301 0602 50       		.byte	0x50
+ 1302 0603 02       		.uleb128 0x2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 30
+
+
+ 1303 0604 75       		.byte	0x75
+ 1304 0605 00       		.sleb128 0
+ 1305 0606 14       		.uleb128 0x14
+ 1306 0607 01       		.uleb128 0x1
+ 1307 0608 51       		.byte	0x51
+ 1308 0609 05       		.uleb128 0x5
+ 1309 060a 03       		.byte	0x3
+ 1310 060b 60000000 		.4byte	.LANCHOR0+96
+ 1311 060f 00       		.byte	0
+ 1312 0610 00       		.byte	0
+ 1313 0611 17       		.uleb128 0x17
+ 1314 0612 2B010000 		.4byte	.LASF69
+ 1315 0616 01       		.byte	0x1
+ 1316 0617 2A01     		.2byte	0x12a
+ 1317 0619 8C000000 		.4byte	0x8c
+ 1318 061d 00000000 		.4byte	.LFB2
+ 1319 0621 44000000 		.4byte	.LFE2-.LFB2
+ 1320 0625 01       		.uleb128 0x1
+ 1321 0626 9C       		.byte	0x9c
+ 1322 0627 D7060000 		.4byte	0x6d7
+ 1323 062b 18       		.uleb128 0x18
+ 1324 062c C6010000 		.4byte	.LASF65
+ 1325 0630 01       		.byte	0x1
+ 1326 0631 2A01     		.2byte	0x12a
+ 1327 0633 43030000 		.4byte	0x343
+ 1328 0637 C4020000 		.4byte	.LLST11
+ 1329 063b 19       		.uleb128 0x19
+ 1330 063c 6D736700 		.ascii	"msg\000"
+ 1331 0640 01       		.byte	0x1
+ 1332 0641 2A01     		.2byte	0x12a
+ 1333 0643 8C000000 		.4byte	0x8c
+ 1334 0647 F0020000 		.4byte	.LLST12
+ 1335 064b 18       		.uleb128 0x18
+ 1336 064c D4010000 		.4byte	.LASF66
+ 1337 0650 01       		.byte	0x1
+ 1338 0651 2A01     		.2byte	0x12a
+ 1339 0653 8C000000 		.4byte	0x8c
+ 1340 0657 11030000 		.4byte	.LLST13
+ 1341 065b 18       		.uleb128 0x18
+ 1342 065c 4C000000 		.4byte	.LASF67
+ 1343 0660 01       		.byte	0x1
+ 1344 0661 2A01     		.2byte	0x12a
+ 1345 0663 AD000000 		.4byte	0xad
+ 1346 0667 32030000 		.4byte	.LLST14
+ 1347 066b 13       		.uleb128 0x13
+ 1348 066c 0A000000 		.4byte	.LVL41
+ 1349 0670 8A030000 		.4byte	0x38a
+ 1350 0674 8C060000 		.4byte	0x68c
+ 1351 0678 14       		.uleb128 0x14
+ 1352 0679 01       		.uleb128 0x1
+ 1353 067a 50       		.byte	0x50
+ 1354 067b 02       		.uleb128 0x2
+ 1355 067c 75       		.byte	0x75
+ 1356 067d 00       		.sleb128 0
+ 1357 067e 14       		.uleb128 0x14
+ 1358 067f 01       		.uleb128 0x1
+ 1359 0680 51       		.byte	0x51
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 31
+
+
+ 1360 0681 02       		.uleb128 0x2
+ 1361 0682 74       		.byte	0x74
+ 1362 0683 00       		.sleb128 0
+ 1363 0684 14       		.uleb128 0x14
+ 1364 0685 01       		.uleb128 0x1
+ 1365 0686 53       		.byte	0x53
+ 1366 0687 03       		.uleb128 0x3
+ 1367 0688 F3       		.byte	0xf3
+ 1368 0689 01       		.uleb128 0x1
+ 1369 068a 53       		.byte	0x53
+ 1370 068b 00       		.byte	0
+ 1371 068c 13       		.uleb128 0x13
+ 1372 068d 1C000000 		.4byte	.LVL42
+ 1373 0691 FB070000 		.4byte	0x7fb
+ 1374 0695 A0060000 		.4byte	0x6a0
+ 1375 0699 14       		.uleb128 0x14
+ 1376 069a 01       		.uleb128 0x1
+ 1377 069b 50       		.byte	0x50
+ 1378 069c 02       		.uleb128 0x2
+ 1379 069d 75       		.byte	0x75
+ 1380 069e 00       		.sleb128 0
+ 1381 069f 00       		.byte	0
+ 1382 06a0 13       		.uleb128 0x13
+ 1383 06a1 24000000 		.4byte	.LVL43
+ 1384 06a5 B3070000 		.4byte	0x7b3
+ 1385 06a9 BD060000 		.4byte	0x6bd
+ 1386 06ad 14       		.uleb128 0x14
+ 1387 06ae 01       		.uleb128 0x1
+ 1388 06af 50       		.byte	0x50
+ 1389 06b0 02       		.uleb128 0x2
+ 1390 06b1 75       		.byte	0x75
+ 1391 06b2 00       		.sleb128 0
+ 1392 06b3 14       		.uleb128 0x14
+ 1393 06b4 01       		.uleb128 0x1
+ 1394 06b5 51       		.byte	0x51
+ 1395 06b6 05       		.uleb128 0x5
+ 1396 06b7 03       		.byte	0x3
+ 1397 06b8 78000000 		.4byte	.LANCHOR0+120
+ 1398 06bc 00       		.byte	0
+ 1399 06bd 16       		.uleb128 0x16
+ 1400 06be 30000000 		.4byte	.LVL44
+ 1401 06c2 07080000 		.4byte	0x807
+ 1402 06c6 14       		.uleb128 0x14
+ 1403 06c7 01       		.uleb128 0x1
+ 1404 06c8 50       		.byte	0x50
+ 1405 06c9 02       		.uleb128 0x2
+ 1406 06ca 75       		.byte	0x75
+ 1407 06cb 00       		.sleb128 0
+ 1408 06cc 14       		.uleb128 0x14
+ 1409 06cd 01       		.uleb128 0x1
+ 1410 06ce 51       		.byte	0x51
+ 1411 06cf 05       		.uleb128 0x5
+ 1412 06d0 03       		.byte	0x3
+ 1413 06d1 60000000 		.4byte	.LANCHOR0+96
+ 1414 06d5 00       		.byte	0
+ 1415 06d6 00       		.byte	0
+ 1416 06d7 1A       		.uleb128 0x1a
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 32
+
+
+ 1417 06d8 85030000 		.4byte	0x385
+ 1418 06dc E7060000 		.4byte	0x6e7
+ 1419 06e0 1B       		.uleb128 0x1b
+ 1420 06e1 E7060000 		.4byte	0x6e7
+ 1421 06e5 3C       		.byte	0x3c
+ 1422 06e6 00       		.byte	0
+ 1423 06e7 02       		.uleb128 0x2
+ 1424 06e8 04       		.byte	0x4
+ 1425 06e9 07       		.byte	0x7
+ 1426 06ea A6000000 		.4byte	.LASF70
+ 1427 06ee 1C       		.uleb128 0x1c
+ 1428 06ef 33030000 		.4byte	.LASF71
+ 1429 06f3 01       		.byte	0x1
+ 1430 06f4 2F       		.byte	0x2f
+ 1431 06f5 FF060000 		.4byte	0x6ff
+ 1432 06f9 05       		.uleb128 0x5
+ 1433 06fa 03       		.byte	0x3
+ 1434 06fb 20000000 		.4byte	u8x8_d_ssd1318_128x96_icp_init_seq
+ 1435 06ff 0E       		.uleb128 0xe
+ 1436 0700 D7060000 		.4byte	0x6d7
+ 1437 0704 1A       		.uleb128 0x1a
+ 1438 0705 85030000 		.4byte	0x385
+ 1439 0709 14070000 		.4byte	0x714
+ 1440 070d 1B       		.uleb128 0x1b
+ 1441 070e E7060000 		.4byte	0x6e7
+ 1442 0712 34       		.byte	0x34
+ 1443 0713 00       		.byte	0
+ 1444 0714 1C       		.uleb128 0x1c
+ 1445 0715 4F020000 		.4byte	.LASF72
+ 1446 0719 01       		.byte	0x1
+ 1447 071a 61       		.byte	0x61
+ 1448 071b 25070000 		.4byte	0x725
+ 1449 071f 05       		.uleb128 0x5
+ 1450 0720 03       		.byte	0x3
+ 1451 0721 78000000 		.4byte	u8x8_d_ssd1318_128x96_xcp_init_seq
+ 1452 0725 0E       		.uleb128 0xe
+ 1453 0726 04070000 		.4byte	0x704
+ 1454 072a 1A       		.uleb128 0x1a
+ 1455 072b 85030000 		.4byte	0x385
+ 1456 072f 3A070000 		.4byte	0x73a
+ 1457 0733 1B       		.uleb128 0x1b
+ 1458 0734 E7060000 		.4byte	0x6e7
+ 1459 0738 04       		.byte	0x4
+ 1460 0739 00       		.byte	0
+ 1461 073a 1C       		.uleb128 0x1c
+ 1462 073b 00000000 		.4byte	.LASF73
+ 1463 073f 01       		.byte	0x1
+ 1464 0740 8D       		.byte	0x8d
+ 1465 0741 4B070000 		.4byte	0x74b
+ 1466 0745 05       		.uleb128 0x5
+ 1467 0746 03       		.byte	0x3
+ 1468 0747 00000000 		.4byte	u8x8_d_ssd1318_128x96_powersave0_seq
+ 1469 074b 0E       		.uleb128 0xe
+ 1470 074c 2A070000 		.4byte	0x72a
+ 1471 0750 1C       		.uleb128 0x1c
+ 1472 0751 BA020000 		.4byte	.LASF74
+ 1473 0755 01       		.byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 33
+
+
+ 1474 0756 94       		.byte	0x94
+ 1475 0757 61070000 		.4byte	0x761
+ 1476 075b 05       		.uleb128 0x5
+ 1477 075c 03       		.byte	0x3
+ 1478 075d 08000000 		.4byte	u8x8_d_ssd1318_128x96_powersave1_seq
+ 1479 0761 0E       		.uleb128 0xe
+ 1480 0762 2A070000 		.4byte	0x72a
+ 1481 0766 1A       		.uleb128 0x1a
+ 1482 0767 85030000 		.4byte	0x385
+ 1483 076b 76070000 		.4byte	0x776
+ 1484 076f 1B       		.uleb128 0x1b
+ 1485 0770 E7060000 		.4byte	0x6e7
+ 1486 0774 06       		.byte	0x6
+ 1487 0775 00       		.byte	0
+ 1488 0776 1C       		.uleb128 0x1c
+ 1489 0777 4E040000 		.4byte	.LASF75
+ 1490 077b 01       		.byte	0x1
+ 1491 077c 9B       		.byte	0x9b
+ 1492 077d 87070000 		.4byte	0x787
+ 1493 0781 05       		.uleb128 0x5
+ 1494 0782 03       		.byte	0x3
+ 1495 0783 10000000 		.4byte	u8x8_d_ssd1318_128x96_flip0_seq
+ 1496 0787 0E       		.uleb128 0xe
+ 1497 0788 66070000 		.4byte	0x766
+ 1498 078c 1C       		.uleb128 0x1c
+ 1499 078d E2000000 		.4byte	.LASF76
+ 1500 0791 01       		.byte	0x1
+ 1501 0792 A3       		.byte	0xa3
+ 1502 0793 9D070000 		.4byte	0x79d
+ 1503 0797 05       		.uleb128 0x5
+ 1504 0798 03       		.byte	0x3
+ 1505 0799 18000000 		.4byte	u8x8_d_ssd1318_128x96_flip1_seq
+ 1506 079d 0E       		.uleb128 0xe
+ 1507 079e 66070000 		.4byte	0x766
+ 1508 07a2 1C       		.uleb128 0x1c
+ 1509 07a3 AF000000 		.4byte	.LASF77
+ 1510 07a7 01       		.byte	0x1
+ 1511 07a8 FD       		.byte	0xfd
+ 1512 07a9 7A030000 		.4byte	0x37a
+ 1513 07ad 05       		.uleb128 0x5
+ 1514 07ae 03       		.byte	0x3
+ 1515 07af 60000000 		.4byte	u8x8_ssd1318_128x96_display_info
+ 1516 07b3 1D       		.uleb128 0x1d
+ 1517 07b4 59050000 		.4byte	.LASF78
+ 1518 07b8 59050000 		.4byte	.LASF78
+ 1519 07bc 04       		.byte	0x4
+ 1520 07bd 8A02     		.2byte	0x28a
+ 1521 07bf 1D       		.uleb128 0x1d
+ 1522 07c0 C2030000 		.4byte	.LASF79
+ 1523 07c4 C2030000 		.4byte	.LASF79
+ 1524 07c8 04       		.byte	0x4
+ 1525 07c9 6B02     		.2byte	0x26b
+ 1526 07cb 1D       		.uleb128 0x1d
+ 1527 07cc 85020000 		.4byte	.LASF80
+ 1528 07d0 85020000 		.4byte	.LASF80
+ 1529 07d4 04       		.byte	0x4
+ 1530 07d5 6702     		.2byte	0x267
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 34
+
+
+ 1531 07d7 1D       		.uleb128 0x1d
+ 1532 07d8 7D040000 		.4byte	.LASF81
+ 1533 07dc 7D040000 		.4byte	.LASF81
+ 1534 07e0 04       		.byte	0x4
+ 1535 07e1 6802     		.2byte	0x268
+ 1536 07e3 1D       		.uleb128 0x1d
+ 1537 07e4 45010000 		.4byte	.LASF82
+ 1538 07e8 45010000 		.4byte	.LASF82
+ 1539 07ec 04       		.byte	0x4
+ 1540 07ed 6C02     		.2byte	0x26c
+ 1541 07ef 1D       		.uleb128 0x1d
+ 1542 07f0 DC010000 		.4byte	.LASF83
+ 1543 07f4 DC010000 		.4byte	.LASF83
+ 1544 07f8 04       		.byte	0x4
+ 1545 07f9 6A02     		.2byte	0x26a
+ 1546 07fb 1D       		.uleb128 0x1d
+ 1547 07fc 96020000 		.4byte	.LASF84
+ 1548 0800 96020000 		.4byte	.LASF84
+ 1549 0804 04       		.byte	0x4
+ 1550 0805 AF01     		.2byte	0x1af
+ 1551 0807 1D       		.uleb128 0x1d
+ 1552 0808 7B050000 		.4byte	.LASF85
+ 1553 080c 7B050000 		.4byte	.LASF85
+ 1554 0810 04       		.byte	0x4
+ 1555 0811 AE01     		.2byte	0x1ae
+ 1556 0813 00       		.byte	0
+ 1557              		.section	.debug_abbrev,"",%progbits
+ 1558              	.Ldebug_abbrev0:
+ 1559 0000 01       		.uleb128 0x1
+ 1560 0001 11       		.uleb128 0x11
+ 1561 0002 01       		.byte	0x1
+ 1562 0003 25       		.uleb128 0x25
+ 1563 0004 0E       		.uleb128 0xe
+ 1564 0005 13       		.uleb128 0x13
+ 1565 0006 0B       		.uleb128 0xb
+ 1566 0007 03       		.uleb128 0x3
+ 1567 0008 0E       		.uleb128 0xe
+ 1568 0009 1B       		.uleb128 0x1b
+ 1569 000a 0E       		.uleb128 0xe
+ 1570 000b 55       		.uleb128 0x55
+ 1571 000c 17       		.uleb128 0x17
+ 1572 000d 11       		.uleb128 0x11
+ 1573 000e 01       		.uleb128 0x1
+ 1574 000f 10       		.uleb128 0x10
+ 1575 0010 17       		.uleb128 0x17
+ 1576 0011 00       		.byte	0
+ 1577 0012 00       		.byte	0
+ 1578 0013 02       		.uleb128 0x2
+ 1579 0014 24       		.uleb128 0x24
+ 1580 0015 00       		.byte	0
+ 1581 0016 0B       		.uleb128 0xb
+ 1582 0017 0B       		.uleb128 0xb
+ 1583 0018 3E       		.uleb128 0x3e
+ 1584 0019 0B       		.uleb128 0xb
+ 1585 001a 03       		.uleb128 0x3
+ 1586 001b 0E       		.uleb128 0xe
+ 1587 001c 00       		.byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 35
+
+
+ 1588 001d 00       		.byte	0
+ 1589 001e 03       		.uleb128 0x3
+ 1590 001f 16       		.uleb128 0x16
+ 1591 0020 00       		.byte	0
+ 1592 0021 03       		.uleb128 0x3
+ 1593 0022 0E       		.uleb128 0xe
+ 1594 0023 3A       		.uleb128 0x3a
+ 1595 0024 0B       		.uleb128 0xb
+ 1596 0025 3B       		.uleb128 0x3b
+ 1597 0026 0B       		.uleb128 0xb
+ 1598 0027 49       		.uleb128 0x49
+ 1599 0028 13       		.uleb128 0x13
+ 1600 0029 00       		.byte	0
+ 1601 002a 00       		.byte	0
+ 1602 002b 04       		.uleb128 0x4
+ 1603 002c 24       		.uleb128 0x24
+ 1604 002d 00       		.byte	0
+ 1605 002e 0B       		.uleb128 0xb
+ 1606 002f 0B       		.uleb128 0xb
+ 1607 0030 3E       		.uleb128 0x3e
+ 1608 0031 0B       		.uleb128 0xb
+ 1609 0032 03       		.uleb128 0x3
+ 1610 0033 08       		.uleb128 0x8
+ 1611 0034 00       		.byte	0
+ 1612 0035 00       		.byte	0
+ 1613 0036 05       		.uleb128 0x5
+ 1614 0037 0F       		.uleb128 0xf
+ 1615 0038 00       		.byte	0
+ 1616 0039 0B       		.uleb128 0xb
+ 1617 003a 0B       		.uleb128 0xb
+ 1618 003b 00       		.byte	0
+ 1619 003c 00       		.byte	0
+ 1620 003d 06       		.uleb128 0x6
+ 1621 003e 13       		.uleb128 0x13
+ 1622 003f 01       		.byte	0x1
+ 1623 0040 03       		.uleb128 0x3
+ 1624 0041 0E       		.uleb128 0xe
+ 1625 0042 0B       		.uleb128 0xb
+ 1626 0043 0B       		.uleb128 0xb
+ 1627 0044 3A       		.uleb128 0x3a
+ 1628 0045 0B       		.uleb128 0xb
+ 1629 0046 3B       		.uleb128 0x3b
+ 1630 0047 05       		.uleb128 0x5
+ 1631 0048 01       		.uleb128 0x1
+ 1632 0049 13       		.uleb128 0x13
+ 1633 004a 00       		.byte	0
+ 1634 004b 00       		.byte	0
+ 1635 004c 07       		.uleb128 0x7
+ 1636 004d 0D       		.uleb128 0xd
+ 1637 004e 00       		.byte	0
+ 1638 004f 03       		.uleb128 0x3
+ 1639 0050 0E       		.uleb128 0xe
+ 1640 0051 3A       		.uleb128 0x3a
+ 1641 0052 0B       		.uleb128 0xb
+ 1642 0053 3B       		.uleb128 0x3b
+ 1643 0054 05       		.uleb128 0x5
+ 1644 0055 49       		.uleb128 0x49
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 36
+
+
+ 1645 0056 13       		.uleb128 0x13
+ 1646 0057 38       		.uleb128 0x38
+ 1647 0058 0B       		.uleb128 0xb
+ 1648 0059 00       		.byte	0
+ 1649 005a 00       		.byte	0
+ 1650 005b 08       		.uleb128 0x8
+ 1651 005c 13       		.uleb128 0x13
+ 1652 005d 01       		.byte	0x1
+ 1653 005e 03       		.uleb128 0x3
+ 1654 005f 0E       		.uleb128 0xe
+ 1655 0060 0B       		.uleb128 0xb
+ 1656 0061 0B       		.uleb128 0xb
+ 1657 0062 3A       		.uleb128 0x3a
+ 1658 0063 0B       		.uleb128 0xb
+ 1659 0064 3B       		.uleb128 0x3b
+ 1660 0065 0B       		.uleb128 0xb
+ 1661 0066 01       		.uleb128 0x1
+ 1662 0067 13       		.uleb128 0x13
+ 1663 0068 00       		.byte	0
+ 1664 0069 00       		.byte	0
+ 1665 006a 09       		.uleb128 0x9
+ 1666 006b 0D       		.uleb128 0xd
+ 1667 006c 00       		.byte	0
+ 1668 006d 03       		.uleb128 0x3
+ 1669 006e 0E       		.uleb128 0xe
+ 1670 006f 3A       		.uleb128 0x3a
+ 1671 0070 0B       		.uleb128 0xb
+ 1672 0071 3B       		.uleb128 0x3b
+ 1673 0072 0B       		.uleb128 0xb
+ 1674 0073 49       		.uleb128 0x49
+ 1675 0074 13       		.uleb128 0x13
+ 1676 0075 38       		.uleb128 0x38
+ 1677 0076 0B       		.uleb128 0xb
+ 1678 0077 00       		.byte	0
+ 1679 0078 00       		.byte	0
+ 1680 0079 0A       		.uleb128 0xa
+ 1681 007a 0D       		.uleb128 0xd
+ 1682 007b 00       		.byte	0
+ 1683 007c 03       		.uleb128 0x3
+ 1684 007d 08       		.uleb128 0x8
+ 1685 007e 3A       		.uleb128 0x3a
+ 1686 007f 0B       		.uleb128 0xb
+ 1687 0080 3B       		.uleb128 0x3b
+ 1688 0081 0B       		.uleb128 0xb
+ 1689 0082 49       		.uleb128 0x49
+ 1690 0083 13       		.uleb128 0x13
+ 1691 0084 38       		.uleb128 0x38
+ 1692 0085 0B       		.uleb128 0xb
+ 1693 0086 00       		.byte	0
+ 1694 0087 00       		.byte	0
+ 1695 0088 0B       		.uleb128 0xb
+ 1696 0089 0F       		.uleb128 0xf
+ 1697 008a 00       		.byte	0
+ 1698 008b 0B       		.uleb128 0xb
+ 1699 008c 0B       		.uleb128 0xb
+ 1700 008d 49       		.uleb128 0x49
+ 1701 008e 13       		.uleb128 0x13
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 37
+
+
+ 1702 008f 00       		.byte	0
+ 1703 0090 00       		.byte	0
+ 1704 0091 0C       		.uleb128 0xc
+ 1705 0092 15       		.uleb128 0x15
+ 1706 0093 01       		.byte	0x1
+ 1707 0094 27       		.uleb128 0x27
+ 1708 0095 19       		.uleb128 0x19
+ 1709 0096 49       		.uleb128 0x49
+ 1710 0097 13       		.uleb128 0x13
+ 1711 0098 01       		.uleb128 0x1
+ 1712 0099 13       		.uleb128 0x13
+ 1713 009a 00       		.byte	0
+ 1714 009b 00       		.byte	0
+ 1715 009c 0D       		.uleb128 0xd
+ 1716 009d 05       		.uleb128 0x5
+ 1717 009e 00       		.byte	0
+ 1718 009f 49       		.uleb128 0x49
+ 1719 00a0 13       		.uleb128 0x13
+ 1720 00a1 00       		.byte	0
+ 1721 00a2 00       		.byte	0
+ 1722 00a3 0E       		.uleb128 0xe
+ 1723 00a4 26       		.uleb128 0x26
+ 1724 00a5 00       		.byte	0
+ 1725 00a6 49       		.uleb128 0x49
+ 1726 00a7 13       		.uleb128 0x13
+ 1727 00a8 00       		.byte	0
+ 1728 00a9 00       		.byte	0
+ 1729 00aa 0F       		.uleb128 0xf
+ 1730 00ab 2E       		.uleb128 0x2e
+ 1731 00ac 01       		.byte	0x1
+ 1732 00ad 03       		.uleb128 0x3
+ 1733 00ae 0E       		.uleb128 0xe
+ 1734 00af 3A       		.uleb128 0x3a
+ 1735 00b0 0B       		.uleb128 0xb
+ 1736 00b1 3B       		.uleb128 0x3b
+ 1737 00b2 0B       		.uleb128 0xb
+ 1738 00b3 27       		.uleb128 0x27
+ 1739 00b4 19       		.uleb128 0x19
+ 1740 00b5 49       		.uleb128 0x49
+ 1741 00b6 13       		.uleb128 0x13
+ 1742 00b7 11       		.uleb128 0x11
+ 1743 00b8 01       		.uleb128 0x1
+ 1744 00b9 12       		.uleb128 0x12
+ 1745 00ba 06       		.uleb128 0x6
+ 1746 00bb 40       		.uleb128 0x40
+ 1747 00bc 18       		.uleb128 0x18
+ 1748 00bd 9742     		.uleb128 0x2117
+ 1749 00bf 19       		.uleb128 0x19
+ 1750 00c0 01       		.uleb128 0x1
+ 1751 00c1 13       		.uleb128 0x13
+ 1752 00c2 00       		.byte	0
+ 1753 00c3 00       		.byte	0
+ 1754 00c4 10       		.uleb128 0x10
+ 1755 00c5 05       		.uleb128 0x5
+ 1756 00c6 00       		.byte	0
+ 1757 00c7 03       		.uleb128 0x3
+ 1758 00c8 0E       		.uleb128 0xe
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 38
+
+
+ 1759 00c9 3A       		.uleb128 0x3a
+ 1760 00ca 0B       		.uleb128 0xb
+ 1761 00cb 3B       		.uleb128 0x3b
+ 1762 00cc 0B       		.uleb128 0xb
+ 1763 00cd 49       		.uleb128 0x49
+ 1764 00ce 13       		.uleb128 0x13
+ 1765 00cf 02       		.uleb128 0x2
+ 1766 00d0 17       		.uleb128 0x17
+ 1767 00d1 00       		.byte	0
+ 1768 00d2 00       		.byte	0
+ 1769 00d3 11       		.uleb128 0x11
+ 1770 00d4 05       		.uleb128 0x5
+ 1771 00d5 00       		.byte	0
+ 1772 00d6 03       		.uleb128 0x3
+ 1773 00d7 08       		.uleb128 0x8
+ 1774 00d8 3A       		.uleb128 0x3a
+ 1775 00d9 0B       		.uleb128 0xb
+ 1776 00da 3B       		.uleb128 0x3b
+ 1777 00db 0B       		.uleb128 0xb
+ 1778 00dc 49       		.uleb128 0x49
+ 1779 00dd 13       		.uleb128 0x13
+ 1780 00de 02       		.uleb128 0x2
+ 1781 00df 17       		.uleb128 0x17
+ 1782 00e0 00       		.byte	0
+ 1783 00e1 00       		.byte	0
+ 1784 00e2 12       		.uleb128 0x12
+ 1785 00e3 34       		.uleb128 0x34
+ 1786 00e4 00       		.byte	0
+ 1787 00e5 03       		.uleb128 0x3
+ 1788 00e6 08       		.uleb128 0x8
+ 1789 00e7 3A       		.uleb128 0x3a
+ 1790 00e8 0B       		.uleb128 0xb
+ 1791 00e9 3B       		.uleb128 0x3b
+ 1792 00ea 0B       		.uleb128 0xb
+ 1793 00eb 49       		.uleb128 0x49
+ 1794 00ec 13       		.uleb128 0x13
+ 1795 00ed 02       		.uleb128 0x2
+ 1796 00ee 17       		.uleb128 0x17
+ 1797 00ef 00       		.byte	0
+ 1798 00f0 00       		.byte	0
+ 1799 00f1 13       		.uleb128 0x13
+ 1800 00f2 898201   		.uleb128 0x4109
+ 1801 00f5 01       		.byte	0x1
+ 1802 00f6 11       		.uleb128 0x11
+ 1803 00f7 01       		.uleb128 0x1
+ 1804 00f8 31       		.uleb128 0x31
+ 1805 00f9 13       		.uleb128 0x13
+ 1806 00fa 01       		.uleb128 0x1
+ 1807 00fb 13       		.uleb128 0x13
+ 1808 00fc 00       		.byte	0
+ 1809 00fd 00       		.byte	0
+ 1810 00fe 14       		.uleb128 0x14
+ 1811 00ff 8A8201   		.uleb128 0x410a
+ 1812 0102 00       		.byte	0
+ 1813 0103 02       		.uleb128 0x2
+ 1814 0104 18       		.uleb128 0x18
+ 1815 0105 9142     		.uleb128 0x2111
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 39
+
+
+ 1816 0107 18       		.uleb128 0x18
+ 1817 0108 00       		.byte	0
+ 1818 0109 00       		.byte	0
+ 1819 010a 15       		.uleb128 0x15
+ 1820 010b 898201   		.uleb128 0x4109
+ 1821 010e 00       		.byte	0
+ 1822 010f 11       		.uleb128 0x11
+ 1823 0110 01       		.uleb128 0x1
+ 1824 0111 31       		.uleb128 0x31
+ 1825 0112 13       		.uleb128 0x13
+ 1826 0113 00       		.byte	0
+ 1827 0114 00       		.byte	0
+ 1828 0115 16       		.uleb128 0x16
+ 1829 0116 898201   		.uleb128 0x4109
+ 1830 0119 01       		.byte	0x1
+ 1831 011a 11       		.uleb128 0x11
+ 1832 011b 01       		.uleb128 0x1
+ 1833 011c 31       		.uleb128 0x31
+ 1834 011d 13       		.uleb128 0x13
+ 1835 011e 00       		.byte	0
+ 1836 011f 00       		.byte	0
+ 1837 0120 17       		.uleb128 0x17
+ 1838 0121 2E       		.uleb128 0x2e
+ 1839 0122 01       		.byte	0x1
+ 1840 0123 3F       		.uleb128 0x3f
+ 1841 0124 19       		.uleb128 0x19
+ 1842 0125 03       		.uleb128 0x3
+ 1843 0126 0E       		.uleb128 0xe
+ 1844 0127 3A       		.uleb128 0x3a
+ 1845 0128 0B       		.uleb128 0xb
+ 1846 0129 3B       		.uleb128 0x3b
+ 1847 012a 05       		.uleb128 0x5
+ 1848 012b 27       		.uleb128 0x27
+ 1849 012c 19       		.uleb128 0x19
+ 1850 012d 49       		.uleb128 0x49
+ 1851 012e 13       		.uleb128 0x13
+ 1852 012f 11       		.uleb128 0x11
+ 1853 0130 01       		.uleb128 0x1
+ 1854 0131 12       		.uleb128 0x12
+ 1855 0132 06       		.uleb128 0x6
+ 1856 0133 40       		.uleb128 0x40
+ 1857 0134 18       		.uleb128 0x18
+ 1858 0135 9742     		.uleb128 0x2117
+ 1859 0137 19       		.uleb128 0x19
+ 1860 0138 01       		.uleb128 0x1
+ 1861 0139 13       		.uleb128 0x13
+ 1862 013a 00       		.byte	0
+ 1863 013b 00       		.byte	0
+ 1864 013c 18       		.uleb128 0x18
+ 1865 013d 05       		.uleb128 0x5
+ 1866 013e 00       		.byte	0
+ 1867 013f 03       		.uleb128 0x3
+ 1868 0140 0E       		.uleb128 0xe
+ 1869 0141 3A       		.uleb128 0x3a
+ 1870 0142 0B       		.uleb128 0xb
+ 1871 0143 3B       		.uleb128 0x3b
+ 1872 0144 05       		.uleb128 0x5
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 40
+
+
+ 1873 0145 49       		.uleb128 0x49
+ 1874 0146 13       		.uleb128 0x13
+ 1875 0147 02       		.uleb128 0x2
+ 1876 0148 17       		.uleb128 0x17
+ 1877 0149 00       		.byte	0
+ 1878 014a 00       		.byte	0
+ 1879 014b 19       		.uleb128 0x19
+ 1880 014c 05       		.uleb128 0x5
+ 1881 014d 00       		.byte	0
+ 1882 014e 03       		.uleb128 0x3
+ 1883 014f 08       		.uleb128 0x8
+ 1884 0150 3A       		.uleb128 0x3a
+ 1885 0151 0B       		.uleb128 0xb
+ 1886 0152 3B       		.uleb128 0x3b
+ 1887 0153 05       		.uleb128 0x5
+ 1888 0154 49       		.uleb128 0x49
+ 1889 0155 13       		.uleb128 0x13
+ 1890 0156 02       		.uleb128 0x2
+ 1891 0157 17       		.uleb128 0x17
+ 1892 0158 00       		.byte	0
+ 1893 0159 00       		.byte	0
+ 1894 015a 1A       		.uleb128 0x1a
+ 1895 015b 01       		.uleb128 0x1
+ 1896 015c 01       		.byte	0x1
+ 1897 015d 49       		.uleb128 0x49
+ 1898 015e 13       		.uleb128 0x13
+ 1899 015f 01       		.uleb128 0x1
+ 1900 0160 13       		.uleb128 0x13
+ 1901 0161 00       		.byte	0
+ 1902 0162 00       		.byte	0
+ 1903 0163 1B       		.uleb128 0x1b
+ 1904 0164 21       		.uleb128 0x21
+ 1905 0165 00       		.byte	0
+ 1906 0166 49       		.uleb128 0x49
+ 1907 0167 13       		.uleb128 0x13
+ 1908 0168 2F       		.uleb128 0x2f
+ 1909 0169 0B       		.uleb128 0xb
+ 1910 016a 00       		.byte	0
+ 1911 016b 00       		.byte	0
+ 1912 016c 1C       		.uleb128 0x1c
+ 1913 016d 34       		.uleb128 0x34
+ 1914 016e 00       		.byte	0
+ 1915 016f 03       		.uleb128 0x3
+ 1916 0170 0E       		.uleb128 0xe
+ 1917 0171 3A       		.uleb128 0x3a
+ 1918 0172 0B       		.uleb128 0xb
+ 1919 0173 3B       		.uleb128 0x3b
+ 1920 0174 0B       		.uleb128 0xb
+ 1921 0175 49       		.uleb128 0x49
+ 1922 0176 13       		.uleb128 0x13
+ 1923 0177 02       		.uleb128 0x2
+ 1924 0178 18       		.uleb128 0x18
+ 1925 0179 00       		.byte	0
+ 1926 017a 00       		.byte	0
+ 1927 017b 1D       		.uleb128 0x1d
+ 1928 017c 2E       		.uleb128 0x2e
+ 1929 017d 00       		.byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 41
+
+
+ 1930 017e 3F       		.uleb128 0x3f
+ 1931 017f 19       		.uleb128 0x19
+ 1932 0180 3C       		.uleb128 0x3c
+ 1933 0181 19       		.uleb128 0x19
+ 1934 0182 6E       		.uleb128 0x6e
+ 1935 0183 0E       		.uleb128 0xe
+ 1936 0184 03       		.uleb128 0x3
+ 1937 0185 0E       		.uleb128 0xe
+ 1938 0186 3A       		.uleb128 0x3a
+ 1939 0187 0B       		.uleb128 0xb
+ 1940 0188 3B       		.uleb128 0x3b
+ 1941 0189 05       		.uleb128 0x5
+ 1942 018a 00       		.byte	0
+ 1943 018b 00       		.byte	0
+ 1944 018c 00       		.byte	0
+ 1945              		.section	.debug_loc,"",%progbits
+ 1946              	.Ldebug_loc0:
+ 1947              	.LLST0:
+ 1948 0000 00000000 		.4byte	.LVL0
+ 1949 0004 1F000000 		.4byte	.LVL3-1
+ 1950 0008 0100     		.2byte	0x1
+ 1951 000a 50       		.byte	0x50
+ 1952 000b 1F000000 		.4byte	.LVL3-1
+ 1953 000f 24000000 		.4byte	.LVL4
+ 1954 0013 0100     		.2byte	0x1
+ 1955 0015 55       		.byte	0x55
+ 1956 0016 24000000 		.4byte	.LVL4
+ 1957 001a 29000000 		.4byte	.LVL5-1
+ 1958 001e 0100     		.2byte	0x1
+ 1959 0020 50       		.byte	0x50
+ 1960 0021 29000000 		.4byte	.LVL5-1
+ 1961 0025 2E000000 		.4byte	.LVL6
+ 1962 0029 0100     		.2byte	0x1
+ 1963 002b 55       		.byte	0x55
+ 1964 002c 2E000000 		.4byte	.LVL6
+ 1965 0030 35000000 		.4byte	.LVL7-1
+ 1966 0034 0100     		.2byte	0x1
+ 1967 0036 50       		.byte	0x50
+ 1968 0037 35000000 		.4byte	.LVL7-1
+ 1969 003b 42000000 		.4byte	.LVL8
+ 1970 003f 0100     		.2byte	0x1
+ 1971 0041 55       		.byte	0x55
+ 1972 0042 42000000 		.4byte	.LVL8
+ 1973 0046 47000000 		.4byte	.LVL9-1
+ 1974 004a 0100     		.2byte	0x1
+ 1975 004c 50       		.byte	0x50
+ 1976 004d 47000000 		.4byte	.LVL9-1
+ 1977 0051 54000000 		.4byte	.LVL10
+ 1978 0055 0100     		.2byte	0x1
+ 1979 0057 55       		.byte	0x55
+ 1980 0058 54000000 		.4byte	.LVL10
+ 1981 005c 57000000 		.4byte	.LVL11-1
+ 1982 0060 0100     		.2byte	0x1
+ 1983 0062 50       		.byte	0x50
+ 1984 0063 57000000 		.4byte	.LVL11-1
+ 1985 0067 72000000 		.4byte	.LVL15
+ 1986 006b 0100     		.2byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 42
+
+
+ 1987 006d 55       		.byte	0x55
+ 1988 006e 72000000 		.4byte	.LVL15
+ 1989 0072 75000000 		.4byte	.LVL16-1
+ 1990 0076 0100     		.2byte	0x1
+ 1991 0078 50       		.byte	0x50
+ 1992 0079 75000000 		.4byte	.LVL16-1
+ 1993 007d D0000000 		.4byte	.LVL31
+ 1994 0081 0100     		.2byte	0x1
+ 1995 0083 55       		.byte	0x55
+ 1996 0084 D0000000 		.4byte	.LVL31
+ 1997 0088 D2000000 		.4byte	.LVL32
+ 1998 008c 0100     		.2byte	0x1
+ 1999 008e 50       		.byte	0x50
+ 2000 008f D2000000 		.4byte	.LVL32
+ 2001 0093 D4000000 		.4byte	.LVL33
+ 2002 0097 0100     		.2byte	0x1
+ 2003 0099 55       		.byte	0x55
+ 2004 009a D4000000 		.4byte	.LVL33
+ 2005 009e E4000000 		.4byte	.LFE0
+ 2006 00a2 0400     		.2byte	0x4
+ 2007 00a4 F3       		.byte	0xf3
+ 2008 00a5 01       		.uleb128 0x1
+ 2009 00a6 50       		.byte	0x50
+ 2010 00a7 9F       		.byte	0x9f
+ 2011 00a8 00000000 		.4byte	0
+ 2012 00ac 00000000 		.4byte	0
+ 2013              	.LLST1:
+ 2014 00b0 00000000 		.4byte	.LVL0
+ 2015 00b4 0A000000 		.4byte	.LVL1
+ 2016 00b8 0100     		.2byte	0x1
+ 2017 00ba 51       		.byte	0x51
+ 2018 00bb 0A000000 		.4byte	.LVL1
+ 2019 00bf E4000000 		.4byte	.LFE0
+ 2020 00c3 0400     		.2byte	0x4
+ 2021 00c5 F3       		.byte	0xf3
+ 2022 00c6 01       		.uleb128 0x1
+ 2023 00c7 51       		.byte	0x51
+ 2024 00c8 9F       		.byte	0x9f
+ 2025 00c9 00000000 		.4byte	0
+ 2026 00cd 00000000 		.4byte	0
+ 2027              	.LLST2:
+ 2028 00d1 00000000 		.4byte	.LVL0
+ 2029 00d5 1F000000 		.4byte	.LVL3-1
+ 2030 00d9 0100     		.2byte	0x1
+ 2031 00db 52       		.byte	0x52
+ 2032 00dc 1F000000 		.4byte	.LVL3-1
+ 2033 00e0 24000000 		.4byte	.LVL4
+ 2034 00e4 0400     		.2byte	0x4
+ 2035 00e6 F3       		.byte	0xf3
+ 2036 00e7 01       		.uleb128 0x1
+ 2037 00e8 52       		.byte	0x52
+ 2038 00e9 9F       		.byte	0x9f
+ 2039 00ea 24000000 		.4byte	.LVL4
+ 2040 00ee 29000000 		.4byte	.LVL5-1
+ 2041 00f2 0100     		.2byte	0x1
+ 2042 00f4 52       		.byte	0x52
+ 2043 00f5 29000000 		.4byte	.LVL5-1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 43
+
+
+ 2044 00f9 2E000000 		.4byte	.LVL6
+ 2045 00fd 0400     		.2byte	0x4
+ 2046 00ff F3       		.byte	0xf3
+ 2047 0100 01       		.uleb128 0x1
+ 2048 0101 52       		.byte	0x52
+ 2049 0102 9F       		.byte	0x9f
+ 2050 0103 2E000000 		.4byte	.LVL6
+ 2051 0107 35000000 		.4byte	.LVL7-1
+ 2052 010b 0100     		.2byte	0x1
+ 2053 010d 52       		.byte	0x52
+ 2054 010e 35000000 		.4byte	.LVL7-1
+ 2055 0112 42000000 		.4byte	.LVL8
+ 2056 0116 0400     		.2byte	0x4
+ 2057 0118 F3       		.byte	0xf3
+ 2058 0119 01       		.uleb128 0x1
+ 2059 011a 52       		.byte	0x52
+ 2060 011b 9F       		.byte	0x9f
+ 2061 011c 42000000 		.4byte	.LVL8
+ 2062 0120 47000000 		.4byte	.LVL9-1
+ 2063 0124 0100     		.2byte	0x1
+ 2064 0126 52       		.byte	0x52
+ 2065 0127 47000000 		.4byte	.LVL9-1
+ 2066 012b 54000000 		.4byte	.LVL10
+ 2067 012f 0400     		.2byte	0x4
+ 2068 0131 F3       		.byte	0xf3
+ 2069 0132 01       		.uleb128 0x1
+ 2070 0133 52       		.byte	0x52
+ 2071 0134 9F       		.byte	0x9f
+ 2072 0135 54000000 		.4byte	.LVL10
+ 2073 0139 57000000 		.4byte	.LVL11-1
+ 2074 013d 0100     		.2byte	0x1
+ 2075 013f 52       		.byte	0x52
+ 2076 0140 57000000 		.4byte	.LVL11-1
+ 2077 0144 72000000 		.4byte	.LVL15
+ 2078 0148 0400     		.2byte	0x4
+ 2079 014a F3       		.byte	0xf3
+ 2080 014b 01       		.uleb128 0x1
+ 2081 014c 52       		.byte	0x52
+ 2082 014d 9F       		.byte	0x9f
+ 2083 014e 72000000 		.4byte	.LVL15
+ 2084 0152 75000000 		.4byte	.LVL16-1
+ 2085 0156 0100     		.2byte	0x1
+ 2086 0158 52       		.byte	0x52
+ 2087 0159 75000000 		.4byte	.LVL16-1
+ 2088 015d AE000000 		.4byte	.LVL25
+ 2089 0161 0400     		.2byte	0x4
+ 2090 0163 F3       		.byte	0xf3
+ 2091 0164 01       		.uleb128 0x1
+ 2092 0165 52       		.byte	0x52
+ 2093 0166 9F       		.byte	0x9f
+ 2094 0167 AE000000 		.4byte	.LVL25
+ 2095 016b C0000000 		.4byte	.LVL29
+ 2096 016f 0100     		.2byte	0x1
+ 2097 0171 54       		.byte	0x54
+ 2098 0172 C0000000 		.4byte	.LVL29
+ 2099 0176 CB000000 		.4byte	.LVL30-1
+ 2100 017a 0100     		.2byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 44
+
+
+ 2101 017c 52       		.byte	0x52
+ 2102 017d D0000000 		.4byte	.LVL31
+ 2103 0181 E4000000 		.4byte	.LFE0
+ 2104 0185 0100     		.2byte	0x1
+ 2105 0187 52       		.byte	0x52
+ 2106 0188 00000000 		.4byte	0
+ 2107 018c 00000000 		.4byte	0
+ 2108              	.LLST3:
+ 2109 0190 00000000 		.4byte	.LVL0
+ 2110 0194 12000000 		.4byte	.LVL2
+ 2111 0198 0100     		.2byte	0x1
+ 2112 019a 53       		.byte	0x53
+ 2113 019b 12000000 		.4byte	.LVL2
+ 2114 019f D4000000 		.4byte	.LVL33
+ 2115 01a3 0100     		.2byte	0x1
+ 2116 01a5 56       		.byte	0x56
+ 2117 01a6 D4000000 		.4byte	.LVL33
+ 2118 01aa E4000000 		.4byte	.LFE0
+ 2119 01ae 0400     		.2byte	0x4
+ 2120 01b0 F3       		.byte	0xf3
+ 2121 01b1 01       		.uleb128 0x1
+ 2122 01b2 53       		.byte	0x53
+ 2123 01b3 9F       		.byte	0x9f
+ 2124 01b4 00000000 		.4byte	0
+ 2125 01b8 00000000 		.4byte	0
+ 2126              	.LLST4:
+ 2127 01bc 78000000 		.4byte	.LVL17
+ 2128 01c0 7A000000 		.4byte	.LVL18
+ 2129 01c4 0100     		.2byte	0x1
+ 2130 01c6 57       		.byte	0x57
+ 2131 01c7 7A000000 		.4byte	.LVL18
+ 2132 01cb 7C000000 		.4byte	.LVL19
+ 2133 01cf 0200     		.2byte	0x2
+ 2134 01d1 76       		.byte	0x76
+ 2135 01d2 05       		.sleb128 5
+ 2136 01d3 7C000000 		.4byte	.LVL19
+ 2137 01d7 82000000 		.4byte	.LVL20
+ 2138 01db 0100     		.2byte	0x1
+ 2139 01dd 57       		.byte	0x57
+ 2140 01de 82000000 		.4byte	.LVL20
+ 2141 01e2 84000000 		.4byte	.LVL21
+ 2142 01e6 0700     		.2byte	0x7
+ 2143 01e8 76       		.byte	0x76
+ 2144 01e9 05       		.sleb128 5
+ 2145 01ea 94       		.byte	0x94
+ 2146 01eb 01       		.byte	0x1
+ 2147 01ec 33       		.byte	0x33
+ 2148 01ed 24       		.byte	0x24
+ 2149 01ee 9F       		.byte	0x9f
+ 2150 01ef 84000000 		.4byte	.LVL21
+ 2151 01f3 D0000000 		.4byte	.LVL31
+ 2152 01f7 0100     		.2byte	0x1
+ 2153 01f9 57       		.byte	0x57
+ 2154 01fa 00000000 		.4byte	0
+ 2155 01fe 00000000 		.4byte	0
+ 2156              	.LLST5:
+ 2157 0202 B0000000 		.4byte	.LVL26
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 45
+
+
+ 2158 0206 B2000000 		.4byte	.LVL27
+ 2159 020a 0100     		.2byte	0x1
+ 2160 020c 51       		.byte	0x51
+ 2161 020d B2000000 		.4byte	.LVL27
+ 2162 0211 BD000000 		.4byte	.LVL28-1
+ 2163 0215 0200     		.2byte	0x2
+ 2164 0217 76       		.byte	0x76
+ 2165 0218 04       		.sleb128 4
+ 2166 0219 00000000 		.4byte	0
+ 2167 021d 00000000 		.4byte	0
+ 2168              	.LLST6:
+ 2169 0221 B0000000 		.4byte	.LVL26
+ 2170 0225 BD000000 		.4byte	.LVL28-1
+ 2171 0229 0200     		.2byte	0x2
+ 2172 022b 76       		.byte	0x76
+ 2173 022c 00       		.sleb128 0
+ 2174 022d 00000000 		.4byte	0
+ 2175 0231 00000000 		.4byte	0
+ 2176              	.LLST7:
+ 2177 0235 00000000 		.4byte	.LVL34
+ 2178 0239 09000000 		.4byte	.LVL35-1
+ 2179 023d 0100     		.2byte	0x1
+ 2180 023f 50       		.byte	0x50
+ 2181 0240 09000000 		.4byte	.LVL35-1
+ 2182 0244 3A000000 		.4byte	.LVL39
+ 2183 0248 0100     		.2byte	0x1
+ 2184 024a 55       		.byte	0x55
+ 2185 024b 3A000000 		.4byte	.LVL39
+ 2186 024f 44000000 		.4byte	.LFE1
+ 2187 0253 0400     		.2byte	0x4
+ 2188 0255 F3       		.byte	0xf3
+ 2189 0256 01       		.uleb128 0x1
+ 2190 0257 50       		.byte	0x50
+ 2191 0258 9F       		.byte	0x9f
+ 2192 0259 00000000 		.4byte	0
+ 2193 025d 00000000 		.4byte	0
+ 2194              	.LLST8:
+ 2195 0261 00000000 		.4byte	.LVL34
+ 2196 0265 09000000 		.4byte	.LVL35-1
+ 2197 0269 0100     		.2byte	0x1
+ 2198 026b 51       		.byte	0x51
+ 2199 026c 09000000 		.4byte	.LVL35-1
+ 2200 0270 44000000 		.4byte	.LFE1
+ 2201 0274 0400     		.2byte	0x4
+ 2202 0276 F3       		.byte	0xf3
+ 2203 0277 01       		.uleb128 0x1
+ 2204 0278 51       		.byte	0x51
+ 2205 0279 9F       		.byte	0x9f
+ 2206 027a 00000000 		.4byte	0
+ 2207 027e 00000000 		.4byte	0
+ 2208              	.LLST9:
+ 2209 0282 00000000 		.4byte	.LVL34
+ 2210 0286 09000000 		.4byte	.LVL35-1
+ 2211 028a 0100     		.2byte	0x1
+ 2212 028c 52       		.byte	0x52
+ 2213 028d 09000000 		.4byte	.LVL35-1
+ 2214 0291 44000000 		.4byte	.LFE1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 46
+
+
+ 2215 0295 0400     		.2byte	0x4
+ 2216 0297 F3       		.byte	0xf3
+ 2217 0298 01       		.uleb128 0x1
+ 2218 0299 52       		.byte	0x52
+ 2219 029a 9F       		.byte	0x9f
+ 2220 029b 00000000 		.4byte	0
+ 2221 029f 00000000 		.4byte	0
+ 2222              	.LLST10:
+ 2223 02a3 00000000 		.4byte	.LVL34
+ 2224 02a7 09000000 		.4byte	.LVL35-1
+ 2225 02ab 0100     		.2byte	0x1
+ 2226 02ad 53       		.byte	0x53
+ 2227 02ae 09000000 		.4byte	.LVL35-1
+ 2228 02b2 44000000 		.4byte	.LFE1
+ 2229 02b6 0400     		.2byte	0x4
+ 2230 02b8 F3       		.byte	0xf3
+ 2231 02b9 01       		.uleb128 0x1
+ 2232 02ba 53       		.byte	0x53
+ 2233 02bb 9F       		.byte	0x9f
+ 2234 02bc 00000000 		.4byte	0
+ 2235 02c0 00000000 		.4byte	0
+ 2236              	.LLST11:
+ 2237 02c4 00000000 		.4byte	.LVL40
+ 2238 02c8 09000000 		.4byte	.LVL41-1
+ 2239 02cc 0100     		.2byte	0x1
+ 2240 02ce 50       		.byte	0x50
+ 2241 02cf 09000000 		.4byte	.LVL41-1
+ 2242 02d3 3A000000 		.4byte	.LVL45
+ 2243 02d7 0100     		.2byte	0x1
+ 2244 02d9 55       		.byte	0x55
+ 2245 02da 3A000000 		.4byte	.LVL45
+ 2246 02de 44000000 		.4byte	.LFE2
+ 2247 02e2 0400     		.2byte	0x4
+ 2248 02e4 F3       		.byte	0xf3
+ 2249 02e5 01       		.uleb128 0x1
+ 2250 02e6 50       		.byte	0x50
+ 2251 02e7 9F       		.byte	0x9f
+ 2252 02e8 00000000 		.4byte	0
+ 2253 02ec 00000000 		.4byte	0
+ 2254              	.LLST12:
+ 2255 02f0 00000000 		.4byte	.LVL40
+ 2256 02f4 09000000 		.4byte	.LVL41-1
+ 2257 02f8 0100     		.2byte	0x1
+ 2258 02fa 51       		.byte	0x51
+ 2259 02fb 09000000 		.4byte	.LVL41-1
+ 2260 02ff 44000000 		.4byte	.LFE2
+ 2261 0303 0400     		.2byte	0x4
+ 2262 0305 F3       		.byte	0xf3
+ 2263 0306 01       		.uleb128 0x1
+ 2264 0307 51       		.byte	0x51
+ 2265 0308 9F       		.byte	0x9f
+ 2266 0309 00000000 		.4byte	0
+ 2267 030d 00000000 		.4byte	0
+ 2268              	.LLST13:
+ 2269 0311 00000000 		.4byte	.LVL40
+ 2270 0315 09000000 		.4byte	.LVL41-1
+ 2271 0319 0100     		.2byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 47
+
+
+ 2272 031b 52       		.byte	0x52
+ 2273 031c 09000000 		.4byte	.LVL41-1
+ 2274 0320 44000000 		.4byte	.LFE2
+ 2275 0324 0400     		.2byte	0x4
+ 2276 0326 F3       		.byte	0xf3
+ 2277 0327 01       		.uleb128 0x1
+ 2278 0328 52       		.byte	0x52
+ 2279 0329 9F       		.byte	0x9f
+ 2280 032a 00000000 		.4byte	0
+ 2281 032e 00000000 		.4byte	0
+ 2282              	.LLST14:
+ 2283 0332 00000000 		.4byte	.LVL40
+ 2284 0336 09000000 		.4byte	.LVL41-1
+ 2285 033a 0100     		.2byte	0x1
+ 2286 033c 53       		.byte	0x53
+ 2287 033d 09000000 		.4byte	.LVL41-1
+ 2288 0341 44000000 		.4byte	.LFE2
+ 2289 0345 0400     		.2byte	0x4
+ 2290 0347 F3       		.byte	0xf3
+ 2291 0348 01       		.uleb128 0x1
+ 2292 0349 53       		.byte	0x53
+ 2293 034a 9F       		.byte	0x9f
+ 2294 034b 00000000 		.4byte	0
+ 2295 034f 00000000 		.4byte	0
+ 2296              		.section	.debug_aranges,"",%progbits
+ 2297 0000 2C000000 		.4byte	0x2c
+ 2298 0004 0200     		.2byte	0x2
+ 2299 0006 00000000 		.4byte	.Ldebug_info0
+ 2300 000a 04       		.byte	0x4
+ 2301 000b 00       		.byte	0
+ 2302 000c 0000     		.2byte	0
+ 2303 000e 0000     		.2byte	0
+ 2304 0010 00000000 		.4byte	.LFB0
+ 2305 0014 E4000000 		.4byte	.LFE0-.LFB0
+ 2306 0018 00000000 		.4byte	.LFB1
+ 2307 001c 44000000 		.4byte	.LFE1-.LFB1
+ 2308 0020 00000000 		.4byte	.LFB2
+ 2309 0024 44000000 		.4byte	.LFE2-.LFB2
+ 2310 0028 00000000 		.4byte	0
+ 2311 002c 00000000 		.4byte	0
+ 2312              		.section	.debug_ranges,"",%progbits
+ 2313              	.Ldebug_ranges0:
+ 2314 0000 00000000 		.4byte	.LFB0
+ 2315 0004 E4000000 		.4byte	.LFE0
+ 2316 0008 00000000 		.4byte	.LFB1
+ 2317 000c 44000000 		.4byte	.LFE1
+ 2318 0010 00000000 		.4byte	.LFB2
+ 2319 0014 44000000 		.4byte	.LFE2
+ 2320 0018 00000000 		.4byte	0
+ 2321 001c 00000000 		.4byte	0
+ 2322              		.section	.debug_line,"",%progbits
+ 2323              	.Ldebug_line0:
+ 2324 0000 DF010000 		.section	.debug_str,"MS",%progbits,1
+ 2324      02003B01 
+ 2324      00000201 
+ 2324      FB0E0D00 
+ 2324      01010101 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 48
+
+
+ 2325              	.LASF73:
+ 2326 0000 75387838 		.ascii	"u8x8_d_ssd1318_128x96_powersave0_seq\000"
+ 2326      5F645F73 
+ 2326      73643133 
+ 2326      31385F31 
+ 2326      32387839 
+ 2327              	.LASF26:
+ 2328 0025 785F6F66 		.ascii	"x_offset\000"
+ 2328      66736574 
+ 2328      00
+ 2329              	.LASF27:
+ 2330 002e 69735F66 		.ascii	"is_font_inverse_mode\000"
+ 2330      6F6E745F 
+ 2330      696E7665 
+ 2330      7273655F 
+ 2330      6D6F6465 
+ 2331              	.LASF48:
+ 2332 0043 7370695F 		.ascii	"spi_mode\000"
+ 2332      6D6F6465 
+ 2332      00
+ 2333              	.LASF67:
+ 2334 004c 6172675F 		.ascii	"arg_ptr\000"
+ 2334      70747200 
+ 2335              	.LASF39:
+ 2336 0054 63686970 		.ascii	"chip_enable_level\000"
+ 2336      5F656E61 
+ 2336      626C655F 
+ 2336      6C657665 
+ 2336      6C00
+ 2337              	.LASF24:
+ 2338 0066 666F6E74 		.ascii	"font\000"
+ 2338      00
+ 2339              	.LASF35:
+ 2340 006b 6465626F 		.ascii	"debounce_result_msg\000"
+ 2340      756E6365 
+ 2340      5F726573 
+ 2340      756C745F 
+ 2340      6D736700 
+ 2341              	.LASF2:
+ 2342 007f 73686F72 		.ascii	"short int\000"
+ 2342      7420696E 
+ 2342      7400
+ 2343              	.LASF22:
+ 2344 0089 6770696F 		.ascii	"gpio_and_delay_cb\000"
+ 2344      5F616E64 
+ 2344      5F64656C 
+ 2344      61795F63 
+ 2344      6200
+ 2345              	.LASF52:
+ 2346 009b 74696C65 		.ascii	"tile_width\000"
+ 2346      5F776964 
+ 2346      746800
+ 2347              	.LASF70:
+ 2348 00a6 73697A65 		.ascii	"sizetype\000"
+ 2348      74797065 
+ 2348      00
+ 2349              	.LASF77:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 49
+
+
+ 2350 00af 75387838 		.ascii	"u8x8_ssd1318_128x96_display_info\000"
+ 2350      5F737364 
+ 2350      31333138 
+ 2350      5F313238 
+ 2350      7839365F 
+ 2351              	.LASF45:
+ 2352 00d0 7364615F 		.ascii	"sda_setup_time_ns\000"
+ 2352      73657475 
+ 2352      705F7469 
+ 2352      6D655F6E 
+ 2352      7300
+ 2353              	.LASF76:
+ 2354 00e2 75387838 		.ascii	"u8x8_d_ssd1318_128x96_flip1_seq\000"
+ 2354      5F645F73 
+ 2354      73643133 
+ 2354      31385F31 
+ 2354      32387839 
+ 2355              	.LASF44:
+ 2356 0102 706F7374 		.ascii	"post_reset_wait_ms\000"
+ 2356      5F726573 
+ 2356      65745F77 
+ 2356      6169745F 
+ 2356      6D7300
+ 2357              	.LASF7:
+ 2358 0115 5F5F7569 		.ascii	"__uint32_t\000"
+ 2358      6E743332 
+ 2358      5F7400
+ 2359              	.LASF4:
+ 2360 0120 5F5F7569 		.ascii	"__uint16_t\000"
+ 2360      6E743136 
+ 2360      5F7400
+ 2361              	.LASF69:
+ 2362 012b 75387838 		.ascii	"u8x8_d_ssd1318_128x96_xcp\000"
+ 2362      5F645F73 
+ 2362      73643133 
+ 2362      31385F31 
+ 2362      32387839 
+ 2363              	.LASF82:
+ 2364 0145 75387838 		.ascii	"u8x8_cad_EndTransfer\000"
+ 2364      5F636164 
+ 2364      5F456E64 
+ 2364      5472616E 
+ 2364      73666572 
+ 2365              	.LASF88:
+ 2366 015a 433A5C55 		.ascii	"C:\\Users\\brian\\Documents\\PSoC Creator\\Lab7\\La"
+ 2366      73657273 
+ 2366      5C627269 
+ 2366      616E5C44 
+ 2366      6F63756D 
+ 2367 0187 62372E63 		.ascii	"b7.cydsn\000"
+ 2367      7964736E 
+ 2367      00
+ 2368              	.LASF51:
+ 2369 0190 77726974 		.ascii	"write_pulse_width_ns\000"
+ 2369      655F7075 
+ 2369      6C73655F 
+ 2369      77696474 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 50
+
+
+ 2369      685F6E73 
+ 2370              	.LASF12:
+ 2371 01a5 75696E74 		.ascii	"uint8_t\000"
+ 2371      385F7400 
+ 2372              	.LASF41:
+ 2373 01ad 706F7374 		.ascii	"post_chip_enable_wait_ns\000"
+ 2373      5F636869 
+ 2373      705F656E 
+ 2373      61626C65 
+ 2373      5F776169 
+ 2374              	.LASF65:
+ 2375 01c6 75387838 		.ascii	"u8x8\000"
+ 2375      00
+ 2376              	.LASF60:
+ 2377 01cb 74696C65 		.ascii	"tile_ptr\000"
+ 2377      5F707472 
+ 2377      00
+ 2378              	.LASF66:
+ 2379 01d4 6172675F 		.ascii	"arg_int\000"
+ 2379      696E7400 
+ 2380              	.LASF83:
+ 2381 01dc 75387838 		.ascii	"u8x8_cad_SendData\000"
+ 2381      5F636164 
+ 2381      5F53656E 
+ 2381      64446174 
+ 2381      6100
+ 2382              	.LASF23:
+ 2383 01ee 6275735F 		.ascii	"bus_clock\000"
+ 2383      636C6F63 
+ 2383      6B00
+ 2384              	.LASF54:
+ 2385 01f8 64656661 		.ascii	"default_x_offset\000"
+ 2385      756C745F 
+ 2385      785F6F66 
+ 2385      66736574 
+ 2385      00
+ 2386              	.LASF36:
+ 2387 0209 75387838 		.ascii	"u8x8_display_info_t\000"
+ 2387      5F646973 
+ 2387      706C6179 
+ 2387      5F696E66 
+ 2387      6F5F7400 
+ 2388              	.LASF33:
+ 2389 021d 6465626F 		.ascii	"debounce_last_pin_state\000"
+ 2389      756E6365 
+ 2389      5F6C6173 
+ 2389      745F7069 
+ 2389      6E5F7374 
+ 2390              	.LASF9:
+ 2391 0235 6C6F6E67 		.ascii	"long long int\000"
+ 2391      206C6F6E 
+ 2391      6720696E 
+ 2391      7400
+ 2392              	.LASF31:
+ 2393 0243 6770696F 		.ascii	"gpio_result\000"
+ 2393      5F726573 
+ 2393      756C7400 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 51
+
+
+ 2394              	.LASF72:
+ 2395 024f 75387838 		.ascii	"u8x8_d_ssd1318_128x96_xcp_init_seq\000"
+ 2395      5F645F73 
+ 2395      73643133 
+ 2395      31385F31 
+ 2395      32387839 
+ 2396              	.LASF46:
+ 2397 0272 73636B5F 		.ascii	"sck_pulse_width_ns\000"
+ 2397      70756C73 
+ 2397      655F7769 
+ 2397      6474685F 
+ 2397      6E7300
+ 2398              	.LASF80:
+ 2399 0285 75387838 		.ascii	"u8x8_cad_SendCmd\000"
+ 2399      5F636164 
+ 2399      5F53656E 
+ 2399      64436D64 
+ 2399      00
+ 2400              	.LASF84:
+ 2401 0296 75387838 		.ascii	"u8x8_d_helper_display_init\000"
+ 2401      5F645F68 
+ 2401      656C7065 
+ 2401      725F6469 
+ 2401      73706C61 
+ 2402              	.LASF6:
+ 2403 02b1 6C6F6E67 		.ascii	"long int\000"
+ 2403      20696E74 
+ 2403      00
+ 2404              	.LASF74:
+ 2405 02ba 75387838 		.ascii	"u8x8_d_ssd1318_128x96_powersave1_seq\000"
+ 2405      5F645F73 
+ 2405      73643133 
+ 2405      31385F31 
+ 2405      32387839 
+ 2406              	.LASF61:
+ 2407 02df 785F706F 		.ascii	"x_pos\000"
+ 2407      7300
+ 2408              	.LASF3:
+ 2409 02e5 5F5F7569 		.ascii	"__uint8_t\000"
+ 2409      6E74385F 
+ 2409      7400
+ 2410              	.LASF19:
+ 2411 02ef 64697370 		.ascii	"display_cb\000"
+ 2411      6C61795F 
+ 2411      636200
+ 2412              	.LASF50:
+ 2413 02fa 64617461 		.ascii	"data_setup_time_ns\000"
+ 2413      5F736574 
+ 2413      75705F74 
+ 2413      696D655F 
+ 2413      6E7300
+ 2414              	.LASF15:
+ 2415 030d 6C6F6E67 		.ascii	"long double\000"
+ 2415      20646F75 
+ 2415      626C6500 
+ 2416              	.LASF53:
+ 2417 0319 74696C65 		.ascii	"tile_height\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 52
+
+
+ 2417      5F686569 
+ 2417      67687400 
+ 2418              	.LASF1:
+ 2419 0325 756E7369 		.ascii	"unsigned char\000"
+ 2419      676E6564 
+ 2419      20636861 
+ 2419      7200
+ 2420              	.LASF71:
+ 2421 0333 75387838 		.ascii	"u8x8_d_ssd1318_128x96_icp_init_seq\000"
+ 2421      5F645F73 
+ 2421      73643133 
+ 2421      31385F31 
+ 2421      32387839 
+ 2422              	.LASF0:
+ 2423 0356 7369676E 		.ascii	"signed char\000"
+ 2423      65642063 
+ 2423      68617200 
+ 2424              	.LASF10:
+ 2425 0362 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2425      206C6F6E 
+ 2425      6720756E 
+ 2425      7369676E 
+ 2425      65642069 
+ 2426              	.LASF14:
+ 2427 0379 75696E74 		.ascii	"uint32_t\000"
+ 2427      33325F74 
+ 2427      00
+ 2428              	.LASF59:
+ 2429 0382 75387838 		.ascii	"u8x8_tile_struct\000"
+ 2429      5F74696C 
+ 2429      655F7374 
+ 2429      72756374 
+ 2429      00
+ 2430              	.LASF11:
+ 2431 0393 756E7369 		.ascii	"unsigned int\000"
+ 2431      676E6564 
+ 2431      20696E74 
+ 2431      00
+ 2432              	.LASF13:
+ 2433 03a0 75696E74 		.ascii	"uint16_t\000"
+ 2433      31365F74 
+ 2433      00
+ 2434              	.LASF38:
+ 2435 03a9 75387838 		.ascii	"u8x8_display_info_struct\000"
+ 2435      5F646973 
+ 2435      706C6179 
+ 2435      5F696E66 
+ 2435      6F5F7374 
+ 2436              	.LASF79:
+ 2437 03c2 75387838 		.ascii	"u8x8_cad_StartTransfer\000"
+ 2437      5F636164 
+ 2437      5F537461 
+ 2437      72745472 
+ 2437      616E7366 
+ 2438              	.LASF43:
+ 2439 03d9 72657365 		.ascii	"reset_pulse_width_ms\000"
+ 2439      745F7075 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 53
+
+
+ 2439      6C73655F 
+ 2439      77696474 
+ 2439      685F6D73 
+ 2440              	.LASF16:
+ 2441 03ee 75387838 		.ascii	"u8x8_t\000"
+ 2441      5F7400
+ 2442              	.LASF89:
+ 2443 03f5 75387838 		.ascii	"u8x8_d_ssd1318_generic\000"
+ 2443      5F645F73 
+ 2443      73643133 
+ 2443      31385F67 
+ 2443      656E6572 
+ 2444              	.LASF49:
+ 2445 040c 6932635F 		.ascii	"i2c_bus_clock_100kHz\000"
+ 2445      6275735F 
+ 2445      636C6F63 
+ 2445      6B5F3130 
+ 2445      306B487A 
+ 2446              	.LASF47:
+ 2447 0421 73636B5F 		.ascii	"sck_clock_hz\000"
+ 2447      636C6F63 
+ 2447      6B5F687A 
+ 2447      00
+ 2448              	.LASF5:
+ 2449 042e 73686F72 		.ascii	"short unsigned int\000"
+ 2449      7420756E 
+ 2449      7369676E 
+ 2449      65642069 
+ 2449      6E7400
+ 2450              	.LASF64:
+ 2451 0441 75387838 		.ascii	"u8x8_char_cb\000"
+ 2451      5F636861 
+ 2451      725F6362 
+ 2451      00
+ 2452              	.LASF75:
+ 2453 044e 75387838 		.ascii	"u8x8_d_ssd1318_128x96_flip0_seq\000"
+ 2453      5F645F73 
+ 2453      73643133 
+ 2453      31385F31 
+ 2453      32387839 
+ 2454              	.LASF34:
+ 2455 046e 6465626F 		.ascii	"debounce_state\000"
+ 2455      756E6365 
+ 2455      5F737461 
+ 2455      746500
+ 2456              	.LASF81:
+ 2457 047d 75387838 		.ascii	"u8x8_cad_SendArg\000"
+ 2457      5F636164 
+ 2457      5F53656E 
+ 2457      64417267 
+ 2457      00
+ 2458              	.LASF17:
+ 2459 048e 64697370 		.ascii	"display_info\000"
+ 2459      6C61795F 
+ 2459      696E666F 
+ 2459      00
+ 2460              	.LASF57:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 54
+
+
+ 2461 049b 70697865 		.ascii	"pixel_height\000"
+ 2461      6C5F6865 
+ 2461      69676874 
+ 2461      00
+ 2462              	.LASF56:
+ 2463 04a8 70697865 		.ascii	"pixel_width\000"
+ 2463      6C5F7769 
+ 2463      64746800 
+ 2464              	.LASF30:
+ 2465 04b4 75746638 		.ascii	"utf8_state\000"
+ 2465      5F737461 
+ 2465      746500
+ 2466              	.LASF37:
+ 2467 04bf 75387838 		.ascii	"u8x8_struct\000"
+ 2467      5F737472 
+ 2467      75637400 
+ 2468              	.LASF62:
+ 2469 04cb 795F706F 		.ascii	"y_pos\000"
+ 2469      7300
+ 2470              	.LASF68:
+ 2471 04d1 75387838 		.ascii	"u8x8_d_ssd1318_128x96\000"
+ 2471      5F645F73 
+ 2471      73643133 
+ 2471      31385F31 
+ 2471      32387839 
+ 2472              	.LASF8:
+ 2473 04e7 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2473      20756E73 
+ 2473      69676E65 
+ 2473      6420696E 
+ 2473      7400
+ 2474              	.LASF21:
+ 2475 04f9 62797465 		.ascii	"byte_cb\000"
+ 2475      5F636200 
+ 2476              	.LASF40:
+ 2477 0501 63686970 		.ascii	"chip_disable_level\000"
+ 2477      5F646973 
+ 2477      61626C65 
+ 2477      5F6C6576 
+ 2477      656C00
+ 2478              	.LASF28:
+ 2479 0514 6932635F 		.ascii	"i2c_address\000"
+ 2479      61646472 
+ 2479      65737300 
+ 2480              	.LASF87:
+ 2481 0520 2E2E5C75 		.ascii	"..\\u8g2\\csrc\\u8x8_d_ssd1318.c\000"
+ 2481      3867325C 
+ 2481      63737263 
+ 2481      5C753878 
+ 2481      385F645F 
+ 2482              	.LASF55:
+ 2483 053e 666C6970 		.ascii	"flipmode_x_offset\000"
+ 2483      6D6F6465 
+ 2483      5F785F6F 
+ 2483      66667365 
+ 2483      7400
+ 2484              	.LASF25:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 55
+
+
+ 2485 0550 656E636F 		.ascii	"encoding\000"
+ 2485      64696E67 
+ 2485      00
+ 2486              	.LASF78:
+ 2487 0559 75387838 		.ascii	"u8x8_cad_SendSequence\000"
+ 2487      5F636164 
+ 2487      5F53656E 
+ 2487      64536571 
+ 2487      75656E63 
+ 2488              	.LASF29:
+ 2489 056f 6932635F 		.ascii	"i2c_started\000"
+ 2489      73746172 
+ 2489      74656400 
+ 2490              	.LASF85:
+ 2491 057b 75387838 		.ascii	"u8x8_d_helper_display_setup_memory\000"
+ 2491      5F645F68 
+ 2491      656C7065 
+ 2491      725F6469 
+ 2491      73706C61 
+ 2492              	.LASF20:
+ 2493 059e 6361645F 		.ascii	"cad_cb\000"
+ 2493      636200
+ 2494              	.LASF58:
+ 2495 05a5 75387838 		.ascii	"u8x8_tile_t\000"
+ 2495      5F74696C 
+ 2495      655F7400 
+ 2496              	.LASF86:
+ 2497 05b1 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2497      43313120 
+ 2497      352E342E 
+ 2497      31203230 
+ 2497      31363036 
+ 2498 05e4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2498      20726576 
+ 2498      6973696F 
+ 2498      6E203233 
+ 2498      37373135 
+ 2499 0617 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2499      66756E63 
+ 2499      74696F6E 
+ 2499      2D736563 
+ 2499      74696F6E 
+ 2500              	.LASF32:
+ 2501 063f 6465626F 		.ascii	"debounce_default_pin_state\000"
+ 2501      756E6365 
+ 2501      5F646566 
+ 2501      61756C74 
+ 2501      5F70696E 
+ 2502              	.LASF63:
+ 2503 065a 75387838 		.ascii	"u8x8_msg_cb\000"
+ 2503      5F6D7367 
+ 2503      5F636200 
+ 2504              	.LASF18:
+ 2505 0666 6E657874 		.ascii	"next_cb\000"
+ 2505      5F636200 
+ 2506              	.LASF42:
+ 2507 066e 7072655F 		.ascii	"pre_chip_disable_wait_ns\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccgKrip4.s 			page 56
+
+
+ 2507      63686970 
+ 2507      5F646973 
+ 2507      61626C65 
+ 2507      5F776169 
+ 2508              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

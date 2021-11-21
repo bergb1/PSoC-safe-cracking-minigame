@@ -1,0 +1,2430 @@
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"u8x8_d_pcd8544_84x48.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.u8x8_d_pcd8544_84x48,"ax",%progbits
+  20              		.align	2
+  21              		.global	u8x8_d_pcd8544_84x48
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	u8x8_d_pcd8544_84x48, %function
+  25              	u8x8_d_pcd8544_84x48:
+  26              	.LFB0:
+  27              		.file 1 "..\\u8g2\\csrc\\u8x8_d_pcd8544_84x48.c"
+   1:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** /*
+   2:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+   3:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   u8x8_d_pcd8544_84x48.c (so called "Nokia 5110" displays)
+   4:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   
+   5:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   Universal 8bit Graphics Library (https://github.com/olikraus/u8g2/)
+   6:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+   7:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   Copyright (c) 2016, olikraus@gmail.com
+   8:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   All rights reserved.
+   9:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  10:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   Redistribution and use in source and binary forms, with or without modification, 
+  11:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   are permitted provided that the following conditions are met:
+  12:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  13:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   * Redistributions of source code must retain the above copyright notice, this list 
+  14:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     of conditions and the following disclaimer.
+  15:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     
+  16:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   * Redistributions in binary form must reproduce the above copyright notice, this 
+  17:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     list of conditions and the following disclaimer in the documentation and/or other 
+  18:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     materials provided with the distribution.
+  19:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  20:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+  21:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+  22:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  23:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+  24:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+  25:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  26:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  27:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+  28:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+  29:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+  30:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 2
+
+
+  31:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+  32:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
+  33:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  34:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   
+  35:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** */
+  36:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** #include "u8x8.h"
+  37:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  38:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  39:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  40:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  41:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** static const uint8_t u8x8_d_pcd8544_84x48_init_seq[] = {
+  42:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     
+  43:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  44:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   
+  45:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x021),            			/* activate chip (PD=0), horizontal increment (V=0), enter extended 
+  46:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x006),		                /* temp. control: b10 = 2  */
+  47:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x013),		                /* bias system 1:48 */
+  48:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x0c0),		                /* medium Vop  */
+  49:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   
+  50:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x020),		                /* activate chip (PD=0), horizontal increment (V=0), enter normal
+  51:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x008),				/* blank */
+  52:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x024),		                /* power down (PD=1), horizontal increment (V=0), enter normal co
+  53:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     
+  54:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  55:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_END()             			/* end of sequence */
+  56:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** };
+  57:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  58:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** static const uint8_t u8x8_d_pcd8544_84x48_powersave0_seq[] = {
+  59:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  60:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x020),		                /* activate chip (PD=0), horizontal increment (V=0), enter normal
+  61:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x00c),				/* display on */
+  62:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  63:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_END()             			/* end of sequence */
+  64:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** };
+  65:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  66:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** static const uint8_t u8x8_d_pcd8544_84x48_powersave1_seq[] = {
+  67:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  68:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x020),		                /* activate chip (PD=0), horizontal increment (V=0), enter normal
+  69:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x008),				/* blank */
+  70:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_C(0x024),		                /* power down (PD=1), horizontal increment (V=0), enter normal co
+  71:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  72:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   U8X8_END()             			/* end of sequence */
+  73:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** };
+  74:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  75:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  76:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+  77:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** static const u8x8_display_info_t u8x8_pcd8544_84x48_display_info =
+  78:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** {
+  79:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* chip_enable_level = */ 0,
+  80:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* chip_disable_level = */ 1,
+  81:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   
+  82:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* post_chip_enable_wait_ns = */ 5,
+  83:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* pre_chip_disable_wait_ns = */ 5,
+  84:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* reset_pulse_width_ms = */ 2, 
+  85:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* post_reset_wait_ms = */ 2, 
+  86:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* sda_setup_time_ns = */ 12,		
+  87:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* sck_pulse_width_ns = */ 75,	/* half of cycle time (100ns according to datasheet), AVR: below 7
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 3
+
+
+  88:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* sck_clock_hz = */ 4000000UL,	/* since Arduino 1.6.0, the SPI bus speed in Hz. Should be  10000
+  89:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* spi_mode = */ 0,		/* active high, rising edge */
+  90:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* i2c_bus_clock_100kHz = */ 4,
+  91:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* data_setup_time_ns = */ 30,
+  92:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* write_pulse_width_ns = */ 40,
+  93:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* tile_width = */ 11,		/* width of 11*8=88 pixel */
+  94:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* tile_hight = */ 6,
+  95:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* default_x_offset = */ 0,
+  96:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* flipmode_x_offset = */ 0,
+  97:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* pixel_width = */ 84,
+  98:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   /* pixel_height = */ 48
+  99:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** };
+ 100:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 
+ 101:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** uint8_t u8x8_d_pcd8544_84x48(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 102:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** {
+  28              		.loc 1 102 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  34              		.cfi_def_cfa_offset 24
+  35              		.cfi_offset 4, -24
+  36              		.cfi_offset 5, -20
+  37              		.cfi_offset 6, -16
+  38              		.cfi_offset 7, -12
+  39              		.cfi_offset 8, -8
+  40              		.cfi_offset 14, -4
+  41 0004 0646     		mov	r6, r0
+  42 0006 9046     		mov	r8, r2
+  43 0008 1D46     		mov	r5, r3
+ 103:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   uint8_t x, c;
+ 104:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   uint8_t *ptr;
+ 105:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   switch(msg)
+  44              		.loc 1 105 0
+  45 000a 0939     		subs	r1, r1, #9
+  46              	.LVL1:
+  47 000c 0629     		cmp	r1, #6
+  48 000e 6AD8     		bhi	.L13
+  49 0010 DFE801F0 		tbb	[pc, r1]
+  50              	.LVL2:
+  51              	.L4:
+  52 0014 04       		.byte	(.L3-.L4)/2
+  53 0015 0A       		.byte	(.L5-.L4)/2
+  54 0016 13       		.byte	(.L6-.L4)/2
+  55 0017 69       		.byte	(.L13-.L4)/2
+  56 0018 69       		.byte	(.L13-.L4)/2
+  57 0019 20       		.byte	(.L7-.L4)/2
+  58 001a 33       		.byte	(.L8-.L4)/2
+  59 001b 00       		.p2align 1
+  60              	.L3:
+ 106:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   {
+ 107:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     case U8X8_MSG_DISPLAY_SETUP_MEMORY:
+ 108:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_pcd8544_84x48_display_info);
+  61              		.loc 1 108 0
+  62 001c 3349     		ldr	r1, .L15
+  63 001e FFF7FEFF 		bl	u8x8_d_helper_display_setup_memory
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 4
+
+
+  64              	.LVL3:
+ 109:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       break;
+ 110:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     case U8X8_MSG_DISPLAY_INIT:
+ 111:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_d_helper_display_init(u8x8);
+ 112:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_pcd8544_84x48_init_seq);
+ 113:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       break;
+ 114:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     case U8X8_MSG_DISPLAY_SET_POWER_SAVE:
+ 115:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       if ( arg_int == 0 )
+ 116:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_pcd8544_84x48_powersave0_seq);
+ 117:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       else
+ 118:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_pcd8544_84x48_powersave1_seq);
+ 119:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       break;
+ 120:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     // case U8X8_MSG_DISPLAY_SET_FLIP_MODE:
+ 121:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     // 	  break; 	NOT SUPPORTED
+ 122:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       
+ 123:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** #ifdef U8X8_WITH_SET_CONTRAST
+ 124:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     case U8X8_MSG_DISPLAY_SET_CONTRAST:
+ 125:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_StartTransfer(u8x8);
+ 126:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendCmd(u8x8, 0x021 ); /* command mode, extended function set */
+ 127:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendCmd(u8x8, 0x080 | (arg_int >> 1) );
+ 128:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_EndTransfer(u8x8);
+ 129:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       break;
+ 130:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** #endif
+ 131:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     case U8X8_MSG_DISPLAY_DRAW_TILE:
+ 132:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_StartTransfer(u8x8);
+ 133:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     
+ 134:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       x = ((u8x8_tile_t *)arg_ptr)->x_pos;
+ 135:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       x *= 8;
+ 136:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       x += u8x8->x_offset;
+ 137:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendCmd(u8x8, 0x020 ); /* activate chip (PD=0), horizontal increment (V=0), enter no
+ 138:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendCmd(u8x8, 0x080 | (x) );	/* set X address */
+ 139:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendCmd(u8x8, 0x040 | (((u8x8_tile_t *)arg_ptr)->y_pos) );	/* set Y address */
+ 140:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     
+ 141:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       ptr = ((u8x8_tile_t *)arg_ptr)->tile_ptr;
+ 142:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       c = ((u8x8_tile_t *)arg_ptr)->cnt;
+ 143:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       c *= 8;	
+ 144:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       do
+ 145:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       {
+ 146:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	if ( c + x > 84u )
+ 147:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	{
+ 148:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	  if ( x >= 84u )
+ 149:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	    break;
+ 150:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	  c = 84u;
+ 151:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	  c -= x;
+ 152:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	}
+ 153:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	u8x8_cad_SendData(u8x8, c, ptr);	/* note: SendData can not handle more than 255 bytes */
+ 154:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	x += c;
+ 155:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	arg_int--;
+ 156:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       } while( arg_int > 0 );
+ 157:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       
+ 158:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_EndTransfer(u8x8);
+ 159:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       break;
+ 160:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     default:
+ 161:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       return 0;
+ 162:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   }
+ 163:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   return 1;
+  65              		.loc 1 163 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 5
+
+
+  66 0022 0120     		movs	r0, #1
+ 109:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       break;
+  67              		.loc 1 109 0
+  68 0024 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  69              	.LVL4:
+  70              	.L5:
+ 111:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_pcd8544_84x48_init_seq);
+  71              		.loc 1 111 0
+  72 0028 FFF7FEFF 		bl	u8x8_d_helper_display_init
+  73              	.LVL5:
+ 112:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       break;
+  74              		.loc 1 112 0
+  75 002c 3049     		ldr	r1, .L15+4
+  76 002e 3046     		mov	r0, r6
+  77 0030 FFF7FEFF 		bl	u8x8_cad_SendSequence
+  78              	.LVL6:
+  79              		.loc 1 163 0
+  80 0034 0120     		movs	r0, #1
+ 113:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     case U8X8_MSG_DISPLAY_SET_POWER_SAVE:
+  81              		.loc 1 113 0
+  82 0036 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  83              	.LVL7:
+  84              	.L6:
+ 115:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_pcd8544_84x48_powersave0_seq);
+  85              		.loc 1 115 0
+  86 003a 2AB9     		cbnz	r2, .L9
+ 116:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       else
+  87              		.loc 1 116 0
+  88 003c 2D49     		ldr	r1, .L15+8
+  89 003e FFF7FEFF 		bl	u8x8_cad_SendSequence
+  90              	.LVL8:
+  91              		.loc 1 163 0
+  92 0042 0120     		movs	r0, #1
+  93 0044 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  94              	.LVL9:
+  95              	.L9:
+ 118:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       break;
+  96              		.loc 1 118 0
+  97 0048 2B49     		ldr	r1, .L15+12
+  98 004a FFF7FEFF 		bl	u8x8_cad_SendSequence
+  99              	.LVL10:
+ 100              		.loc 1 163 0
+ 101 004e 0120     		movs	r0, #1
+ 102 0050 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 103              	.LVL11:
+ 104              	.L7:
+ 125:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendCmd(u8x8, 0x021 ); /* command mode, extended function set */
+ 105              		.loc 1 125 0
+ 106 0054 FFF7FEFF 		bl	u8x8_cad_StartTransfer
+ 107              	.LVL12:
+ 126:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendCmd(u8x8, 0x080 | (arg_int >> 1) );
+ 108              		.loc 1 126 0
+ 109 0058 2121     		movs	r1, #33
+ 110 005a 3046     		mov	r0, r6
+ 111 005c FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 112              	.LVL13:
+ 127:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_EndTransfer(u8x8);
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 6
+
+
+ 113              		.loc 1 127 0
+ 114 0060 4FEA5801 		lsr	r1, r8, #1
+ 115 0064 41F08001 		orr	r1, r1, #128
+ 116 0068 3046     		mov	r0, r6
+ 117 006a FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 118              	.LVL14:
+ 128:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       break;
+ 119              		.loc 1 128 0
+ 120 006e 3046     		mov	r0, r6
+ 121 0070 FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 122              	.LVL15:
+ 123              		.loc 1 163 0
+ 124 0074 0120     		movs	r0, #1
+ 129:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** #endif
+ 125              		.loc 1 129 0
+ 126 0076 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 127              	.LVL16:
+ 128              	.L8:
+ 132:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     
+ 129              		.loc 1 132 0
+ 130 007a FFF7FEFF 		bl	u8x8_cad_StartTransfer
+ 131              	.LVL17:
+ 134:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       x *= 8;
+ 132              		.loc 1 134 0
+ 133 007e 6B79     		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 134              	.LVL18:
+ 135:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       x += u8x8->x_offset;
+ 135              		.loc 1 135 0
+ 136 0080 DB00     		lsls	r3, r3, #3
+ 137              	.LVL19:
+ 138 0082 DBB2     		uxtb	r3, r3
+ 139              	.LVL20:
+ 136:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendCmd(u8x8, 0x020 ); /* activate chip (PD=0), horizontal increment (V=0), enter no
+ 140              		.loc 1 136 0
+ 141 0084 96F82240 		ldrb	r4, [r6, #34]	@ zero_extendqisi2
+ 142 0088 1C44     		add	r4, r4, r3
+ 143 008a E4B2     		uxtb	r4, r4
+ 144              	.LVL21:
+ 137:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendCmd(u8x8, 0x080 | (x) );	/* set X address */
+ 145              		.loc 1 137 0
+ 146 008c 2021     		movs	r1, #32
+ 147 008e 3046     		mov	r0, r6
+ 148 0090 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 149              	.LVL22:
+ 138:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       u8x8_cad_SendCmd(u8x8, 0x040 | (((u8x8_tile_t *)arg_ptr)->y_pos) );	/* set Y address */
+ 150              		.loc 1 138 0
+ 151 0094 44F08001 		orr	r1, r4, #128
+ 152 0098 3046     		mov	r0, r6
+ 153 009a FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 154              	.LVL23:
+ 139:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     
+ 155              		.loc 1 139 0
+ 156 009e A979     		ldrb	r1, [r5, #6]	@ zero_extendqisi2
+ 157 00a0 41F04001 		orr	r1, r1, #64
+ 158 00a4 3046     		mov	r0, r6
+ 159 00a6 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 160              	.LVL24:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 7
+
+
+ 141:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       c = ((u8x8_tile_t *)arg_ptr)->cnt;
+ 161              		.loc 1 141 0
+ 162 00aa 2F68     		ldr	r7, [r5]
+ 163              	.LVL25:
+ 142:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       c *= 8;	
+ 164              		.loc 1 142 0
+ 165 00ac 2D79     		ldrb	r5, [r5, #4]	@ zero_extendqisi2
+ 166              	.LVL26:
+ 143:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       do
+ 167              		.loc 1 143 0
+ 168 00ae ED00     		lsls	r5, r5, #3
+ 169              	.LVL27:
+ 170 00b0 EDB2     		uxtb	r5, r5
+ 171              	.LVL28:
+ 172              	.L12:
+ 146:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	{
+ 173              		.loc 1 146 0
+ 174 00b2 2B19     		adds	r3, r5, r4
+ 175 00b4 542B     		cmp	r3, #84
+ 176 00b6 04D9     		bls	.L10
+ 148:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	    break;
+ 177              		.loc 1 148 0
+ 178 00b8 532C     		cmp	r4, #83
+ 179 00ba 0ED8     		bhi	.L11
+ 180              	.LVL29:
+ 151:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	}
+ 181              		.loc 1 151 0
+ 182 00bc C4F15405 		rsb	r5, r4, #84
+ 183 00c0 EDB2     		uxtb	r5, r5
+ 184              	.LVL30:
+ 185              	.L10:
+ 153:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	x += c;
+ 186              		.loc 1 153 0
+ 187 00c2 3A46     		mov	r2, r7
+ 188 00c4 2946     		mov	r1, r5
+ 189 00c6 3046     		mov	r0, r6
+ 190 00c8 FFF7FEFF 		bl	u8x8_cad_SendData
+ 191              	.LVL31:
+ 154:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** 	arg_int--;
+ 192              		.loc 1 154 0
+ 193 00cc 2C44     		add	r4, r4, r5
+ 194              	.LVL32:
+ 195 00ce E4B2     		uxtb	r4, r4
+ 196              	.LVL33:
+ 155:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       } while( arg_int > 0 );
+ 197              		.loc 1 155 0
+ 198 00d0 08F1FF32 		add	r2, r8, #-1
+ 199              	.LVL34:
+ 156:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       
+ 200              		.loc 1 156 0
+ 201 00d4 12F0FF08 		ands	r8, r2, #255
+ 202 00d8 EBD1     		bne	.L12
+ 203              	.LVL35:
+ 204              	.L11:
+ 158:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****       break;
+ 205              		.loc 1 158 0
+ 206 00da 3046     		mov	r0, r6
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 8
+
+
+ 207 00dc FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 208              	.LVL36:
+ 209              		.loc 1 163 0
+ 210 00e0 0120     		movs	r0, #1
+ 159:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****     default:
+ 211              		.loc 1 159 0
+ 212 00e2 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 213              	.LVL37:
+ 214              	.L13:
+ 161:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c ****   }
+ 215              		.loc 1 161 0
+ 216 00e6 0020     		movs	r0, #0
+ 217              	.LVL38:
+ 164:..\u8g2\csrc/u8x8_d_pcd8544_84x48.c **** }
+ 218              		.loc 1 164 0
+ 219 00e8 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 220              	.LVL39:
+ 221              	.L16:
+ 222              		.align	2
+ 223              	.L15:
+ 224 00ec 00000000 		.word	.LANCHOR0
+ 225 00f0 18000000 		.word	.LANCHOR0+24
+ 226 00f4 2C000000 		.word	.LANCHOR0+44
+ 227 00f8 34000000 		.word	.LANCHOR0+52
+ 228              		.cfi_endproc
+ 229              	.LFE0:
+ 230              		.size	u8x8_d_pcd8544_84x48, .-u8x8_d_pcd8544_84x48
+ 231              		.section	.rodata
+ 232              		.align	2
+ 233              		.set	.LANCHOR0,. + 0
+ 234              		.type	u8x8_pcd8544_84x48_display_info, %object
+ 235              		.size	u8x8_pcd8544_84x48_display_info, 24
+ 236              	u8x8_pcd8544_84x48_display_info:
+ 237 0000 00       		.byte	0
+ 238 0001 01       		.byte	1
+ 239 0002 05       		.byte	5
+ 240 0003 05       		.byte	5
+ 241 0004 02       		.byte	2
+ 242 0005 02       		.byte	2
+ 243 0006 0C       		.byte	12
+ 244 0007 4B       		.byte	75
+ 245 0008 00093D00 		.word	4000000
+ 246 000c 00       		.byte	0
+ 247 000d 04       		.byte	4
+ 248 000e 1E       		.byte	30
+ 249 000f 28       		.byte	40
+ 250 0010 0B       		.byte	11
+ 251 0011 06       		.byte	6
+ 252 0012 00       		.byte	0
+ 253 0013 00       		.byte	0
+ 254 0014 5400     		.short	84
+ 255 0016 3000     		.short	48
+ 256              		.type	u8x8_d_pcd8544_84x48_init_seq, %object
+ 257              		.size	u8x8_d_pcd8544_84x48_init_seq, 17
+ 258              	u8x8_d_pcd8544_84x48_init_seq:
+ 259 0018 18       		.byte	24
+ 260 0019 15       		.byte	21
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 9
+
+
+ 261 001a 21       		.byte	33
+ 262 001b 15       		.byte	21
+ 263 001c 06       		.byte	6
+ 264 001d 15       		.byte	21
+ 265 001e 13       		.byte	19
+ 266 001f 15       		.byte	21
+ 267 0020 C0       		.byte	-64
+ 268 0021 15       		.byte	21
+ 269 0022 20       		.byte	32
+ 270 0023 15       		.byte	21
+ 271 0024 08       		.byte	8
+ 272 0025 15       		.byte	21
+ 273 0026 24       		.byte	36
+ 274 0027 19       		.byte	25
+ 275 0028 FF       		.byte	-1
+ 276 0029 000000   		.space	3
+ 277              		.type	u8x8_d_pcd8544_84x48_powersave0_seq, %object
+ 278              		.size	u8x8_d_pcd8544_84x48_powersave0_seq, 7
+ 279              	u8x8_d_pcd8544_84x48_powersave0_seq:
+ 280 002c 18       		.byte	24
+ 281 002d 15       		.byte	21
+ 282 002e 20       		.byte	32
+ 283 002f 15       		.byte	21
+ 284 0030 0C       		.byte	12
+ 285 0031 19       		.byte	25
+ 286 0032 FF       		.byte	-1
+ 287 0033 00       		.space	1
+ 288              		.type	u8x8_d_pcd8544_84x48_powersave1_seq, %object
+ 289              		.size	u8x8_d_pcd8544_84x48_powersave1_seq, 9
+ 290              	u8x8_d_pcd8544_84x48_powersave1_seq:
+ 291 0034 18       		.byte	24
+ 292 0035 15       		.byte	21
+ 293 0036 20       		.byte	32
+ 294 0037 15       		.byte	21
+ 295 0038 08       		.byte	8
+ 296 0039 15       		.byte	21
+ 297 003a 24       		.byte	36
+ 298 003b 19       		.byte	25
+ 299 003c FF       		.byte	-1
+ 300              		.text
+ 301              	.Letext0:
+ 302              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 303              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 304              		.file 4 "..\\u8g2\\csrc\\u8x8.h"
+ 305              		.section	.debug_info,"",%progbits
+ 306              	.Ldebug_info0:
+ 307 0000 29060000 		.4byte	0x629
+ 308 0004 0400     		.2byte	0x4
+ 309 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 310 000a 04       		.byte	0x4
+ 311 000b 01       		.uleb128 0x1
+ 312 000c EB040000 		.4byte	.LASF80
+ 313 0010 0C       		.byte	0xc
+ 314 0011 00000000 		.4byte	.LASF81
+ 315 0015 E9000000 		.4byte	.LASF82
+ 316 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 317 001d 00000000 		.4byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 10
+
+
+ 318 0021 00000000 		.4byte	.Ldebug_line0
+ 319 0025 02       		.uleb128 0x2
+ 320 0026 01       		.byte	0x1
+ 321 0027 06       		.byte	0x6
+ 322 0028 B3020000 		.4byte	.LASF0
+ 323 002c 03       		.uleb128 0x3
+ 324 002d 41020000 		.4byte	.LASF3
+ 325 0031 02       		.byte	0x2
+ 326 0032 1D       		.byte	0x1d
+ 327 0033 37000000 		.4byte	0x37
+ 328 0037 02       		.uleb128 0x2
+ 329 0038 01       		.byte	0x1
+ 330 0039 08       		.byte	0x8
+ 331 003a A5020000 		.4byte	.LASF1
+ 332 003e 02       		.uleb128 0x2
+ 333 003f 02       		.byte	0x2
+ 334 0040 05       		.byte	0x5
+ 335 0041 7E000000 		.4byte	.LASF2
+ 336 0045 03       		.uleb128 0x3
+ 337 0046 DE000000 		.4byte	.LASF4
+ 338 004a 02       		.byte	0x2
+ 339 004b 2B       		.byte	0x2b
+ 340 004c 50000000 		.4byte	0x50
+ 341 0050 02       		.uleb128 0x2
+ 342 0051 02       		.byte	0x2
+ 343 0052 07       		.byte	0x7
+ 344 0053 74030000 		.4byte	.LASF5
+ 345 0057 02       		.uleb128 0x2
+ 346 0058 04       		.byte	0x4
+ 347 0059 05       		.byte	0x5
+ 348 005a 1D020000 		.4byte	.LASF6
+ 349 005e 03       		.uleb128 0x3
+ 350 005f D3000000 		.4byte	.LASF7
+ 351 0063 02       		.byte	0x2
+ 352 0064 41       		.byte	0x41
+ 353 0065 69000000 		.4byte	0x69
+ 354 0069 02       		.uleb128 0x2
+ 355 006a 04       		.byte	0x4
+ 356 006b 07       		.byte	0x7
+ 357 006c 35040000 		.4byte	.LASF8
+ 358 0070 02       		.uleb128 0x2
+ 359 0071 08       		.byte	0x8
+ 360 0072 05       		.byte	0x5
+ 361 0073 C4010000 		.4byte	.LASF9
+ 362 0077 02       		.uleb128 0x2
+ 363 0078 08       		.byte	0x8
+ 364 0079 07       		.byte	0x7
+ 365 007a BF020000 		.4byte	.LASF10
+ 366 007e 04       		.uleb128 0x4
+ 367 007f 04       		.byte	0x4
+ 368 0080 05       		.byte	0x5
+ 369 0081 696E7400 		.ascii	"int\000"
+ 370 0085 02       		.uleb128 0x2
+ 371 0086 04       		.byte	0x4
+ 372 0087 07       		.byte	0x7
+ 373 0088 F0020000 		.4byte	.LASF11
+ 374 008c 03       		.uleb128 0x3
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 11
+
+
+ 375 008d 34010000 		.4byte	.LASF12
+ 376 0091 03       		.byte	0x3
+ 377 0092 18       		.byte	0x18
+ 378 0093 2C000000 		.4byte	0x2c
+ 379 0097 03       		.uleb128 0x3
+ 380 0098 FD020000 		.4byte	.LASF13
+ 381 009c 03       		.byte	0x3
+ 382 009d 24       		.byte	0x24
+ 383 009e 45000000 		.4byte	0x45
+ 384 00a2 03       		.uleb128 0x3
+ 385 00a3 D6020000 		.4byte	.LASF14
+ 386 00a7 03       		.byte	0x3
+ 387 00a8 30       		.byte	0x30
+ 388 00a9 5E000000 		.4byte	0x5e
+ 389 00ad 05       		.uleb128 0x5
+ 390 00ae 04       		.byte	0x4
+ 391 00af 02       		.uleb128 0x2
+ 392 00b0 08       		.byte	0x8
+ 393 00b1 04       		.byte	0x4
+ 394 00b2 8D020000 		.4byte	.LASF15
+ 395 00b6 03       		.uleb128 0x3
+ 396 00b7 4B030000 		.4byte	.LASF16
+ 397 00bb 04       		.byte	0x4
+ 398 00bc CD       		.byte	0xcd
+ 399 00bd C1000000 		.4byte	0xc1
+ 400 00c1 06       		.uleb128 0x6
+ 401 00c2 E9030000 		.4byte	.LASF37
+ 402 00c6 2C       		.byte	0x2c
+ 403 00c7 04       		.byte	0x4
+ 404 00c8 5001     		.2byte	0x150
+ 405 00ca C6010000 		.4byte	0x1c6
+ 406 00ce 07       		.uleb128 0x7
+ 407 00cf B8030000 		.4byte	.LASF17
+ 408 00d3 04       		.byte	0x4
+ 409 00d4 5201     		.2byte	0x152
+ 410 00d6 74030000 		.4byte	0x374
+ 411 00da 00       		.byte	0
+ 412 00db 07       		.uleb128 0x7
+ 413 00dc A0050000 		.4byte	.LASF18
+ 414 00e0 04       		.byte	0x4
+ 415 00e1 5301     		.2byte	0x153
+ 416 00e3 49030000 		.4byte	0x349
+ 417 00e7 04       		.byte	0x4
+ 418 00e8 07       		.uleb128 0x7
+ 419 00e9 4B020000 		.4byte	.LASF19
+ 420 00ed 04       		.byte	0x4
+ 421 00ee 5401     		.2byte	0x154
+ 422 00f0 14030000 		.4byte	0x314
+ 423 00f4 08       		.byte	0x8
+ 424 00f5 07       		.uleb128 0x7
+ 425 00f6 D8040000 		.4byte	.LASF20
+ 426 00fa 04       		.byte	0x4
+ 427 00fb 5501     		.2byte	0x155
+ 428 00fd 14030000 		.4byte	0x314
+ 429 0101 0C       		.byte	0xc
+ 430 0102 07       		.uleb128 0x7
+ 431 0103 47040000 		.4byte	.LASF21
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 12
+
+
+ 432 0107 04       		.byte	0x4
+ 433 0108 5601     		.2byte	0x156
+ 434 010a 14030000 		.4byte	0x314
+ 435 010e 10       		.byte	0x10
+ 436 010f 07       		.uleb128 0x7
+ 437 0110 88000000 		.4byte	.LASF22
+ 438 0114 04       		.byte	0x4
+ 439 0115 5701     		.2byte	0x157
+ 440 0117 14030000 		.4byte	0x314
+ 441 011b 14       		.byte	0x14
+ 442 011c 07       		.uleb128 0x7
+ 443 011d 7D010000 		.4byte	.LASF23
+ 444 0121 04       		.byte	0x4
+ 445 0122 5801     		.2byte	0x158
+ 446 0124 A2000000 		.4byte	0xa2
+ 447 0128 18       		.byte	0x18
+ 448 0129 07       		.uleb128 0x7
+ 449 012a 65000000 		.4byte	.LASF24
+ 450 012e 04       		.byte	0x4
+ 451 012f 5901     		.2byte	0x159
+ 452 0131 7F030000 		.4byte	0x37f
+ 453 0135 1C       		.byte	0x1c
+ 454 0136 07       		.uleb128 0x7
+ 455 0137 80040000 		.4byte	.LASF25
+ 456 013b 04       		.byte	0x4
+ 457 013c 5A01     		.2byte	0x15a
+ 458 013e 97000000 		.4byte	0x97
+ 459 0142 20       		.byte	0x20
+ 460 0143 07       		.uleb128 0x7
+ 461 0144 24000000 		.4byte	.LASF26
+ 462 0148 04       		.byte	0x4
+ 463 0149 5B01     		.2byte	0x15b
+ 464 014b 8C000000 		.4byte	0x8c
+ 465 014f 22       		.byte	0x22
+ 466 0150 07       		.uleb128 0x7
+ 467 0151 2D000000 		.4byte	.LASF27
+ 468 0155 04       		.byte	0x4
+ 469 0156 5C01     		.2byte	0x15c
+ 470 0158 8C000000 		.4byte	0x8c
+ 471 015c 23       		.byte	0x23
+ 472 015d 07       		.uleb128 0x7
+ 473 015e 62040000 		.4byte	.LASF28
+ 474 0162 04       		.byte	0x4
+ 475 0163 5D01     		.2byte	0x15d
+ 476 0165 8C000000 		.4byte	0x8c
+ 477 0169 24       		.byte	0x24
+ 478 016a 07       		.uleb128 0x7
+ 479 016b A9040000 		.4byte	.LASF29
+ 480 016f 04       		.byte	0x4
+ 481 0170 6001     		.2byte	0x160
+ 482 0172 8C000000 		.4byte	0x8c
+ 483 0176 25       		.byte	0x25
+ 484 0177 07       		.uleb128 0x7
+ 485 0178 DE030000 		.4byte	.LASF30
+ 486 017c 04       		.byte	0x4
+ 487 017d 6201     		.2byte	0x162
+ 488 017f 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 13
+
+
+ 489 0183 26       		.byte	0x26
+ 490 0184 07       		.uleb128 0x7
+ 491 0185 D2010000 		.4byte	.LASF31
+ 492 0189 04       		.byte	0x4
+ 493 018a 6301     		.2byte	0x163
+ 494 018c 8C000000 		.4byte	0x8c
+ 495 0190 27       		.byte	0x27
+ 496 0191 07       		.uleb128 0x7
+ 497 0192 79050000 		.4byte	.LASF32
+ 498 0196 04       		.byte	0x4
+ 499 0197 6401     		.2byte	0x164
+ 500 0199 8C000000 		.4byte	0x8c
+ 501 019d 28       		.byte	0x28
+ 502 019e 07       		.uleb128 0x7
+ 503 019f AC010000 		.4byte	.LASF33
+ 504 01a3 04       		.byte	0x4
+ 505 01a4 6501     		.2byte	0x165
+ 506 01a6 8C000000 		.4byte	0x8c
+ 507 01aa 29       		.byte	0x29
+ 508 01ab 07       		.uleb128 0x7
+ 509 01ac A9030000 		.4byte	.LASF34
+ 510 01b0 04       		.byte	0x4
+ 511 01b1 6601     		.2byte	0x166
+ 512 01b3 8C000000 		.4byte	0x8c
+ 513 01b7 2A       		.byte	0x2a
+ 514 01b8 07       		.uleb128 0x7
+ 515 01b9 6A000000 		.4byte	.LASF35
+ 516 01bd 04       		.byte	0x4
+ 517 01be 6701     		.2byte	0x167
+ 518 01c0 8C000000 		.4byte	0x8c
+ 519 01c4 2B       		.byte	0x2b
+ 520 01c5 00       		.byte	0
+ 521 01c6 03       		.uleb128 0x3
+ 522 01c7 98010000 		.4byte	.LASF36
+ 523 01cb 04       		.byte	0x4
+ 524 01cc CE       		.byte	0xce
+ 525 01cd D1010000 		.4byte	0x1d1
+ 526 01d1 08       		.uleb128 0x8
+ 527 01d2 06030000 		.4byte	.LASF38
+ 528 01d6 18       		.byte	0x18
+ 529 01d7 04       		.byte	0x4
+ 530 01d8 E7       		.byte	0xe7
+ 531 01d9 CC020000 		.4byte	0x2cc
+ 532 01dd 09       		.uleb128 0x9
+ 533 01de 53000000 		.4byte	.LASF39
+ 534 01e2 04       		.byte	0x4
+ 535 01e3 EB       		.byte	0xeb
+ 536 01e4 8C000000 		.4byte	0x8c
+ 537 01e8 00       		.byte	0
+ 538 01e9 09       		.uleb128 0x9
+ 539 01ea 4F040000 		.4byte	.LASF40
+ 540 01ee 04       		.byte	0x4
+ 541 01ef EC       		.byte	0xec
+ 542 01f0 8C000000 		.4byte	0x8c
+ 543 01f4 01       		.byte	0x1
+ 544 01f5 09       		.uleb128 0x9
+ 545 01f6 3C010000 		.4byte	.LASF41
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 14
+
+
+ 546 01fa 04       		.byte	0x4
+ 547 01fb EE       		.byte	0xee
+ 548 01fc 8C000000 		.4byte	0x8c
+ 549 0200 02       		.byte	0x2
+ 550 0201 09       		.uleb128 0x9
+ 551 0202 C6050000 		.4byte	.LASF42
+ 552 0206 04       		.byte	0x4
+ 553 0207 EF       		.byte	0xef
+ 554 0208 8C000000 		.4byte	0x8c
+ 555 020c 03       		.byte	0x3
+ 556 020d 09       		.uleb128 0x9
+ 557 020e 36030000 		.4byte	.LASF43
+ 558 0212 04       		.byte	0x4
+ 559 0213 F0       		.byte	0xf0
+ 560 0214 8C000000 		.4byte	0x8c
+ 561 0218 04       		.byte	0x4
+ 562 0219 09       		.uleb128 0x9
+ 563 021a C0000000 		.4byte	.LASF44
+ 564 021e 04       		.byte	0x4
+ 565 021f F1       		.byte	0xf1
+ 566 0220 8C000000 		.4byte	0x8c
+ 567 0224 05       		.byte	0x5
+ 568 0225 09       		.uleb128 0x9
+ 569 0226 AE000000 		.4byte	.LASF45
+ 570 022a 04       		.byte	0x4
+ 571 022b F8       		.byte	0xf8
+ 572 022c 8C000000 		.4byte	0x8c
+ 573 0230 06       		.byte	0x6
+ 574 0231 09       		.uleb128 0x9
+ 575 0232 DE010000 		.4byte	.LASF46
+ 576 0236 04       		.byte	0x4
+ 577 0237 FC       		.byte	0xfc
+ 578 0238 8C000000 		.4byte	0x8c
+ 579 023c 07       		.byte	0x7
+ 580 023d 09       		.uleb128 0x9
+ 581 023e 67030000 		.4byte	.LASF47
+ 582 0242 04       		.byte	0x4
+ 583 0243 FF       		.byte	0xff
+ 584 0244 A2000000 		.4byte	0xa2
+ 585 0248 08       		.byte	0x8
+ 586 0249 07       		.uleb128 0x7
+ 587 024a 42000000 		.4byte	.LASF48
+ 588 024e 04       		.byte	0x4
+ 589 024f 0901     		.2byte	0x109
+ 590 0251 8C000000 		.4byte	0x8c
+ 591 0255 0C       		.byte	0xc
+ 592 0256 07       		.uleb128 0x7
+ 593 0257 52030000 		.4byte	.LASF49
+ 594 025b 04       		.byte	0x4
+ 595 025c 0C01     		.2byte	0x10c
+ 596 025e 8C000000 		.4byte	0x8c
+ 597 0262 0D       		.byte	0xd
+ 598 0263 07       		.uleb128 0x7
+ 599 0264 56020000 		.4byte	.LASF50
+ 600 0268 04       		.byte	0x4
+ 601 0269 1201     		.2byte	0x112
+ 602 026b 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 15
+
+
+ 603 026f 0E       		.byte	0xe
+ 604 0270 07       		.uleb128 0x7
+ 605 0271 1F010000 		.4byte	.LASF51
+ 606 0275 04       		.byte	0x4
+ 607 0276 1401     		.2byte	0x114
+ 608 0278 8C000000 		.4byte	0x8c
+ 609 027c 0F       		.byte	0xf
+ 610 027d 07       		.uleb128 0x7
+ 611 027e 9A000000 		.4byte	.LASF52
+ 612 0282 04       		.byte	0x4
+ 613 0283 1701     		.2byte	0x117
+ 614 0285 8C000000 		.4byte	0x8c
+ 615 0289 10       		.byte	0x10
+ 616 028a 07       		.uleb128 0x7
+ 617 028b 99020000 		.4byte	.LASF53
+ 618 028f 04       		.byte	0x4
+ 619 0290 1801     		.2byte	0x118
+ 620 0292 8C000000 		.4byte	0x8c
+ 621 0296 11       		.byte	0x11
+ 622 0297 07       		.uleb128 0x7
+ 623 0298 87010000 		.4byte	.LASF54
+ 624 029c 04       		.byte	0x4
+ 625 029d 1A01     		.2byte	0x11a
+ 626 029f 8C000000 		.4byte	0x8c
+ 627 02a3 12       		.byte	0x12
+ 628 02a4 07       		.uleb128 0x7
+ 629 02a5 6E040000 		.4byte	.LASF55
+ 630 02a9 04       		.byte	0x4
+ 631 02aa 1B01     		.2byte	0x11b
+ 632 02ac 8C000000 		.4byte	0x8c
+ 633 02b0 13       		.byte	0x13
+ 634 02b1 07       		.uleb128 0x7
+ 635 02b2 D2030000 		.4byte	.LASF56
+ 636 02b6 04       		.byte	0x4
+ 637 02b7 2301     		.2byte	0x123
+ 638 02b9 97000000 		.4byte	0x97
+ 639 02bd 14       		.byte	0x14
+ 640 02be 07       		.uleb128 0x7
+ 641 02bf C5030000 		.4byte	.LASF57
+ 642 02c3 04       		.byte	0x4
+ 643 02c4 2401     		.2byte	0x124
+ 644 02c6 97000000 		.4byte	0x97
+ 645 02ca 16       		.byte	0x16
+ 646 02cb 00       		.byte	0
+ 647 02cc 03       		.uleb128 0x3
+ 648 02cd DF040000 		.4byte	.LASF58
+ 649 02d1 04       		.byte	0x4
+ 650 02d2 CF       		.byte	0xcf
+ 651 02d3 D7020000 		.4byte	0x2d7
+ 652 02d7 08       		.uleb128 0x8
+ 653 02d8 DF020000 		.4byte	.LASF59
+ 654 02dc 08       		.byte	0x8
+ 655 02dd 04       		.byte	0x4
+ 656 02de DE       		.byte	0xde
+ 657 02df 14030000 		.4byte	0x314
+ 658 02e3 09       		.uleb128 0x9
+ 659 02e4 5A010000 		.4byte	.LASF60
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 16
+
+
+ 660 02e8 04       		.byte	0x4
+ 661 02e9 E0       		.byte	0xe0
+ 662 02ea 6E030000 		.4byte	0x36e
+ 663 02ee 00       		.byte	0
+ 664 02ef 0A       		.uleb128 0xa
+ 665 02f0 636E7400 		.ascii	"cnt\000"
+ 666 02f4 04       		.byte	0x4
+ 667 02f5 E1       		.byte	0xe1
+ 668 02f6 8C000000 		.4byte	0x8c
+ 669 02fa 04       		.byte	0x4
+ 670 02fb 09       		.uleb128 0x9
+ 671 02fc 3B020000 		.4byte	.LASF61
+ 672 0300 04       		.byte	0x4
+ 673 0301 E2       		.byte	0xe2
+ 674 0302 8C000000 		.4byte	0x8c
+ 675 0306 05       		.byte	0x5
+ 676 0307 09       		.uleb128 0x9
+ 677 0308 F5030000 		.4byte	.LASF62
+ 678 030c 04       		.byte	0x4
+ 679 030d E3       		.byte	0xe3
+ 680 030e 8C000000 		.4byte	0x8c
+ 681 0312 06       		.byte	0x6
+ 682 0313 00       		.byte	0
+ 683 0314 03       		.uleb128 0x3
+ 684 0315 94050000 		.4byte	.LASF63
+ 685 0319 04       		.byte	0x4
+ 686 031a D1       		.byte	0xd1
+ 687 031b 1F030000 		.4byte	0x31f
+ 688 031f 0B       		.uleb128 0xb
+ 689 0320 04       		.byte	0x4
+ 690 0321 25030000 		.4byte	0x325
+ 691 0325 0C       		.uleb128 0xc
+ 692 0326 8C000000 		.4byte	0x8c
+ 693 032a 43030000 		.4byte	0x343
+ 694 032e 0D       		.uleb128 0xd
+ 695 032f 43030000 		.4byte	0x343
+ 696 0333 0D       		.uleb128 0xd
+ 697 0334 8C000000 		.4byte	0x8c
+ 698 0338 0D       		.uleb128 0xd
+ 699 0339 8C000000 		.4byte	0x8c
+ 700 033d 0D       		.uleb128 0xd
+ 701 033e AD000000 		.4byte	0xad
+ 702 0342 00       		.byte	0
+ 703 0343 0B       		.uleb128 0xb
+ 704 0344 04       		.byte	0x4
+ 705 0345 B6000000 		.4byte	0xb6
+ 706 0349 03       		.uleb128 0x3
+ 707 034a 87030000 		.4byte	.LASF64
+ 708 034e 04       		.byte	0x4
+ 709 034f D2       		.byte	0xd2
+ 710 0350 54030000 		.4byte	0x354
+ 711 0354 0B       		.uleb128 0xb
+ 712 0355 04       		.byte	0x4
+ 713 0356 5A030000 		.4byte	0x35a
+ 714 035a 0C       		.uleb128 0xc
+ 715 035b 97000000 		.4byte	0x97
+ 716 035f 6E030000 		.4byte	0x36e
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 17
+
+
+ 717 0363 0D       		.uleb128 0xd
+ 718 0364 43030000 		.4byte	0x343
+ 719 0368 0D       		.uleb128 0xd
+ 720 0369 8C000000 		.4byte	0x8c
+ 721 036d 00       		.byte	0
+ 722 036e 0B       		.uleb128 0xb
+ 723 036f 04       		.byte	0x4
+ 724 0370 8C000000 		.4byte	0x8c
+ 725 0374 0B       		.uleb128 0xb
+ 726 0375 04       		.byte	0x4
+ 727 0376 7A030000 		.4byte	0x37a
+ 728 037a 0E       		.uleb128 0xe
+ 729 037b C6010000 		.4byte	0x1c6
+ 730 037f 0B       		.uleb128 0xb
+ 731 0380 04       		.byte	0x4
+ 732 0381 85030000 		.4byte	0x385
+ 733 0385 0E       		.uleb128 0xe
+ 734 0386 8C000000 		.4byte	0x8c
+ 735 038a 0F       		.uleb128 0xf
+ 736 038b 94030000 		.4byte	.LASF83
+ 737 038f 01       		.byte	0x1
+ 738 0390 65       		.byte	0x65
+ 739 0391 8C000000 		.4byte	0x8c
+ 740 0395 00000000 		.4byte	.LFB0
+ 741 0399 FC000000 		.4byte	.LFE0-.LFB0
+ 742 039d 01       		.uleb128 0x1
+ 743 039e 9C       		.byte	0x9c
+ 744 039f 4E050000 		.4byte	0x54e
+ 745 03a3 10       		.uleb128 0x10
+ 746 03a4 55010000 		.4byte	.LASF65
+ 747 03a8 01       		.byte	0x1
+ 748 03a9 65       		.byte	0x65
+ 749 03aa 43030000 		.4byte	0x343
+ 750 03ae 00000000 		.4byte	.LLST0
+ 751 03b2 11       		.uleb128 0x11
+ 752 03b3 6D736700 		.ascii	"msg\000"
+ 753 03b7 01       		.byte	0x1
+ 754 03b8 65       		.byte	0x65
+ 755 03b9 8C000000 		.4byte	0x8c
+ 756 03bd B0000000 		.4byte	.LLST1
+ 757 03c1 10       		.uleb128 0x10
+ 758 03c2 63010000 		.4byte	.LASF66
+ 759 03c6 01       		.byte	0x1
+ 760 03c7 65       		.byte	0x65
+ 761 03c8 8C000000 		.4byte	0x8c
+ 762 03cc D1000000 		.4byte	.LLST2
+ 763 03d0 10       		.uleb128 0x10
+ 764 03d1 4B000000 		.4byte	.LASF67
+ 765 03d5 01       		.byte	0x1
+ 766 03d6 65       		.byte	0x65
+ 767 03d7 AD000000 		.4byte	0xad
+ 768 03db 90010000 		.4byte	.LLST3
+ 769 03df 12       		.uleb128 0x12
+ 770 03e0 7800     		.ascii	"x\000"
+ 771 03e2 01       		.byte	0x1
+ 772 03e3 67       		.byte	0x67
+ 773 03e4 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 18
+
+
+ 774 03e8 D5010000 		.4byte	.LLST4
+ 775 03ec 12       		.uleb128 0x12
+ 776 03ed 6300     		.ascii	"c\000"
+ 777 03ef 01       		.byte	0x1
+ 778 03f0 67       		.byte	0x67
+ 779 03f1 8C000000 		.4byte	0x8c
+ 780 03f5 15020000 		.4byte	.LLST5
+ 781 03f9 12       		.uleb128 0x12
+ 782 03fa 70747200 		.ascii	"ptr\000"
+ 783 03fe 01       		.byte	0x1
+ 784 03ff 68       		.byte	0x68
+ 785 0400 6E030000 		.4byte	0x36e
+ 786 0404 5A020000 		.4byte	.LLST6
+ 787 0408 13       		.uleb128 0x13
+ 788 0409 22000000 		.4byte	.LVL3
+ 789 040d D8050000 		.4byte	0x5d8
+ 790 0411 1F040000 		.4byte	0x41f
+ 791 0415 14       		.uleb128 0x14
+ 792 0416 01       		.uleb128 0x1
+ 793 0417 51       		.byte	0x51
+ 794 0418 05       		.uleb128 0x5
+ 795 0419 03       		.byte	0x3
+ 796 041a 00000000 		.4byte	.LANCHOR0
+ 797 041e 00       		.byte	0
+ 798 041f 15       		.uleb128 0x15
+ 799 0420 2C000000 		.4byte	.LVL5
+ 800 0424 E4050000 		.4byte	0x5e4
+ 801 0428 13       		.uleb128 0x13
+ 802 0429 34000000 		.4byte	.LVL6
+ 803 042d F0050000 		.4byte	0x5f0
+ 804 0431 45040000 		.4byte	0x445
+ 805 0435 14       		.uleb128 0x14
+ 806 0436 01       		.uleb128 0x1
+ 807 0437 50       		.byte	0x50
+ 808 0438 02       		.uleb128 0x2
+ 809 0439 76       		.byte	0x76
+ 810 043a 00       		.sleb128 0
+ 811 043b 14       		.uleb128 0x14
+ 812 043c 01       		.uleb128 0x1
+ 813 043d 51       		.byte	0x51
+ 814 043e 05       		.uleb128 0x5
+ 815 043f 03       		.byte	0x3
+ 816 0440 18000000 		.4byte	.LANCHOR0+24
+ 817 0444 00       		.byte	0
+ 818 0445 13       		.uleb128 0x13
+ 819 0446 42000000 		.4byte	.LVL8
+ 820 044a F0050000 		.4byte	0x5f0
+ 821 044e 5C040000 		.4byte	0x45c
+ 822 0452 14       		.uleb128 0x14
+ 823 0453 01       		.uleb128 0x1
+ 824 0454 51       		.byte	0x51
+ 825 0455 05       		.uleb128 0x5
+ 826 0456 03       		.byte	0x3
+ 827 0457 2C000000 		.4byte	.LANCHOR0+44
+ 828 045b 00       		.byte	0
+ 829 045c 13       		.uleb128 0x13
+ 830 045d 4E000000 		.4byte	.LVL10
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 19
+
+
+ 831 0461 F0050000 		.4byte	0x5f0
+ 832 0465 73040000 		.4byte	0x473
+ 833 0469 14       		.uleb128 0x14
+ 834 046a 01       		.uleb128 0x1
+ 835 046b 51       		.byte	0x51
+ 836 046c 05       		.uleb128 0x5
+ 837 046d 03       		.byte	0x3
+ 838 046e 34000000 		.4byte	.LANCHOR0+52
+ 839 0472 00       		.byte	0
+ 840 0473 15       		.uleb128 0x15
+ 841 0474 58000000 		.4byte	.LVL12
+ 842 0478 FC050000 		.4byte	0x5fc
+ 843 047c 13       		.uleb128 0x13
+ 844 047d 60000000 		.4byte	.LVL13
+ 845 0481 08060000 		.4byte	0x608
+ 846 0485 96040000 		.4byte	0x496
+ 847 0489 14       		.uleb128 0x14
+ 848 048a 01       		.uleb128 0x1
+ 849 048b 50       		.byte	0x50
+ 850 048c 02       		.uleb128 0x2
+ 851 048d 76       		.byte	0x76
+ 852 048e 00       		.sleb128 0
+ 853 048f 14       		.uleb128 0x14
+ 854 0490 01       		.uleb128 0x1
+ 855 0491 51       		.byte	0x51
+ 856 0492 02       		.uleb128 0x2
+ 857 0493 08       		.byte	0x8
+ 858 0494 21       		.byte	0x21
+ 859 0495 00       		.byte	0
+ 860 0496 13       		.uleb128 0x13
+ 861 0497 6E000000 		.4byte	.LVL14
+ 862 049b 08060000 		.4byte	0x608
+ 863 049f B5040000 		.4byte	0x4b5
+ 864 04a3 14       		.uleb128 0x14
+ 865 04a4 01       		.uleb128 0x1
+ 866 04a5 50       		.byte	0x50
+ 867 04a6 02       		.uleb128 0x2
+ 868 04a7 76       		.byte	0x76
+ 869 04a8 00       		.sleb128 0
+ 870 04a9 14       		.uleb128 0x14
+ 871 04aa 01       		.uleb128 0x1
+ 872 04ab 51       		.byte	0x51
+ 873 04ac 07       		.uleb128 0x7
+ 874 04ad 78       		.byte	0x78
+ 875 04ae 00       		.sleb128 0
+ 876 04af 31       		.byte	0x31
+ 877 04b0 25       		.byte	0x25
+ 878 04b1 08       		.byte	0x8
+ 879 04b2 80       		.byte	0x80
+ 880 04b3 21       		.byte	0x21
+ 881 04b4 00       		.byte	0
+ 882 04b5 13       		.uleb128 0x13
+ 883 04b6 74000000 		.4byte	.LVL15
+ 884 04ba 14060000 		.4byte	0x614
+ 885 04be C9040000 		.4byte	0x4c9
+ 886 04c2 14       		.uleb128 0x14
+ 887 04c3 01       		.uleb128 0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 20
+
+
+ 888 04c4 50       		.byte	0x50
+ 889 04c5 02       		.uleb128 0x2
+ 890 04c6 76       		.byte	0x76
+ 891 04c7 00       		.sleb128 0
+ 892 04c8 00       		.byte	0
+ 893 04c9 15       		.uleb128 0x15
+ 894 04ca 7E000000 		.4byte	.LVL17
+ 895 04ce FC050000 		.4byte	0x5fc
+ 896 04d2 13       		.uleb128 0x13
+ 897 04d3 94000000 		.4byte	.LVL22
+ 898 04d7 08060000 		.4byte	0x608
+ 899 04db EC040000 		.4byte	0x4ec
+ 900 04df 14       		.uleb128 0x14
+ 901 04e0 01       		.uleb128 0x1
+ 902 04e1 50       		.byte	0x50
+ 903 04e2 02       		.uleb128 0x2
+ 904 04e3 76       		.byte	0x76
+ 905 04e4 00       		.sleb128 0
+ 906 04e5 14       		.uleb128 0x14
+ 907 04e6 01       		.uleb128 0x1
+ 908 04e7 51       		.byte	0x51
+ 909 04e8 02       		.uleb128 0x2
+ 910 04e9 08       		.byte	0x8
+ 911 04ea 20       		.byte	0x20
+ 912 04eb 00       		.byte	0
+ 913 04ec 13       		.uleb128 0x13
+ 914 04ed 9E000000 		.4byte	.LVL23
+ 915 04f1 08060000 		.4byte	0x608
+ 916 04f5 09050000 		.4byte	0x509
+ 917 04f9 14       		.uleb128 0x14
+ 918 04fa 01       		.uleb128 0x1
+ 919 04fb 50       		.byte	0x50
+ 920 04fc 02       		.uleb128 0x2
+ 921 04fd 76       		.byte	0x76
+ 922 04fe 00       		.sleb128 0
+ 923 04ff 14       		.uleb128 0x14
+ 924 0500 01       		.uleb128 0x1
+ 925 0501 51       		.byte	0x51
+ 926 0502 05       		.uleb128 0x5
+ 927 0503 74       		.byte	0x74
+ 928 0504 00       		.sleb128 0
+ 929 0505 08       		.byte	0x8
+ 930 0506 80       		.byte	0x80
+ 931 0507 21       		.byte	0x21
+ 932 0508 00       		.byte	0
+ 933 0509 13       		.uleb128 0x13
+ 934 050a AA000000 		.4byte	.LVL24
+ 935 050e 08060000 		.4byte	0x608
+ 936 0512 1D050000 		.4byte	0x51d
+ 937 0516 14       		.uleb128 0x14
+ 938 0517 01       		.uleb128 0x1
+ 939 0518 50       		.byte	0x50
+ 940 0519 02       		.uleb128 0x2
+ 941 051a 76       		.byte	0x76
+ 942 051b 00       		.sleb128 0
+ 943 051c 00       		.byte	0
+ 944 051d 13       		.uleb128 0x13
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 21
+
+
+ 945 051e CC000000 		.4byte	.LVL31
+ 946 0522 20060000 		.4byte	0x620
+ 947 0526 3D050000 		.4byte	0x53d
+ 948 052a 14       		.uleb128 0x14
+ 949 052b 01       		.uleb128 0x1
+ 950 052c 50       		.byte	0x50
+ 951 052d 02       		.uleb128 0x2
+ 952 052e 76       		.byte	0x76
+ 953 052f 00       		.sleb128 0
+ 954 0530 14       		.uleb128 0x14
+ 955 0531 01       		.uleb128 0x1
+ 956 0532 51       		.byte	0x51
+ 957 0533 02       		.uleb128 0x2
+ 958 0534 75       		.byte	0x75
+ 959 0535 00       		.sleb128 0
+ 960 0536 14       		.uleb128 0x14
+ 961 0537 01       		.uleb128 0x1
+ 962 0538 52       		.byte	0x52
+ 963 0539 02       		.uleb128 0x2
+ 964 053a 77       		.byte	0x77
+ 965 053b 00       		.sleb128 0
+ 966 053c 00       		.byte	0
+ 967 053d 16       		.uleb128 0x16
+ 968 053e E0000000 		.4byte	.LVL36
+ 969 0542 14060000 		.4byte	0x614
+ 970 0546 14       		.uleb128 0x14
+ 971 0547 01       		.uleb128 0x1
+ 972 0548 50       		.byte	0x50
+ 973 0549 02       		.uleb128 0x2
+ 974 054a 76       		.byte	0x76
+ 975 054b 00       		.sleb128 0
+ 976 054c 00       		.byte	0
+ 977 054d 00       		.byte	0
+ 978 054e 17       		.uleb128 0x17
+ 979 054f 85030000 		.4byte	0x385
+ 980 0553 5E050000 		.4byte	0x55e
+ 981 0557 18       		.uleb128 0x18
+ 982 0558 5E050000 		.4byte	0x55e
+ 983 055c 10       		.byte	0x10
+ 984 055d 00       		.byte	0
+ 985 055e 02       		.uleb128 0x2
+ 986 055f 04       		.byte	0x4
+ 987 0560 07       		.byte	0x7
+ 988 0561 A5000000 		.4byte	.LASF68
+ 989 0565 19       		.uleb128 0x19
+ 990 0566 A8050000 		.4byte	.LASF69
+ 991 056a 01       		.byte	0x1
+ 992 056b 29       		.byte	0x29
+ 993 056c 76050000 		.4byte	0x576
+ 994 0570 05       		.uleb128 0x5
+ 995 0571 03       		.byte	0x3
+ 996 0572 18000000 		.4byte	u8x8_d_pcd8544_84x48_init_seq
+ 997 0576 0E       		.uleb128 0xe
+ 998 0577 4E050000 		.4byte	0x54e
+ 999 057b 17       		.uleb128 0x17
+ 1000 057c 85030000 		.4byte	0x385
+ 1001 0580 8B050000 		.4byte	0x58b
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 22
+
+
+ 1002 0584 18       		.uleb128 0x18
+ 1003 0585 5E050000 		.4byte	0x55e
+ 1004 0589 06       		.byte	0x6
+ 1005 058a 00       		.byte	0
+ 1006 058b 19       		.uleb128 0x19
+ 1007 058c 11040000 		.4byte	.LASF70
+ 1008 0590 01       		.byte	0x1
+ 1009 0591 3A       		.byte	0x3a
+ 1010 0592 9C050000 		.4byte	0x59c
+ 1011 0596 05       		.uleb128 0x5
+ 1012 0597 03       		.byte	0x3
+ 1013 0598 2C000000 		.4byte	u8x8_d_pcd8544_84x48_powersave0_seq
+ 1014 059c 0E       		.uleb128 0xe
+ 1015 059d 7B050000 		.4byte	0x57b
+ 1016 05a1 17       		.uleb128 0x17
+ 1017 05a2 85030000 		.4byte	0x385
+ 1018 05a6 B1050000 		.4byte	0x5b1
+ 1019 05aa 18       		.uleb128 0x18
+ 1020 05ab 5E050000 		.4byte	0x55e
+ 1021 05af 08       		.byte	0x8
+ 1022 05b0 00       		.byte	0
+ 1023 05b1 19       		.uleb128 0x19
+ 1024 05b2 69020000 		.4byte	.LASF71
+ 1025 05b6 01       		.byte	0x1
+ 1026 05b7 42       		.byte	0x42
+ 1027 05b8 C2050000 		.4byte	0x5c2
+ 1028 05bc 05       		.uleb128 0x5
+ 1029 05bd 03       		.byte	0x3
+ 1030 05be 34000000 		.4byte	u8x8_d_pcd8544_84x48_powersave1_seq
+ 1031 05c2 0E       		.uleb128 0xe
+ 1032 05c3 A1050000 		.4byte	0x5a1
+ 1033 05c7 19       		.uleb128 0x19
+ 1034 05c8 89040000 		.4byte	.LASF72
+ 1035 05cc 01       		.byte	0x1
+ 1036 05cd 4D       		.byte	0x4d
+ 1037 05ce 7A030000 		.4byte	0x37a
+ 1038 05d2 05       		.uleb128 0x5
+ 1039 05d3 03       		.byte	0x3
+ 1040 05d4 00000000 		.4byte	u8x8_pcd8544_84x48_display_info
+ 1041 05d8 1A       		.uleb128 0x1a
+ 1042 05d9 B5040000 		.4byte	.LASF73
+ 1043 05dd B5040000 		.4byte	.LASF73
+ 1044 05e1 04       		.byte	0x4
+ 1045 05e2 AE01     		.2byte	0x1ae
+ 1046 05e4 1A       		.uleb128 0x1a
+ 1047 05e5 02020000 		.4byte	.LASF74
+ 1048 05e9 02020000 		.4byte	.LASF74
+ 1049 05ed 04       		.byte	0x4
+ 1050 05ee AF01     		.2byte	0x1af
+ 1051 05f0 1A       		.uleb128 0x1a
+ 1052 05f1 FB030000 		.4byte	.LASF75
+ 1053 05f5 FB030000 		.4byte	.LASF75
+ 1054 05f9 04       		.byte	0x4
+ 1055 05fa 8A02     		.2byte	0x28a
+ 1056 05fc 1A       		.uleb128 0x1a
+ 1057 05fd 1F030000 		.4byte	.LASF76
+ 1058 0601 1F030000 		.4byte	.LASF76
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 23
+
+
+ 1059 0605 04       		.byte	0x4
+ 1060 0606 6B02     		.2byte	0x26b
+ 1061 0608 1A       		.uleb128 0x1a
+ 1062 0609 F1010000 		.4byte	.LASF77
+ 1063 060d F1010000 		.4byte	.LASF77
+ 1064 0611 04       		.byte	0x4
+ 1065 0612 6702     		.2byte	0x267
+ 1066 0614 1A       		.uleb128 0x1a
+ 1067 0615 26020000 		.4byte	.LASF78
+ 1068 0619 26020000 		.4byte	.LASF78
+ 1069 061d 04       		.byte	0x4
+ 1070 061e 6C02     		.2byte	0x26c
+ 1071 0620 1A       		.uleb128 0x1a
+ 1072 0621 6B010000 		.4byte	.LASF79
+ 1073 0625 6B010000 		.4byte	.LASF79
+ 1074 0629 04       		.byte	0x4
+ 1075 062a 6A02     		.2byte	0x26a
+ 1076 062c 00       		.byte	0
+ 1077              		.section	.debug_abbrev,"",%progbits
+ 1078              	.Ldebug_abbrev0:
+ 1079 0000 01       		.uleb128 0x1
+ 1080 0001 11       		.uleb128 0x11
+ 1081 0002 01       		.byte	0x1
+ 1082 0003 25       		.uleb128 0x25
+ 1083 0004 0E       		.uleb128 0xe
+ 1084 0005 13       		.uleb128 0x13
+ 1085 0006 0B       		.uleb128 0xb
+ 1086 0007 03       		.uleb128 0x3
+ 1087 0008 0E       		.uleb128 0xe
+ 1088 0009 1B       		.uleb128 0x1b
+ 1089 000a 0E       		.uleb128 0xe
+ 1090 000b 55       		.uleb128 0x55
+ 1091 000c 17       		.uleb128 0x17
+ 1092 000d 11       		.uleb128 0x11
+ 1093 000e 01       		.uleb128 0x1
+ 1094 000f 10       		.uleb128 0x10
+ 1095 0010 17       		.uleb128 0x17
+ 1096 0011 00       		.byte	0
+ 1097 0012 00       		.byte	0
+ 1098 0013 02       		.uleb128 0x2
+ 1099 0014 24       		.uleb128 0x24
+ 1100 0015 00       		.byte	0
+ 1101 0016 0B       		.uleb128 0xb
+ 1102 0017 0B       		.uleb128 0xb
+ 1103 0018 3E       		.uleb128 0x3e
+ 1104 0019 0B       		.uleb128 0xb
+ 1105 001a 03       		.uleb128 0x3
+ 1106 001b 0E       		.uleb128 0xe
+ 1107 001c 00       		.byte	0
+ 1108 001d 00       		.byte	0
+ 1109 001e 03       		.uleb128 0x3
+ 1110 001f 16       		.uleb128 0x16
+ 1111 0020 00       		.byte	0
+ 1112 0021 03       		.uleb128 0x3
+ 1113 0022 0E       		.uleb128 0xe
+ 1114 0023 3A       		.uleb128 0x3a
+ 1115 0024 0B       		.uleb128 0xb
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 24
+
+
+ 1116 0025 3B       		.uleb128 0x3b
+ 1117 0026 0B       		.uleb128 0xb
+ 1118 0027 49       		.uleb128 0x49
+ 1119 0028 13       		.uleb128 0x13
+ 1120 0029 00       		.byte	0
+ 1121 002a 00       		.byte	0
+ 1122 002b 04       		.uleb128 0x4
+ 1123 002c 24       		.uleb128 0x24
+ 1124 002d 00       		.byte	0
+ 1125 002e 0B       		.uleb128 0xb
+ 1126 002f 0B       		.uleb128 0xb
+ 1127 0030 3E       		.uleb128 0x3e
+ 1128 0031 0B       		.uleb128 0xb
+ 1129 0032 03       		.uleb128 0x3
+ 1130 0033 08       		.uleb128 0x8
+ 1131 0034 00       		.byte	0
+ 1132 0035 00       		.byte	0
+ 1133 0036 05       		.uleb128 0x5
+ 1134 0037 0F       		.uleb128 0xf
+ 1135 0038 00       		.byte	0
+ 1136 0039 0B       		.uleb128 0xb
+ 1137 003a 0B       		.uleb128 0xb
+ 1138 003b 00       		.byte	0
+ 1139 003c 00       		.byte	0
+ 1140 003d 06       		.uleb128 0x6
+ 1141 003e 13       		.uleb128 0x13
+ 1142 003f 01       		.byte	0x1
+ 1143 0040 03       		.uleb128 0x3
+ 1144 0041 0E       		.uleb128 0xe
+ 1145 0042 0B       		.uleb128 0xb
+ 1146 0043 0B       		.uleb128 0xb
+ 1147 0044 3A       		.uleb128 0x3a
+ 1148 0045 0B       		.uleb128 0xb
+ 1149 0046 3B       		.uleb128 0x3b
+ 1150 0047 05       		.uleb128 0x5
+ 1151 0048 01       		.uleb128 0x1
+ 1152 0049 13       		.uleb128 0x13
+ 1153 004a 00       		.byte	0
+ 1154 004b 00       		.byte	0
+ 1155 004c 07       		.uleb128 0x7
+ 1156 004d 0D       		.uleb128 0xd
+ 1157 004e 00       		.byte	0
+ 1158 004f 03       		.uleb128 0x3
+ 1159 0050 0E       		.uleb128 0xe
+ 1160 0051 3A       		.uleb128 0x3a
+ 1161 0052 0B       		.uleb128 0xb
+ 1162 0053 3B       		.uleb128 0x3b
+ 1163 0054 05       		.uleb128 0x5
+ 1164 0055 49       		.uleb128 0x49
+ 1165 0056 13       		.uleb128 0x13
+ 1166 0057 38       		.uleb128 0x38
+ 1167 0058 0B       		.uleb128 0xb
+ 1168 0059 00       		.byte	0
+ 1169 005a 00       		.byte	0
+ 1170 005b 08       		.uleb128 0x8
+ 1171 005c 13       		.uleb128 0x13
+ 1172 005d 01       		.byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 25
+
+
+ 1173 005e 03       		.uleb128 0x3
+ 1174 005f 0E       		.uleb128 0xe
+ 1175 0060 0B       		.uleb128 0xb
+ 1176 0061 0B       		.uleb128 0xb
+ 1177 0062 3A       		.uleb128 0x3a
+ 1178 0063 0B       		.uleb128 0xb
+ 1179 0064 3B       		.uleb128 0x3b
+ 1180 0065 0B       		.uleb128 0xb
+ 1181 0066 01       		.uleb128 0x1
+ 1182 0067 13       		.uleb128 0x13
+ 1183 0068 00       		.byte	0
+ 1184 0069 00       		.byte	0
+ 1185 006a 09       		.uleb128 0x9
+ 1186 006b 0D       		.uleb128 0xd
+ 1187 006c 00       		.byte	0
+ 1188 006d 03       		.uleb128 0x3
+ 1189 006e 0E       		.uleb128 0xe
+ 1190 006f 3A       		.uleb128 0x3a
+ 1191 0070 0B       		.uleb128 0xb
+ 1192 0071 3B       		.uleb128 0x3b
+ 1193 0072 0B       		.uleb128 0xb
+ 1194 0073 49       		.uleb128 0x49
+ 1195 0074 13       		.uleb128 0x13
+ 1196 0075 38       		.uleb128 0x38
+ 1197 0076 0B       		.uleb128 0xb
+ 1198 0077 00       		.byte	0
+ 1199 0078 00       		.byte	0
+ 1200 0079 0A       		.uleb128 0xa
+ 1201 007a 0D       		.uleb128 0xd
+ 1202 007b 00       		.byte	0
+ 1203 007c 03       		.uleb128 0x3
+ 1204 007d 08       		.uleb128 0x8
+ 1205 007e 3A       		.uleb128 0x3a
+ 1206 007f 0B       		.uleb128 0xb
+ 1207 0080 3B       		.uleb128 0x3b
+ 1208 0081 0B       		.uleb128 0xb
+ 1209 0082 49       		.uleb128 0x49
+ 1210 0083 13       		.uleb128 0x13
+ 1211 0084 38       		.uleb128 0x38
+ 1212 0085 0B       		.uleb128 0xb
+ 1213 0086 00       		.byte	0
+ 1214 0087 00       		.byte	0
+ 1215 0088 0B       		.uleb128 0xb
+ 1216 0089 0F       		.uleb128 0xf
+ 1217 008a 00       		.byte	0
+ 1218 008b 0B       		.uleb128 0xb
+ 1219 008c 0B       		.uleb128 0xb
+ 1220 008d 49       		.uleb128 0x49
+ 1221 008e 13       		.uleb128 0x13
+ 1222 008f 00       		.byte	0
+ 1223 0090 00       		.byte	0
+ 1224 0091 0C       		.uleb128 0xc
+ 1225 0092 15       		.uleb128 0x15
+ 1226 0093 01       		.byte	0x1
+ 1227 0094 27       		.uleb128 0x27
+ 1228 0095 19       		.uleb128 0x19
+ 1229 0096 49       		.uleb128 0x49
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 26
+
+
+ 1230 0097 13       		.uleb128 0x13
+ 1231 0098 01       		.uleb128 0x1
+ 1232 0099 13       		.uleb128 0x13
+ 1233 009a 00       		.byte	0
+ 1234 009b 00       		.byte	0
+ 1235 009c 0D       		.uleb128 0xd
+ 1236 009d 05       		.uleb128 0x5
+ 1237 009e 00       		.byte	0
+ 1238 009f 49       		.uleb128 0x49
+ 1239 00a0 13       		.uleb128 0x13
+ 1240 00a1 00       		.byte	0
+ 1241 00a2 00       		.byte	0
+ 1242 00a3 0E       		.uleb128 0xe
+ 1243 00a4 26       		.uleb128 0x26
+ 1244 00a5 00       		.byte	0
+ 1245 00a6 49       		.uleb128 0x49
+ 1246 00a7 13       		.uleb128 0x13
+ 1247 00a8 00       		.byte	0
+ 1248 00a9 00       		.byte	0
+ 1249 00aa 0F       		.uleb128 0xf
+ 1250 00ab 2E       		.uleb128 0x2e
+ 1251 00ac 01       		.byte	0x1
+ 1252 00ad 3F       		.uleb128 0x3f
+ 1253 00ae 19       		.uleb128 0x19
+ 1254 00af 03       		.uleb128 0x3
+ 1255 00b0 0E       		.uleb128 0xe
+ 1256 00b1 3A       		.uleb128 0x3a
+ 1257 00b2 0B       		.uleb128 0xb
+ 1258 00b3 3B       		.uleb128 0x3b
+ 1259 00b4 0B       		.uleb128 0xb
+ 1260 00b5 27       		.uleb128 0x27
+ 1261 00b6 19       		.uleb128 0x19
+ 1262 00b7 49       		.uleb128 0x49
+ 1263 00b8 13       		.uleb128 0x13
+ 1264 00b9 11       		.uleb128 0x11
+ 1265 00ba 01       		.uleb128 0x1
+ 1266 00bb 12       		.uleb128 0x12
+ 1267 00bc 06       		.uleb128 0x6
+ 1268 00bd 40       		.uleb128 0x40
+ 1269 00be 18       		.uleb128 0x18
+ 1270 00bf 9742     		.uleb128 0x2117
+ 1271 00c1 19       		.uleb128 0x19
+ 1272 00c2 01       		.uleb128 0x1
+ 1273 00c3 13       		.uleb128 0x13
+ 1274 00c4 00       		.byte	0
+ 1275 00c5 00       		.byte	0
+ 1276 00c6 10       		.uleb128 0x10
+ 1277 00c7 05       		.uleb128 0x5
+ 1278 00c8 00       		.byte	0
+ 1279 00c9 03       		.uleb128 0x3
+ 1280 00ca 0E       		.uleb128 0xe
+ 1281 00cb 3A       		.uleb128 0x3a
+ 1282 00cc 0B       		.uleb128 0xb
+ 1283 00cd 3B       		.uleb128 0x3b
+ 1284 00ce 0B       		.uleb128 0xb
+ 1285 00cf 49       		.uleb128 0x49
+ 1286 00d0 13       		.uleb128 0x13
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 27
+
+
+ 1287 00d1 02       		.uleb128 0x2
+ 1288 00d2 17       		.uleb128 0x17
+ 1289 00d3 00       		.byte	0
+ 1290 00d4 00       		.byte	0
+ 1291 00d5 11       		.uleb128 0x11
+ 1292 00d6 05       		.uleb128 0x5
+ 1293 00d7 00       		.byte	0
+ 1294 00d8 03       		.uleb128 0x3
+ 1295 00d9 08       		.uleb128 0x8
+ 1296 00da 3A       		.uleb128 0x3a
+ 1297 00db 0B       		.uleb128 0xb
+ 1298 00dc 3B       		.uleb128 0x3b
+ 1299 00dd 0B       		.uleb128 0xb
+ 1300 00de 49       		.uleb128 0x49
+ 1301 00df 13       		.uleb128 0x13
+ 1302 00e0 02       		.uleb128 0x2
+ 1303 00e1 17       		.uleb128 0x17
+ 1304 00e2 00       		.byte	0
+ 1305 00e3 00       		.byte	0
+ 1306 00e4 12       		.uleb128 0x12
+ 1307 00e5 34       		.uleb128 0x34
+ 1308 00e6 00       		.byte	0
+ 1309 00e7 03       		.uleb128 0x3
+ 1310 00e8 08       		.uleb128 0x8
+ 1311 00e9 3A       		.uleb128 0x3a
+ 1312 00ea 0B       		.uleb128 0xb
+ 1313 00eb 3B       		.uleb128 0x3b
+ 1314 00ec 0B       		.uleb128 0xb
+ 1315 00ed 49       		.uleb128 0x49
+ 1316 00ee 13       		.uleb128 0x13
+ 1317 00ef 02       		.uleb128 0x2
+ 1318 00f0 17       		.uleb128 0x17
+ 1319 00f1 00       		.byte	0
+ 1320 00f2 00       		.byte	0
+ 1321 00f3 13       		.uleb128 0x13
+ 1322 00f4 898201   		.uleb128 0x4109
+ 1323 00f7 01       		.byte	0x1
+ 1324 00f8 11       		.uleb128 0x11
+ 1325 00f9 01       		.uleb128 0x1
+ 1326 00fa 31       		.uleb128 0x31
+ 1327 00fb 13       		.uleb128 0x13
+ 1328 00fc 01       		.uleb128 0x1
+ 1329 00fd 13       		.uleb128 0x13
+ 1330 00fe 00       		.byte	0
+ 1331 00ff 00       		.byte	0
+ 1332 0100 14       		.uleb128 0x14
+ 1333 0101 8A8201   		.uleb128 0x410a
+ 1334 0104 00       		.byte	0
+ 1335 0105 02       		.uleb128 0x2
+ 1336 0106 18       		.uleb128 0x18
+ 1337 0107 9142     		.uleb128 0x2111
+ 1338 0109 18       		.uleb128 0x18
+ 1339 010a 00       		.byte	0
+ 1340 010b 00       		.byte	0
+ 1341 010c 15       		.uleb128 0x15
+ 1342 010d 898201   		.uleb128 0x4109
+ 1343 0110 00       		.byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 28
+
+
+ 1344 0111 11       		.uleb128 0x11
+ 1345 0112 01       		.uleb128 0x1
+ 1346 0113 31       		.uleb128 0x31
+ 1347 0114 13       		.uleb128 0x13
+ 1348 0115 00       		.byte	0
+ 1349 0116 00       		.byte	0
+ 1350 0117 16       		.uleb128 0x16
+ 1351 0118 898201   		.uleb128 0x4109
+ 1352 011b 01       		.byte	0x1
+ 1353 011c 11       		.uleb128 0x11
+ 1354 011d 01       		.uleb128 0x1
+ 1355 011e 31       		.uleb128 0x31
+ 1356 011f 13       		.uleb128 0x13
+ 1357 0120 00       		.byte	0
+ 1358 0121 00       		.byte	0
+ 1359 0122 17       		.uleb128 0x17
+ 1360 0123 01       		.uleb128 0x1
+ 1361 0124 01       		.byte	0x1
+ 1362 0125 49       		.uleb128 0x49
+ 1363 0126 13       		.uleb128 0x13
+ 1364 0127 01       		.uleb128 0x1
+ 1365 0128 13       		.uleb128 0x13
+ 1366 0129 00       		.byte	0
+ 1367 012a 00       		.byte	0
+ 1368 012b 18       		.uleb128 0x18
+ 1369 012c 21       		.uleb128 0x21
+ 1370 012d 00       		.byte	0
+ 1371 012e 49       		.uleb128 0x49
+ 1372 012f 13       		.uleb128 0x13
+ 1373 0130 2F       		.uleb128 0x2f
+ 1374 0131 0B       		.uleb128 0xb
+ 1375 0132 00       		.byte	0
+ 1376 0133 00       		.byte	0
+ 1377 0134 19       		.uleb128 0x19
+ 1378 0135 34       		.uleb128 0x34
+ 1379 0136 00       		.byte	0
+ 1380 0137 03       		.uleb128 0x3
+ 1381 0138 0E       		.uleb128 0xe
+ 1382 0139 3A       		.uleb128 0x3a
+ 1383 013a 0B       		.uleb128 0xb
+ 1384 013b 3B       		.uleb128 0x3b
+ 1385 013c 0B       		.uleb128 0xb
+ 1386 013d 49       		.uleb128 0x49
+ 1387 013e 13       		.uleb128 0x13
+ 1388 013f 02       		.uleb128 0x2
+ 1389 0140 18       		.uleb128 0x18
+ 1390 0141 00       		.byte	0
+ 1391 0142 00       		.byte	0
+ 1392 0143 1A       		.uleb128 0x1a
+ 1393 0144 2E       		.uleb128 0x2e
+ 1394 0145 00       		.byte	0
+ 1395 0146 3F       		.uleb128 0x3f
+ 1396 0147 19       		.uleb128 0x19
+ 1397 0148 3C       		.uleb128 0x3c
+ 1398 0149 19       		.uleb128 0x19
+ 1399 014a 6E       		.uleb128 0x6e
+ 1400 014b 0E       		.uleb128 0xe
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 29
+
+
+ 1401 014c 03       		.uleb128 0x3
+ 1402 014d 0E       		.uleb128 0xe
+ 1403 014e 3A       		.uleb128 0x3a
+ 1404 014f 0B       		.uleb128 0xb
+ 1405 0150 3B       		.uleb128 0x3b
+ 1406 0151 05       		.uleb128 0x5
+ 1407 0152 00       		.byte	0
+ 1408 0153 00       		.byte	0
+ 1409 0154 00       		.byte	0
+ 1410              		.section	.debug_loc,"",%progbits
+ 1411              	.Ldebug_loc0:
+ 1412              	.LLST0:
+ 1413 0000 00000000 		.4byte	.LVL0
+ 1414 0004 21000000 		.4byte	.LVL3-1
+ 1415 0008 0100     		.2byte	0x1
+ 1416 000a 50       		.byte	0x50
+ 1417 000b 21000000 		.4byte	.LVL3-1
+ 1418 000f 28000000 		.4byte	.LVL4
+ 1419 0013 0100     		.2byte	0x1
+ 1420 0015 56       		.byte	0x56
+ 1421 0016 28000000 		.4byte	.LVL4
+ 1422 001a 2B000000 		.4byte	.LVL5-1
+ 1423 001e 0100     		.2byte	0x1
+ 1424 0020 50       		.byte	0x50
+ 1425 0021 2B000000 		.4byte	.LVL5-1
+ 1426 0025 3A000000 		.4byte	.LVL7
+ 1427 0029 0100     		.2byte	0x1
+ 1428 002b 56       		.byte	0x56
+ 1429 002c 3A000000 		.4byte	.LVL7
+ 1430 0030 41000000 		.4byte	.LVL8-1
+ 1431 0034 0100     		.2byte	0x1
+ 1432 0036 50       		.byte	0x50
+ 1433 0037 41000000 		.4byte	.LVL8-1
+ 1434 003b 48000000 		.4byte	.LVL9
+ 1435 003f 0100     		.2byte	0x1
+ 1436 0041 56       		.byte	0x56
+ 1437 0042 48000000 		.4byte	.LVL9
+ 1438 0046 4D000000 		.4byte	.LVL10-1
+ 1439 004a 0100     		.2byte	0x1
+ 1440 004c 50       		.byte	0x50
+ 1441 004d 4D000000 		.4byte	.LVL10-1
+ 1442 0051 54000000 		.4byte	.LVL11
+ 1443 0055 0100     		.2byte	0x1
+ 1444 0057 56       		.byte	0x56
+ 1445 0058 54000000 		.4byte	.LVL11
+ 1446 005c 57000000 		.4byte	.LVL12-1
+ 1447 0060 0100     		.2byte	0x1
+ 1448 0062 50       		.byte	0x50
+ 1449 0063 57000000 		.4byte	.LVL12-1
+ 1450 0067 7A000000 		.4byte	.LVL16
+ 1451 006b 0100     		.2byte	0x1
+ 1452 006d 56       		.byte	0x56
+ 1453 006e 7A000000 		.4byte	.LVL16
+ 1454 0072 7D000000 		.4byte	.LVL17-1
+ 1455 0076 0100     		.2byte	0x1
+ 1456 0078 50       		.byte	0x50
+ 1457 0079 7D000000 		.4byte	.LVL17-1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 30
+
+
+ 1458 007d E6000000 		.4byte	.LVL37
+ 1459 0081 0100     		.2byte	0x1
+ 1460 0083 56       		.byte	0x56
+ 1461 0084 E6000000 		.4byte	.LVL37
+ 1462 0088 E8000000 		.4byte	.LVL38
+ 1463 008c 0100     		.2byte	0x1
+ 1464 008e 50       		.byte	0x50
+ 1465 008f E8000000 		.4byte	.LVL38
+ 1466 0093 EC000000 		.4byte	.LVL39
+ 1467 0097 0100     		.2byte	0x1
+ 1468 0099 56       		.byte	0x56
+ 1469 009a EC000000 		.4byte	.LVL39
+ 1470 009e FC000000 		.4byte	.LFE0
+ 1471 00a2 0400     		.2byte	0x4
+ 1472 00a4 F3       		.byte	0xf3
+ 1473 00a5 01       		.uleb128 0x1
+ 1474 00a6 50       		.byte	0x50
+ 1475 00a7 9F       		.byte	0x9f
+ 1476 00a8 00000000 		.4byte	0
+ 1477 00ac 00000000 		.4byte	0
+ 1478              	.LLST1:
+ 1479 00b0 00000000 		.4byte	.LVL0
+ 1480 00b4 0C000000 		.4byte	.LVL1
+ 1481 00b8 0100     		.2byte	0x1
+ 1482 00ba 51       		.byte	0x51
+ 1483 00bb 0C000000 		.4byte	.LVL1
+ 1484 00bf FC000000 		.4byte	.LFE0
+ 1485 00c3 0400     		.2byte	0x4
+ 1486 00c5 F3       		.byte	0xf3
+ 1487 00c6 01       		.uleb128 0x1
+ 1488 00c7 51       		.byte	0x51
+ 1489 00c8 9F       		.byte	0x9f
+ 1490 00c9 00000000 		.4byte	0
+ 1491 00cd 00000000 		.4byte	0
+ 1492              	.LLST2:
+ 1493 00d1 00000000 		.4byte	.LVL0
+ 1494 00d5 21000000 		.4byte	.LVL3-1
+ 1495 00d9 0100     		.2byte	0x1
+ 1496 00db 52       		.byte	0x52
+ 1497 00dc 21000000 		.4byte	.LVL3-1
+ 1498 00e0 28000000 		.4byte	.LVL4
+ 1499 00e4 0400     		.2byte	0x4
+ 1500 00e6 F3       		.byte	0xf3
+ 1501 00e7 01       		.uleb128 0x1
+ 1502 00e8 52       		.byte	0x52
+ 1503 00e9 9F       		.byte	0x9f
+ 1504 00ea 28000000 		.4byte	.LVL4
+ 1505 00ee 2B000000 		.4byte	.LVL5-1
+ 1506 00f2 0100     		.2byte	0x1
+ 1507 00f4 52       		.byte	0x52
+ 1508 00f5 2B000000 		.4byte	.LVL5-1
+ 1509 00f9 3A000000 		.4byte	.LVL7
+ 1510 00fd 0400     		.2byte	0x4
+ 1511 00ff F3       		.byte	0xf3
+ 1512 0100 01       		.uleb128 0x1
+ 1513 0101 52       		.byte	0x52
+ 1514 0102 9F       		.byte	0x9f
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 31
+
+
+ 1515 0103 3A000000 		.4byte	.LVL7
+ 1516 0107 41000000 		.4byte	.LVL8-1
+ 1517 010b 0100     		.2byte	0x1
+ 1518 010d 52       		.byte	0x52
+ 1519 010e 41000000 		.4byte	.LVL8-1
+ 1520 0112 48000000 		.4byte	.LVL9
+ 1521 0116 0400     		.2byte	0x4
+ 1522 0118 F3       		.byte	0xf3
+ 1523 0119 01       		.uleb128 0x1
+ 1524 011a 52       		.byte	0x52
+ 1525 011b 9F       		.byte	0x9f
+ 1526 011c 48000000 		.4byte	.LVL9
+ 1527 0120 4D000000 		.4byte	.LVL10-1
+ 1528 0124 0100     		.2byte	0x1
+ 1529 0126 52       		.byte	0x52
+ 1530 0127 4D000000 		.4byte	.LVL10-1
+ 1531 012b 54000000 		.4byte	.LVL11
+ 1532 012f 0400     		.2byte	0x4
+ 1533 0131 F3       		.byte	0xf3
+ 1534 0132 01       		.uleb128 0x1
+ 1535 0133 52       		.byte	0x52
+ 1536 0134 9F       		.byte	0x9f
+ 1537 0135 54000000 		.4byte	.LVL11
+ 1538 0139 57000000 		.4byte	.LVL12-1
+ 1539 013d 0100     		.2byte	0x1
+ 1540 013f 52       		.byte	0x52
+ 1541 0140 57000000 		.4byte	.LVL12-1
+ 1542 0144 7A000000 		.4byte	.LVL16
+ 1543 0148 0400     		.2byte	0x4
+ 1544 014a F3       		.byte	0xf3
+ 1545 014b 01       		.uleb128 0x1
+ 1546 014c 52       		.byte	0x52
+ 1547 014d 9F       		.byte	0x9f
+ 1548 014e 7A000000 		.4byte	.LVL16
+ 1549 0152 7D000000 		.4byte	.LVL17-1
+ 1550 0156 0100     		.2byte	0x1
+ 1551 0158 52       		.byte	0x52
+ 1552 0159 7D000000 		.4byte	.LVL17-1
+ 1553 015d B2000000 		.4byte	.LVL28
+ 1554 0161 0400     		.2byte	0x4
+ 1555 0163 F3       		.byte	0xf3
+ 1556 0164 01       		.uleb128 0x1
+ 1557 0165 52       		.byte	0x52
+ 1558 0166 9F       		.byte	0x9f
+ 1559 0167 B2000000 		.4byte	.LVL28
+ 1560 016b D4000000 		.4byte	.LVL34
+ 1561 016f 0100     		.2byte	0x1
+ 1562 0171 58       		.byte	0x58
+ 1563 0172 D4000000 		.4byte	.LVL34
+ 1564 0176 DA000000 		.4byte	.LVL35
+ 1565 017a 0100     		.2byte	0x1
+ 1566 017c 52       		.byte	0x52
+ 1567 017d E6000000 		.4byte	.LVL37
+ 1568 0181 FC000000 		.4byte	.LFE0
+ 1569 0185 0100     		.2byte	0x1
+ 1570 0187 52       		.byte	0x52
+ 1571 0188 00000000 		.4byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 32
+
+
+ 1572 018c 00000000 		.4byte	0
+ 1573              	.LLST3:
+ 1574 0190 00000000 		.4byte	.LVL0
+ 1575 0194 14000000 		.4byte	.LVL2
+ 1576 0198 0100     		.2byte	0x1
+ 1577 019a 53       		.byte	0x53
+ 1578 019b 14000000 		.4byte	.LVL2
+ 1579 019f AE000000 		.4byte	.LVL26
+ 1580 01a3 0100     		.2byte	0x1
+ 1581 01a5 55       		.byte	0x55
+ 1582 01a6 AE000000 		.4byte	.LVL26
+ 1583 01aa E6000000 		.4byte	.LVL37
+ 1584 01ae 0400     		.2byte	0x4
+ 1585 01b0 F3       		.byte	0xf3
+ 1586 01b1 01       		.uleb128 0x1
+ 1587 01b2 53       		.byte	0x53
+ 1588 01b3 9F       		.byte	0x9f
+ 1589 01b4 E6000000 		.4byte	.LVL37
+ 1590 01b8 EC000000 		.4byte	.LVL39
+ 1591 01bc 0100     		.2byte	0x1
+ 1592 01be 55       		.byte	0x55
+ 1593 01bf EC000000 		.4byte	.LVL39
+ 1594 01c3 FC000000 		.4byte	.LFE0
+ 1595 01c7 0400     		.2byte	0x4
+ 1596 01c9 F3       		.byte	0xf3
+ 1597 01ca 01       		.uleb128 0x1
+ 1598 01cb 53       		.byte	0x53
+ 1599 01cc 9F       		.byte	0x9f
+ 1600 01cd 00000000 		.4byte	0
+ 1601 01d1 00000000 		.4byte	0
+ 1602              	.LLST4:
+ 1603 01d5 80000000 		.4byte	.LVL18
+ 1604 01d9 82000000 		.4byte	.LVL19
+ 1605 01dd 0100     		.2byte	0x1
+ 1606 01df 53       		.byte	0x53
+ 1607 01e0 82000000 		.4byte	.LVL19
+ 1608 01e4 84000000 		.4byte	.LVL20
+ 1609 01e8 0200     		.2byte	0x2
+ 1610 01ea 75       		.byte	0x75
+ 1611 01eb 05       		.sleb128 5
+ 1612 01ec 84000000 		.4byte	.LVL20
+ 1613 01f0 8C000000 		.4byte	.LVL21
+ 1614 01f4 0100     		.2byte	0x1
+ 1615 01f6 53       		.byte	0x53
+ 1616 01f7 8C000000 		.4byte	.LVL21
+ 1617 01fb CE000000 		.4byte	.LVL32
+ 1618 01ff 0100     		.2byte	0x1
+ 1619 0201 54       		.byte	0x54
+ 1620 0202 D0000000 		.4byte	.LVL33
+ 1621 0206 E6000000 		.4byte	.LVL37
+ 1622 020a 0100     		.2byte	0x1
+ 1623 020c 54       		.byte	0x54
+ 1624 020d 00000000 		.4byte	0
+ 1625 0211 00000000 		.4byte	0
+ 1626              	.LLST5:
+ 1627 0215 AE000000 		.4byte	.LVL26
+ 1628 0219 B0000000 		.4byte	.LVL27
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 33
+
+
+ 1629 021d 0100     		.2byte	0x1
+ 1630 021f 55       		.byte	0x55
+ 1631 0220 B0000000 		.4byte	.LVL27
+ 1632 0224 B2000000 		.4byte	.LVL28
+ 1633 0228 0500     		.2byte	0x5
+ 1634 022a F3       		.byte	0xf3
+ 1635 022b 01       		.uleb128 0x1
+ 1636 022c 53       		.byte	0x53
+ 1637 022d 23       		.byte	0x23
+ 1638 022e 04       		.uleb128 0x4
+ 1639 022f B2000000 		.4byte	.LVL28
+ 1640 0233 BC000000 		.4byte	.LVL29
+ 1641 0237 0100     		.2byte	0x1
+ 1642 0239 55       		.byte	0x55
+ 1643 023a BC000000 		.4byte	.LVL29
+ 1644 023e C2000000 		.4byte	.LVL30
+ 1645 0242 0300     		.2byte	0x3
+ 1646 0244 08       		.byte	0x8
+ 1647 0245 54       		.byte	0x54
+ 1648 0246 9F       		.byte	0x9f
+ 1649 0247 C2000000 		.4byte	.LVL30
+ 1650 024b E6000000 		.4byte	.LVL37
+ 1651 024f 0100     		.2byte	0x1
+ 1652 0251 55       		.byte	0x55
+ 1653 0252 00000000 		.4byte	0
+ 1654 0256 00000000 		.4byte	0
+ 1655              	.LLST6:
+ 1656 025a AC000000 		.4byte	.LVL25
+ 1657 025e E6000000 		.4byte	.LVL37
+ 1658 0262 0100     		.2byte	0x1
+ 1659 0264 57       		.byte	0x57
+ 1660 0265 00000000 		.4byte	0
+ 1661 0269 00000000 		.4byte	0
+ 1662              		.section	.debug_aranges,"",%progbits
+ 1663 0000 1C000000 		.4byte	0x1c
+ 1664 0004 0200     		.2byte	0x2
+ 1665 0006 00000000 		.4byte	.Ldebug_info0
+ 1666 000a 04       		.byte	0x4
+ 1667 000b 00       		.byte	0
+ 1668 000c 0000     		.2byte	0
+ 1669 000e 0000     		.2byte	0
+ 1670 0010 00000000 		.4byte	.LFB0
+ 1671 0014 FC000000 		.4byte	.LFE0-.LFB0
+ 1672 0018 00000000 		.4byte	0
+ 1673 001c 00000000 		.4byte	0
+ 1674              		.section	.debug_ranges,"",%progbits
+ 1675              	.Ldebug_ranges0:
+ 1676 0000 00000000 		.4byte	.LFB0
+ 1677 0004 FC000000 		.4byte	.LFE0
+ 1678 0008 00000000 		.4byte	0
+ 1679 000c 00000000 		.4byte	0
+ 1680              		.section	.debug_line,"",%progbits
+ 1681              	.Ldebug_line0:
+ 1682 0000 94010000 		.section	.debug_str,"MS",%progbits,1
+ 1682      02004101 
+ 1682      00000201 
+ 1682      FB0E0D00 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 34
+
+
+ 1682      01010101 
+ 1683              	.LASF81:
+ 1684 0000 2E2E5C75 		.ascii	"..\\u8g2\\csrc\\u8x8_d_pcd8544_84x48.c\000"
+ 1684      3867325C 
+ 1684      63737263 
+ 1684      5C753878 
+ 1684      385F645F 
+ 1685              	.LASF26:
+ 1686 0024 785F6F66 		.ascii	"x_offset\000"
+ 1686      66736574 
+ 1686      00
+ 1687              	.LASF27:
+ 1688 002d 69735F66 		.ascii	"is_font_inverse_mode\000"
+ 1688      6F6E745F 
+ 1688      696E7665 
+ 1688      7273655F 
+ 1688      6D6F6465 
+ 1689              	.LASF48:
+ 1690 0042 7370695F 		.ascii	"spi_mode\000"
+ 1690      6D6F6465 
+ 1690      00
+ 1691              	.LASF67:
+ 1692 004b 6172675F 		.ascii	"arg_ptr\000"
+ 1692      70747200 
+ 1693              	.LASF39:
+ 1694 0053 63686970 		.ascii	"chip_enable_level\000"
+ 1694      5F656E61 
+ 1694      626C655F 
+ 1694      6C657665 
+ 1694      6C00
+ 1695              	.LASF24:
+ 1696 0065 666F6E74 		.ascii	"font\000"
+ 1696      00
+ 1697              	.LASF35:
+ 1698 006a 6465626F 		.ascii	"debounce_result_msg\000"
+ 1698      756E6365 
+ 1698      5F726573 
+ 1698      756C745F 
+ 1698      6D736700 
+ 1699              	.LASF2:
+ 1700 007e 73686F72 		.ascii	"short int\000"
+ 1700      7420696E 
+ 1700      7400
+ 1701              	.LASF22:
+ 1702 0088 6770696F 		.ascii	"gpio_and_delay_cb\000"
+ 1702      5F616E64 
+ 1702      5F64656C 
+ 1702      61795F63 
+ 1702      6200
+ 1703              	.LASF52:
+ 1704 009a 74696C65 		.ascii	"tile_width\000"
+ 1704      5F776964 
+ 1704      746800
+ 1705              	.LASF68:
+ 1706 00a5 73697A65 		.ascii	"sizetype\000"
+ 1706      74797065 
+ 1706      00
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 35
+
+
+ 1707              	.LASF45:
+ 1708 00ae 7364615F 		.ascii	"sda_setup_time_ns\000"
+ 1708      73657475 
+ 1708      705F7469 
+ 1708      6D655F6E 
+ 1708      7300
+ 1709              	.LASF44:
+ 1710 00c0 706F7374 		.ascii	"post_reset_wait_ms\000"
+ 1710      5F726573 
+ 1710      65745F77 
+ 1710      6169745F 
+ 1710      6D7300
+ 1711              	.LASF7:
+ 1712 00d3 5F5F7569 		.ascii	"__uint32_t\000"
+ 1712      6E743332 
+ 1712      5F7400
+ 1713              	.LASF4:
+ 1714 00de 5F5F7569 		.ascii	"__uint16_t\000"
+ 1714      6E743136 
+ 1714      5F7400
+ 1715              	.LASF82:
+ 1716 00e9 433A5C55 		.ascii	"C:\\Users\\brian\\Documents\\PSoC Creator\\Lab7\\La"
+ 1716      73657273 
+ 1716      5C627269 
+ 1716      616E5C44 
+ 1716      6F63756D 
+ 1717 0116 62372E63 		.ascii	"b7.cydsn\000"
+ 1717      7964736E 
+ 1717      00
+ 1718              	.LASF51:
+ 1719 011f 77726974 		.ascii	"write_pulse_width_ns\000"
+ 1719      655F7075 
+ 1719      6C73655F 
+ 1719      77696474 
+ 1719      685F6E73 
+ 1720              	.LASF12:
+ 1721 0134 75696E74 		.ascii	"uint8_t\000"
+ 1721      385F7400 
+ 1722              	.LASF41:
+ 1723 013c 706F7374 		.ascii	"post_chip_enable_wait_ns\000"
+ 1723      5F636869 
+ 1723      705F656E 
+ 1723      61626C65 
+ 1723      5F776169 
+ 1724              	.LASF65:
+ 1725 0155 75387838 		.ascii	"u8x8\000"
+ 1725      00
+ 1726              	.LASF60:
+ 1727 015a 74696C65 		.ascii	"tile_ptr\000"
+ 1727      5F707472 
+ 1727      00
+ 1728              	.LASF66:
+ 1729 0163 6172675F 		.ascii	"arg_int\000"
+ 1729      696E7400 
+ 1730              	.LASF79:
+ 1731 016b 75387838 		.ascii	"u8x8_cad_SendData\000"
+ 1731      5F636164 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 36
+
+
+ 1731      5F53656E 
+ 1731      64446174 
+ 1731      6100
+ 1732              	.LASF23:
+ 1733 017d 6275735F 		.ascii	"bus_clock\000"
+ 1733      636C6F63 
+ 1733      6B00
+ 1734              	.LASF54:
+ 1735 0187 64656661 		.ascii	"default_x_offset\000"
+ 1735      756C745F 
+ 1735      785F6F66 
+ 1735      66736574 
+ 1735      00
+ 1736              	.LASF36:
+ 1737 0198 75387838 		.ascii	"u8x8_display_info_t\000"
+ 1737      5F646973 
+ 1737      706C6179 
+ 1737      5F696E66 
+ 1737      6F5F7400 
+ 1738              	.LASF33:
+ 1739 01ac 6465626F 		.ascii	"debounce_last_pin_state\000"
+ 1739      756E6365 
+ 1739      5F6C6173 
+ 1739      745F7069 
+ 1739      6E5F7374 
+ 1740              	.LASF9:
+ 1741 01c4 6C6F6E67 		.ascii	"long long int\000"
+ 1741      206C6F6E 
+ 1741      6720696E 
+ 1741      7400
+ 1742              	.LASF31:
+ 1743 01d2 6770696F 		.ascii	"gpio_result\000"
+ 1743      5F726573 
+ 1743      756C7400 
+ 1744              	.LASF46:
+ 1745 01de 73636B5F 		.ascii	"sck_pulse_width_ns\000"
+ 1745      70756C73 
+ 1745      655F7769 
+ 1745      6474685F 
+ 1745      6E7300
+ 1746              	.LASF77:
+ 1747 01f1 75387838 		.ascii	"u8x8_cad_SendCmd\000"
+ 1747      5F636164 
+ 1747      5F53656E 
+ 1747      64436D64 
+ 1747      00
+ 1748              	.LASF74:
+ 1749 0202 75387838 		.ascii	"u8x8_d_helper_display_init\000"
+ 1749      5F645F68 
+ 1749      656C7065 
+ 1749      725F6469 
+ 1749      73706C61 
+ 1750              	.LASF6:
+ 1751 021d 6C6F6E67 		.ascii	"long int\000"
+ 1751      20696E74 
+ 1751      00
+ 1752              	.LASF78:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 37
+
+
+ 1753 0226 75387838 		.ascii	"u8x8_cad_EndTransfer\000"
+ 1753      5F636164 
+ 1753      5F456E64 
+ 1753      5472616E 
+ 1753      73666572 
+ 1754              	.LASF61:
+ 1755 023b 785F706F 		.ascii	"x_pos\000"
+ 1755      7300
+ 1756              	.LASF3:
+ 1757 0241 5F5F7569 		.ascii	"__uint8_t\000"
+ 1757      6E74385F 
+ 1757      7400
+ 1758              	.LASF19:
+ 1759 024b 64697370 		.ascii	"display_cb\000"
+ 1759      6C61795F 
+ 1759      636200
+ 1760              	.LASF50:
+ 1761 0256 64617461 		.ascii	"data_setup_time_ns\000"
+ 1761      5F736574 
+ 1761      75705F74 
+ 1761      696D655F 
+ 1761      6E7300
+ 1762              	.LASF71:
+ 1763 0269 75387838 		.ascii	"u8x8_d_pcd8544_84x48_powersave1_seq\000"
+ 1763      5F645F70 
+ 1763      63643835 
+ 1763      34345F38 
+ 1763      34783438 
+ 1764              	.LASF15:
+ 1765 028d 6C6F6E67 		.ascii	"long double\000"
+ 1765      20646F75 
+ 1765      626C6500 
+ 1766              	.LASF53:
+ 1767 0299 74696C65 		.ascii	"tile_height\000"
+ 1767      5F686569 
+ 1767      67687400 
+ 1768              	.LASF1:
+ 1769 02a5 756E7369 		.ascii	"unsigned char\000"
+ 1769      676E6564 
+ 1769      20636861 
+ 1769      7200
+ 1770              	.LASF0:
+ 1771 02b3 7369676E 		.ascii	"signed char\000"
+ 1771      65642063 
+ 1771      68617200 
+ 1772              	.LASF10:
+ 1773 02bf 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1773      206C6F6E 
+ 1773      6720756E 
+ 1773      7369676E 
+ 1773      65642069 
+ 1774              	.LASF14:
+ 1775 02d6 75696E74 		.ascii	"uint32_t\000"
+ 1775      33325F74 
+ 1775      00
+ 1776              	.LASF59:
+ 1777 02df 75387838 		.ascii	"u8x8_tile_struct\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 38
+
+
+ 1777      5F74696C 
+ 1777      655F7374 
+ 1777      72756374 
+ 1777      00
+ 1778              	.LASF11:
+ 1779 02f0 756E7369 		.ascii	"unsigned int\000"
+ 1779      676E6564 
+ 1779      20696E74 
+ 1779      00
+ 1780              	.LASF13:
+ 1781 02fd 75696E74 		.ascii	"uint16_t\000"
+ 1781      31365F74 
+ 1781      00
+ 1782              	.LASF38:
+ 1783 0306 75387838 		.ascii	"u8x8_display_info_struct\000"
+ 1783      5F646973 
+ 1783      706C6179 
+ 1783      5F696E66 
+ 1783      6F5F7374 
+ 1784              	.LASF76:
+ 1785 031f 75387838 		.ascii	"u8x8_cad_StartTransfer\000"
+ 1785      5F636164 
+ 1785      5F537461 
+ 1785      72745472 
+ 1785      616E7366 
+ 1786              	.LASF43:
+ 1787 0336 72657365 		.ascii	"reset_pulse_width_ms\000"
+ 1787      745F7075 
+ 1787      6C73655F 
+ 1787      77696474 
+ 1787      685F6D73 
+ 1788              	.LASF16:
+ 1789 034b 75387838 		.ascii	"u8x8_t\000"
+ 1789      5F7400
+ 1790              	.LASF49:
+ 1791 0352 6932635F 		.ascii	"i2c_bus_clock_100kHz\000"
+ 1791      6275735F 
+ 1791      636C6F63 
+ 1791      6B5F3130 
+ 1791      306B487A 
+ 1792              	.LASF47:
+ 1793 0367 73636B5F 		.ascii	"sck_clock_hz\000"
+ 1793      636C6F63 
+ 1793      6B5F687A 
+ 1793      00
+ 1794              	.LASF5:
+ 1795 0374 73686F72 		.ascii	"short unsigned int\000"
+ 1795      7420756E 
+ 1795      7369676E 
+ 1795      65642069 
+ 1795      6E7400
+ 1796              	.LASF64:
+ 1797 0387 75387838 		.ascii	"u8x8_char_cb\000"
+ 1797      5F636861 
+ 1797      725F6362 
+ 1797      00
+ 1798              	.LASF83:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 39
+
+
+ 1799 0394 75387838 		.ascii	"u8x8_d_pcd8544_84x48\000"
+ 1799      5F645F70 
+ 1799      63643835 
+ 1799      34345F38 
+ 1799      34783438 
+ 1800              	.LASF34:
+ 1801 03a9 6465626F 		.ascii	"debounce_state\000"
+ 1801      756E6365 
+ 1801      5F737461 
+ 1801      746500
+ 1802              	.LASF17:
+ 1803 03b8 64697370 		.ascii	"display_info\000"
+ 1803      6C61795F 
+ 1803      696E666F 
+ 1803      00
+ 1804              	.LASF57:
+ 1805 03c5 70697865 		.ascii	"pixel_height\000"
+ 1805      6C5F6865 
+ 1805      69676874 
+ 1805      00
+ 1806              	.LASF56:
+ 1807 03d2 70697865 		.ascii	"pixel_width\000"
+ 1807      6C5F7769 
+ 1807      64746800 
+ 1808              	.LASF30:
+ 1809 03de 75746638 		.ascii	"utf8_state\000"
+ 1809      5F737461 
+ 1809      746500
+ 1810              	.LASF37:
+ 1811 03e9 75387838 		.ascii	"u8x8_struct\000"
+ 1811      5F737472 
+ 1811      75637400 
+ 1812              	.LASF62:
+ 1813 03f5 795F706F 		.ascii	"y_pos\000"
+ 1813      7300
+ 1814              	.LASF75:
+ 1815 03fb 75387838 		.ascii	"u8x8_cad_SendSequence\000"
+ 1815      5F636164 
+ 1815      5F53656E 
+ 1815      64536571 
+ 1815      75656E63 
+ 1816              	.LASF70:
+ 1817 0411 75387838 		.ascii	"u8x8_d_pcd8544_84x48_powersave0_seq\000"
+ 1817      5F645F70 
+ 1817      63643835 
+ 1817      34345F38 
+ 1817      34783438 
+ 1818              	.LASF8:
+ 1819 0435 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1819      20756E73 
+ 1819      69676E65 
+ 1819      6420696E 
+ 1819      7400
+ 1820              	.LASF21:
+ 1821 0447 62797465 		.ascii	"byte_cb\000"
+ 1821      5F636200 
+ 1822              	.LASF40:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 40
+
+
+ 1823 044f 63686970 		.ascii	"chip_disable_level\000"
+ 1823      5F646973 
+ 1823      61626C65 
+ 1823      5F6C6576 
+ 1823      656C00
+ 1824              	.LASF28:
+ 1825 0462 6932635F 		.ascii	"i2c_address\000"
+ 1825      61646472 
+ 1825      65737300 
+ 1826              	.LASF55:
+ 1827 046e 666C6970 		.ascii	"flipmode_x_offset\000"
+ 1827      6D6F6465 
+ 1827      5F785F6F 
+ 1827      66667365 
+ 1827      7400
+ 1828              	.LASF25:
+ 1829 0480 656E636F 		.ascii	"encoding\000"
+ 1829      64696E67 
+ 1829      00
+ 1830              	.LASF72:
+ 1831 0489 75387838 		.ascii	"u8x8_pcd8544_84x48_display_info\000"
+ 1831      5F706364 
+ 1831      38353434 
+ 1831      5F383478 
+ 1831      34385F64 
+ 1832              	.LASF29:
+ 1833 04a9 6932635F 		.ascii	"i2c_started\000"
+ 1833      73746172 
+ 1833      74656400 
+ 1834              	.LASF73:
+ 1835 04b5 75387838 		.ascii	"u8x8_d_helper_display_setup_memory\000"
+ 1835      5F645F68 
+ 1835      656C7065 
+ 1835      725F6469 
+ 1835      73706C61 
+ 1836              	.LASF20:
+ 1837 04d8 6361645F 		.ascii	"cad_cb\000"
+ 1837      636200
+ 1838              	.LASF58:
+ 1839 04df 75387838 		.ascii	"u8x8_tile_t\000"
+ 1839      5F74696C 
+ 1839      655F7400 
+ 1840              	.LASF80:
+ 1841 04eb 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1841      43313120 
+ 1841      352E342E 
+ 1841      31203230 
+ 1841      31363036 
+ 1842 051e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1842      20726576 
+ 1842      6973696F 
+ 1842      6E203233 
+ 1842      37373135 
+ 1843 0551 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1843      66756E63 
+ 1843      74696F6E 
+ 1843      2D736563 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccaMHHDN.s 			page 41
+
+
+ 1843      74696F6E 
+ 1844              	.LASF32:
+ 1845 0579 6465626F 		.ascii	"debounce_default_pin_state\000"
+ 1845      756E6365 
+ 1845      5F646566 
+ 1845      61756C74 
+ 1845      5F70696E 
+ 1846              	.LASF63:
+ 1847 0594 75387838 		.ascii	"u8x8_msg_cb\000"
+ 1847      5F6D7367 
+ 1847      5F636200 
+ 1848              	.LASF18:
+ 1849 05a0 6E657874 		.ascii	"next_cb\000"
+ 1849      5F636200 
+ 1850              	.LASF69:
+ 1851 05a8 75387838 		.ascii	"u8x8_d_pcd8544_84x48_init_seq\000"
+ 1851      5F645F70 
+ 1851      63643835 
+ 1851      34345F38 
+ 1851      34783438 
+ 1852              	.LASF42:
+ 1853 05c6 7072655F 		.ascii	"pre_chip_disable_wait_ns\000"
+ 1853      63686970 
+ 1853      5F646973 
+ 1853      61626C65 
+ 1853      5F776169 
+ 1854              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

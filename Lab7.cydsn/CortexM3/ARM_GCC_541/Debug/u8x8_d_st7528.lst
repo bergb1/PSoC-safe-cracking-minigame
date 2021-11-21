@@ -1,0 +1,4258 @@
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"u8x8_d_st7528.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.u8x8_st7528_8to32,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	u8x8_st7528_8to32, %function
+  24              	u8x8_st7528_8to32:
+  25              	.LFB0:
+  26              		.file 1 "..\\u8g2\\csrc\\u8x8_d_st7528.c"
+   1:..\u8g2\csrc/u8x8_d_st7528.c **** /*
+   2:..\u8g2\csrc/u8x8_d_st7528.c **** 
+   3:..\u8g2\csrc/u8x8_d_st7528.c ****   u8x8_d_st7528.c
+   4:..\u8g2\csrc/u8x8_d_st7528.c **** 
+   5:..\u8g2\csrc/u8x8_d_st7528.c ****   Universal 8bit Graphics Library (https://github.com/olikraus/u8g2/)
+   6:..\u8g2\csrc/u8x8_d_st7528.c **** 
+   7:..\u8g2\csrc/u8x8_d_st7528.c ****   Copyright (c) 2019, olikraus@gmail.com
+   8:..\u8g2\csrc/u8x8_d_st7528.c ****   All rights reserved.
+   9:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  10:..\u8g2\csrc/u8x8_d_st7528.c ****   Redistribution and use in source and binary forms, with or without modification, 
+  11:..\u8g2\csrc/u8x8_d_st7528.c ****   are permitted provided that the following conditions are met:
+  12:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  13:..\u8g2\csrc/u8x8_d_st7528.c ****   * Redistributions of source code must retain the above copyright notice, this list 
+  14:..\u8g2\csrc/u8x8_d_st7528.c ****     of conditions and the following disclaimer.
+  15:..\u8g2\csrc/u8x8_d_st7528.c ****     
+  16:..\u8g2\csrc/u8x8_d_st7528.c ****   * Redistributions in binary form must reproduce the above copyright notice, this 
+  17:..\u8g2\csrc/u8x8_d_st7528.c ****     list of conditions and the following disclaimer in the documentation and/or other 
+  18:..\u8g2\csrc/u8x8_d_st7528.c ****     materials provided with the distribution.
+  19:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  20:..\u8g2\csrc/u8x8_d_st7528.c ****   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+  21:..\u8g2\csrc/u8x8_d_st7528.c ****   CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+  22:..\u8g2\csrc/u8x8_d_st7528.c ****   INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  23:..\u8g2\csrc/u8x8_d_st7528.c ****   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+  24:..\u8g2\csrc/u8x8_d_st7528.c ****   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+  25:..\u8g2\csrc/u8x8_d_st7528.c ****   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  26:..\u8g2\csrc/u8x8_d_st7528.c ****   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  27:..\u8g2\csrc/u8x8_d_st7528.c ****   NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+  28:..\u8g2\csrc/u8x8_d_st7528.c ****   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+  29:..\u8g2\csrc/u8x8_d_st7528.c ****   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+  30:..\u8g2\csrc/u8x8_d_st7528.c ****   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  31:..\u8g2\csrc/u8x8_d_st7528.c ****   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 2
+
+
+  32:..\u8g2\csrc/u8x8_d_st7528.c ****   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
+  33:..\u8g2\csrc/u8x8_d_st7528.c ****   
+  34:..\u8g2\csrc/u8x8_d_st7528.c ****   ST7528: 16 Graylevel Controller
+  35:..\u8g2\csrc/u8x8_d_st7528.c ****   https://github.com/olikraus/u8g2/issues/986
+  36:..\u8g2\csrc/u8x8_d_st7528.c ****   I2C Address: 0x03f (0x7e)
+  37:..\u8g2\csrc/u8x8_d_st7528.c ****   
+  38:..\u8g2\csrc/u8x8_d_st7528.c ****   
+  39:..\u8g2\csrc/u8x8_d_st7528.c ****   ERC16004
+  40:..\u8g2\csrc/u8x8_d_st7528.c ****   https://www.buydisplay.com/default/2-inch-lcd-160x64-graphic-module-serial-spi-display-st7528-bla
+  41:..\u8g2\csrc/u8x8_d_st7528.c ****   
+  42:..\u8g2\csrc/u8x8_d_st7528.c **** */
+  43:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  44:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  45:..\u8g2\csrc/u8x8_d_st7528.c **** #include "u8x8.h"
+  46:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  47:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  48:..\u8g2\csrc/u8x8_d_st7528.c **** static const uint8_t u8x8_d_st7528_powersave0_seq[] = {
+  49:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  50:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x038, 0x074),		/* ext mode 0*/
+  51:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0af),		                /* display on */
+  52:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  53:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END()             			/* end of sequence */
+  54:..\u8g2\csrc/u8x8_d_st7528.c **** };
+  55:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  56:..\u8g2\csrc/u8x8_d_st7528.c **** static const uint8_t u8x8_d_st7528_powersave1_seq[] = {
+  57:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  58:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x038, 0x074),		/* ext mode 0*/
+  59:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0ae),		                /* display off */
+  60:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  61:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END()             			/* end of sequence */
+  62:..\u8g2\csrc/u8x8_d_st7528.c **** };
+  63:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  64:..\u8g2\csrc/u8x8_d_st7528.c **** static const uint8_t u8x8_d_st7528_flip0_seq[] = {
+  65:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  66:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0a0),		                /* ADC */
+  67:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0c8),		                /* SHL */  
+  68:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  69:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END()             			/* end of sequence */
+  70:..\u8g2\csrc/u8x8_d_st7528.c **** };
+  71:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  72:..\u8g2\csrc/u8x8_d_st7528.c **** static const uint8_t u8x8_d_st7528_flip1_seq[] = {
+  73:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  74:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0a1),		                /* ADC */
+  75:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0c0),		                /* SHL */  
+  76:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  77:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END()             			/* end of sequence */
+  78:..\u8g2\csrc/u8x8_d_st7528.c **** };
+  79:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  80:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  81:..\u8g2\csrc/u8x8_d_st7528.c **** /*
+  82:..\u8g2\csrc/u8x8_d_st7528.c ****   input:
+  83:..\u8g2\csrc/u8x8_d_st7528.c ****     one tile (8 Bytes)
+  84:..\u8g2\csrc/u8x8_d_st7528.c ****   output:
+  85:..\u8g2\csrc/u8x8_d_st7528.c ****     Tile for st7528 (32 Bytes)
+  86:..\u8g2\csrc/u8x8_d_st7528.c **** */
+  87:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  88:..\u8g2\csrc/u8x8_d_st7528.c **** static uint8_t u8x8_st7528_8to32_dest_buf[32];
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 3
+
+
+  89:..\u8g2\csrc/u8x8_d_st7528.c **** 
+  90:..\u8g2\csrc/u8x8_d_st7528.c **** static uint8_t *u8x8_st7528_8to32(U8X8_UNUSED u8x8_t *u8x8, uint8_t *ptr)
+  91:..\u8g2\csrc/u8x8_d_st7528.c **** {
+  27              		.loc 1 91 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32              	.LVL0:
+  92:..\u8g2\csrc/u8x8_d_st7528.c ****   uint8_t j;
+  93:..\u8g2\csrc/u8x8_d_st7528.c ****   uint8_t *dest;
+  94:..\u8g2\csrc/u8x8_d_st7528.c ****   
+  95:..\u8g2\csrc/u8x8_d_st7528.c ****   dest = u8x8_st7528_8to32_dest_buf;
+  33              		.loc 1 95 0
+  34 0000 094B     		ldr	r3, .L4
+  96:..\u8g2\csrc/u8x8_d_st7528.c ****   for( j = 0; j < 8; j++ )
+  35              		.loc 1 96 0
+  36 0002 0022     		movs	r2, #0
+  37 0004 0BE0     		b	.L2
+  38              	.LVL1:
+  39              	.L3:
+  97:..\u8g2\csrc/u8x8_d_st7528.c ****   {
+  98:..\u8g2\csrc/u8x8_d_st7528.c ****     *dest++ =*ptr;
+  40              		.loc 1 98 0 discriminator 3
+  41 0006 0878     		ldrb	r0, [r1]	@ zero_extendqisi2
+  42 0008 1870     		strb	r0, [r3]
+  43              	.LVL2:
+  99:..\u8g2\csrc/u8x8_d_st7528.c ****     *dest++ =*ptr;
+  44              		.loc 1 99 0 discriminator 3
+  45 000a 0878     		ldrb	r0, [r1]	@ zero_extendqisi2
+  46 000c 5870     		strb	r0, [r3, #1]
+  47              	.LVL3:
+ 100:..\u8g2\csrc/u8x8_d_st7528.c ****     *dest++ =*ptr;
+  48              		.loc 1 100 0 discriminator 3
+  49 000e 0878     		ldrb	r0, [r1]	@ zero_extendqisi2
+  50 0010 9870     		strb	r0, [r3, #2]
+  51              	.LVL4:
+ 101:..\u8g2\csrc/u8x8_d_st7528.c ****     *dest++ =*ptr;
+  52              		.loc 1 101 0 discriminator 3
+  53 0012 11F8010B 		ldrb	r0, [r1], #1	@ zero_extendqisi2
+  54              	.LVL5:
+  55 0016 D870     		strb	r0, [r3, #3]
+  56              	.LVL6:
+  96:..\u8g2\csrc/u8x8_d_st7528.c ****   {
+  57              		.loc 1 96 0 discriminator 3
+  58 0018 0132     		adds	r2, r2, #1
+  59              	.LVL7:
+  60 001a D2B2     		uxtb	r2, r2
+  61              	.LVL8:
+  62              		.loc 1 101 0 discriminator 3
+  63 001c 0433     		adds	r3, r3, #4
+  64              	.LVL9:
+  65              	.L2:
+  96:..\u8g2\csrc/u8x8_d_st7528.c ****   {
+  66              		.loc 1 96 0 discriminator 1
+  67 001e 072A     		cmp	r2, #7
+  68 0020 F1D9     		bls	.L3
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 4
+
+
+ 102:..\u8g2\csrc/u8x8_d_st7528.c ****     ptr++;
+ 103:..\u8g2\csrc/u8x8_d_st7528.c ****   }
+ 104:..\u8g2\csrc/u8x8_d_st7528.c ****   return u8x8_st7528_8to32_dest_buf;
+ 105:..\u8g2\csrc/u8x8_d_st7528.c **** }
+  69              		.loc 1 105 0
+  70 0022 0148     		ldr	r0, .L4
+  71 0024 7047     		bx	lr
+  72              	.L5:
+  73 0026 00BF     		.align	2
+  74              	.L4:
+  75 0028 00000000 		.word	.LANCHOR0
+  76              		.cfi_endproc
+  77              	.LFE0:
+  78              		.size	u8x8_st7528_8to32, .-u8x8_st7528_8to32
+  79              		.section	.text.u8x8_d_st7528_graylevel_init,"ax",%progbits
+  80              		.align	2
+  81              		.thumb
+  82              		.thumb_func
+  83              		.type	u8x8_d_st7528_graylevel_init, %function
+  84              	u8x8_d_st7528_graylevel_init:
+  85              	.LFB2:
+ 106:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 107:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 108:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 109:..\u8g2\csrc/u8x8_d_st7528.c **** static uint8_t u8x8_d_st7528_generic(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 110:..\u8g2\csrc/u8x8_d_st7528.c **** {
+ 111:..\u8g2\csrc/u8x8_d_st7528.c ****   uint8_t x;
+ 112:..\u8g2\csrc/u8x8_d_st7528.c ****   uint8_t y, c;
+ 113:..\u8g2\csrc/u8x8_d_st7528.c ****   uint8_t *ptr;
+ 114:..\u8g2\csrc/u8x8_d_st7528.c ****   switch(msg)
+ 115:..\u8g2\csrc/u8x8_d_st7528.c ****   {
+ 116:..\u8g2\csrc/u8x8_d_st7528.c ****     /* handled by the calling function
+ 117:..\u8g2\csrc/u8x8_d_st7528.c ****     case U8X8_MSG_DISPLAY_SETUP_MEMORY:
+ 118:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_st7528_display_info);
+ 119:..\u8g2\csrc/u8x8_d_st7528.c ****       break;
+ 120:..\u8g2\csrc/u8x8_d_st7528.c ****     case U8X8_MSG_DISPLAY_INIT:
+ 121:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_d_helper_display_init(u8x8);
+ 122:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_st7528_nhd_c160100_init_seq);    
+ 123:..\u8g2\csrc/u8x8_d_st7528.c ****     */
+ 124:..\u8g2\csrc/u8x8_d_st7528.c ****       break;
+ 125:..\u8g2\csrc/u8x8_d_st7528.c ****     case U8X8_MSG_DISPLAY_SET_POWER_SAVE:
+ 126:..\u8g2\csrc/u8x8_d_st7528.c ****       if ( arg_int == 0 )
+ 127:..\u8g2\csrc/u8x8_d_st7528.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_st7528_powersave0_seq);
+ 128:..\u8g2\csrc/u8x8_d_st7528.c ****       else
+ 129:..\u8g2\csrc/u8x8_d_st7528.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_st7528_powersave1_seq);
+ 130:..\u8g2\csrc/u8x8_d_st7528.c ****       break;
+ 131:..\u8g2\csrc/u8x8_d_st7528.c ****     case U8X8_MSG_DISPLAY_SET_FLIP_MODE:
+ 132:..\u8g2\csrc/u8x8_d_st7528.c ****       if ( arg_int == 0 )
+ 133:..\u8g2\csrc/u8x8_d_st7528.c ****       {
+ 134:..\u8g2\csrc/u8x8_d_st7528.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_st7528_flip0_seq);
+ 135:..\u8g2\csrc/u8x8_d_st7528.c **** 	u8x8->x_offset = u8x8->display_info->default_x_offset;
+ 136:..\u8g2\csrc/u8x8_d_st7528.c ****       }
+ 137:..\u8g2\csrc/u8x8_d_st7528.c ****       else
+ 138:..\u8g2\csrc/u8x8_d_st7528.c ****       {
+ 139:..\u8g2\csrc/u8x8_d_st7528.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_st7528_flip1_seq);
+ 140:..\u8g2\csrc/u8x8_d_st7528.c **** 	u8x8->x_offset = u8x8->display_info->flipmode_x_offset;
+ 141:..\u8g2\csrc/u8x8_d_st7528.c ****       }
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 5
+
+
+ 142:..\u8g2\csrc/u8x8_d_st7528.c ****       break;
+ 143:..\u8g2\csrc/u8x8_d_st7528.c **** #ifdef U8X8_WITH_SET_CONTRAST
+ 144:..\u8g2\csrc/u8x8_d_st7528.c ****     case U8X8_MSG_DISPLAY_SET_CONTRAST:
+ 145:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_StartTransfer(u8x8);
+ 146:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_SendCmd(u8x8, 0x081 );
+ 147:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_SendArg(u8x8, arg_int );	/* ssd1326 has range from 0 to 255 */
+ 148:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_EndTransfer(u8x8);
+ 149:..\u8g2\csrc/u8x8_d_st7528.c ****       break;
+ 150:..\u8g2\csrc/u8x8_d_st7528.c **** #endif
+ 151:..\u8g2\csrc/u8x8_d_st7528.c ****     case U8X8_MSG_DISPLAY_DRAW_TILE:
+ 152:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_StartTransfer(u8x8);
+ 153:..\u8g2\csrc/u8x8_d_st7528.c ****       x = ((u8x8_tile_t *)arg_ptr)->x_pos;
+ 154:..\u8g2\csrc/u8x8_d_st7528.c ****       x *= 8;  // not clear
+ 155:..\u8g2\csrc/u8x8_d_st7528.c ****       
+ 156:..\u8g2\csrc/u8x8_d_st7528.c ****       y = (((u8x8_tile_t *)arg_ptr)->y_pos);
+ 157:..\u8g2\csrc/u8x8_d_st7528.c ****       
+ 158:..\u8g2\csrc/u8x8_d_st7528.c ****     
+ 159:..\u8g2\csrc/u8x8_d_st7528.c ****       
+ 160:..\u8g2\csrc/u8x8_d_st7528.c ****       do
+ 161:..\u8g2\csrc/u8x8_d_st7528.c ****       {
+ 162:..\u8g2\csrc/u8x8_d_st7528.c **** 	c = ((u8x8_tile_t *)arg_ptr)->cnt;
+ 163:..\u8g2\csrc/u8x8_d_st7528.c **** 	ptr = ((u8x8_tile_t *)arg_ptr)->tile_ptr;
+ 164:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 165:..\u8g2\csrc/u8x8_d_st7528.c **** 	do
+ 166:..\u8g2\csrc/u8x8_d_st7528.c **** 	{
+ 167:..\u8g2\csrc/u8x8_d_st7528.c ****           u8x8_cad_SendCmd(u8x8, 0xb0 | y );	/* set page address */
+ 168:..\u8g2\csrc/u8x8_d_st7528.c ****           u8x8_cad_SendCmd(u8x8, 0x10| (x>>4) );	/* set col msb*/
+ 169:..\u8g2\csrc/u8x8_d_st7528.c ****           u8x8_cad_SendCmd(u8x8, 0x00| (x&15) );	/* set col lsb*/
+ 170:..\u8g2\csrc/u8x8_d_st7528.c ****           
+ 171:..\u8g2\csrc/u8x8_d_st7528.c ****           u8x8_cad_SendData(u8x8, 32, u8x8_st7528_8to32(u8x8, ptr));
+ 172:..\u8g2\csrc/u8x8_d_st7528.c ****           
+ 173:..\u8g2\csrc/u8x8_d_st7528.c **** 	  ptr += 8;
+ 174:..\u8g2\csrc/u8x8_d_st7528.c **** 	  x += 8;
+ 175:..\u8g2\csrc/u8x8_d_st7528.c **** 	  c--;
+ 176:..\u8g2\csrc/u8x8_d_st7528.c **** 	} while( c > 0 );	
+ 177:..\u8g2\csrc/u8x8_d_st7528.c **** 	arg_int--;
+ 178:..\u8g2\csrc/u8x8_d_st7528.c ****       } while( arg_int > 0 );
+ 179:..\u8g2\csrc/u8x8_d_st7528.c ****       
+ 180:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_EndTransfer(u8x8);
+ 181:..\u8g2\csrc/u8x8_d_st7528.c ****       break;
+ 182:..\u8g2\csrc/u8x8_d_st7528.c ****     default:
+ 183:..\u8g2\csrc/u8x8_d_st7528.c ****       return 0;
+ 184:..\u8g2\csrc/u8x8_d_st7528.c ****   }
+ 185:..\u8g2\csrc/u8x8_d_st7528.c ****   return 1;
+ 186:..\u8g2\csrc/u8x8_d_st7528.c **** }
+ 187:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 188:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 189:..\u8g2\csrc/u8x8_d_st7528.c **** static void u8x8_d_st7528_graylevel_init(u8x8_t *u8x8, uint8_t mode0)
+ 190:..\u8g2\csrc/u8x8_d_st7528.c **** {
+  86              		.loc 1 190 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              	.LVL10:
+  91 0000 70B5     		push	{r4, r5, r6, lr}
+  92              		.cfi_def_cfa_offset 16
+  93              		.cfi_offset 4, -16
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 6
+
+
+  94              		.cfi_offset 5, -12
+  95              		.cfi_offset 6, -8
+  96              		.cfi_offset 14, -4
+  97 0002 0546     		mov	r5, r0
+  98 0004 0E46     		mov	r6, r1
+ 191:..\u8g2\csrc/u8x8_d_st7528.c ****   uint8_t i;
+ 192:..\u8g2\csrc/u8x8_d_st7528.c ****   
+ 193:..\u8g2\csrc/u8x8_d_st7528.c ****   u8x8_cad_StartTransfer(u8x8);
+  99              		.loc 1 193 0
+ 100 0006 FFF7FEFF 		bl	u8x8_cad_StartTransfer
+ 101              	.LVL11:
+ 194:..\u8g2\csrc/u8x8_d_st7528.c ****   u8x8_cad_SendCmd(u8x8, 0x38 );
+ 102              		.loc 1 194 0
+ 103 000a 3821     		movs	r1, #56
+ 104 000c 2846     		mov	r0, r5
+ 105 000e FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 106              	.LVL12:
+ 195:..\u8g2\csrc/u8x8_d_st7528.c ****   u8x8_cad_SendArg(u8x8, mode0+1 );
+ 107              		.loc 1 195 0
+ 108 0012 711C     		adds	r1, r6, #1
+ 109 0014 C9B2     		uxtb	r1, r1
+ 110 0016 2846     		mov	r0, r5
+ 111 0018 FFF7FEFF 		bl	u8x8_cad_SendArg
+ 112              	.LVL13:
+ 196:..\u8g2\csrc/u8x8_d_st7528.c ****   for( i = 0; i < 64; i++ )
+ 113              		.loc 1 196 0
+ 114 001c 0024     		movs	r4, #0
+ 115 001e 0BE0     		b	.L7
+ 116              	.LVL14:
+ 117              	.L8:
+ 197:..\u8g2\csrc/u8x8_d_st7528.c ****   {
+ 198:..\u8g2\csrc/u8x8_d_st7528.c ****           u8x8_cad_SendCmd(u8x8, i+0x080 );
+ 118              		.loc 1 198 0 discriminator 3
+ 119 0020 84F08001 		eor	r1, r4, #128
+ 120 0024 2846     		mov	r0, r5
+ 121 0026 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 122              	.LVL15:
+ 199:..\u8g2\csrc/u8x8_d_st7528.c ****           u8x8_cad_SendArg(u8x8, i & 0xfc);
+ 123              		.loc 1 199 0 discriminator 3
+ 124 002a 04F0FC01 		and	r1, r4, #252
+ 125 002e 2846     		mov	r0, r5
+ 126 0030 FFF7FEFF 		bl	u8x8_cad_SendArg
+ 127              	.LVL16:
+ 196:..\u8g2\csrc/u8x8_d_st7528.c ****   for( i = 0; i < 64; i++ )
+ 128              		.loc 1 196 0 discriminator 3
+ 129 0034 0134     		adds	r4, r4, #1
+ 130              	.LVL17:
+ 131 0036 E4B2     		uxtb	r4, r4
+ 132              	.LVL18:
+ 133              	.L7:
+ 196:..\u8g2\csrc/u8x8_d_st7528.c ****   for( i = 0; i < 64; i++ )
+ 134              		.loc 1 196 0 is_stmt 0 discriminator 1
+ 135 0038 3F2C     		cmp	r4, #63
+ 136 003a F1D9     		bls	.L8
+ 200:..\u8g2\csrc/u8x8_d_st7528.c ****   }
+ 201:..\u8g2\csrc/u8x8_d_st7528.c ****   u8x8_cad_SendCmd(u8x8, 0x38 );
+ 137              		.loc 1 201 0 is_stmt 1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 7
+
+
+ 138 003c 3821     		movs	r1, #56
+ 139 003e 2846     		mov	r0, r5
+ 140 0040 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 141              	.LVL19:
+ 202:..\u8g2\csrc/u8x8_d_st7528.c ****   u8x8_cad_SendArg(u8x8, mode0 );
+ 142              		.loc 1 202 0
+ 143 0044 3146     		mov	r1, r6
+ 144 0046 2846     		mov	r0, r5
+ 145 0048 FFF7FEFF 		bl	u8x8_cad_SendArg
+ 146              	.LVL20:
+ 203:..\u8g2\csrc/u8x8_d_st7528.c ****   u8x8_cad_EndTransfer(u8x8);
+ 147              		.loc 1 203 0
+ 148 004c 2846     		mov	r0, r5
+ 149 004e FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 150              	.LVL21:
+ 151 0052 70BD     		pop	{r4, r5, r6, pc}
+ 152              		.cfi_endproc
+ 153              	.LFE2:
+ 154              		.size	u8x8_d_st7528_graylevel_init, .-u8x8_d_st7528_graylevel_init
+ 155              		.section	.text.u8x8_d_st7528_generic,"ax",%progbits
+ 156              		.align	2
+ 157              		.thumb
+ 158              		.thumb_func
+ 159              		.type	u8x8_d_st7528_generic, %function
+ 160              	u8x8_d_st7528_generic:
+ 161              	.LFB1:
+ 110:..\u8g2\csrc/u8x8_d_st7528.c ****   uint8_t x;
+ 162              		.loc 1 110 0
+ 163              		.cfi_startproc
+ 164              		@ args = 0, pretend = 0, frame = 0
+ 165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 166              	.LVL22:
+ 167 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 168              		.cfi_def_cfa_offset 32
+ 169              		.cfi_offset 4, -32
+ 170              		.cfi_offset 5, -28
+ 171              		.cfi_offset 6, -24
+ 172              		.cfi_offset 7, -20
+ 173              		.cfi_offset 8, -16
+ 174              		.cfi_offset 9, -12
+ 175              		.cfi_offset 10, -8
+ 176              		.cfi_offset 14, -4
+ 177 0004 0546     		mov	r5, r0
+ 178 0006 9046     		mov	r8, r2
+ 179 0008 9946     		mov	r9, r3
+ 114:..\u8g2\csrc/u8x8_d_st7528.c ****   {
+ 180              		.loc 1 114 0
+ 181 000a 0B39     		subs	r1, r1, #11
+ 182              	.LVL23:
+ 183 000c 0429     		cmp	r1, #4
+ 184 000e 6ED8     		bhi	.L21
+ 185 0010 DFE801F0 		tbb	[pc, r1]
+ 186              	.LVL24:
+ 187              	.L13:
+ 188 0014 03       		.byte	(.L12-.L13)/2
+ 189 0015 6D       		.byte	(.L21-.L13)/2
+ 190 0016 10       		.byte	(.L14-.L13)/2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 8
+
+
+ 191 0017 25       		.byte	(.L15-.L13)/2
+ 192 0018 35       		.byte	(.L16-.L13)/2
+ 193 0019 00       		.p2align 1
+ 194              	.L12:
+ 126:..\u8g2\csrc/u8x8_d_st7528.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_st7528_powersave0_seq);
+ 195              		.loc 1 126 0
+ 196 001a 2AB9     		cbnz	r2, .L17
+ 127:..\u8g2\csrc/u8x8_d_st7528.c ****       else
+ 197              		.loc 1 127 0
+ 198 001c 3549     		ldr	r1, .L23
+ 199 001e FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 200              	.LVL25:
+ 185:..\u8g2\csrc/u8x8_d_st7528.c **** }
+ 201              		.loc 1 185 0
+ 202 0022 0120     		movs	r0, #1
+ 203 0024 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 204              	.LVL26:
+ 205              	.L17:
+ 129:..\u8g2\csrc/u8x8_d_st7528.c ****       break;
+ 206              		.loc 1 129 0
+ 207 0028 3349     		ldr	r1, .L23+4
+ 208 002a FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 209              	.LVL27:
+ 185:..\u8g2\csrc/u8x8_d_st7528.c **** }
+ 210              		.loc 1 185 0
+ 211 002e 0120     		movs	r0, #1
+ 212 0030 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 213              	.LVL28:
+ 214              	.L14:
+ 132:..\u8g2\csrc/u8x8_d_st7528.c ****       {
+ 215              		.loc 1 132 0
+ 216 0034 4AB9     		cbnz	r2, .L18
+ 134:..\u8g2\csrc/u8x8_d_st7528.c **** 	u8x8->x_offset = u8x8->display_info->default_x_offset;
+ 217              		.loc 1 134 0
+ 218 0036 3149     		ldr	r1, .L23+8
+ 219 0038 FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 220              	.LVL29:
+ 135:..\u8g2\csrc/u8x8_d_st7528.c ****       }
+ 221              		.loc 1 135 0
+ 222 003c 2B68     		ldr	r3, [r5]
+ 223 003e 9B7C     		ldrb	r3, [r3, #18]	@ zero_extendqisi2
+ 224 0040 85F82230 		strb	r3, [r5, #34]
+ 185:..\u8g2\csrc/u8x8_d_st7528.c **** }
+ 225              		.loc 1 185 0
+ 226 0044 0120     		movs	r0, #1
+ 227 0046 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 228              	.LVL30:
+ 229              	.L18:
+ 139:..\u8g2\csrc/u8x8_d_st7528.c **** 	u8x8->x_offset = u8x8->display_info->flipmode_x_offset;
+ 230              		.loc 1 139 0
+ 231 004a 2D49     		ldr	r1, .L23+12
+ 232 004c FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 233              	.LVL31:
+ 140:..\u8g2\csrc/u8x8_d_st7528.c ****       }
+ 234              		.loc 1 140 0
+ 235 0050 2B68     		ldr	r3, [r5]
+ 236 0052 DB7C     		ldrb	r3, [r3, #19]	@ zero_extendqisi2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 9
+
+
+ 237 0054 85F82230 		strb	r3, [r5, #34]
+ 185:..\u8g2\csrc/u8x8_d_st7528.c **** }
+ 238              		.loc 1 185 0
+ 239 0058 0120     		movs	r0, #1
+ 240 005a BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 241              	.LVL32:
+ 242              	.L15:
+ 145:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_SendCmd(u8x8, 0x081 );
+ 243              		.loc 1 145 0
+ 244 005e FFF7FEFF 		bl	u8x8_cad_StartTransfer
+ 245              	.LVL33:
+ 146:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_SendArg(u8x8, arg_int );	/* ssd1326 has range from 0 to 255 */
+ 246              		.loc 1 146 0
+ 247 0062 8121     		movs	r1, #129
+ 248 0064 2846     		mov	r0, r5
+ 249 0066 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 250              	.LVL34:
+ 147:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_EndTransfer(u8x8);
+ 251              		.loc 1 147 0
+ 252 006a 4146     		mov	r1, r8
+ 253 006c 2846     		mov	r0, r5
+ 254 006e FFF7FEFF 		bl	u8x8_cad_SendArg
+ 255              	.LVL35:
+ 148:..\u8g2\csrc/u8x8_d_st7528.c ****       break;
+ 256              		.loc 1 148 0
+ 257 0072 2846     		mov	r0, r5
+ 258 0074 FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 259              	.LVL36:
+ 185:..\u8g2\csrc/u8x8_d_st7528.c **** }
+ 260              		.loc 1 185 0
+ 261 0078 0120     		movs	r0, #1
+ 149:..\u8g2\csrc/u8x8_d_st7528.c **** #endif
+ 262              		.loc 1 149 0
+ 263 007a BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 264              	.LVL37:
+ 265              	.L16:
+ 152:..\u8g2\csrc/u8x8_d_st7528.c ****       x = ((u8x8_tile_t *)arg_ptr)->x_pos;
+ 266              		.loc 1 152 0
+ 267 007e FFF7FEFF 		bl	u8x8_cad_StartTransfer
+ 268              	.LVL38:
+ 153:..\u8g2\csrc/u8x8_d_st7528.c ****       x *= 8;  // not clear
+ 269              		.loc 1 153 0
+ 270 0082 99F80540 		ldrb	r4, [r9, #5]	@ zero_extendqisi2
+ 271              	.LVL39:
+ 154:..\u8g2\csrc/u8x8_d_st7528.c ****       
+ 272              		.loc 1 154 0
+ 273 0086 E400     		lsls	r4, r4, #3
+ 274              	.LVL40:
+ 275 0088 E4B2     		uxtb	r4, r4
+ 276              	.LVL41:
+ 156:..\u8g2\csrc/u8x8_d_st7528.c ****       
+ 277              		.loc 1 156 0
+ 278 008a 99F80670 		ldrb	r7, [r9, #6]	@ zero_extendqisi2
+ 279              	.LVL42:
+ 280              	.L20:
+ 162:..\u8g2\csrc/u8x8_d_st7528.c **** 	ptr = ((u8x8_tile_t *)arg_ptr)->tile_ptr;
+ 281              		.loc 1 162 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 10
+
+
+ 282 008e 99F804A0 		ldrb	r10, [r9, #4]	@ zero_extendqisi2
+ 283              	.LVL43:
+ 163:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 284              		.loc 1 163 0
+ 285 0092 D9F80060 		ldr	r6, [r9]
+ 286              	.LVL44:
+ 287              	.L19:
+ 167:..\u8g2\csrc/u8x8_d_st7528.c ****           u8x8_cad_SendCmd(u8x8, 0x10| (x>>4) );	/* set col msb*/
+ 288              		.loc 1 167 0 discriminator 1
+ 289 0096 47F0B001 		orr	r1, r7, #176
+ 290 009a 2846     		mov	r0, r5
+ 291 009c FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 292              	.LVL45:
+ 168:..\u8g2\csrc/u8x8_d_st7528.c ****           u8x8_cad_SendCmd(u8x8, 0x00| (x&15) );	/* set col lsb*/
+ 293              		.loc 1 168 0 discriminator 1
+ 294 00a0 2109     		lsrs	r1, r4, #4
+ 295 00a2 41F01001 		orr	r1, r1, #16
+ 296 00a6 2846     		mov	r0, r5
+ 297 00a8 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 298              	.LVL46:
+ 169:..\u8g2\csrc/u8x8_d_st7528.c ****           
+ 299              		.loc 1 169 0 discriminator 1
+ 300 00ac 04F00F01 		and	r1, r4, #15
+ 301 00b0 2846     		mov	r0, r5
+ 302 00b2 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 303              	.LVL47:
+ 171:..\u8g2\csrc/u8x8_d_st7528.c ****           
+ 304              		.loc 1 171 0 discriminator 1
+ 305 00b6 3146     		mov	r1, r6
+ 306 00b8 2846     		mov	r0, r5
+ 307 00ba FFF7FEFF 		bl	u8x8_st7528_8to32
+ 308              	.LVL48:
+ 309 00be 0246     		mov	r2, r0
+ 310 00c0 2021     		movs	r1, #32
+ 311 00c2 2846     		mov	r0, r5
+ 312 00c4 FFF7FEFF 		bl	u8x8_cad_SendData
+ 313              	.LVL49:
+ 173:..\u8g2\csrc/u8x8_d_st7528.c **** 	  x += 8;
+ 314              		.loc 1 173 0 discriminator 1
+ 315 00c8 0836     		adds	r6, r6, #8
+ 316              	.LVL50:
+ 174:..\u8g2\csrc/u8x8_d_st7528.c **** 	  c--;
+ 317              		.loc 1 174 0 discriminator 1
+ 318 00ca 0834     		adds	r4, r4, #8
+ 319              	.LVL51:
+ 320 00cc E4B2     		uxtb	r4, r4
+ 321              	.LVL52:
+ 175:..\u8g2\csrc/u8x8_d_st7528.c **** 	} while( c > 0 );	
+ 322              		.loc 1 175 0 discriminator 1
+ 323 00ce 0AF1FF33 		add	r3, r10, #-1
+ 324              	.LVL53:
+ 176:..\u8g2\csrc/u8x8_d_st7528.c **** 	arg_int--;
+ 325              		.loc 1 176 0 discriminator 1
+ 326 00d2 13F0FF0A 		ands	r10, r3, #255
+ 327 00d6 DED1     		bne	.L19
+ 177:..\u8g2\csrc/u8x8_d_st7528.c ****       } while( arg_int > 0 );
+ 328              		.loc 1 177 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 11
+
+
+ 329 00d8 08F1FF38 		add	r8, r8, #-1
+ 330              	.LVL54:
+ 178:..\u8g2\csrc/u8x8_d_st7528.c ****       
+ 331              		.loc 1 178 0
+ 332 00dc 18F0FF08 		ands	r8, r8, #255
+ 333              	.LVL55:
+ 334 00e0 D5D1     		bne	.L20
+ 180:..\u8g2\csrc/u8x8_d_st7528.c ****       break;
+ 335              		.loc 1 180 0
+ 336 00e2 2846     		mov	r0, r5
+ 337 00e4 FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 338              	.LVL56:
+ 185:..\u8g2\csrc/u8x8_d_st7528.c **** }
+ 339              		.loc 1 185 0
+ 340 00e8 0120     		movs	r0, #1
+ 181:..\u8g2\csrc/u8x8_d_st7528.c ****     default:
+ 341              		.loc 1 181 0
+ 342 00ea BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 343              	.LVL57:
+ 344              	.L21:
+ 183:..\u8g2\csrc/u8x8_d_st7528.c ****   }
+ 345              		.loc 1 183 0
+ 346 00ee 0020     		movs	r0, #0
+ 347              	.LVL58:
+ 186:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 348              		.loc 1 186 0
+ 349 00f0 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 350              	.LVL59:
+ 351              	.L24:
+ 352              		.align	2
+ 353              	.L23:
+ 354 00f4 00000000 		.word	.LANCHOR1
+ 355 00f8 0C000000 		.word	.LANCHOR1+12
+ 356 00fc 18000000 		.word	.LANCHOR1+24
+ 357 0100 20000000 		.word	.LANCHOR1+32
+ 358              		.cfi_endproc
+ 359              	.LFE1:
+ 360              		.size	u8x8_d_st7528_generic, .-u8x8_d_st7528_generic
+ 361              		.section	.text.u8x8_d_st7528_nhd_c160100,"ax",%progbits
+ 362              		.align	2
+ 363              		.global	u8x8_d_st7528_nhd_c160100
+ 364              		.thumb
+ 365              		.thumb_func
+ 366              		.type	u8x8_d_st7528_nhd_c160100, %function
+ 367              	u8x8_d_st7528_nhd_c160100:
+ 368              	.LFB3:
+ 204:..\u8g2\csrc/u8x8_d_st7528.c **** }
+ 205:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 206:..\u8g2\csrc/u8x8_d_st7528.c **** /*===============================================================*/
+ 207:..\u8g2\csrc/u8x8_d_st7528.c **** /* NHD C160100 */
+ 208:..\u8g2\csrc/u8x8_d_st7528.c **** static const uint8_t u8x8_d_st7528_nhd_c160100_init_seq[] = {
+ 209:..\u8g2\csrc/u8x8_d_st7528.c ****     
+ 210:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+ 211:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 212:..\u8g2\csrc/u8x8_d_st7528.c ****   
+ 213:..\u8g2\csrc/u8x8_d_st7528.c **** /*
+ 214:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x48);//partial display duty ratio
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 12
+
+
+ 215:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x64);// 1/100 duty
+ 216:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0xA0);//ADC select
+ 217:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0xC8);//SHL select
+ 218:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x44);//initial Com0 register
+ 219:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x00);//scan from Com0
+ 220:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0xAB);//OSC on
+ 221:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x26);//
+ 222:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x81);	//set electronic volume
+ 223:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x15);//vopcode=0x1C
+ 224:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x56);//set 1/11 bias
+ 225:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x64);//3x
+ 226:..\u8g2\csrc/u8x8_d_st7528.c ****     delay(2);
+ 227:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x2C);//
+ 228:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x66);//5x
+ 229:..\u8g2\csrc/u8x8_d_st7528.c ****     delay(2);
+ 230:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x2E);//
+ 231:..\u8g2\csrc/u8x8_d_st7528.c ****     delay(2);
+ 232:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x2F);//power control
+ 233:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0xF3);//bias save circuit
+ 234:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x00);//
+ 235:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x96);//frc and pwm
+ 236:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x38);//external mode
+ 237:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x75);//
+ 238:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x97);//3frc, 45 pwm			THIS IS A MODE0 CMD, IT IS USELESS HERE
+ 239:..\u8g2\csrc/u8x8_d_st7528.c ****     I2C_out(0x80);//start 16-level grayscale settings
+ 240:..\u8g2\csrc/u8x8_d_st7528.c **** */
+ 241:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x038, 0x064),		/* ext mode 0*/
+ 242:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x048, 0x064),		/* partial display duty ratio, 1/100 duty*/
+ 243:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0a0),		                /* ADC */
+ 244:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0c8),		                /* SHL */
+ 245:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x044, 0x000),		/* initial Com0 */
+ 246:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0ab),		                /* start oscillator */
+ 247:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x026),		                /* Select the internal resistance ratio of the regulator resistor
+ 248:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x081, 0x015),		/* volumn */
+ 249:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x056),		                /* LCD Bias */
+ 250:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x064),		                /* DC DC step up */
+ 251:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_DLY(2),
+ 252:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x02c),		                /* Power Control */
+ 253:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x066),		                /* DC DC step up */
+ 254:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_DLY(2),
+ 255:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x02e),		                /* Power Control */
+ 256:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_DLY(2),
+ 257:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x02f),		                /* Power Control */
+ 258:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x0f3, 0x000),		/* bias power save */
+ 259:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x096),		                /* frc and pwm */
+ 260:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 261:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+ 262:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END()             			/* end of sequence */
+ 263:..\u8g2\csrc/u8x8_d_st7528.c **** };
+ 264:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 265:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 266:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 267:..\u8g2\csrc/u8x8_d_st7528.c **** static const u8x8_display_info_t u8x8_st7528_160x100_display_info =
+ 268:..\u8g2\csrc/u8x8_d_st7528.c **** {
+ 269:..\u8g2\csrc/u8x8_d_st7528.c ****   /* chip_enable_level = */ 0,
+ 270:..\u8g2\csrc/u8x8_d_st7528.c ****   /* chip_disable_level = */ 1,
+ 271:..\u8g2\csrc/u8x8_d_st7528.c ****   
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 13
+
+
+ 272:..\u8g2\csrc/u8x8_d_st7528.c ****   /* post_chip_enable_wait_ns = */ 20,
+ 273:..\u8g2\csrc/u8x8_d_st7528.c ****   /* pre_chip_disable_wait_ns = */ 20,
+ 274:..\u8g2\csrc/u8x8_d_st7528.c ****   /* reset_pulse_width_ms = */ 5, 	
+ 275:..\u8g2\csrc/u8x8_d_st7528.c ****   /* post_reset_wait_ms = */ 5, 		/**/
+ 276:..\u8g2\csrc/u8x8_d_st7528.c ****   /* sda_setup_time_ns = */ 20,		/* st7528  */
+ 277:..\u8g2\csrc/u8x8_d_st7528.c ****   /* sck_pulse_width_ns = */ 25,	/* st7528 */
+ 278:..\u8g2\csrc/u8x8_d_st7528.c ****   /* sck_clock_hz = */ 8000000UL,	/* since Arduino 1.6.0, the SPI bus speed in Hz. Should be  10000
+ 279:..\u8g2\csrc/u8x8_d_st7528.c ****       /* st7528 actually allows 20MHz according to the datasheet */
+ 280:..\u8g2\csrc/u8x8_d_st7528.c ****   /* spi_mode = */ 0,		/* active high, rising edge */
+ 281:..\u8g2\csrc/u8x8_d_st7528.c ****   /* i2c_bus_clock_100kHz = */ 4,
+ 282:..\u8g2\csrc/u8x8_d_st7528.c ****   /* data_setup_time_ns = */ 40,
+ 283:..\u8g2\csrc/u8x8_d_st7528.c ****   /* write_pulse_width_ns = */ 80,	/* st7528 */
+ 284:..\u8g2\csrc/u8x8_d_st7528.c ****   /* tile_width = */ 20,
+ 285:..\u8g2\csrc/u8x8_d_st7528.c ****   /* tile_hight = */ 13,
+ 286:..\u8g2\csrc/u8x8_d_st7528.c ****   /* default_x_offset = */ 0,		/* x_offset is used as y offset for the ssd1326 */
+ 287:..\u8g2\csrc/u8x8_d_st7528.c ****   /* flipmode_x_offset = */ 0,		/* x_offset is used as y offset for the ssd1326 */
+ 288:..\u8g2\csrc/u8x8_d_st7528.c ****   /* pixel_width = */ 160,
+ 289:..\u8g2\csrc/u8x8_d_st7528.c ****   /* pixel_height = */ 100
+ 290:..\u8g2\csrc/u8x8_d_st7528.c **** };
+ 291:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 292:..\u8g2\csrc/u8x8_d_st7528.c **** uint8_t u8x8_d_st7528_nhd_c160100(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 293:..\u8g2\csrc/u8x8_d_st7528.c **** {
+ 369              		.loc 1 293 0
+ 370              		.cfi_startproc
+ 371              		@ args = 0, pretend = 0, frame = 0
+ 372              		@ frame_needed = 0, uses_anonymous_args = 0
+ 373              	.LVL60:
+ 374 0000 10B5     		push	{r4, lr}
+ 375              		.cfi_def_cfa_offset 8
+ 376              		.cfi_offset 4, -8
+ 377              		.cfi_offset 14, -4
+ 378 0002 0446     		mov	r4, r0
+ 294:..\u8g2\csrc/u8x8_d_st7528.c ****     if ( msg == U8X8_MSG_DISPLAY_SETUP_MEMORY )
+ 379              		.loc 1 294 0
+ 380 0004 0929     		cmp	r1, #9
+ 381 0006 04D1     		bne	.L26
+ 295:..\u8g2\csrc/u8x8_d_st7528.c ****     {
+ 296:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_st7528_160x100_display_info);
+ 382              		.loc 1 296 0
+ 383 0008 0A49     		ldr	r1, .L30
+ 384              	.LVL61:
+ 385 000a FFF7FEFF 		bl	u8x8_d_helper_display_setup_memory
+ 386              	.LVL62:
+ 297:..\u8g2\csrc/u8x8_d_st7528.c ****       return 1;
+ 387              		.loc 1 297 0
+ 388 000e 0120     		movs	r0, #1
+ 389 0010 10BD     		pop	{r4, pc}
+ 390              	.LVL63:
+ 391              	.L26:
+ 298:..\u8g2\csrc/u8x8_d_st7528.c ****     }
+ 299:..\u8g2\csrc/u8x8_d_st7528.c ****     if ( msg == U8X8_MSG_DISPLAY_INIT )
+ 392              		.loc 1 299 0
+ 393 0012 0A29     		cmp	r1, #10
+ 394 0014 0BD1     		bne	.L28
+ 300:..\u8g2\csrc/u8x8_d_st7528.c ****     {
+ 301:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_d_helper_display_init(u8x8);
+ 395              		.loc 1 301 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 14
+
+
+ 396 0016 FFF7FEFF 		bl	u8x8_d_helper_display_init
+ 397              	.LVL64:
+ 302:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_st7528_nhd_c160100_init_seq);    
+ 398              		.loc 1 302 0
+ 399 001a 0749     		ldr	r1, .L30+4
+ 400 001c 2046     		mov	r0, r4
+ 401 001e FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 402              	.LVL65:
+ 303:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_d_st7528_graylevel_init(u8x8, 0x074);
+ 403              		.loc 1 303 0
+ 404 0022 7421     		movs	r1, #116
+ 405 0024 2046     		mov	r0, r4
+ 406 0026 FFF7FEFF 		bl	u8x8_d_st7528_graylevel_init
+ 407              	.LVL66:
+ 304:..\u8g2\csrc/u8x8_d_st7528.c ****       return 1;
+ 408              		.loc 1 304 0
+ 409 002a 0120     		movs	r0, #1
+ 410 002c 10BD     		pop	{r4, pc}
+ 411              	.LVL67:
+ 412              	.L28:
+ 305:..\u8g2\csrc/u8x8_d_st7528.c ****     }    
+ 306:..\u8g2\csrc/u8x8_d_st7528.c ****     return u8x8_d_st7528_generic(u8x8, msg, arg_int, arg_ptr);
+ 413              		.loc 1 306 0
+ 414 002e FFF7FEFF 		bl	u8x8_d_st7528_generic
+ 415              	.LVL68:
+ 307:..\u8g2\csrc/u8x8_d_st7528.c **** }
+ 416              		.loc 1 307 0
+ 417 0032 10BD     		pop	{r4, pc}
+ 418              	.LVL69:
+ 419              	.L31:
+ 420              		.align	2
+ 421              	.L30:
+ 422 0034 28000000 		.word	.LANCHOR1+40
+ 423 0038 40000000 		.word	.LANCHOR1+64
+ 424              		.cfi_endproc
+ 425              	.LFE3:
+ 426              		.size	u8x8_d_st7528_nhd_c160100, .-u8x8_d_st7528_nhd_c160100
+ 427              		.section	.text.u8x8_d_st7528_erc16064,"ax",%progbits
+ 428              		.align	2
+ 429              		.global	u8x8_d_st7528_erc16064
+ 430              		.thumb
+ 431              		.thumb_func
+ 432              		.type	u8x8_d_st7528_erc16064, %function
+ 433              	u8x8_d_st7528_erc16064:
+ 434              	.LFB4:
+ 308:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 309:..\u8g2\csrc/u8x8_d_st7528.c **** /*===============================================================*/
+ 310:..\u8g2\csrc/u8x8_d_st7528.c **** /* ERC16064, https://www.buydisplay.com/2-inch-lcd-160x64-graphic-module-serial-spi-display-st7528-
+ 311:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 312:..\u8g2\csrc/u8x8_d_st7528.c **** /*
+ 313:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 314:..\u8g2\csrc/u8x8_d_st7528.c **** #define	ModeSet				0x38
+ 315:..\u8g2\csrc/u8x8_d_st7528.c **** #define	ModeSetP1			0x64	//EXT=0
+ 316:..\u8g2\csrc/u8x8_d_st7528.c **** #define	ModeSetP2			0x65	//EXT=1
+ 317:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 318:..\u8g2\csrc/u8x8_d_st7528.c **** #define Display_on 			0xaf
+ 319:..\u8g2\csrc/u8x8_d_st7528.c **** #define Display_off 		0xae
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 15
+
+
+ 320:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 321:..\u8g2\csrc/u8x8_d_st7528.c **** #define Regulator			0x26
+ 322:..\u8g2\csrc/u8x8_d_st7528.c **** #define Contrast_level		0x81
+ 323:..\u8g2\csrc/u8x8_d_st7528.c **** #define PowerControll_on1	0x2c
+ 324:..\u8g2\csrc/u8x8_d_st7528.c **** #define PowerControll_on2	0x2e
+ 325:..\u8g2\csrc/u8x8_d_st7528.c **** #define PowerControll_on3	0x2f
+ 326:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 327:..\u8g2\csrc/u8x8_d_st7528.c **** #define	LcdBias_9			0x54
+ 328:..\u8g2\csrc/u8x8_d_st7528.c **** #define	InterOsc_on			0xab
+ 329:..\u8g2\csrc/u8x8_d_st7528.c **** #define	EntireDisp_on		0xa5
+ 330:..\u8g2\csrc/u8x8_d_st7528.c **** #define	EntireDisp_off		0xa4
+ 331:..\u8g2\csrc/u8x8_d_st7528.c **** #define BoostLevel_5		0x66
+ 332:..\u8g2\csrc/u8x8_d_st7528.c **** #define	Duty_set			0x48
+ 333:..\u8g2\csrc/u8x8_d_st7528.c **** #define	Duty_setP			0x40
+ 334:..\u8g2\csrc/u8x8_d_st7528.c **** #define Start_columnlsb		0x00
+ 335:..\u8g2\csrc/u8x8_d_st7528.c **** #define Start_columnmsb		0x10
+ 336:..\u8g2\csrc/u8x8_d_st7528.c **** #define Start_page			0xb0
+ 337:..\u8g2\csrc/u8x8_d_st7528.c **** #define	StartLine_set		0x40
+ 338:..\u8g2\csrc/u8x8_d_st7528.c **** //#define	StartLine_setP		0x00
+ 339:..\u8g2\csrc/u8x8_d_st7528.c **** #define Set_Initial_COM0	0x44
+ 340:..\u8g2\csrc/u8x8_d_st7528.c **** #define Set_Initial_COM0P	0x12
+ 341:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 342:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 343:..\u8g2\csrc/u8x8_d_st7528.c **** #define Entire_Displa_ON	0xA5
+ 344:..\u8g2\csrc/u8x8_d_st7528.c **** #define Entire_Displa_OFF	0xA4
+ 345:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 346:..\u8g2\csrc/u8x8_d_st7528.c **** #define FrcPwm_set			0x92
+ 347:..\u8g2\csrc/u8x8_d_st7528.c **** #define NLineInversion_on	0x4c
+ 348:..\u8g2\csrc/u8x8_d_st7528.c **** #define NLineInversion_onP	0x1f
+ 349:..\u8g2\csrc/u8x8_d_st7528.c **** #define NLineInversion_off	0xe4	
+ 350:..\u8g2\csrc/u8x8_d_st7528.c **** #define ReverseDisp_on		0xa7
+ 351:..\u8g2\csrc/u8x8_d_st7528.c **** #define ReverseDisp_off		0xa6
+ 352:..\u8g2\csrc/u8x8_d_st7528.c **** #define AdcSelect			0xa0
+ 353:..\u8g2\csrc/u8x8_d_st7528.c **** #define ComScanDirection	0xc8
+ 354:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 355:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(ModeSet);		0x38, 0x64
+ 356:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(ModeSetP1);	
+ 357:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(InterOsc_on);	0xab
+ 358:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(Set_Initial_COM0);	0x44, 0x12
+ 359:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(Set_Initial_COM0P);
+ 360:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 361:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(AdcSelect);		0xa0
+ 362:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(ComScanDirection);	0xc8
+ 363:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(BoostLevel_5);		0x66
+ 364:..\u8g2\csrc/u8x8_d_st7528.c **** 	Delay(1000);
+ 365:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(LcdBias_9);	0x54
+ 366:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(Duty_set);		0x48, 0x40
+ 367:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(Duty_setP);
+ 368:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(Regulator);	0x26
+ 369:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(Contrast_level);		0x81, 0x0b
+ 370:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(Contrast_levelP);
+ 371:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(PowerControll_on1);	0x2c
+ 372:..\u8g2\csrc/u8x8_d_st7528.c **** 	Delay(10000);
+ 373:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(PowerControll_on2);	0x2e
+ 374:..\u8g2\csrc/u8x8_d_st7528.c **** 	Delay(1000);
+ 375:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(PowerControll_on3);	0x2f
+ 376:..\u8g2\csrc/u8x8_d_st7528.c **** 	Delay(1000);	
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 16
+
+
+ 377:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(FrcPwm_set);	0x92
+ 378:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 379:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(ModeSet);
+ 380:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(ModeSetP2);
+ 381:..\u8g2\csrc/u8x8_d_st7528.c **** 	for(i=0;i<64;i++)
+ 382:..\u8g2\csrc/u8x8_d_st7528.c **** 		{
+ 383:..\u8g2\csrc/u8x8_d_st7528.c **** 		Write_command(0x80+i);
+ 384:..\u8g2\csrc/u8x8_d_st7528.c **** 		Write_command(Gray_Parameters[i]);
+ 385:..\u8g2\csrc/u8x8_d_st7528.c **** 		}
+ 386:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(ModeSet);
+ 387:..\u8g2\csrc/u8x8_d_st7528.c **** 	Write_command(ModeSetP1);
+ 388:..\u8g2\csrc/u8x8_d_st7528.c **** */
+ 389:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 390:..\u8g2\csrc/u8x8_d_st7528.c **** static const uint8_t u8x8_d_st7528_erc16064_init_seq[] = {    
+ 391:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+ 392:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x038, 0x064),		/* ext mode 0*/
+ 393:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0ab),		                /* start oscillator */
+ 394:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x044, 0x012),		/* initial Com0 */
+ 395:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0a0),		                /* ADC */
+ 396:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x0c8),		                /* SHL */  
+ 397:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x066),		                /* boost level, ERC16064: 0x066 */
+ 398:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_DLY(1),
+ 399:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x054),		                /* LCD Bias, ERC16064: 0x054 */
+ 400:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x048, 0x040),		/* partial display duty ratio */  
+ 401:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x026),		                /* Select the internal resistance ratio of the regulator resistor
+ 402:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_CA(0x081, 0x00b),		/* contrast,  ERC16064: 0x00b */
+ 403:..\u8g2\csrc/u8x8_d_st7528.c ****   
+ 404:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x02c),		                /* Power Control */
+ 405:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_DLY(2),
+ 406:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x02e),		                /* Power Control */
+ 407:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_DLY(2),
+ 408:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x02f),		                /* Power Control */
+ 409:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_DLY(2),
+ 410:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_C(0x092),		                /* frc and pwm, ERC160624: 0x092 */
+ 411:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 412:..\u8g2\csrc/u8x8_d_st7528.c ****   
+ 413:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 414:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+ 415:..\u8g2\csrc/u8x8_d_st7528.c ****   U8X8_END()             			/* end of sequence */
+ 416:..\u8g2\csrc/u8x8_d_st7528.c **** };
+ 417:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 418:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 419:..\u8g2\csrc/u8x8_d_st7528.c **** static const u8x8_display_info_t u8x8_st7528_erc16064_display_info =
+ 420:..\u8g2\csrc/u8x8_d_st7528.c **** {
+ 421:..\u8g2\csrc/u8x8_d_st7528.c ****   /* chip_enable_level = */ 0,
+ 422:..\u8g2\csrc/u8x8_d_st7528.c ****   /* chip_disable_level = */ 1,
+ 423:..\u8g2\csrc/u8x8_d_st7528.c ****   
+ 424:..\u8g2\csrc/u8x8_d_st7528.c ****   /* post_chip_enable_wait_ns = */ 20,
+ 425:..\u8g2\csrc/u8x8_d_st7528.c ****   /* pre_chip_disable_wait_ns = */ 20,
+ 426:..\u8g2\csrc/u8x8_d_st7528.c ****   /* reset_pulse_width_ms = */ 5, 	
+ 427:..\u8g2\csrc/u8x8_d_st7528.c ****   /* post_reset_wait_ms = */ 5, 		/**/
+ 428:..\u8g2\csrc/u8x8_d_st7528.c ****   /* sda_setup_time_ns = */ 20,		/* st7528  */
+ 429:..\u8g2\csrc/u8x8_d_st7528.c ****   /* sck_pulse_width_ns = */ 25,	/* st7528 */
+ 430:..\u8g2\csrc/u8x8_d_st7528.c ****   /* sck_clock_hz = */ 8000000UL,	/* since Arduino 1.6.0, the SPI bus speed in Hz. Should be  10000
+ 431:..\u8g2\csrc/u8x8_d_st7528.c ****       /* st7528 actually allows 20MHz according to the datasheet */
+ 432:..\u8g2\csrc/u8x8_d_st7528.c ****   /* spi_mode = */ 0,		/* active high, rising edge */
+ 433:..\u8g2\csrc/u8x8_d_st7528.c ****   /* i2c_bus_clock_100kHz = */ 4,
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 17
+
+
+ 434:..\u8g2\csrc/u8x8_d_st7528.c ****   /* data_setup_time_ns = */ 40,
+ 435:..\u8g2\csrc/u8x8_d_st7528.c ****   /* write_pulse_width_ns = */ 80,	/* st7528 */
+ 436:..\u8g2\csrc/u8x8_d_st7528.c ****   /* tile_width = */ 20,
+ 437:..\u8g2\csrc/u8x8_d_st7528.c ****   /* tile_hight = */ 8,
+ 438:..\u8g2\csrc/u8x8_d_st7528.c ****   /* default_x_offset = */ 0,		/* x_offset is used as y offset for the ssd1326 */
+ 439:..\u8g2\csrc/u8x8_d_st7528.c ****   /* flipmode_x_offset = */ 0,		/* x_offset is used as y offset for the ssd1326 */
+ 440:..\u8g2\csrc/u8x8_d_st7528.c ****   /* pixel_width = */ 160,
+ 441:..\u8g2\csrc/u8x8_d_st7528.c ****   /* pixel_height = */ 64
+ 442:..\u8g2\csrc/u8x8_d_st7528.c **** };
+ 443:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 444:..\u8g2\csrc/u8x8_d_st7528.c **** 
+ 445:..\u8g2\csrc/u8x8_d_st7528.c **** uint8_t u8x8_d_st7528_erc16064(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 446:..\u8g2\csrc/u8x8_d_st7528.c **** {
+ 435              		.loc 1 446 0
+ 436              		.cfi_startproc
+ 437              		@ args = 0, pretend = 0, frame = 0
+ 438              		@ frame_needed = 0, uses_anonymous_args = 0
+ 439              	.LVL70:
+ 440 0000 10B5     		push	{r4, lr}
+ 441              		.cfi_def_cfa_offset 8
+ 442              		.cfi_offset 4, -8
+ 443              		.cfi_offset 14, -4
+ 444 0002 0446     		mov	r4, r0
+ 447:..\u8g2\csrc/u8x8_d_st7528.c ****     if ( msg == U8X8_MSG_DISPLAY_SETUP_MEMORY )
+ 445              		.loc 1 447 0
+ 446 0004 0929     		cmp	r1, #9
+ 447 0006 04D1     		bne	.L33
+ 448:..\u8g2\csrc/u8x8_d_st7528.c ****     {
+ 449:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_st7528_erc16064_display_info);
+ 448              		.loc 1 449 0
+ 449 0008 0A49     		ldr	r1, .L37
+ 450              	.LVL71:
+ 451 000a FFF7FEFF 		bl	u8x8_d_helper_display_setup_memory
+ 452              	.LVL72:
+ 450:..\u8g2\csrc/u8x8_d_st7528.c ****       return 1;
+ 453              		.loc 1 450 0
+ 454 000e 0120     		movs	r0, #1
+ 455 0010 10BD     		pop	{r4, pc}
+ 456              	.LVL73:
+ 457              	.L33:
+ 451:..\u8g2\csrc/u8x8_d_st7528.c ****     }
+ 452:..\u8g2\csrc/u8x8_d_st7528.c ****     if ( msg == U8X8_MSG_DISPLAY_INIT )
+ 458              		.loc 1 452 0
+ 459 0012 0A29     		cmp	r1, #10
+ 460 0014 0BD1     		bne	.L35
+ 453:..\u8g2\csrc/u8x8_d_st7528.c ****     {
+ 454:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_d_helper_display_init(u8x8);
+ 461              		.loc 1 454 0
+ 462 0016 FFF7FEFF 		bl	u8x8_d_helper_display_init
+ 463              	.LVL74:
+ 455:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_st7528_erc16064_init_seq);    
+ 464              		.loc 1 455 0
+ 465 001a 0749     		ldr	r1, .L37+4
+ 466 001c 2046     		mov	r0, r4
+ 467 001e FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 468              	.LVL75:
+ 456:..\u8g2\csrc/u8x8_d_st7528.c ****       u8x8_d_st7528_graylevel_init(u8x8, 0x064);
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 18
+
+
+ 469              		.loc 1 456 0
+ 470 0022 6421     		movs	r1, #100
+ 471 0024 2046     		mov	r0, r4
+ 472 0026 FFF7FEFF 		bl	u8x8_d_st7528_graylevel_init
+ 473              	.LVL76:
+ 457:..\u8g2\csrc/u8x8_d_st7528.c ****       return 1;
+ 474              		.loc 1 457 0
+ 475 002a 0120     		movs	r0, #1
+ 476 002c 10BD     		pop	{r4, pc}
+ 477              	.LVL77:
+ 478              	.L35:
+ 458:..\u8g2\csrc/u8x8_d_st7528.c ****     }    
+ 459:..\u8g2\csrc/u8x8_d_st7528.c ****     return u8x8_d_st7528_generic(u8x8, msg, arg_int, arg_ptr);
+ 479              		.loc 1 459 0
+ 480 002e FFF7FEFF 		bl	u8x8_d_st7528_generic
+ 481              	.LVL78:
+ 460:..\u8g2\csrc/u8x8_d_st7528.c **** }
+ 482              		.loc 1 460 0
+ 483 0032 10BD     		pop	{r4, pc}
+ 484              	.LVL79:
+ 485              	.L38:
+ 486              		.align	2
+ 487              	.L37:
+ 488 0034 74000000 		.word	.LANCHOR1+116
+ 489 0038 8C000000 		.word	.LANCHOR1+140
+ 490              		.cfi_endproc
+ 491              	.LFE4:
+ 492              		.size	u8x8_d_st7528_erc16064, .-u8x8_d_st7528_erc16064
+ 493              		.section	.rodata
+ 494              		.align	2
+ 495              		.set	.LANCHOR1,. + 0
+ 496              		.type	u8x8_d_st7528_powersave0_seq, %object
+ 497              		.size	u8x8_d_st7528_powersave0_seq, 9
+ 498              	u8x8_d_st7528_powersave0_seq:
+ 499 0000 18       		.byte	24
+ 500 0001 15       		.byte	21
+ 501 0002 38       		.byte	56
+ 502 0003 16       		.byte	22
+ 503 0004 74       		.byte	116
+ 504 0005 15       		.byte	21
+ 505 0006 AF       		.byte	-81
+ 506 0007 19       		.byte	25
+ 507 0008 FF       		.byte	-1
+ 508 0009 000000   		.space	3
+ 509              		.type	u8x8_d_st7528_powersave1_seq, %object
+ 510              		.size	u8x8_d_st7528_powersave1_seq, 9
+ 511              	u8x8_d_st7528_powersave1_seq:
+ 512 000c 18       		.byte	24
+ 513 000d 15       		.byte	21
+ 514 000e 38       		.byte	56
+ 515 000f 16       		.byte	22
+ 516 0010 74       		.byte	116
+ 517 0011 15       		.byte	21
+ 518 0012 AE       		.byte	-82
+ 519 0013 19       		.byte	25
+ 520 0014 FF       		.byte	-1
+ 521 0015 000000   		.space	3
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 19
+
+
+ 522              		.type	u8x8_d_st7528_flip0_seq, %object
+ 523              		.size	u8x8_d_st7528_flip0_seq, 7
+ 524              	u8x8_d_st7528_flip0_seq:
+ 525 0018 18       		.byte	24
+ 526 0019 15       		.byte	21
+ 527 001a A0       		.byte	-96
+ 528 001b 15       		.byte	21
+ 529 001c C8       		.byte	-56
+ 530 001d 19       		.byte	25
+ 531 001e FF       		.byte	-1
+ 532 001f 00       		.space	1
+ 533              		.type	u8x8_d_st7528_flip1_seq, %object
+ 534              		.size	u8x8_d_st7528_flip1_seq, 7
+ 535              	u8x8_d_st7528_flip1_seq:
+ 536 0020 18       		.byte	24
+ 537 0021 15       		.byte	21
+ 538 0022 A1       		.byte	-95
+ 539 0023 15       		.byte	21
+ 540 0024 C0       		.byte	-64
+ 541 0025 19       		.byte	25
+ 542 0026 FF       		.byte	-1
+ 543 0027 00       		.space	1
+ 544              		.type	u8x8_st7528_160x100_display_info, %object
+ 545              		.size	u8x8_st7528_160x100_display_info, 24
+ 546              	u8x8_st7528_160x100_display_info:
+ 547 0028 00       		.byte	0
+ 548 0029 01       		.byte	1
+ 549 002a 14       		.byte	20
+ 550 002b 14       		.byte	20
+ 551 002c 05       		.byte	5
+ 552 002d 05       		.byte	5
+ 553 002e 14       		.byte	20
+ 554 002f 19       		.byte	25
+ 555 0030 00127A00 		.word	8000000
+ 556 0034 00       		.byte	0
+ 557 0035 04       		.byte	4
+ 558 0036 28       		.byte	40
+ 559 0037 50       		.byte	80
+ 560 0038 14       		.byte	20
+ 561 0039 0D       		.byte	13
+ 562 003a 00       		.byte	0
+ 563 003b 00       		.byte	0
+ 564 003c A000     		.short	160
+ 565 003e 6400     		.short	100
+ 566              		.type	u8x8_d_st7528_nhd_c160100_init_seq, %object
+ 567              		.size	u8x8_d_st7528_nhd_c160100_init_seq, 51
+ 568              	u8x8_d_st7528_nhd_c160100_init_seq:
+ 569 0040 18       		.byte	24
+ 570 0041 15       		.byte	21
+ 571 0042 38       		.byte	56
+ 572 0043 16       		.byte	22
+ 573 0044 64       		.byte	100
+ 574 0045 15       		.byte	21
+ 575 0046 48       		.byte	72
+ 576 0047 16       		.byte	22
+ 577 0048 64       		.byte	100
+ 578 0049 15       		.byte	21
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 20
+
+
+ 579 004a A0       		.byte	-96
+ 580 004b 15       		.byte	21
+ 581 004c C8       		.byte	-56
+ 582 004d 15       		.byte	21
+ 583 004e 44       		.byte	68
+ 584 004f 16       		.byte	22
+ 585 0050 00       		.byte	0
+ 586 0051 15       		.byte	21
+ 587 0052 AB       		.byte	-85
+ 588 0053 15       		.byte	21
+ 589 0054 26       		.byte	38
+ 590 0055 15       		.byte	21
+ 591 0056 81       		.byte	-127
+ 592 0057 16       		.byte	22
+ 593 0058 15       		.byte	21
+ 594 0059 15       		.byte	21
+ 595 005a 56       		.byte	86
+ 596 005b 15       		.byte	21
+ 597 005c 64       		.byte	100
+ 598 005d FE       		.byte	-2
+ 599 005e 02       		.byte	2
+ 600 005f 15       		.byte	21
+ 601 0060 2C       		.byte	44
+ 602 0061 15       		.byte	21
+ 603 0062 66       		.byte	102
+ 604 0063 FE       		.byte	-2
+ 605 0064 02       		.byte	2
+ 606 0065 15       		.byte	21
+ 607 0066 2E       		.byte	46
+ 608 0067 FE       		.byte	-2
+ 609 0068 02       		.byte	2
+ 610 0069 15       		.byte	21
+ 611 006a 2F       		.byte	47
+ 612 006b 15       		.byte	21
+ 613 006c F3       		.byte	-13
+ 614 006d 16       		.byte	22
+ 615 006e 00       		.byte	0
+ 616 006f 15       		.byte	21
+ 617 0070 96       		.byte	-106
+ 618 0071 19       		.byte	25
+ 619 0072 FF       		.byte	-1
+ 620 0073 00       		.space	1
+ 621              		.type	u8x8_st7528_erc16064_display_info, %object
+ 622              		.size	u8x8_st7528_erc16064_display_info, 24
+ 623              	u8x8_st7528_erc16064_display_info:
+ 624 0074 00       		.byte	0
+ 625 0075 01       		.byte	1
+ 626 0076 14       		.byte	20
+ 627 0077 14       		.byte	20
+ 628 0078 05       		.byte	5
+ 629 0079 05       		.byte	5
+ 630 007a 14       		.byte	20
+ 631 007b 19       		.byte	25
+ 632 007c 00127A00 		.word	8000000
+ 633 0080 00       		.byte	0
+ 634 0081 04       		.byte	4
+ 635 0082 28       		.byte	40
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 21
+
+
+ 636 0083 50       		.byte	80
+ 637 0084 14       		.byte	20
+ 638 0085 08       		.byte	8
+ 639 0086 00       		.byte	0
+ 640 0087 00       		.byte	0
+ 641 0088 A000     		.short	160
+ 642 008a 4000     		.short	64
+ 643              		.type	u8x8_d_st7528_erc16064_init_seq, %object
+ 644              		.size	u8x8_d_st7528_erc16064_init_seq, 47
+ 645              	u8x8_d_st7528_erc16064_init_seq:
+ 646 008c 18       		.byte	24
+ 647 008d 15       		.byte	21
+ 648 008e 38       		.byte	56
+ 649 008f 16       		.byte	22
+ 650 0090 64       		.byte	100
+ 651 0091 15       		.byte	21
+ 652 0092 AB       		.byte	-85
+ 653 0093 15       		.byte	21
+ 654 0094 44       		.byte	68
+ 655 0095 16       		.byte	22
+ 656 0096 12       		.byte	18
+ 657 0097 15       		.byte	21
+ 658 0098 A0       		.byte	-96
+ 659 0099 15       		.byte	21
+ 660 009a C8       		.byte	-56
+ 661 009b 15       		.byte	21
+ 662 009c 66       		.byte	102
+ 663 009d FE       		.byte	-2
+ 664 009e 01       		.byte	1
+ 665 009f 15       		.byte	21
+ 666 00a0 54       		.byte	84
+ 667 00a1 15       		.byte	21
+ 668 00a2 48       		.byte	72
+ 669 00a3 16       		.byte	22
+ 670 00a4 40       		.byte	64
+ 671 00a5 15       		.byte	21
+ 672 00a6 26       		.byte	38
+ 673 00a7 15       		.byte	21
+ 674 00a8 81       		.byte	-127
+ 675 00a9 16       		.byte	22
+ 676 00aa 0B       		.byte	11
+ 677 00ab 15       		.byte	21
+ 678 00ac 2C       		.byte	44
+ 679 00ad FE       		.byte	-2
+ 680 00ae 02       		.byte	2
+ 681 00af 15       		.byte	21
+ 682 00b0 2E       		.byte	46
+ 683 00b1 FE       		.byte	-2
+ 684 00b2 02       		.byte	2
+ 685 00b3 15       		.byte	21
+ 686 00b4 2F       		.byte	47
+ 687 00b5 FE       		.byte	-2
+ 688 00b6 02       		.byte	2
+ 689 00b7 15       		.byte	21
+ 690 00b8 92       		.byte	-110
+ 691 00b9 19       		.byte	25
+ 692 00ba FF       		.byte	-1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 22
+
+
+ 693              		.bss
+ 694              		.align	2
+ 695              		.set	.LANCHOR0,. + 0
+ 696              		.type	u8x8_st7528_8to32_dest_buf, %object
+ 697              		.size	u8x8_st7528_8to32_dest_buf, 32
+ 698              	u8x8_st7528_8to32_dest_buf:
+ 699 0000 00000000 		.space	32
+ 699      00000000 
+ 699      00000000 
+ 699      00000000 
+ 699      00000000 
+ 700              		.text
+ 701              	.Letext0:
+ 702              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 703              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 704              		.file 4 "..\\u8g2\\csrc\\u8x8.h"
+ 705              		.section	.debug_info,"",%progbits
+ 706              	.Ldebug_info0:
+ 707 0000 B2090000 		.4byte	0x9b2
+ 708 0004 0400     		.2byte	0x4
+ 709 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 710 000a 04       		.byte	0x4
+ 711 000b 01       		.uleb128 0x1
+ 712 000c 04060000 		.4byte	.LASF92
+ 713 0010 0C       		.byte	0xc
+ 714 0011 A5050000 		.4byte	.LASF93
+ 715 0015 33010000 		.4byte	.LASF94
+ 716 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 717 001d 00000000 		.4byte	0
+ 718 0021 00000000 		.4byte	.Ldebug_line0
+ 719 0025 02       		.uleb128 0x2
+ 720 0026 01       		.byte	0x1
+ 721 0027 06       		.byte	0x6
+ 722 0028 4D030000 		.4byte	.LASF0
+ 723 002c 03       		.uleb128 0x3
+ 724 002d D0020000 		.4byte	.LASF3
+ 725 0031 02       		.byte	0x2
+ 726 0032 1D       		.byte	0x1d
+ 727 0033 37000000 		.4byte	0x37
+ 728 0037 02       		.uleb128 0x2
+ 729 0038 01       		.byte	0x1
+ 730 0039 08       		.byte	0x8
+ 731 003a 3F030000 		.4byte	.LASF1
+ 732 003e 02       		.uleb128 0x2
+ 733 003f 02       		.byte	0x2
+ 734 0040 05       		.byte	0x5
+ 735 0041 75000000 		.4byte	.LASF2
+ 736 0045 03       		.uleb128 0x3
+ 737 0046 13010000 		.4byte	.LASF4
+ 738 004a 02       		.byte	0x2
+ 739 004b 2B       		.byte	0x2b
+ 740 004c 50000000 		.4byte	0x50
+ 741 0050 02       		.uleb128 0x2
+ 742 0051 02       		.byte	0x2
+ 743 0052 07       		.byte	0x7
+ 744 0053 0E040000 		.4byte	.LASF5
+ 745 0057 02       		.uleb128 0x2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 23
+
+
+ 746 0058 04       		.byte	0x4
+ 747 0059 05       		.byte	0x5
+ 748 005a 67020000 		.4byte	.LASF6
+ 749 005e 03       		.uleb128 0x3
+ 750 005f 08010000 		.4byte	.LASF7
+ 751 0063 02       		.byte	0x2
+ 752 0064 41       		.byte	0x41
+ 753 0065 69000000 		.4byte	0x69
+ 754 0069 02       		.uleb128 0x2
+ 755 006a 04       		.byte	0x4
+ 756 006b 07       		.byte	0x7
+ 757 006c E1040000 		.4byte	.LASF8
+ 758 0070 02       		.uleb128 0x2
+ 759 0071 08       		.byte	0x8
+ 760 0072 05       		.byte	0x5
+ 761 0073 0E020000 		.4byte	.LASF9
+ 762 0077 02       		.uleb128 0x2
+ 763 0078 08       		.byte	0x8
+ 764 0079 07       		.byte	0x7
+ 765 007a 59030000 		.4byte	.LASF10
+ 766 007e 04       		.uleb128 0x4
+ 767 007f 04       		.byte	0x4
+ 768 0080 05       		.byte	0x5
+ 769 0081 696E7400 		.ascii	"int\000"
+ 770 0085 02       		.uleb128 0x2
+ 771 0086 04       		.byte	0x4
+ 772 0087 07       		.byte	0x7
+ 773 0088 8A030000 		.4byte	.LASF11
+ 774 008c 03       		.uleb128 0x3
+ 775 008d 7E010000 		.4byte	.LASF12
+ 776 0091 03       		.byte	0x3
+ 777 0092 18       		.byte	0x18
+ 778 0093 2C000000 		.4byte	0x2c
+ 779 0097 03       		.uleb128 0x3
+ 780 0098 97030000 		.4byte	.LASF13
+ 781 009c 03       		.byte	0x3
+ 782 009d 24       		.byte	0x24
+ 783 009e 45000000 		.4byte	0x45
+ 784 00a2 03       		.uleb128 0x3
+ 785 00a3 70030000 		.4byte	.LASF14
+ 786 00a7 03       		.byte	0x3
+ 787 00a8 30       		.byte	0x30
+ 788 00a9 5E000000 		.4byte	0x5e
+ 789 00ad 05       		.uleb128 0x5
+ 790 00ae 04       		.byte	0x4
+ 791 00af 02       		.uleb128 0x2
+ 792 00b0 08       		.byte	0x8
+ 793 00b1 04       		.byte	0x4
+ 794 00b2 0A030000 		.4byte	.LASF15
+ 795 00b6 03       		.uleb128 0x3
+ 796 00b7 E5030000 		.4byte	.LASF16
+ 797 00bb 04       		.byte	0x4
+ 798 00bc CD       		.byte	0xcd
+ 799 00bd C1000000 		.4byte	0xc1
+ 800 00c1 06       		.uleb128 0x6
+ 801 00c2 B9040000 		.4byte	.LASF37
+ 802 00c6 2C       		.byte	0x2c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 24
+
+
+ 803 00c7 04       		.byte	0x4
+ 804 00c8 5001     		.2byte	0x150
+ 805 00ca C6010000 		.4byte	0x1c6
+ 806 00ce 07       		.uleb128 0x7
+ 807 00cf 4E040000 		.4byte	.LASF17
+ 808 00d3 04       		.byte	0x4
+ 809 00d4 5201     		.2byte	0x152
+ 810 00d6 74030000 		.4byte	0x374
+ 811 00da 00       		.byte	0
+ 812 00db 07       		.uleb128 0x7
+ 813 00dc B9060000 		.4byte	.LASF18
+ 814 00e0 04       		.byte	0x4
+ 815 00e1 5301     		.2byte	0x153
+ 816 00e3 49030000 		.4byte	0x349
+ 817 00e7 04       		.byte	0x4
+ 818 00e8 07       		.uleb128 0x7
+ 819 00e9 DA020000 		.4byte	.LASF19
+ 820 00ed 04       		.byte	0x4
+ 821 00ee 5401     		.2byte	0x154
+ 822 00f0 14030000 		.4byte	0x314
+ 823 00f4 08       		.byte	0x8
+ 824 00f5 07       		.uleb128 0x7
+ 825 00f6 F1050000 		.4byte	.LASF20
+ 826 00fa 04       		.byte	0x4
+ 827 00fb 5501     		.2byte	0x155
+ 828 00fd 14030000 		.4byte	0x314
+ 829 0101 0C       		.byte	0xc
+ 830 0102 07       		.uleb128 0x7
+ 831 0103 0D050000 		.4byte	.LASF21
+ 832 0107 04       		.byte	0x4
+ 833 0108 5601     		.2byte	0x156
+ 834 010a 14030000 		.4byte	0x314
+ 835 010e 10       		.byte	0x10
+ 836 010f 07       		.uleb128 0x7
+ 837 0110 7F000000 		.4byte	.LASF22
+ 838 0114 04       		.byte	0x4
+ 839 0115 5701     		.2byte	0x157
+ 840 0117 14030000 		.4byte	0x314
+ 841 011b 14       		.byte	0x14
+ 842 011c 07       		.uleb128 0x7
+ 843 011d C7010000 		.4byte	.LASF23
+ 844 0121 04       		.byte	0x4
+ 845 0122 5801     		.2byte	0x158
+ 846 0124 A2000000 		.4byte	0xa2
+ 847 0128 18       		.byte	0x18
+ 848 0129 07       		.uleb128 0x7
+ 849 012a 5C000000 		.4byte	.LASF24
+ 850 012e 04       		.byte	0x4
+ 851 012f 5901     		.2byte	0x159
+ 852 0131 7F030000 		.4byte	0x37f
+ 853 0135 1C       		.byte	0x1c
+ 854 0136 07       		.uleb128 0x7
+ 855 0137 81050000 		.4byte	.LASF25
+ 856 013b 04       		.byte	0x4
+ 857 013c 5A01     		.2byte	0x15a
+ 858 013e 97000000 		.4byte	0x97
+ 859 0142 20       		.byte	0x20
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 25
+
+
+ 860 0143 07       		.uleb128 0x7
+ 861 0144 16000000 		.4byte	.LASF26
+ 862 0148 04       		.byte	0x4
+ 863 0149 5B01     		.2byte	0x15b
+ 864 014b 8C000000 		.4byte	0x8c
+ 865 014f 22       		.byte	0x22
+ 866 0150 07       		.uleb128 0x7
+ 867 0151 1F000000 		.4byte	.LASF27
+ 868 0155 04       		.byte	0x4
+ 869 0156 5C01     		.2byte	0x15c
+ 870 0158 8C000000 		.4byte	0x8c
+ 871 015c 23       		.byte	0x23
+ 872 015d 07       		.uleb128 0x7
+ 873 015e 40050000 		.4byte	.LASF28
+ 874 0162 04       		.byte	0x4
+ 875 0163 5D01     		.2byte	0x15d
+ 876 0165 8C000000 		.4byte	0x8c
+ 877 0169 24       		.byte	0x24
+ 878 016a 07       		.uleb128 0x7
+ 879 016b C2050000 		.4byte	.LASF29
+ 880 016f 04       		.byte	0x4
+ 881 0170 6001     		.2byte	0x160
+ 882 0172 8C000000 		.4byte	0x8c
+ 883 0176 25       		.byte	0x25
+ 884 0177 07       		.uleb128 0x7
+ 885 0178 AE040000 		.4byte	.LASF30
+ 886 017c 04       		.byte	0x4
+ 887 017d 6201     		.2byte	0x162
+ 888 017f 8C000000 		.4byte	0x8c
+ 889 0183 26       		.byte	0x26
+ 890 0184 07       		.uleb128 0x7
+ 891 0185 1C020000 		.4byte	.LASF31
+ 892 0189 04       		.byte	0x4
+ 893 018a 6301     		.2byte	0x163
+ 894 018c 8C000000 		.4byte	0x8c
+ 895 0190 27       		.byte	0x27
+ 896 0191 07       		.uleb128 0x7
+ 897 0192 92060000 		.4byte	.LASF32
+ 898 0196 04       		.byte	0x4
+ 899 0197 6401     		.2byte	0x164
+ 900 0199 8C000000 		.4byte	0x8c
+ 901 019d 28       		.byte	0x28
+ 902 019e 07       		.uleb128 0x7
+ 903 019f F6010000 		.4byte	.LASF33
+ 904 01a3 04       		.byte	0x4
+ 905 01a4 6501     		.2byte	0x165
+ 906 01a6 8C000000 		.4byte	0x8c
+ 907 01aa 29       		.byte	0x29
+ 908 01ab 07       		.uleb128 0x7
+ 909 01ac 2E040000 		.4byte	.LASF34
+ 910 01b0 04       		.byte	0x4
+ 911 01b1 6601     		.2byte	0x166
+ 912 01b3 8C000000 		.4byte	0x8c
+ 913 01b7 2A       		.byte	0x2a
+ 914 01b8 07       		.uleb128 0x7
+ 915 01b9 61000000 		.4byte	.LASF35
+ 916 01bd 04       		.byte	0x4
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 26
+
+
+ 917 01be 6701     		.2byte	0x167
+ 918 01c0 8C000000 		.4byte	0x8c
+ 919 01c4 2B       		.byte	0x2b
+ 920 01c5 00       		.byte	0
+ 921 01c6 03       		.uleb128 0x3
+ 922 01c7 E2010000 		.4byte	.LASF36
+ 923 01cb 04       		.byte	0x4
+ 924 01cc CE       		.byte	0xce
+ 925 01cd D1010000 		.4byte	0x1d1
+ 926 01d1 08       		.uleb128 0x8
+ 927 01d2 A0030000 		.4byte	.LASF38
+ 928 01d6 18       		.byte	0x18
+ 929 01d7 04       		.byte	0x4
+ 930 01d8 E7       		.byte	0xe7
+ 931 01d9 CC020000 		.4byte	0x2cc
+ 932 01dd 09       		.uleb128 0x9
+ 933 01de 4A000000 		.4byte	.LASF39
+ 934 01e2 04       		.byte	0x4
+ 935 01e3 EB       		.byte	0xeb
+ 936 01e4 8C000000 		.4byte	0x8c
+ 937 01e8 00       		.byte	0
+ 938 01e9 09       		.uleb128 0x9
+ 939 01ea 15050000 		.4byte	.LASF40
+ 940 01ee 04       		.byte	0x4
+ 941 01ef EC       		.byte	0xec
+ 942 01f0 8C000000 		.4byte	0x8c
+ 943 01f4 01       		.byte	0x1
+ 944 01f5 09       		.uleb128 0x9
+ 945 01f6 86010000 		.4byte	.LASF41
+ 946 01fa 04       		.byte	0x4
+ 947 01fb EE       		.byte	0xee
+ 948 01fc 8C000000 		.4byte	0x8c
+ 949 0200 02       		.byte	0x2
+ 950 0201 09       		.uleb128 0x9
+ 951 0202 C1060000 		.4byte	.LASF42
+ 952 0206 04       		.byte	0x4
+ 953 0207 EF       		.byte	0xef
+ 954 0208 8C000000 		.4byte	0x8c
+ 955 020c 03       		.byte	0x3
+ 956 020d 09       		.uleb128 0x9
+ 957 020e D0030000 		.4byte	.LASF43
+ 958 0212 04       		.byte	0x4
+ 959 0213 F0       		.byte	0xf0
+ 960 0214 8C000000 		.4byte	0x8c
+ 961 0218 04       		.byte	0x4
+ 962 0219 09       		.uleb128 0x9
+ 963 021a F5000000 		.4byte	.LASF44
+ 964 021e 04       		.byte	0x4
+ 965 021f F1       		.byte	0xf1
+ 966 0220 8C000000 		.4byte	0x8c
+ 967 0224 05       		.byte	0x5
+ 968 0225 09       		.uleb128 0x9
+ 969 0226 A5000000 		.4byte	.LASF45
+ 970 022a 04       		.byte	0x4
+ 971 022b F8       		.byte	0xf8
+ 972 022c 8C000000 		.4byte	0x8c
+ 973 0230 06       		.byte	0x6
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 27
+
+
+ 974 0231 09       		.uleb128 0x9
+ 975 0232 28020000 		.4byte	.LASF46
+ 976 0236 04       		.byte	0x4
+ 977 0237 FC       		.byte	0xfc
+ 978 0238 8C000000 		.4byte	0x8c
+ 979 023c 07       		.byte	0x7
+ 980 023d 09       		.uleb128 0x9
+ 981 023e 01040000 		.4byte	.LASF47
+ 982 0242 04       		.byte	0x4
+ 983 0243 FF       		.byte	0xff
+ 984 0244 A2000000 		.4byte	0xa2
+ 985 0248 08       		.byte	0x8
+ 986 0249 07       		.uleb128 0x7
+ 987 024a 39000000 		.4byte	.LASF48
+ 988 024e 04       		.byte	0x4
+ 989 024f 0901     		.2byte	0x109
+ 990 0251 8C000000 		.4byte	0x8c
+ 991 0255 0C       		.byte	0xc
+ 992 0256 07       		.uleb128 0x7
+ 993 0257 EC030000 		.4byte	.LASF49
+ 994 025b 04       		.byte	0x4
+ 995 025c 0C01     		.2byte	0x10c
+ 996 025e 8C000000 		.4byte	0x8c
+ 997 0262 0D       		.byte	0xd
+ 998 0263 07       		.uleb128 0x7
+ 999 0264 F7020000 		.4byte	.LASF50
+ 1000 0268 04       		.byte	0x4
+ 1001 0269 1201     		.2byte	0x112
+ 1002 026b 8C000000 		.4byte	0x8c
+ 1003 026f 0E       		.byte	0xe
+ 1004 0270 07       		.uleb128 0x7
+ 1005 0271 69010000 		.4byte	.LASF51
+ 1006 0275 04       		.byte	0x4
+ 1007 0276 1401     		.2byte	0x114
+ 1008 0278 8C000000 		.4byte	0x8c
+ 1009 027c 0F       		.byte	0xf
+ 1010 027d 07       		.uleb128 0x7
+ 1011 027e 91000000 		.4byte	.LASF52
+ 1012 0282 04       		.byte	0x4
+ 1013 0283 1701     		.2byte	0x117
+ 1014 0285 8C000000 		.4byte	0x8c
+ 1015 0289 10       		.byte	0x10
+ 1016 028a 07       		.uleb128 0x7
+ 1017 028b 16030000 		.4byte	.LASF53
+ 1018 028f 04       		.byte	0x4
+ 1019 0290 1801     		.2byte	0x118
+ 1020 0292 8C000000 		.4byte	0x8c
+ 1021 0296 11       		.byte	0x11
+ 1022 0297 07       		.uleb128 0x7
+ 1023 0298 D1010000 		.4byte	.LASF54
+ 1024 029c 04       		.byte	0x4
+ 1025 029d 1A01     		.2byte	0x11a
+ 1026 029f 8C000000 		.4byte	0x8c
+ 1027 02a3 12       		.byte	0x12
+ 1028 02a4 07       		.uleb128 0x7
+ 1029 02a5 69050000 		.4byte	.LASF55
+ 1030 02a9 04       		.byte	0x4
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 28
+
+
+ 1031 02aa 1B01     		.2byte	0x11b
+ 1032 02ac 8C000000 		.4byte	0x8c
+ 1033 02b0 13       		.byte	0x13
+ 1034 02b1 07       		.uleb128 0x7
+ 1035 02b2 A2040000 		.4byte	.LASF56
+ 1036 02b6 04       		.byte	0x4
+ 1037 02b7 2301     		.2byte	0x123
+ 1038 02b9 97000000 		.4byte	0x97
+ 1039 02bd 14       		.byte	0x14
+ 1040 02be 07       		.uleb128 0x7
+ 1041 02bf 5B040000 		.4byte	.LASF57
+ 1042 02c3 04       		.byte	0x4
+ 1043 02c4 2401     		.2byte	0x124
+ 1044 02c6 97000000 		.4byte	0x97
+ 1045 02ca 16       		.byte	0x16
+ 1046 02cb 00       		.byte	0
+ 1047 02cc 03       		.uleb128 0x3
+ 1048 02cd F8050000 		.4byte	.LASF58
+ 1049 02d1 04       		.byte	0x4
+ 1050 02d2 CF       		.byte	0xcf
+ 1051 02d3 D7020000 		.4byte	0x2d7
+ 1052 02d7 08       		.uleb128 0x8
+ 1053 02d8 79030000 		.4byte	.LASF59
+ 1054 02dc 08       		.byte	0x8
+ 1055 02dd 04       		.byte	0x4
+ 1056 02de DE       		.byte	0xde
+ 1057 02df 14030000 		.4byte	0x314
+ 1058 02e3 09       		.uleb128 0x9
+ 1059 02e4 A4010000 		.4byte	.LASF60
+ 1060 02e8 04       		.byte	0x4
+ 1061 02e9 E0       		.byte	0xe0
+ 1062 02ea 6E030000 		.4byte	0x36e
+ 1063 02ee 00       		.byte	0
+ 1064 02ef 0A       		.uleb128 0xa
+ 1065 02f0 636E7400 		.ascii	"cnt\000"
+ 1066 02f4 04       		.byte	0x4
+ 1067 02f5 E1       		.byte	0xe1
+ 1068 02f6 8C000000 		.4byte	0x8c
+ 1069 02fa 04       		.byte	0x4
+ 1070 02fb 09       		.uleb128 0x9
+ 1071 02fc AA020000 		.4byte	.LASF61
+ 1072 0300 04       		.byte	0x4
+ 1073 0301 E2       		.byte	0xe2
+ 1074 0302 8C000000 		.4byte	0x8c
+ 1075 0306 05       		.byte	0x5
+ 1076 0307 09       		.uleb128 0x9
+ 1077 0308 C5040000 		.4byte	.LASF62
+ 1078 030c 04       		.byte	0x4
+ 1079 030d E3       		.byte	0xe3
+ 1080 030e 8C000000 		.4byte	0x8c
+ 1081 0312 06       		.byte	0x6
+ 1082 0313 00       		.byte	0
+ 1083 0314 03       		.uleb128 0x3
+ 1084 0315 AD060000 		.4byte	.LASF63
+ 1085 0319 04       		.byte	0x4
+ 1086 031a D1       		.byte	0xd1
+ 1087 031b 1F030000 		.4byte	0x31f
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 29
+
+
+ 1088 031f 0B       		.uleb128 0xb
+ 1089 0320 04       		.byte	0x4
+ 1090 0321 25030000 		.4byte	0x325
+ 1091 0325 0C       		.uleb128 0xc
+ 1092 0326 8C000000 		.4byte	0x8c
+ 1093 032a 43030000 		.4byte	0x343
+ 1094 032e 0D       		.uleb128 0xd
+ 1095 032f 43030000 		.4byte	0x343
+ 1096 0333 0D       		.uleb128 0xd
+ 1097 0334 8C000000 		.4byte	0x8c
+ 1098 0338 0D       		.uleb128 0xd
+ 1099 0339 8C000000 		.4byte	0x8c
+ 1100 033d 0D       		.uleb128 0xd
+ 1101 033e AD000000 		.4byte	0xad
+ 1102 0342 00       		.byte	0
+ 1103 0343 0B       		.uleb128 0xb
+ 1104 0344 04       		.byte	0x4
+ 1105 0345 B6000000 		.4byte	0xb6
+ 1106 0349 03       		.uleb128 0x3
+ 1107 034a 21040000 		.4byte	.LASF64
+ 1108 034e 04       		.byte	0x4
+ 1109 034f D2       		.byte	0xd2
+ 1110 0350 54030000 		.4byte	0x354
+ 1111 0354 0B       		.uleb128 0xb
+ 1112 0355 04       		.byte	0x4
+ 1113 0356 5A030000 		.4byte	0x35a
+ 1114 035a 0C       		.uleb128 0xc
+ 1115 035b 97000000 		.4byte	0x97
+ 1116 035f 6E030000 		.4byte	0x36e
+ 1117 0363 0D       		.uleb128 0xd
+ 1118 0364 43030000 		.4byte	0x343
+ 1119 0368 0D       		.uleb128 0xd
+ 1120 0369 8C000000 		.4byte	0x8c
+ 1121 036d 00       		.byte	0
+ 1122 036e 0B       		.uleb128 0xb
+ 1123 036f 04       		.byte	0x4
+ 1124 0370 8C000000 		.4byte	0x8c
+ 1125 0374 0B       		.uleb128 0xb
+ 1126 0375 04       		.byte	0x4
+ 1127 0376 7A030000 		.4byte	0x37a
+ 1128 037a 0E       		.uleb128 0xe
+ 1129 037b C6010000 		.4byte	0x1c6
+ 1130 037f 0B       		.uleb128 0xb
+ 1131 0380 04       		.byte	0x4
+ 1132 0381 85030000 		.4byte	0x385
+ 1133 0385 0E       		.uleb128 0xe
+ 1134 0386 8C000000 		.4byte	0x8c
+ 1135 038a 0F       		.uleb128 0xf
+ 1136 038b E5020000 		.4byte	.LASF68
+ 1137 038f 01       		.byte	0x1
+ 1138 0390 5A       		.byte	0x5a
+ 1139 0391 6E030000 		.4byte	0x36e
+ 1140 0395 00000000 		.4byte	.LFB0
+ 1141 0399 2C000000 		.4byte	.LFE0-.LFB0
+ 1142 039d 01       		.uleb128 0x1
+ 1143 039e 9C       		.byte	0x9c
+ 1144 039f DE030000 		.4byte	0x3de
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 30
+
+
+ 1145 03a3 10       		.uleb128 0x10
+ 1146 03a4 9F010000 		.4byte	.LASF65
+ 1147 03a8 01       		.byte	0x1
+ 1148 03a9 5A       		.byte	0x5a
+ 1149 03aa 43030000 		.4byte	0x343
+ 1150 03ae 00000000 		.4byte	.LLST0
+ 1151 03b2 11       		.uleb128 0x11
+ 1152 03b3 70747200 		.ascii	"ptr\000"
+ 1153 03b7 01       		.byte	0x1
+ 1154 03b8 5A       		.byte	0x5a
+ 1155 03b9 6E030000 		.4byte	0x36e
+ 1156 03bd 21000000 		.4byte	.LLST1
+ 1157 03c1 12       		.uleb128 0x12
+ 1158 03c2 6A00     		.ascii	"j\000"
+ 1159 03c4 01       		.byte	0x1
+ 1160 03c5 5C       		.byte	0x5c
+ 1161 03c6 8C000000 		.4byte	0x8c
+ 1162 03ca 4C000000 		.4byte	.LLST2
+ 1163 03ce 13       		.uleb128 0x13
+ 1164 03cf 34000000 		.4byte	.LASF66
+ 1165 03d3 01       		.byte	0x1
+ 1166 03d4 5D       		.byte	0x5d
+ 1167 03d5 6E030000 		.4byte	0x36e
+ 1168 03d9 76000000 		.4byte	.LLST3
+ 1169 03dd 00       		.byte	0
+ 1170 03de 14       		.uleb128 0x14
+ 1171 03df 4C050000 		.4byte	.LASF95
+ 1172 03e3 01       		.byte	0x1
+ 1173 03e4 BD       		.byte	0xbd
+ 1174 03e5 00000000 		.4byte	.LFB2
+ 1175 03e9 54000000 		.4byte	.LFE2-.LFB2
+ 1176 03ed 01       		.uleb128 0x1
+ 1177 03ee 9C       		.byte	0x9c
+ 1178 03ef E5040000 		.4byte	0x4e5
+ 1179 03f3 10       		.uleb128 0x10
+ 1180 03f4 9F010000 		.4byte	.LASF65
+ 1181 03f8 01       		.byte	0x1
+ 1182 03f9 BD       		.byte	0xbd
+ 1183 03fa 43030000 		.4byte	0x343
+ 1184 03fe CD000000 		.4byte	.LLST4
+ 1185 0402 10       		.uleb128 0x10
+ 1186 0403 7B050000 		.4byte	.LASF67
+ 1187 0407 01       		.byte	0x1
+ 1188 0408 BD       		.byte	0xbd
+ 1189 0409 8C000000 		.4byte	0x8c
+ 1190 040d EB000000 		.4byte	.LLST5
+ 1191 0411 12       		.uleb128 0x12
+ 1192 0412 6900     		.ascii	"i\000"
+ 1193 0414 01       		.byte	0x1
+ 1194 0415 BF       		.byte	0xbf
+ 1195 0416 8C000000 		.4byte	0x8c
+ 1196 041a 0C010000 		.4byte	.LLST6
+ 1197 041e 15       		.uleb128 0x15
+ 1198 041f 0A000000 		.4byte	.LVL11
+ 1199 0423 55090000 		.4byte	0x955
+ 1200 0427 32040000 		.4byte	0x432
+ 1201 042b 16       		.uleb128 0x16
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 31
+
+
+ 1202 042c 01       		.uleb128 0x1
+ 1203 042d 50       		.byte	0x50
+ 1204 042e 02       		.uleb128 0x2
+ 1205 042f 75       		.byte	0x75
+ 1206 0430 00       		.sleb128 0
+ 1207 0431 00       		.byte	0
+ 1208 0432 15       		.uleb128 0x15
+ 1209 0433 12000000 		.4byte	.LVL12
+ 1210 0437 61090000 		.4byte	0x961
+ 1211 043b 4C040000 		.4byte	0x44c
+ 1212 043f 16       		.uleb128 0x16
+ 1213 0440 01       		.uleb128 0x1
+ 1214 0441 50       		.byte	0x50
+ 1215 0442 02       		.uleb128 0x2
+ 1216 0443 75       		.byte	0x75
+ 1217 0444 00       		.sleb128 0
+ 1218 0445 16       		.uleb128 0x16
+ 1219 0446 01       		.uleb128 0x1
+ 1220 0447 51       		.byte	0x51
+ 1221 0448 02       		.uleb128 0x2
+ 1222 0449 08       		.byte	0x8
+ 1223 044a 38       		.byte	0x38
+ 1224 044b 00       		.byte	0
+ 1225 044c 15       		.uleb128 0x15
+ 1226 044d 1C000000 		.4byte	.LVL13
+ 1227 0451 6D090000 		.4byte	0x96d
+ 1228 0455 66040000 		.4byte	0x466
+ 1229 0459 16       		.uleb128 0x16
+ 1230 045a 01       		.uleb128 0x1
+ 1231 045b 50       		.byte	0x50
+ 1232 045c 02       		.uleb128 0x2
+ 1233 045d 75       		.byte	0x75
+ 1234 045e 00       		.sleb128 0
+ 1235 045f 16       		.uleb128 0x16
+ 1236 0460 01       		.uleb128 0x1
+ 1237 0461 51       		.byte	0x51
+ 1238 0462 02       		.uleb128 0x2
+ 1239 0463 76       		.byte	0x76
+ 1240 0464 01       		.sleb128 1
+ 1241 0465 00       		.byte	0
+ 1242 0466 15       		.uleb128 0x15
+ 1243 0467 2A000000 		.4byte	.LVL15
+ 1244 046b 61090000 		.4byte	0x961
+ 1245 046f 83040000 		.4byte	0x483
+ 1246 0473 16       		.uleb128 0x16
+ 1247 0474 01       		.uleb128 0x1
+ 1248 0475 50       		.byte	0x50
+ 1249 0476 02       		.uleb128 0x2
+ 1250 0477 75       		.byte	0x75
+ 1251 0478 00       		.sleb128 0
+ 1252 0479 16       		.uleb128 0x16
+ 1253 047a 01       		.uleb128 0x1
+ 1254 047b 51       		.byte	0x51
+ 1255 047c 05       		.uleb128 0x5
+ 1256 047d 74       		.byte	0x74
+ 1257 047e 00       		.sleb128 0
+ 1258 047f 08       		.byte	0x8
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 32
+
+
+ 1259 0480 80       		.byte	0x80
+ 1260 0481 27       		.byte	0x27
+ 1261 0482 00       		.byte	0
+ 1262 0483 15       		.uleb128 0x15
+ 1263 0484 34000000 		.4byte	.LVL16
+ 1264 0488 6D090000 		.4byte	0x96d
+ 1265 048c A0040000 		.4byte	0x4a0
+ 1266 0490 16       		.uleb128 0x16
+ 1267 0491 01       		.uleb128 0x1
+ 1268 0492 50       		.byte	0x50
+ 1269 0493 02       		.uleb128 0x2
+ 1270 0494 75       		.byte	0x75
+ 1271 0495 00       		.sleb128 0
+ 1272 0496 16       		.uleb128 0x16
+ 1273 0497 01       		.uleb128 0x1
+ 1274 0498 51       		.byte	0x51
+ 1275 0499 05       		.uleb128 0x5
+ 1276 049a 74       		.byte	0x74
+ 1277 049b 00       		.sleb128 0
+ 1278 049c 08       		.byte	0x8
+ 1279 049d FC       		.byte	0xfc
+ 1280 049e 1A       		.byte	0x1a
+ 1281 049f 00       		.byte	0
+ 1282 04a0 15       		.uleb128 0x15
+ 1283 04a1 44000000 		.4byte	.LVL19
+ 1284 04a5 61090000 		.4byte	0x961
+ 1285 04a9 BA040000 		.4byte	0x4ba
+ 1286 04ad 16       		.uleb128 0x16
+ 1287 04ae 01       		.uleb128 0x1
+ 1288 04af 50       		.byte	0x50
+ 1289 04b0 02       		.uleb128 0x2
+ 1290 04b1 75       		.byte	0x75
+ 1291 04b2 00       		.sleb128 0
+ 1292 04b3 16       		.uleb128 0x16
+ 1293 04b4 01       		.uleb128 0x1
+ 1294 04b5 51       		.byte	0x51
+ 1295 04b6 02       		.uleb128 0x2
+ 1296 04b7 08       		.byte	0x8
+ 1297 04b8 38       		.byte	0x38
+ 1298 04b9 00       		.byte	0
+ 1299 04ba 15       		.uleb128 0x15
+ 1300 04bb 4C000000 		.4byte	.LVL20
+ 1301 04bf 6D090000 		.4byte	0x96d
+ 1302 04c3 D4040000 		.4byte	0x4d4
+ 1303 04c7 16       		.uleb128 0x16
+ 1304 04c8 01       		.uleb128 0x1
+ 1305 04c9 50       		.byte	0x50
+ 1306 04ca 02       		.uleb128 0x2
+ 1307 04cb 75       		.byte	0x75
+ 1308 04cc 00       		.sleb128 0
+ 1309 04cd 16       		.uleb128 0x16
+ 1310 04ce 01       		.uleb128 0x1
+ 1311 04cf 51       		.byte	0x51
+ 1312 04d0 02       		.uleb128 0x2
+ 1313 04d1 76       		.byte	0x76
+ 1314 04d2 00       		.sleb128 0
+ 1315 04d3 00       		.byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 33
+
+
+ 1316 04d4 17       		.uleb128 0x17
+ 1317 04d5 52000000 		.4byte	.LVL21
+ 1318 04d9 79090000 		.4byte	0x979
+ 1319 04dd 16       		.uleb128 0x16
+ 1320 04de 01       		.uleb128 0x1
+ 1321 04df 50       		.byte	0x50
+ 1322 04e0 02       		.uleb128 0x2
+ 1323 04e1 75       		.byte	0x75
+ 1324 04e2 00       		.sleb128 0
+ 1325 04e3 00       		.byte	0
+ 1326 04e4 00       		.byte	0
+ 1327 04e5 0F       		.uleb128 0xf
+ 1328 04e6 00000000 		.4byte	.LASF69
+ 1329 04ea 01       		.byte	0x1
+ 1330 04eb 6D       		.byte	0x6d
+ 1331 04ec 8C000000 		.4byte	0x8c
+ 1332 04f0 00000000 		.4byte	.LFB1
+ 1333 04f4 04010000 		.4byte	.LFE1-.LFB1
+ 1334 04f8 01       		.uleb128 0x1
+ 1335 04f9 9C       		.byte	0x9c
+ 1336 04fa C2060000 		.4byte	0x6c2
+ 1337 04fe 10       		.uleb128 0x10
+ 1338 04ff 9F010000 		.4byte	.LASF65
+ 1339 0503 01       		.byte	0x1
+ 1340 0504 6D       		.byte	0x6d
+ 1341 0505 43030000 		.4byte	0x343
+ 1342 0509 36010000 		.4byte	.LLST7
+ 1343 050d 11       		.uleb128 0x11
+ 1344 050e 6D736700 		.ascii	"msg\000"
+ 1345 0512 01       		.byte	0x1
+ 1346 0513 6D       		.byte	0x6d
+ 1347 0514 8C000000 		.4byte	0x8c
+ 1348 0518 E6010000 		.4byte	.LLST8
+ 1349 051c 10       		.uleb128 0x10
+ 1350 051d AD010000 		.4byte	.LASF70
+ 1351 0521 01       		.byte	0x1
+ 1352 0522 6D       		.byte	0x6d
+ 1353 0523 8C000000 		.4byte	0x8c
+ 1354 0527 07020000 		.4byte	.LLST9
+ 1355 052b 10       		.uleb128 0x10
+ 1356 052c 42000000 		.4byte	.LASF71
+ 1357 0530 01       		.byte	0x1
+ 1358 0531 6D       		.byte	0x6d
+ 1359 0532 AD000000 		.4byte	0xad
+ 1360 0536 BB020000 		.4byte	.LLST10
+ 1361 053a 12       		.uleb128 0x12
+ 1362 053b 7800     		.ascii	"x\000"
+ 1363 053d 01       		.byte	0x1
+ 1364 053e 6F       		.byte	0x6f
+ 1365 053f 8C000000 		.4byte	0x8c
+ 1366 0543 E7020000 		.4byte	.LLST11
+ 1367 0547 12       		.uleb128 0x12
+ 1368 0548 7900     		.ascii	"y\000"
+ 1369 054a 01       		.byte	0x1
+ 1370 054b 70       		.byte	0x70
+ 1371 054c 8C000000 		.4byte	0x8c
+ 1372 0550 1C030000 		.4byte	.LLST12
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 34
+
+
+ 1373 0554 12       		.uleb128 0x12
+ 1374 0555 6300     		.ascii	"c\000"
+ 1375 0557 01       		.byte	0x1
+ 1376 0558 70       		.byte	0x70
+ 1377 0559 8C000000 		.4byte	0x8c
+ 1378 055d 2F030000 		.4byte	.LLST13
+ 1379 0561 12       		.uleb128 0x12
+ 1380 0562 70747200 		.ascii	"ptr\000"
+ 1381 0566 01       		.byte	0x1
+ 1382 0567 71       		.byte	0x71
+ 1383 0568 6E030000 		.4byte	0x36e
+ 1384 056c 4D030000 		.4byte	.LLST14
+ 1385 0570 15       		.uleb128 0x15
+ 1386 0571 22000000 		.4byte	.LVL25
+ 1387 0575 85090000 		.4byte	0x985
+ 1388 0579 87050000 		.4byte	0x587
+ 1389 057d 16       		.uleb128 0x16
+ 1390 057e 01       		.uleb128 0x1
+ 1391 057f 51       		.byte	0x51
+ 1392 0580 05       		.uleb128 0x5
+ 1393 0581 03       		.byte	0x3
+ 1394 0582 00000000 		.4byte	.LANCHOR1
+ 1395 0586 00       		.byte	0
+ 1396 0587 15       		.uleb128 0x15
+ 1397 0588 2E000000 		.4byte	.LVL27
+ 1398 058c 85090000 		.4byte	0x985
+ 1399 0590 9E050000 		.4byte	0x59e
+ 1400 0594 16       		.uleb128 0x16
+ 1401 0595 01       		.uleb128 0x1
+ 1402 0596 51       		.byte	0x51
+ 1403 0597 05       		.uleb128 0x5
+ 1404 0598 03       		.byte	0x3
+ 1405 0599 0C000000 		.4byte	.LANCHOR1+12
+ 1406 059d 00       		.byte	0
+ 1407 059e 15       		.uleb128 0x15
+ 1408 059f 3C000000 		.4byte	.LVL29
+ 1409 05a3 85090000 		.4byte	0x985
+ 1410 05a7 B5050000 		.4byte	0x5b5
+ 1411 05ab 16       		.uleb128 0x16
+ 1412 05ac 01       		.uleb128 0x1
+ 1413 05ad 51       		.byte	0x51
+ 1414 05ae 05       		.uleb128 0x5
+ 1415 05af 03       		.byte	0x3
+ 1416 05b0 18000000 		.4byte	.LANCHOR1+24
+ 1417 05b4 00       		.byte	0
+ 1418 05b5 15       		.uleb128 0x15
+ 1419 05b6 50000000 		.4byte	.LVL31
+ 1420 05ba 85090000 		.4byte	0x985
+ 1421 05be CC050000 		.4byte	0x5cc
+ 1422 05c2 16       		.uleb128 0x16
+ 1423 05c3 01       		.uleb128 0x1
+ 1424 05c4 51       		.byte	0x51
+ 1425 05c5 05       		.uleb128 0x5
+ 1426 05c6 03       		.byte	0x3
+ 1427 05c7 20000000 		.4byte	.LANCHOR1+32
+ 1428 05cb 00       		.byte	0
+ 1429 05cc 18       		.uleb128 0x18
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 35
+
+
+ 1430 05cd 62000000 		.4byte	.LVL33
+ 1431 05d1 55090000 		.4byte	0x955
+ 1432 05d5 15       		.uleb128 0x15
+ 1433 05d6 6A000000 		.4byte	.LVL34
+ 1434 05da 61090000 		.4byte	0x961
+ 1435 05de EF050000 		.4byte	0x5ef
+ 1436 05e2 16       		.uleb128 0x16
+ 1437 05e3 01       		.uleb128 0x1
+ 1438 05e4 50       		.byte	0x50
+ 1439 05e5 02       		.uleb128 0x2
+ 1440 05e6 75       		.byte	0x75
+ 1441 05e7 00       		.sleb128 0
+ 1442 05e8 16       		.uleb128 0x16
+ 1443 05e9 01       		.uleb128 0x1
+ 1444 05ea 51       		.byte	0x51
+ 1445 05eb 02       		.uleb128 0x2
+ 1446 05ec 09       		.byte	0x9
+ 1447 05ed 81       		.byte	0x81
+ 1448 05ee 00       		.byte	0
+ 1449 05ef 15       		.uleb128 0x15
+ 1450 05f0 72000000 		.4byte	.LVL35
+ 1451 05f4 6D090000 		.4byte	0x96d
+ 1452 05f8 09060000 		.4byte	0x609
+ 1453 05fc 16       		.uleb128 0x16
+ 1454 05fd 01       		.uleb128 0x1
+ 1455 05fe 50       		.byte	0x50
+ 1456 05ff 02       		.uleb128 0x2
+ 1457 0600 75       		.byte	0x75
+ 1458 0601 00       		.sleb128 0
+ 1459 0602 16       		.uleb128 0x16
+ 1460 0603 01       		.uleb128 0x1
+ 1461 0604 51       		.byte	0x51
+ 1462 0605 02       		.uleb128 0x2
+ 1463 0606 78       		.byte	0x78
+ 1464 0607 00       		.sleb128 0
+ 1465 0608 00       		.byte	0
+ 1466 0609 15       		.uleb128 0x15
+ 1467 060a 78000000 		.4byte	.LVL36
+ 1468 060e 79090000 		.4byte	0x979
+ 1469 0612 1D060000 		.4byte	0x61d
+ 1470 0616 16       		.uleb128 0x16
+ 1471 0617 01       		.uleb128 0x1
+ 1472 0618 50       		.byte	0x50
+ 1473 0619 02       		.uleb128 0x2
+ 1474 061a 75       		.byte	0x75
+ 1475 061b 00       		.sleb128 0
+ 1476 061c 00       		.byte	0
+ 1477 061d 18       		.uleb128 0x18
+ 1478 061e 82000000 		.4byte	.LVL38
+ 1479 0622 55090000 		.4byte	0x955
+ 1480 0626 15       		.uleb128 0x15
+ 1481 0627 A0000000 		.4byte	.LVL45
+ 1482 062b 61090000 		.4byte	0x961
+ 1483 062f 43060000 		.4byte	0x643
+ 1484 0633 16       		.uleb128 0x16
+ 1485 0634 01       		.uleb128 0x1
+ 1486 0635 50       		.byte	0x50
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 36
+
+
+ 1487 0636 02       		.uleb128 0x2
+ 1488 0637 75       		.byte	0x75
+ 1489 0638 00       		.sleb128 0
+ 1490 0639 16       		.uleb128 0x16
+ 1491 063a 01       		.uleb128 0x1
+ 1492 063b 51       		.byte	0x51
+ 1493 063c 05       		.uleb128 0x5
+ 1494 063d 77       		.byte	0x77
+ 1495 063e 00       		.sleb128 0
+ 1496 063f 08       		.byte	0x8
+ 1497 0640 B0       		.byte	0xb0
+ 1498 0641 21       		.byte	0x21
+ 1499 0642 00       		.byte	0
+ 1500 0643 15       		.uleb128 0x15
+ 1501 0644 AC000000 		.4byte	.LVL46
+ 1502 0648 61090000 		.4byte	0x961
+ 1503 064c 61060000 		.4byte	0x661
+ 1504 0650 16       		.uleb128 0x16
+ 1505 0651 01       		.uleb128 0x1
+ 1506 0652 50       		.byte	0x50
+ 1507 0653 02       		.uleb128 0x2
+ 1508 0654 75       		.byte	0x75
+ 1509 0655 00       		.sleb128 0
+ 1510 0656 16       		.uleb128 0x16
+ 1511 0657 01       		.uleb128 0x1
+ 1512 0658 51       		.byte	0x51
+ 1513 0659 06       		.uleb128 0x6
+ 1514 065a 74       		.byte	0x74
+ 1515 065b 00       		.sleb128 0
+ 1516 065c 34       		.byte	0x34
+ 1517 065d 25       		.byte	0x25
+ 1518 065e 40       		.byte	0x40
+ 1519 065f 21       		.byte	0x21
+ 1520 0660 00       		.byte	0
+ 1521 0661 15       		.uleb128 0x15
+ 1522 0662 B6000000 		.4byte	.LVL47
+ 1523 0666 61090000 		.4byte	0x961
+ 1524 066a 7D060000 		.4byte	0x67d
+ 1525 066e 16       		.uleb128 0x16
+ 1526 066f 01       		.uleb128 0x1
+ 1527 0670 50       		.byte	0x50
+ 1528 0671 02       		.uleb128 0x2
+ 1529 0672 75       		.byte	0x75
+ 1530 0673 00       		.sleb128 0
+ 1531 0674 16       		.uleb128 0x16
+ 1532 0675 01       		.uleb128 0x1
+ 1533 0676 51       		.byte	0x51
+ 1534 0677 04       		.uleb128 0x4
+ 1535 0678 74       		.byte	0x74
+ 1536 0679 00       		.sleb128 0
+ 1537 067a 3F       		.byte	0x3f
+ 1538 067b 1A       		.byte	0x1a
+ 1539 067c 00       		.byte	0
+ 1540 067d 15       		.uleb128 0x15
+ 1541 067e BE000000 		.4byte	.LVL48
+ 1542 0682 8A030000 		.4byte	0x38a
+ 1543 0686 97060000 		.4byte	0x697
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 37
+
+
+ 1544 068a 16       		.uleb128 0x16
+ 1545 068b 01       		.uleb128 0x1
+ 1546 068c 50       		.byte	0x50
+ 1547 068d 02       		.uleb128 0x2
+ 1548 068e 75       		.byte	0x75
+ 1549 068f 00       		.sleb128 0
+ 1550 0690 16       		.uleb128 0x16
+ 1551 0691 01       		.uleb128 0x1
+ 1552 0692 51       		.byte	0x51
+ 1553 0693 02       		.uleb128 0x2
+ 1554 0694 76       		.byte	0x76
+ 1555 0695 00       		.sleb128 0
+ 1556 0696 00       		.byte	0
+ 1557 0697 15       		.uleb128 0x15
+ 1558 0698 C8000000 		.4byte	.LVL49
+ 1559 069c 91090000 		.4byte	0x991
+ 1560 06a0 B1060000 		.4byte	0x6b1
+ 1561 06a4 16       		.uleb128 0x16
+ 1562 06a5 01       		.uleb128 0x1
+ 1563 06a6 50       		.byte	0x50
+ 1564 06a7 02       		.uleb128 0x2
+ 1565 06a8 75       		.byte	0x75
+ 1566 06a9 00       		.sleb128 0
+ 1567 06aa 16       		.uleb128 0x16
+ 1568 06ab 01       		.uleb128 0x1
+ 1569 06ac 51       		.byte	0x51
+ 1570 06ad 02       		.uleb128 0x2
+ 1571 06ae 08       		.byte	0x8
+ 1572 06af 20       		.byte	0x20
+ 1573 06b0 00       		.byte	0
+ 1574 06b1 17       		.uleb128 0x17
+ 1575 06b2 E8000000 		.4byte	.LVL56
+ 1576 06b6 79090000 		.4byte	0x979
+ 1577 06ba 16       		.uleb128 0x16
+ 1578 06bb 01       		.uleb128 0x1
+ 1579 06bc 50       		.byte	0x50
+ 1580 06bd 02       		.uleb128 0x2
+ 1581 06be 75       		.byte	0x75
+ 1582 06bf 00       		.sleb128 0
+ 1583 06c0 00       		.byte	0
+ 1584 06c1 00       		.byte	0
+ 1585 06c2 19       		.uleb128 0x19
+ 1586 06c3 F3040000 		.4byte	.LASF72
+ 1587 06c7 01       		.byte	0x1
+ 1588 06c8 2401     		.2byte	0x124
+ 1589 06ca 8C000000 		.4byte	0x8c
+ 1590 06ce 00000000 		.4byte	.LFB3
+ 1591 06d2 3C000000 		.4byte	.LFE3-.LFB3
+ 1592 06d6 01       		.uleb128 0x1
+ 1593 06d7 9C       		.byte	0x9c
+ 1594 06d8 83070000 		.4byte	0x783
+ 1595 06dc 1A       		.uleb128 0x1a
+ 1596 06dd 9F010000 		.4byte	.LASF65
+ 1597 06e1 01       		.byte	0x1
+ 1598 06e2 2401     		.2byte	0x124
+ 1599 06e4 43030000 		.4byte	0x343
+ 1600 06e8 60030000 		.4byte	.LLST15
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 38
+
+
+ 1601 06ec 1B       		.uleb128 0x1b
+ 1602 06ed 6D736700 		.ascii	"msg\000"
+ 1603 06f1 01       		.byte	0x1
+ 1604 06f2 2401     		.2byte	0x124
+ 1605 06f4 8C000000 		.4byte	0x8c
+ 1606 06f8 B8030000 		.4byte	.LLST16
+ 1607 06fc 1A       		.uleb128 0x1a
+ 1608 06fd AD010000 		.4byte	.LASF70
+ 1609 0701 01       		.byte	0x1
+ 1610 0702 2401     		.2byte	0x124
+ 1611 0704 8C000000 		.4byte	0x8c
+ 1612 0708 0B040000 		.4byte	.LLST17
+ 1613 070c 1A       		.uleb128 0x1a
+ 1614 070d 42000000 		.4byte	.LASF71
+ 1615 0711 01       		.byte	0x1
+ 1616 0712 2401     		.2byte	0x124
+ 1617 0714 AD000000 		.4byte	0xad
+ 1618 0718 5E040000 		.4byte	.LLST18
+ 1619 071c 15       		.uleb128 0x15
+ 1620 071d 0E000000 		.4byte	.LVL62
+ 1621 0721 9D090000 		.4byte	0x99d
+ 1622 0725 39070000 		.4byte	0x739
+ 1623 0729 16       		.uleb128 0x16
+ 1624 072a 01       		.uleb128 0x1
+ 1625 072b 50       		.byte	0x50
+ 1626 072c 02       		.uleb128 0x2
+ 1627 072d 74       		.byte	0x74
+ 1628 072e 00       		.sleb128 0
+ 1629 072f 16       		.uleb128 0x16
+ 1630 0730 01       		.uleb128 0x1
+ 1631 0731 51       		.byte	0x51
+ 1632 0732 05       		.uleb128 0x5
+ 1633 0733 03       		.byte	0x3
+ 1634 0734 28000000 		.4byte	.LANCHOR1+40
+ 1635 0738 00       		.byte	0
+ 1636 0739 18       		.uleb128 0x18
+ 1637 073a 1A000000 		.4byte	.LVL64
+ 1638 073e A9090000 		.4byte	0x9a9
+ 1639 0742 15       		.uleb128 0x15
+ 1640 0743 22000000 		.4byte	.LVL65
+ 1641 0747 85090000 		.4byte	0x985
+ 1642 074b 5F070000 		.4byte	0x75f
+ 1643 074f 16       		.uleb128 0x16
+ 1644 0750 01       		.uleb128 0x1
+ 1645 0751 50       		.byte	0x50
+ 1646 0752 02       		.uleb128 0x2
+ 1647 0753 74       		.byte	0x74
+ 1648 0754 00       		.sleb128 0
+ 1649 0755 16       		.uleb128 0x16
+ 1650 0756 01       		.uleb128 0x1
+ 1651 0757 51       		.byte	0x51
+ 1652 0758 05       		.uleb128 0x5
+ 1653 0759 03       		.byte	0x3
+ 1654 075a 40000000 		.4byte	.LANCHOR1+64
+ 1655 075e 00       		.byte	0
+ 1656 075f 15       		.uleb128 0x15
+ 1657 0760 2A000000 		.4byte	.LVL66
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 39
+
+
+ 1658 0764 DE030000 		.4byte	0x3de
+ 1659 0768 79070000 		.4byte	0x779
+ 1660 076c 16       		.uleb128 0x16
+ 1661 076d 01       		.uleb128 0x1
+ 1662 076e 50       		.byte	0x50
+ 1663 076f 02       		.uleb128 0x2
+ 1664 0770 74       		.byte	0x74
+ 1665 0771 00       		.sleb128 0
+ 1666 0772 16       		.uleb128 0x16
+ 1667 0773 01       		.uleb128 0x1
+ 1668 0774 51       		.byte	0x51
+ 1669 0775 02       		.uleb128 0x2
+ 1670 0776 08       		.byte	0x8
+ 1671 0777 74       		.byte	0x74
+ 1672 0778 00       		.byte	0
+ 1673 0779 18       		.uleb128 0x18
+ 1674 077a 32000000 		.4byte	.LVL68
+ 1675 077e E5040000 		.4byte	0x4e5
+ 1676 0782 00       		.byte	0
+ 1677 0783 19       		.uleb128 0x19
+ 1678 0784 8B040000 		.4byte	.LASF73
+ 1679 0788 01       		.byte	0x1
+ 1680 0789 BD01     		.2byte	0x1bd
+ 1681 078b 8C000000 		.4byte	0x8c
+ 1682 078f 00000000 		.4byte	.LFB4
+ 1683 0793 3C000000 		.4byte	.LFE4-.LFB4
+ 1684 0797 01       		.uleb128 0x1
+ 1685 0798 9C       		.byte	0x9c
+ 1686 0799 44080000 		.4byte	0x844
+ 1687 079d 1A       		.uleb128 0x1a
+ 1688 079e 9F010000 		.4byte	.LASF65
+ 1689 07a2 01       		.byte	0x1
+ 1690 07a3 BD01     		.2byte	0x1bd
+ 1691 07a5 43030000 		.4byte	0x343
+ 1692 07a9 B1040000 		.4byte	.LLST19
+ 1693 07ad 1B       		.uleb128 0x1b
+ 1694 07ae 6D736700 		.ascii	"msg\000"
+ 1695 07b2 01       		.byte	0x1
+ 1696 07b3 BD01     		.2byte	0x1bd
+ 1697 07b5 8C000000 		.4byte	0x8c
+ 1698 07b9 09050000 		.4byte	.LLST20
+ 1699 07bd 1A       		.uleb128 0x1a
+ 1700 07be AD010000 		.4byte	.LASF70
+ 1701 07c2 01       		.byte	0x1
+ 1702 07c3 BD01     		.2byte	0x1bd
+ 1703 07c5 8C000000 		.4byte	0x8c
+ 1704 07c9 5C050000 		.4byte	.LLST21
+ 1705 07cd 1A       		.uleb128 0x1a
+ 1706 07ce 42000000 		.4byte	.LASF71
+ 1707 07d2 01       		.byte	0x1
+ 1708 07d3 BD01     		.2byte	0x1bd
+ 1709 07d5 AD000000 		.4byte	0xad
+ 1710 07d9 AF050000 		.4byte	.LLST22
+ 1711 07dd 15       		.uleb128 0x15
+ 1712 07de 0E000000 		.4byte	.LVL72
+ 1713 07e2 9D090000 		.4byte	0x99d
+ 1714 07e6 FA070000 		.4byte	0x7fa
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 40
+
+
+ 1715 07ea 16       		.uleb128 0x16
+ 1716 07eb 01       		.uleb128 0x1
+ 1717 07ec 50       		.byte	0x50
+ 1718 07ed 02       		.uleb128 0x2
+ 1719 07ee 74       		.byte	0x74
+ 1720 07ef 00       		.sleb128 0
+ 1721 07f0 16       		.uleb128 0x16
+ 1722 07f1 01       		.uleb128 0x1
+ 1723 07f2 51       		.byte	0x51
+ 1724 07f3 05       		.uleb128 0x5
+ 1725 07f4 03       		.byte	0x3
+ 1726 07f5 74000000 		.4byte	.LANCHOR1+116
+ 1727 07f9 00       		.byte	0
+ 1728 07fa 18       		.uleb128 0x18
+ 1729 07fb 1A000000 		.4byte	.LVL74
+ 1730 07ff A9090000 		.4byte	0x9a9
+ 1731 0803 15       		.uleb128 0x15
+ 1732 0804 22000000 		.4byte	.LVL75
+ 1733 0808 85090000 		.4byte	0x985
+ 1734 080c 20080000 		.4byte	0x820
+ 1735 0810 16       		.uleb128 0x16
+ 1736 0811 01       		.uleb128 0x1
+ 1737 0812 50       		.byte	0x50
+ 1738 0813 02       		.uleb128 0x2
+ 1739 0814 74       		.byte	0x74
+ 1740 0815 00       		.sleb128 0
+ 1741 0816 16       		.uleb128 0x16
+ 1742 0817 01       		.uleb128 0x1
+ 1743 0818 51       		.byte	0x51
+ 1744 0819 05       		.uleb128 0x5
+ 1745 081a 03       		.byte	0x3
+ 1746 081b 8C000000 		.4byte	.LANCHOR1+140
+ 1747 081f 00       		.byte	0
+ 1748 0820 15       		.uleb128 0x15
+ 1749 0821 2A000000 		.4byte	.LVL76
+ 1750 0825 DE030000 		.4byte	0x3de
+ 1751 0829 3A080000 		.4byte	0x83a
+ 1752 082d 16       		.uleb128 0x16
+ 1753 082e 01       		.uleb128 0x1
+ 1754 082f 50       		.byte	0x50
+ 1755 0830 02       		.uleb128 0x2
+ 1756 0831 74       		.byte	0x74
+ 1757 0832 00       		.sleb128 0
+ 1758 0833 16       		.uleb128 0x16
+ 1759 0834 01       		.uleb128 0x1
+ 1760 0835 51       		.byte	0x51
+ 1761 0836 02       		.uleb128 0x2
+ 1762 0837 08       		.byte	0x8
+ 1763 0838 64       		.byte	0x64
+ 1764 0839 00       		.byte	0
+ 1765 083a 18       		.uleb128 0x18
+ 1766 083b 32000000 		.4byte	.LVL78
+ 1767 083f E5040000 		.4byte	0x4e5
+ 1768 0843 00       		.byte	0
+ 1769 0844 1C       		.uleb128 0x1c
+ 1770 0845 85030000 		.4byte	0x385
+ 1771 0849 54080000 		.4byte	0x854
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 41
+
+
+ 1772 084d 1D       		.uleb128 0x1d
+ 1773 084e 54080000 		.4byte	0x854
+ 1774 0852 08       		.byte	0x8
+ 1775 0853 00       		.byte	0
+ 1776 0854 02       		.uleb128 0x2
+ 1777 0855 04       		.byte	0x4
+ 1778 0856 07       		.byte	0x7
+ 1779 0857 9C000000 		.4byte	.LASF74
+ 1780 085b 1E       		.uleb128 0x1e
+ 1781 085c B7000000 		.4byte	.LASF75
+ 1782 0860 01       		.byte	0x1
+ 1783 0861 30       		.byte	0x30
+ 1784 0862 6C080000 		.4byte	0x86c
+ 1785 0866 05       		.uleb128 0x5
+ 1786 0867 03       		.byte	0x3
+ 1787 0868 00000000 		.4byte	u8x8_d_st7528_powersave0_seq
+ 1788 086c 0E       		.uleb128 0xe
+ 1789 086d 44080000 		.4byte	0x844
+ 1790 0871 1E       		.uleb128 0x1e
+ 1791 0872 22030000 		.4byte	.LASF76
+ 1792 0876 01       		.byte	0x1
+ 1793 0877 38       		.byte	0x38
+ 1794 0878 82080000 		.4byte	0x882
+ 1795 087c 05       		.uleb128 0x5
+ 1796 087d 03       		.byte	0x3
+ 1797 087e 0C000000 		.4byte	u8x8_d_st7528_powersave1_seq
+ 1798 0882 0E       		.uleb128 0xe
+ 1799 0883 44080000 		.4byte	0x844
+ 1800 0887 1C       		.uleb128 0x1c
+ 1801 0888 85030000 		.4byte	0x385
+ 1802 088c 97080000 		.4byte	0x897
+ 1803 0890 1D       		.uleb128 0x1d
+ 1804 0891 54080000 		.4byte	0x854
+ 1805 0895 06       		.byte	0x6
+ 1806 0896 00       		.byte	0
+ 1807 0897 1E       		.uleb128 0x1e
+ 1808 0898 70020000 		.4byte	.LASF77
+ 1809 089c 01       		.byte	0x1
+ 1810 089d 40       		.byte	0x40
+ 1811 089e A8080000 		.4byte	0x8a8
+ 1812 08a2 05       		.uleb128 0x5
+ 1813 08a3 03       		.byte	0x3
+ 1814 08a4 18000000 		.4byte	u8x8_d_st7528_flip0_seq
+ 1815 08a8 0E       		.uleb128 0xe
+ 1816 08a9 87080000 		.4byte	0x887
+ 1817 08ad 1E       		.uleb128 0x1e
+ 1818 08ae 28050000 		.4byte	.LASF78
+ 1819 08b2 01       		.byte	0x1
+ 1820 08b3 48       		.byte	0x48
+ 1821 08b4 BE080000 		.4byte	0x8be
+ 1822 08b8 05       		.uleb128 0x5
+ 1823 08b9 03       		.byte	0x3
+ 1824 08ba 20000000 		.4byte	u8x8_d_st7528_flip1_seq
+ 1825 08be 0E       		.uleb128 0xe
+ 1826 08bf 87080000 		.4byte	0x887
+ 1827 08c3 1C       		.uleb128 0x1c
+ 1828 08c4 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 42
+
+
+ 1829 08c8 D3080000 		.4byte	0x8d3
+ 1830 08cc 1D       		.uleb128 0x1d
+ 1831 08cd 54080000 		.4byte	0x854
+ 1832 08d1 1F       		.byte	0x1f
+ 1833 08d2 00       		.byte	0
+ 1834 08d3 1E       		.uleb128 0x1e
+ 1835 08d4 8A050000 		.4byte	.LASF79
+ 1836 08d8 01       		.byte	0x1
+ 1837 08d9 58       		.byte	0x58
+ 1838 08da C3080000 		.4byte	0x8c3
+ 1839 08de 05       		.uleb128 0x5
+ 1840 08df 03       		.byte	0x3
+ 1841 08e0 00000000 		.4byte	u8x8_st7528_8to32_dest_buf
+ 1842 08e4 1C       		.uleb128 0x1c
+ 1843 08e5 85030000 		.4byte	0x385
+ 1844 08e9 F4080000 		.4byte	0x8f4
+ 1845 08ed 1D       		.uleb128 0x1d
+ 1846 08ee 54080000 		.4byte	0x854
+ 1847 08f2 32       		.byte	0x32
+ 1848 08f3 00       		.byte	0
+ 1849 08f4 1E       		.uleb128 0x1e
+ 1850 08f5 68040000 		.4byte	.LASF80
+ 1851 08f9 01       		.byte	0x1
+ 1852 08fa D0       		.byte	0xd0
+ 1853 08fb 05090000 		.4byte	0x905
+ 1854 08ff 05       		.uleb128 0x5
+ 1855 0900 03       		.byte	0x3
+ 1856 0901 40000000 		.4byte	u8x8_d_st7528_nhd_c160100_init_seq
+ 1857 0905 0E       		.uleb128 0xe
+ 1858 0906 E4080000 		.4byte	0x8e4
+ 1859 090a 1F       		.uleb128 0x1f
+ 1860 090b D4000000 		.4byte	.LASF81
+ 1861 090f 01       		.byte	0x1
+ 1862 0910 0B01     		.2byte	0x10b
+ 1863 0912 7A030000 		.4byte	0x37a
+ 1864 0916 05       		.uleb128 0x5
+ 1865 0917 03       		.byte	0x3
+ 1866 0918 28000000 		.4byte	u8x8_st7528_160x100_display_info
+ 1867 091c 1C       		.uleb128 0x1c
+ 1868 091d 85030000 		.4byte	0x385
+ 1869 0921 2C090000 		.4byte	0x92c
+ 1870 0925 1D       		.uleb128 0x1d
+ 1871 0926 54080000 		.4byte	0x854
+ 1872 092a 2E       		.byte	0x2e
+ 1873 092b 00       		.byte	0
+ 1874 092c 1F       		.uleb128 0x1f
+ 1875 092d B0020000 		.4byte	.LASF82
+ 1876 0931 01       		.byte	0x1
+ 1877 0932 8601     		.2byte	0x186
+ 1878 0934 3E090000 		.4byte	0x93e
+ 1879 0938 05       		.uleb128 0x5
+ 1880 0939 03       		.byte	0x3
+ 1881 093a 8C000000 		.4byte	u8x8_d_st7528_erc16064_init_seq
+ 1882 093e 0E       		.uleb128 0xe
+ 1883 093f 1C090000 		.4byte	0x91c
+ 1884 0943 1F       		.uleb128 0x1f
+ 1885 0944 88020000 		.4byte	.LASF83
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 43
+
+
+ 1886 0948 01       		.byte	0x1
+ 1887 0949 A301     		.2byte	0x1a3
+ 1888 094b 7A030000 		.4byte	0x37a
+ 1889 094f 05       		.uleb128 0x5
+ 1890 0950 03       		.byte	0x3
+ 1891 0951 74000000 		.4byte	u8x8_st7528_erc16064_display_info
+ 1892 0955 20       		.uleb128 0x20
+ 1893 0956 B9030000 		.4byte	.LASF84
+ 1894 095a B9030000 		.4byte	.LASF84
+ 1895 095e 04       		.byte	0x4
+ 1896 095f 6B02     		.2byte	0x26b
+ 1897 0961 20       		.uleb128 0x20
+ 1898 0962 3B020000 		.4byte	.LASF85
+ 1899 0966 3B020000 		.4byte	.LASF85
+ 1900 096a 04       		.byte	0x4
+ 1901 096b 6702     		.2byte	0x267
+ 1902 096d 20       		.uleb128 0x20
+ 1903 096e 3D040000 		.4byte	.LASF86
+ 1904 0972 3D040000 		.4byte	.LASF86
+ 1905 0976 04       		.byte	0x4
+ 1906 0977 6802     		.2byte	0x268
+ 1907 0979 20       		.uleb128 0x20
+ 1908 097a 1E010000 		.4byte	.LASF87
+ 1909 097e 1E010000 		.4byte	.LASF87
+ 1910 0982 04       		.byte	0x4
+ 1911 0983 6C02     		.2byte	0x26c
+ 1912 0985 20       		.uleb128 0x20
+ 1913 0986 CB040000 		.4byte	.LASF88
+ 1914 098a CB040000 		.4byte	.LASF88
+ 1915 098e 04       		.byte	0x4
+ 1916 098f 8A02     		.2byte	0x28a
+ 1917 0991 20       		.uleb128 0x20
+ 1918 0992 B5010000 		.4byte	.LASF89
+ 1919 0996 B5010000 		.4byte	.LASF89
+ 1920 099a 04       		.byte	0x4
+ 1921 099b 6A02     		.2byte	0x26a
+ 1922 099d 20       		.uleb128 0x20
+ 1923 099e CE050000 		.4byte	.LASF90
+ 1924 09a2 CE050000 		.4byte	.LASF90
+ 1925 09a6 04       		.byte	0x4
+ 1926 09a7 AE01     		.2byte	0x1ae
+ 1927 09a9 20       		.uleb128 0x20
+ 1928 09aa 4C020000 		.4byte	.LASF91
+ 1929 09ae 4C020000 		.4byte	.LASF91
+ 1930 09b2 04       		.byte	0x4
+ 1931 09b3 AF01     		.2byte	0x1af
+ 1932 09b5 00       		.byte	0
+ 1933              		.section	.debug_abbrev,"",%progbits
+ 1934              	.Ldebug_abbrev0:
+ 1935 0000 01       		.uleb128 0x1
+ 1936 0001 11       		.uleb128 0x11
+ 1937 0002 01       		.byte	0x1
+ 1938 0003 25       		.uleb128 0x25
+ 1939 0004 0E       		.uleb128 0xe
+ 1940 0005 13       		.uleb128 0x13
+ 1941 0006 0B       		.uleb128 0xb
+ 1942 0007 03       		.uleb128 0x3
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 44
+
+
+ 1943 0008 0E       		.uleb128 0xe
+ 1944 0009 1B       		.uleb128 0x1b
+ 1945 000a 0E       		.uleb128 0xe
+ 1946 000b 55       		.uleb128 0x55
+ 1947 000c 17       		.uleb128 0x17
+ 1948 000d 11       		.uleb128 0x11
+ 1949 000e 01       		.uleb128 0x1
+ 1950 000f 10       		.uleb128 0x10
+ 1951 0010 17       		.uleb128 0x17
+ 1952 0011 00       		.byte	0
+ 1953 0012 00       		.byte	0
+ 1954 0013 02       		.uleb128 0x2
+ 1955 0014 24       		.uleb128 0x24
+ 1956 0015 00       		.byte	0
+ 1957 0016 0B       		.uleb128 0xb
+ 1958 0017 0B       		.uleb128 0xb
+ 1959 0018 3E       		.uleb128 0x3e
+ 1960 0019 0B       		.uleb128 0xb
+ 1961 001a 03       		.uleb128 0x3
+ 1962 001b 0E       		.uleb128 0xe
+ 1963 001c 00       		.byte	0
+ 1964 001d 00       		.byte	0
+ 1965 001e 03       		.uleb128 0x3
+ 1966 001f 16       		.uleb128 0x16
+ 1967 0020 00       		.byte	0
+ 1968 0021 03       		.uleb128 0x3
+ 1969 0022 0E       		.uleb128 0xe
+ 1970 0023 3A       		.uleb128 0x3a
+ 1971 0024 0B       		.uleb128 0xb
+ 1972 0025 3B       		.uleb128 0x3b
+ 1973 0026 0B       		.uleb128 0xb
+ 1974 0027 49       		.uleb128 0x49
+ 1975 0028 13       		.uleb128 0x13
+ 1976 0029 00       		.byte	0
+ 1977 002a 00       		.byte	0
+ 1978 002b 04       		.uleb128 0x4
+ 1979 002c 24       		.uleb128 0x24
+ 1980 002d 00       		.byte	0
+ 1981 002e 0B       		.uleb128 0xb
+ 1982 002f 0B       		.uleb128 0xb
+ 1983 0030 3E       		.uleb128 0x3e
+ 1984 0031 0B       		.uleb128 0xb
+ 1985 0032 03       		.uleb128 0x3
+ 1986 0033 08       		.uleb128 0x8
+ 1987 0034 00       		.byte	0
+ 1988 0035 00       		.byte	0
+ 1989 0036 05       		.uleb128 0x5
+ 1990 0037 0F       		.uleb128 0xf
+ 1991 0038 00       		.byte	0
+ 1992 0039 0B       		.uleb128 0xb
+ 1993 003a 0B       		.uleb128 0xb
+ 1994 003b 00       		.byte	0
+ 1995 003c 00       		.byte	0
+ 1996 003d 06       		.uleb128 0x6
+ 1997 003e 13       		.uleb128 0x13
+ 1998 003f 01       		.byte	0x1
+ 1999 0040 03       		.uleb128 0x3
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 45
+
+
+ 2000 0041 0E       		.uleb128 0xe
+ 2001 0042 0B       		.uleb128 0xb
+ 2002 0043 0B       		.uleb128 0xb
+ 2003 0044 3A       		.uleb128 0x3a
+ 2004 0045 0B       		.uleb128 0xb
+ 2005 0046 3B       		.uleb128 0x3b
+ 2006 0047 05       		.uleb128 0x5
+ 2007 0048 01       		.uleb128 0x1
+ 2008 0049 13       		.uleb128 0x13
+ 2009 004a 00       		.byte	0
+ 2010 004b 00       		.byte	0
+ 2011 004c 07       		.uleb128 0x7
+ 2012 004d 0D       		.uleb128 0xd
+ 2013 004e 00       		.byte	0
+ 2014 004f 03       		.uleb128 0x3
+ 2015 0050 0E       		.uleb128 0xe
+ 2016 0051 3A       		.uleb128 0x3a
+ 2017 0052 0B       		.uleb128 0xb
+ 2018 0053 3B       		.uleb128 0x3b
+ 2019 0054 05       		.uleb128 0x5
+ 2020 0055 49       		.uleb128 0x49
+ 2021 0056 13       		.uleb128 0x13
+ 2022 0057 38       		.uleb128 0x38
+ 2023 0058 0B       		.uleb128 0xb
+ 2024 0059 00       		.byte	0
+ 2025 005a 00       		.byte	0
+ 2026 005b 08       		.uleb128 0x8
+ 2027 005c 13       		.uleb128 0x13
+ 2028 005d 01       		.byte	0x1
+ 2029 005e 03       		.uleb128 0x3
+ 2030 005f 0E       		.uleb128 0xe
+ 2031 0060 0B       		.uleb128 0xb
+ 2032 0061 0B       		.uleb128 0xb
+ 2033 0062 3A       		.uleb128 0x3a
+ 2034 0063 0B       		.uleb128 0xb
+ 2035 0064 3B       		.uleb128 0x3b
+ 2036 0065 0B       		.uleb128 0xb
+ 2037 0066 01       		.uleb128 0x1
+ 2038 0067 13       		.uleb128 0x13
+ 2039 0068 00       		.byte	0
+ 2040 0069 00       		.byte	0
+ 2041 006a 09       		.uleb128 0x9
+ 2042 006b 0D       		.uleb128 0xd
+ 2043 006c 00       		.byte	0
+ 2044 006d 03       		.uleb128 0x3
+ 2045 006e 0E       		.uleb128 0xe
+ 2046 006f 3A       		.uleb128 0x3a
+ 2047 0070 0B       		.uleb128 0xb
+ 2048 0071 3B       		.uleb128 0x3b
+ 2049 0072 0B       		.uleb128 0xb
+ 2050 0073 49       		.uleb128 0x49
+ 2051 0074 13       		.uleb128 0x13
+ 2052 0075 38       		.uleb128 0x38
+ 2053 0076 0B       		.uleb128 0xb
+ 2054 0077 00       		.byte	0
+ 2055 0078 00       		.byte	0
+ 2056 0079 0A       		.uleb128 0xa
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 46
+
+
+ 2057 007a 0D       		.uleb128 0xd
+ 2058 007b 00       		.byte	0
+ 2059 007c 03       		.uleb128 0x3
+ 2060 007d 08       		.uleb128 0x8
+ 2061 007e 3A       		.uleb128 0x3a
+ 2062 007f 0B       		.uleb128 0xb
+ 2063 0080 3B       		.uleb128 0x3b
+ 2064 0081 0B       		.uleb128 0xb
+ 2065 0082 49       		.uleb128 0x49
+ 2066 0083 13       		.uleb128 0x13
+ 2067 0084 38       		.uleb128 0x38
+ 2068 0085 0B       		.uleb128 0xb
+ 2069 0086 00       		.byte	0
+ 2070 0087 00       		.byte	0
+ 2071 0088 0B       		.uleb128 0xb
+ 2072 0089 0F       		.uleb128 0xf
+ 2073 008a 00       		.byte	0
+ 2074 008b 0B       		.uleb128 0xb
+ 2075 008c 0B       		.uleb128 0xb
+ 2076 008d 49       		.uleb128 0x49
+ 2077 008e 13       		.uleb128 0x13
+ 2078 008f 00       		.byte	0
+ 2079 0090 00       		.byte	0
+ 2080 0091 0C       		.uleb128 0xc
+ 2081 0092 15       		.uleb128 0x15
+ 2082 0093 01       		.byte	0x1
+ 2083 0094 27       		.uleb128 0x27
+ 2084 0095 19       		.uleb128 0x19
+ 2085 0096 49       		.uleb128 0x49
+ 2086 0097 13       		.uleb128 0x13
+ 2087 0098 01       		.uleb128 0x1
+ 2088 0099 13       		.uleb128 0x13
+ 2089 009a 00       		.byte	0
+ 2090 009b 00       		.byte	0
+ 2091 009c 0D       		.uleb128 0xd
+ 2092 009d 05       		.uleb128 0x5
+ 2093 009e 00       		.byte	0
+ 2094 009f 49       		.uleb128 0x49
+ 2095 00a0 13       		.uleb128 0x13
+ 2096 00a1 00       		.byte	0
+ 2097 00a2 00       		.byte	0
+ 2098 00a3 0E       		.uleb128 0xe
+ 2099 00a4 26       		.uleb128 0x26
+ 2100 00a5 00       		.byte	0
+ 2101 00a6 49       		.uleb128 0x49
+ 2102 00a7 13       		.uleb128 0x13
+ 2103 00a8 00       		.byte	0
+ 2104 00a9 00       		.byte	0
+ 2105 00aa 0F       		.uleb128 0xf
+ 2106 00ab 2E       		.uleb128 0x2e
+ 2107 00ac 01       		.byte	0x1
+ 2108 00ad 03       		.uleb128 0x3
+ 2109 00ae 0E       		.uleb128 0xe
+ 2110 00af 3A       		.uleb128 0x3a
+ 2111 00b0 0B       		.uleb128 0xb
+ 2112 00b1 3B       		.uleb128 0x3b
+ 2113 00b2 0B       		.uleb128 0xb
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 47
+
+
+ 2114 00b3 27       		.uleb128 0x27
+ 2115 00b4 19       		.uleb128 0x19
+ 2116 00b5 49       		.uleb128 0x49
+ 2117 00b6 13       		.uleb128 0x13
+ 2118 00b7 11       		.uleb128 0x11
+ 2119 00b8 01       		.uleb128 0x1
+ 2120 00b9 12       		.uleb128 0x12
+ 2121 00ba 06       		.uleb128 0x6
+ 2122 00bb 40       		.uleb128 0x40
+ 2123 00bc 18       		.uleb128 0x18
+ 2124 00bd 9742     		.uleb128 0x2117
+ 2125 00bf 19       		.uleb128 0x19
+ 2126 00c0 01       		.uleb128 0x1
+ 2127 00c1 13       		.uleb128 0x13
+ 2128 00c2 00       		.byte	0
+ 2129 00c3 00       		.byte	0
+ 2130 00c4 10       		.uleb128 0x10
+ 2131 00c5 05       		.uleb128 0x5
+ 2132 00c6 00       		.byte	0
+ 2133 00c7 03       		.uleb128 0x3
+ 2134 00c8 0E       		.uleb128 0xe
+ 2135 00c9 3A       		.uleb128 0x3a
+ 2136 00ca 0B       		.uleb128 0xb
+ 2137 00cb 3B       		.uleb128 0x3b
+ 2138 00cc 0B       		.uleb128 0xb
+ 2139 00cd 49       		.uleb128 0x49
+ 2140 00ce 13       		.uleb128 0x13
+ 2141 00cf 02       		.uleb128 0x2
+ 2142 00d0 17       		.uleb128 0x17
+ 2143 00d1 00       		.byte	0
+ 2144 00d2 00       		.byte	0
+ 2145 00d3 11       		.uleb128 0x11
+ 2146 00d4 05       		.uleb128 0x5
+ 2147 00d5 00       		.byte	0
+ 2148 00d6 03       		.uleb128 0x3
+ 2149 00d7 08       		.uleb128 0x8
+ 2150 00d8 3A       		.uleb128 0x3a
+ 2151 00d9 0B       		.uleb128 0xb
+ 2152 00da 3B       		.uleb128 0x3b
+ 2153 00db 0B       		.uleb128 0xb
+ 2154 00dc 49       		.uleb128 0x49
+ 2155 00dd 13       		.uleb128 0x13
+ 2156 00de 02       		.uleb128 0x2
+ 2157 00df 17       		.uleb128 0x17
+ 2158 00e0 00       		.byte	0
+ 2159 00e1 00       		.byte	0
+ 2160 00e2 12       		.uleb128 0x12
+ 2161 00e3 34       		.uleb128 0x34
+ 2162 00e4 00       		.byte	0
+ 2163 00e5 03       		.uleb128 0x3
+ 2164 00e6 08       		.uleb128 0x8
+ 2165 00e7 3A       		.uleb128 0x3a
+ 2166 00e8 0B       		.uleb128 0xb
+ 2167 00e9 3B       		.uleb128 0x3b
+ 2168 00ea 0B       		.uleb128 0xb
+ 2169 00eb 49       		.uleb128 0x49
+ 2170 00ec 13       		.uleb128 0x13
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 48
+
+
+ 2171 00ed 02       		.uleb128 0x2
+ 2172 00ee 17       		.uleb128 0x17
+ 2173 00ef 00       		.byte	0
+ 2174 00f0 00       		.byte	0
+ 2175 00f1 13       		.uleb128 0x13
+ 2176 00f2 34       		.uleb128 0x34
+ 2177 00f3 00       		.byte	0
+ 2178 00f4 03       		.uleb128 0x3
+ 2179 00f5 0E       		.uleb128 0xe
+ 2180 00f6 3A       		.uleb128 0x3a
+ 2181 00f7 0B       		.uleb128 0xb
+ 2182 00f8 3B       		.uleb128 0x3b
+ 2183 00f9 0B       		.uleb128 0xb
+ 2184 00fa 49       		.uleb128 0x49
+ 2185 00fb 13       		.uleb128 0x13
+ 2186 00fc 02       		.uleb128 0x2
+ 2187 00fd 17       		.uleb128 0x17
+ 2188 00fe 00       		.byte	0
+ 2189 00ff 00       		.byte	0
+ 2190 0100 14       		.uleb128 0x14
+ 2191 0101 2E       		.uleb128 0x2e
+ 2192 0102 01       		.byte	0x1
+ 2193 0103 03       		.uleb128 0x3
+ 2194 0104 0E       		.uleb128 0xe
+ 2195 0105 3A       		.uleb128 0x3a
+ 2196 0106 0B       		.uleb128 0xb
+ 2197 0107 3B       		.uleb128 0x3b
+ 2198 0108 0B       		.uleb128 0xb
+ 2199 0109 27       		.uleb128 0x27
+ 2200 010a 19       		.uleb128 0x19
+ 2201 010b 11       		.uleb128 0x11
+ 2202 010c 01       		.uleb128 0x1
+ 2203 010d 12       		.uleb128 0x12
+ 2204 010e 06       		.uleb128 0x6
+ 2205 010f 40       		.uleb128 0x40
+ 2206 0110 18       		.uleb128 0x18
+ 2207 0111 9742     		.uleb128 0x2117
+ 2208 0113 19       		.uleb128 0x19
+ 2209 0114 01       		.uleb128 0x1
+ 2210 0115 13       		.uleb128 0x13
+ 2211 0116 00       		.byte	0
+ 2212 0117 00       		.byte	0
+ 2213 0118 15       		.uleb128 0x15
+ 2214 0119 898201   		.uleb128 0x4109
+ 2215 011c 01       		.byte	0x1
+ 2216 011d 11       		.uleb128 0x11
+ 2217 011e 01       		.uleb128 0x1
+ 2218 011f 31       		.uleb128 0x31
+ 2219 0120 13       		.uleb128 0x13
+ 2220 0121 01       		.uleb128 0x1
+ 2221 0122 13       		.uleb128 0x13
+ 2222 0123 00       		.byte	0
+ 2223 0124 00       		.byte	0
+ 2224 0125 16       		.uleb128 0x16
+ 2225 0126 8A8201   		.uleb128 0x410a
+ 2226 0129 00       		.byte	0
+ 2227 012a 02       		.uleb128 0x2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 49
+
+
+ 2228 012b 18       		.uleb128 0x18
+ 2229 012c 9142     		.uleb128 0x2111
+ 2230 012e 18       		.uleb128 0x18
+ 2231 012f 00       		.byte	0
+ 2232 0130 00       		.byte	0
+ 2233 0131 17       		.uleb128 0x17
+ 2234 0132 898201   		.uleb128 0x4109
+ 2235 0135 01       		.byte	0x1
+ 2236 0136 11       		.uleb128 0x11
+ 2237 0137 01       		.uleb128 0x1
+ 2238 0138 31       		.uleb128 0x31
+ 2239 0139 13       		.uleb128 0x13
+ 2240 013a 00       		.byte	0
+ 2241 013b 00       		.byte	0
+ 2242 013c 18       		.uleb128 0x18
+ 2243 013d 898201   		.uleb128 0x4109
+ 2244 0140 00       		.byte	0
+ 2245 0141 11       		.uleb128 0x11
+ 2246 0142 01       		.uleb128 0x1
+ 2247 0143 31       		.uleb128 0x31
+ 2248 0144 13       		.uleb128 0x13
+ 2249 0145 00       		.byte	0
+ 2250 0146 00       		.byte	0
+ 2251 0147 19       		.uleb128 0x19
+ 2252 0148 2E       		.uleb128 0x2e
+ 2253 0149 01       		.byte	0x1
+ 2254 014a 3F       		.uleb128 0x3f
+ 2255 014b 19       		.uleb128 0x19
+ 2256 014c 03       		.uleb128 0x3
+ 2257 014d 0E       		.uleb128 0xe
+ 2258 014e 3A       		.uleb128 0x3a
+ 2259 014f 0B       		.uleb128 0xb
+ 2260 0150 3B       		.uleb128 0x3b
+ 2261 0151 05       		.uleb128 0x5
+ 2262 0152 27       		.uleb128 0x27
+ 2263 0153 19       		.uleb128 0x19
+ 2264 0154 49       		.uleb128 0x49
+ 2265 0155 13       		.uleb128 0x13
+ 2266 0156 11       		.uleb128 0x11
+ 2267 0157 01       		.uleb128 0x1
+ 2268 0158 12       		.uleb128 0x12
+ 2269 0159 06       		.uleb128 0x6
+ 2270 015a 40       		.uleb128 0x40
+ 2271 015b 18       		.uleb128 0x18
+ 2272 015c 9742     		.uleb128 0x2117
+ 2273 015e 19       		.uleb128 0x19
+ 2274 015f 01       		.uleb128 0x1
+ 2275 0160 13       		.uleb128 0x13
+ 2276 0161 00       		.byte	0
+ 2277 0162 00       		.byte	0
+ 2278 0163 1A       		.uleb128 0x1a
+ 2279 0164 05       		.uleb128 0x5
+ 2280 0165 00       		.byte	0
+ 2281 0166 03       		.uleb128 0x3
+ 2282 0167 0E       		.uleb128 0xe
+ 2283 0168 3A       		.uleb128 0x3a
+ 2284 0169 0B       		.uleb128 0xb
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 50
+
+
+ 2285 016a 3B       		.uleb128 0x3b
+ 2286 016b 05       		.uleb128 0x5
+ 2287 016c 49       		.uleb128 0x49
+ 2288 016d 13       		.uleb128 0x13
+ 2289 016e 02       		.uleb128 0x2
+ 2290 016f 17       		.uleb128 0x17
+ 2291 0170 00       		.byte	0
+ 2292 0171 00       		.byte	0
+ 2293 0172 1B       		.uleb128 0x1b
+ 2294 0173 05       		.uleb128 0x5
+ 2295 0174 00       		.byte	0
+ 2296 0175 03       		.uleb128 0x3
+ 2297 0176 08       		.uleb128 0x8
+ 2298 0177 3A       		.uleb128 0x3a
+ 2299 0178 0B       		.uleb128 0xb
+ 2300 0179 3B       		.uleb128 0x3b
+ 2301 017a 05       		.uleb128 0x5
+ 2302 017b 49       		.uleb128 0x49
+ 2303 017c 13       		.uleb128 0x13
+ 2304 017d 02       		.uleb128 0x2
+ 2305 017e 17       		.uleb128 0x17
+ 2306 017f 00       		.byte	0
+ 2307 0180 00       		.byte	0
+ 2308 0181 1C       		.uleb128 0x1c
+ 2309 0182 01       		.uleb128 0x1
+ 2310 0183 01       		.byte	0x1
+ 2311 0184 49       		.uleb128 0x49
+ 2312 0185 13       		.uleb128 0x13
+ 2313 0186 01       		.uleb128 0x1
+ 2314 0187 13       		.uleb128 0x13
+ 2315 0188 00       		.byte	0
+ 2316 0189 00       		.byte	0
+ 2317 018a 1D       		.uleb128 0x1d
+ 2318 018b 21       		.uleb128 0x21
+ 2319 018c 00       		.byte	0
+ 2320 018d 49       		.uleb128 0x49
+ 2321 018e 13       		.uleb128 0x13
+ 2322 018f 2F       		.uleb128 0x2f
+ 2323 0190 0B       		.uleb128 0xb
+ 2324 0191 00       		.byte	0
+ 2325 0192 00       		.byte	0
+ 2326 0193 1E       		.uleb128 0x1e
+ 2327 0194 34       		.uleb128 0x34
+ 2328 0195 00       		.byte	0
+ 2329 0196 03       		.uleb128 0x3
+ 2330 0197 0E       		.uleb128 0xe
+ 2331 0198 3A       		.uleb128 0x3a
+ 2332 0199 0B       		.uleb128 0xb
+ 2333 019a 3B       		.uleb128 0x3b
+ 2334 019b 0B       		.uleb128 0xb
+ 2335 019c 49       		.uleb128 0x49
+ 2336 019d 13       		.uleb128 0x13
+ 2337 019e 02       		.uleb128 0x2
+ 2338 019f 18       		.uleb128 0x18
+ 2339 01a0 00       		.byte	0
+ 2340 01a1 00       		.byte	0
+ 2341 01a2 1F       		.uleb128 0x1f
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 51
+
+
+ 2342 01a3 34       		.uleb128 0x34
+ 2343 01a4 00       		.byte	0
+ 2344 01a5 03       		.uleb128 0x3
+ 2345 01a6 0E       		.uleb128 0xe
+ 2346 01a7 3A       		.uleb128 0x3a
+ 2347 01a8 0B       		.uleb128 0xb
+ 2348 01a9 3B       		.uleb128 0x3b
+ 2349 01aa 05       		.uleb128 0x5
+ 2350 01ab 49       		.uleb128 0x49
+ 2351 01ac 13       		.uleb128 0x13
+ 2352 01ad 02       		.uleb128 0x2
+ 2353 01ae 18       		.uleb128 0x18
+ 2354 01af 00       		.byte	0
+ 2355 01b0 00       		.byte	0
+ 2356 01b1 20       		.uleb128 0x20
+ 2357 01b2 2E       		.uleb128 0x2e
+ 2358 01b3 00       		.byte	0
+ 2359 01b4 3F       		.uleb128 0x3f
+ 2360 01b5 19       		.uleb128 0x19
+ 2361 01b6 3C       		.uleb128 0x3c
+ 2362 01b7 19       		.uleb128 0x19
+ 2363 01b8 6E       		.uleb128 0x6e
+ 2364 01b9 0E       		.uleb128 0xe
+ 2365 01ba 03       		.uleb128 0x3
+ 2366 01bb 0E       		.uleb128 0xe
+ 2367 01bc 3A       		.uleb128 0x3a
+ 2368 01bd 0B       		.uleb128 0xb
+ 2369 01be 3B       		.uleb128 0x3b
+ 2370 01bf 05       		.uleb128 0x5
+ 2371 01c0 00       		.byte	0
+ 2372 01c1 00       		.byte	0
+ 2373 01c2 00       		.byte	0
+ 2374              		.section	.debug_loc,"",%progbits
+ 2375              	.Ldebug_loc0:
+ 2376              	.LLST0:
+ 2377 0000 00000000 		.4byte	.LVL0
+ 2378 0004 06000000 		.4byte	.LVL1
+ 2379 0008 0100     		.2byte	0x1
+ 2380 000a 50       		.byte	0x50
+ 2381 000b 06000000 		.4byte	.LVL1
+ 2382 000f 2C000000 		.4byte	.LFE0
+ 2383 0013 0400     		.2byte	0x4
+ 2384 0015 F3       		.byte	0xf3
+ 2385 0016 01       		.uleb128 0x1
+ 2386 0017 50       		.byte	0x50
+ 2387 0018 9F       		.byte	0x9f
+ 2388 0019 00000000 		.4byte	0
+ 2389 001d 00000000 		.4byte	0
+ 2390              	.LLST1:
+ 2391 0021 00000000 		.4byte	.LVL0
+ 2392 0025 16000000 		.4byte	.LVL5
+ 2393 0029 0100     		.2byte	0x1
+ 2394 002b 51       		.byte	0x51
+ 2395 002c 16000000 		.4byte	.LVL5
+ 2396 0030 18000000 		.4byte	.LVL6
+ 2397 0034 0300     		.2byte	0x3
+ 2398 0036 71       		.byte	0x71
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 52
+
+
+ 2399 0037 7F       		.sleb128 -1
+ 2400 0038 9F       		.byte	0x9f
+ 2401 0039 18000000 		.4byte	.LVL6
+ 2402 003d 2C000000 		.4byte	.LFE0
+ 2403 0041 0100     		.2byte	0x1
+ 2404 0043 51       		.byte	0x51
+ 2405 0044 00000000 		.4byte	0
+ 2406 0048 00000000 		.4byte	0
+ 2407              	.LLST2:
+ 2408 004c 00000000 		.4byte	.LVL0
+ 2409 0050 06000000 		.4byte	.LVL1
+ 2410 0054 0200     		.2byte	0x2
+ 2411 0056 30       		.byte	0x30
+ 2412 0057 9F       		.byte	0x9f
+ 2413 0058 06000000 		.4byte	.LVL1
+ 2414 005c 1A000000 		.4byte	.LVL7
+ 2415 0060 0100     		.2byte	0x1
+ 2416 0062 52       		.byte	0x52
+ 2417 0063 1C000000 		.4byte	.LVL8
+ 2418 0067 2C000000 		.4byte	.LFE0
+ 2419 006b 0100     		.2byte	0x1
+ 2420 006d 52       		.byte	0x52
+ 2421 006e 00000000 		.4byte	0
+ 2422 0072 00000000 		.4byte	0
+ 2423              	.LLST3:
+ 2424 0076 00000000 		.4byte	.LVL0
+ 2425 007a 06000000 		.4byte	.LVL1
+ 2426 007e 0600     		.2byte	0x6
+ 2427 0080 03       		.byte	0x3
+ 2428 0081 00000000 		.4byte	u8x8_st7528_8to32_dest_buf
+ 2429 0085 9F       		.byte	0x9f
+ 2430 0086 06000000 		.4byte	.LVL1
+ 2431 008a 0A000000 		.4byte	.LVL2
+ 2432 008e 0300     		.2byte	0x3
+ 2433 0090 73       		.byte	0x73
+ 2434 0091 01       		.sleb128 1
+ 2435 0092 9F       		.byte	0x9f
+ 2436 0093 0A000000 		.4byte	.LVL2
+ 2437 0097 0E000000 		.4byte	.LVL3
+ 2438 009b 0300     		.2byte	0x3
+ 2439 009d 73       		.byte	0x73
+ 2440 009e 02       		.sleb128 2
+ 2441 009f 9F       		.byte	0x9f
+ 2442 00a0 0E000000 		.4byte	.LVL3
+ 2443 00a4 12000000 		.4byte	.LVL4
+ 2444 00a8 0300     		.2byte	0x3
+ 2445 00aa 73       		.byte	0x73
+ 2446 00ab 03       		.sleb128 3
+ 2447 00ac 9F       		.byte	0x9f
+ 2448 00ad 12000000 		.4byte	.LVL4
+ 2449 00b1 1E000000 		.4byte	.LVL9
+ 2450 00b5 0300     		.2byte	0x3
+ 2451 00b7 73       		.byte	0x73
+ 2452 00b8 04       		.sleb128 4
+ 2453 00b9 9F       		.byte	0x9f
+ 2454 00ba 1E000000 		.4byte	.LVL9
+ 2455 00be 2C000000 		.4byte	.LFE0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 53
+
+
+ 2456 00c2 0100     		.2byte	0x1
+ 2457 00c4 53       		.byte	0x53
+ 2458 00c5 00000000 		.4byte	0
+ 2459 00c9 00000000 		.4byte	0
+ 2460              	.LLST4:
+ 2461 00cd 00000000 		.4byte	.LVL10
+ 2462 00d1 09000000 		.4byte	.LVL11-1
+ 2463 00d5 0100     		.2byte	0x1
+ 2464 00d7 50       		.byte	0x50
+ 2465 00d8 09000000 		.4byte	.LVL11-1
+ 2466 00dc 54000000 		.4byte	.LFE2
+ 2467 00e0 0100     		.2byte	0x1
+ 2468 00e2 55       		.byte	0x55
+ 2469 00e3 00000000 		.4byte	0
+ 2470 00e7 00000000 		.4byte	0
+ 2471              	.LLST5:
+ 2472 00eb 00000000 		.4byte	.LVL10
+ 2473 00ef 09000000 		.4byte	.LVL11-1
+ 2474 00f3 0100     		.2byte	0x1
+ 2475 00f5 51       		.byte	0x51
+ 2476 00f6 09000000 		.4byte	.LVL11-1
+ 2477 00fa 54000000 		.4byte	.LFE2
+ 2478 00fe 0400     		.2byte	0x4
+ 2479 0100 F3       		.byte	0xf3
+ 2480 0101 01       		.uleb128 0x1
+ 2481 0102 51       		.byte	0x51
+ 2482 0103 9F       		.byte	0x9f
+ 2483 0104 00000000 		.4byte	0
+ 2484 0108 00000000 		.4byte	0
+ 2485              	.LLST6:
+ 2486 010c 1C000000 		.4byte	.LVL13
+ 2487 0110 20000000 		.4byte	.LVL14
+ 2488 0114 0200     		.2byte	0x2
+ 2489 0116 30       		.byte	0x30
+ 2490 0117 9F       		.byte	0x9f
+ 2491 0118 20000000 		.4byte	.LVL14
+ 2492 011c 36000000 		.4byte	.LVL17
+ 2493 0120 0100     		.2byte	0x1
+ 2494 0122 54       		.byte	0x54
+ 2495 0123 38000000 		.4byte	.LVL18
+ 2496 0127 54000000 		.4byte	.LFE2
+ 2497 012b 0100     		.2byte	0x1
+ 2498 012d 54       		.byte	0x54
+ 2499 012e 00000000 		.4byte	0
+ 2500 0132 00000000 		.4byte	0
+ 2501              	.LLST7:
+ 2502 0136 00000000 		.4byte	.LVL22
+ 2503 013a 21000000 		.4byte	.LVL25-1
+ 2504 013e 0100     		.2byte	0x1
+ 2505 0140 50       		.byte	0x50
+ 2506 0141 21000000 		.4byte	.LVL25-1
+ 2507 0145 28000000 		.4byte	.LVL26
+ 2508 0149 0100     		.2byte	0x1
+ 2509 014b 55       		.byte	0x55
+ 2510 014c 28000000 		.4byte	.LVL26
+ 2511 0150 2D000000 		.4byte	.LVL27-1
+ 2512 0154 0100     		.2byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 54
+
+
+ 2513 0156 50       		.byte	0x50
+ 2514 0157 2D000000 		.4byte	.LVL27-1
+ 2515 015b 34000000 		.4byte	.LVL28
+ 2516 015f 0100     		.2byte	0x1
+ 2517 0161 55       		.byte	0x55
+ 2518 0162 34000000 		.4byte	.LVL28
+ 2519 0166 3B000000 		.4byte	.LVL29-1
+ 2520 016a 0100     		.2byte	0x1
+ 2521 016c 50       		.byte	0x50
+ 2522 016d 3B000000 		.4byte	.LVL29-1
+ 2523 0171 4A000000 		.4byte	.LVL30
+ 2524 0175 0100     		.2byte	0x1
+ 2525 0177 55       		.byte	0x55
+ 2526 0178 4A000000 		.4byte	.LVL30
+ 2527 017c 4F000000 		.4byte	.LVL31-1
+ 2528 0180 0100     		.2byte	0x1
+ 2529 0182 50       		.byte	0x50
+ 2530 0183 4F000000 		.4byte	.LVL31-1
+ 2531 0187 5E000000 		.4byte	.LVL32
+ 2532 018b 0100     		.2byte	0x1
+ 2533 018d 55       		.byte	0x55
+ 2534 018e 5E000000 		.4byte	.LVL32
+ 2535 0192 61000000 		.4byte	.LVL33-1
+ 2536 0196 0100     		.2byte	0x1
+ 2537 0198 50       		.byte	0x50
+ 2538 0199 61000000 		.4byte	.LVL33-1
+ 2539 019d 7E000000 		.4byte	.LVL37
+ 2540 01a1 0100     		.2byte	0x1
+ 2541 01a3 55       		.byte	0x55
+ 2542 01a4 7E000000 		.4byte	.LVL37
+ 2543 01a8 81000000 		.4byte	.LVL38-1
+ 2544 01ac 0100     		.2byte	0x1
+ 2545 01ae 50       		.byte	0x50
+ 2546 01af 81000000 		.4byte	.LVL38-1
+ 2547 01b3 EE000000 		.4byte	.LVL57
+ 2548 01b7 0100     		.2byte	0x1
+ 2549 01b9 55       		.byte	0x55
+ 2550 01ba EE000000 		.4byte	.LVL57
+ 2551 01be F0000000 		.4byte	.LVL58
+ 2552 01c2 0100     		.2byte	0x1
+ 2553 01c4 50       		.byte	0x50
+ 2554 01c5 F0000000 		.4byte	.LVL58
+ 2555 01c9 F4000000 		.4byte	.LVL59
+ 2556 01cd 0100     		.2byte	0x1
+ 2557 01cf 55       		.byte	0x55
+ 2558 01d0 F4000000 		.4byte	.LVL59
+ 2559 01d4 04010000 		.4byte	.LFE1
+ 2560 01d8 0400     		.2byte	0x4
+ 2561 01da F3       		.byte	0xf3
+ 2562 01db 01       		.uleb128 0x1
+ 2563 01dc 50       		.byte	0x50
+ 2564 01dd 9F       		.byte	0x9f
+ 2565 01de 00000000 		.4byte	0
+ 2566 01e2 00000000 		.4byte	0
+ 2567              	.LLST8:
+ 2568 01e6 00000000 		.4byte	.LVL22
+ 2569 01ea 0C000000 		.4byte	.LVL23
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 55
+
+
+ 2570 01ee 0100     		.2byte	0x1
+ 2571 01f0 51       		.byte	0x51
+ 2572 01f1 0C000000 		.4byte	.LVL23
+ 2573 01f5 04010000 		.4byte	.LFE1
+ 2574 01f9 0400     		.2byte	0x4
+ 2575 01fb F3       		.byte	0xf3
+ 2576 01fc 01       		.uleb128 0x1
+ 2577 01fd 51       		.byte	0x51
+ 2578 01fe 9F       		.byte	0x9f
+ 2579 01ff 00000000 		.4byte	0
+ 2580 0203 00000000 		.4byte	0
+ 2581              	.LLST9:
+ 2582 0207 00000000 		.4byte	.LVL22
+ 2583 020b 21000000 		.4byte	.LVL25-1
+ 2584 020f 0100     		.2byte	0x1
+ 2585 0211 52       		.byte	0x52
+ 2586 0212 21000000 		.4byte	.LVL25-1
+ 2587 0216 28000000 		.4byte	.LVL26
+ 2588 021a 0400     		.2byte	0x4
+ 2589 021c F3       		.byte	0xf3
+ 2590 021d 01       		.uleb128 0x1
+ 2591 021e 52       		.byte	0x52
+ 2592 021f 9F       		.byte	0x9f
+ 2593 0220 28000000 		.4byte	.LVL26
+ 2594 0224 2D000000 		.4byte	.LVL27-1
+ 2595 0228 0100     		.2byte	0x1
+ 2596 022a 52       		.byte	0x52
+ 2597 022b 2D000000 		.4byte	.LVL27-1
+ 2598 022f 34000000 		.4byte	.LVL28
+ 2599 0233 0400     		.2byte	0x4
+ 2600 0235 F3       		.byte	0xf3
+ 2601 0236 01       		.uleb128 0x1
+ 2602 0237 52       		.byte	0x52
+ 2603 0238 9F       		.byte	0x9f
+ 2604 0239 34000000 		.4byte	.LVL28
+ 2605 023d 3B000000 		.4byte	.LVL29-1
+ 2606 0241 0100     		.2byte	0x1
+ 2607 0243 52       		.byte	0x52
+ 2608 0244 3B000000 		.4byte	.LVL29-1
+ 2609 0248 4A000000 		.4byte	.LVL30
+ 2610 024c 0400     		.2byte	0x4
+ 2611 024e F3       		.byte	0xf3
+ 2612 024f 01       		.uleb128 0x1
+ 2613 0250 52       		.byte	0x52
+ 2614 0251 9F       		.byte	0x9f
+ 2615 0252 4A000000 		.4byte	.LVL30
+ 2616 0256 4F000000 		.4byte	.LVL31-1
+ 2617 025a 0100     		.2byte	0x1
+ 2618 025c 52       		.byte	0x52
+ 2619 025d 4F000000 		.4byte	.LVL31-1
+ 2620 0261 5E000000 		.4byte	.LVL32
+ 2621 0265 0400     		.2byte	0x4
+ 2622 0267 F3       		.byte	0xf3
+ 2623 0268 01       		.uleb128 0x1
+ 2624 0269 52       		.byte	0x52
+ 2625 026a 9F       		.byte	0x9f
+ 2626 026b 5E000000 		.4byte	.LVL32
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 56
+
+
+ 2627 026f 61000000 		.4byte	.LVL33-1
+ 2628 0273 0100     		.2byte	0x1
+ 2629 0275 52       		.byte	0x52
+ 2630 0276 61000000 		.4byte	.LVL33-1
+ 2631 027a 7E000000 		.4byte	.LVL37
+ 2632 027e 0400     		.2byte	0x4
+ 2633 0280 F3       		.byte	0xf3
+ 2634 0281 01       		.uleb128 0x1
+ 2635 0282 52       		.byte	0x52
+ 2636 0283 9F       		.byte	0x9f
+ 2637 0284 7E000000 		.4byte	.LVL37
+ 2638 0288 81000000 		.4byte	.LVL38-1
+ 2639 028c 0100     		.2byte	0x1
+ 2640 028e 52       		.byte	0x52
+ 2641 028f 81000000 		.4byte	.LVL38-1
+ 2642 0293 8E000000 		.4byte	.LVL42
+ 2643 0297 0400     		.2byte	0x4
+ 2644 0299 F3       		.byte	0xf3
+ 2645 029a 01       		.uleb128 0x1
+ 2646 029b 52       		.byte	0x52
+ 2647 029c 9F       		.byte	0x9f
+ 2648 029d 8E000000 		.4byte	.LVL42
+ 2649 02a1 E0000000 		.4byte	.LVL55
+ 2650 02a5 0100     		.2byte	0x1
+ 2651 02a7 58       		.byte	0x58
+ 2652 02a8 EE000000 		.4byte	.LVL57
+ 2653 02ac 04010000 		.4byte	.LFE1
+ 2654 02b0 0100     		.2byte	0x1
+ 2655 02b2 52       		.byte	0x52
+ 2656 02b3 00000000 		.4byte	0
+ 2657 02b7 00000000 		.4byte	0
+ 2658              	.LLST10:
+ 2659 02bb 00000000 		.4byte	.LVL22
+ 2660 02bf 14000000 		.4byte	.LVL24
+ 2661 02c3 0100     		.2byte	0x1
+ 2662 02c5 53       		.byte	0x53
+ 2663 02c6 14000000 		.4byte	.LVL24
+ 2664 02ca F4000000 		.4byte	.LVL59
+ 2665 02ce 0100     		.2byte	0x1
+ 2666 02d0 59       		.byte	0x59
+ 2667 02d1 F4000000 		.4byte	.LVL59
+ 2668 02d5 04010000 		.4byte	.LFE1
+ 2669 02d9 0400     		.2byte	0x4
+ 2670 02db F3       		.byte	0xf3
+ 2671 02dc 01       		.uleb128 0x1
+ 2672 02dd 53       		.byte	0x53
+ 2673 02de 9F       		.byte	0x9f
+ 2674 02df 00000000 		.4byte	0
+ 2675 02e3 00000000 		.4byte	0
+ 2676              	.LLST11:
+ 2677 02e7 86000000 		.4byte	.LVL39
+ 2678 02eb 88000000 		.4byte	.LVL40
+ 2679 02ef 0100     		.2byte	0x1
+ 2680 02f1 54       		.byte	0x54
+ 2681 02f2 88000000 		.4byte	.LVL40
+ 2682 02f6 8A000000 		.4byte	.LVL41
+ 2683 02fa 0200     		.2byte	0x2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 57
+
+
+ 2684 02fc 79       		.byte	0x79
+ 2685 02fd 05       		.sleb128 5
+ 2686 02fe 8A000000 		.4byte	.LVL41
+ 2687 0302 CC000000 		.4byte	.LVL51
+ 2688 0306 0100     		.2byte	0x1
+ 2689 0308 54       		.byte	0x54
+ 2690 0309 CE000000 		.4byte	.LVL52
+ 2691 030d EE000000 		.4byte	.LVL57
+ 2692 0311 0100     		.2byte	0x1
+ 2693 0313 54       		.byte	0x54
+ 2694 0314 00000000 		.4byte	0
+ 2695 0318 00000000 		.4byte	0
+ 2696              	.LLST12:
+ 2697 031c 8E000000 		.4byte	.LVL42
+ 2698 0320 EE000000 		.4byte	.LVL57
+ 2699 0324 0100     		.2byte	0x1
+ 2700 0326 57       		.byte	0x57
+ 2701 0327 00000000 		.4byte	0
+ 2702 032b 00000000 		.4byte	0
+ 2703              	.LLST13:
+ 2704 032f 92000000 		.4byte	.LVL43
+ 2705 0333 D2000000 		.4byte	.LVL53
+ 2706 0337 0100     		.2byte	0x1
+ 2707 0339 5A       		.byte	0x5a
+ 2708 033a D2000000 		.4byte	.LVL53
+ 2709 033e E7000000 		.4byte	.LVL56-1
+ 2710 0342 0100     		.2byte	0x1
+ 2711 0344 53       		.byte	0x53
+ 2712 0345 00000000 		.4byte	0
+ 2713 0349 00000000 		.4byte	0
+ 2714              	.LLST14:
+ 2715 034d 96000000 		.4byte	.LVL44
+ 2716 0351 EE000000 		.4byte	.LVL57
+ 2717 0355 0100     		.2byte	0x1
+ 2718 0357 56       		.byte	0x56
+ 2719 0358 00000000 		.4byte	0
+ 2720 035c 00000000 		.4byte	0
+ 2721              	.LLST15:
+ 2722 0360 00000000 		.4byte	.LVL60
+ 2723 0364 0D000000 		.4byte	.LVL62-1
+ 2724 0368 0100     		.2byte	0x1
+ 2725 036a 50       		.byte	0x50
+ 2726 036b 0D000000 		.4byte	.LVL62-1
+ 2727 036f 12000000 		.4byte	.LVL63
+ 2728 0373 0100     		.2byte	0x1
+ 2729 0375 54       		.byte	0x54
+ 2730 0376 12000000 		.4byte	.LVL63
+ 2731 037a 19000000 		.4byte	.LVL64-1
+ 2732 037e 0100     		.2byte	0x1
+ 2733 0380 50       		.byte	0x50
+ 2734 0381 19000000 		.4byte	.LVL64-1
+ 2735 0385 2E000000 		.4byte	.LVL67
+ 2736 0389 0100     		.2byte	0x1
+ 2737 038b 54       		.byte	0x54
+ 2738 038c 2E000000 		.4byte	.LVL67
+ 2739 0390 31000000 		.4byte	.LVL68-1
+ 2740 0394 0100     		.2byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 58
+
+
+ 2741 0396 50       		.byte	0x50
+ 2742 0397 31000000 		.4byte	.LVL68-1
+ 2743 039b 34000000 		.4byte	.LVL69
+ 2744 039f 0100     		.2byte	0x1
+ 2745 03a1 54       		.byte	0x54
+ 2746 03a2 34000000 		.4byte	.LVL69
+ 2747 03a6 3C000000 		.4byte	.LFE3
+ 2748 03aa 0400     		.2byte	0x4
+ 2749 03ac F3       		.byte	0xf3
+ 2750 03ad 01       		.uleb128 0x1
+ 2751 03ae 50       		.byte	0x50
+ 2752 03af 9F       		.byte	0x9f
+ 2753 03b0 00000000 		.4byte	0
+ 2754 03b4 00000000 		.4byte	0
+ 2755              	.LLST16:
+ 2756 03b8 00000000 		.4byte	.LVL60
+ 2757 03bc 0A000000 		.4byte	.LVL61
+ 2758 03c0 0100     		.2byte	0x1
+ 2759 03c2 51       		.byte	0x51
+ 2760 03c3 0A000000 		.4byte	.LVL61
+ 2761 03c7 12000000 		.4byte	.LVL63
+ 2762 03cb 0400     		.2byte	0x4
+ 2763 03cd F3       		.byte	0xf3
+ 2764 03ce 01       		.uleb128 0x1
+ 2765 03cf 51       		.byte	0x51
+ 2766 03d0 9F       		.byte	0x9f
+ 2767 03d1 12000000 		.4byte	.LVL63
+ 2768 03d5 19000000 		.4byte	.LVL64-1
+ 2769 03d9 0100     		.2byte	0x1
+ 2770 03db 51       		.byte	0x51
+ 2771 03dc 19000000 		.4byte	.LVL64-1
+ 2772 03e0 2E000000 		.4byte	.LVL67
+ 2773 03e4 0400     		.2byte	0x4
+ 2774 03e6 F3       		.byte	0xf3
+ 2775 03e7 01       		.uleb128 0x1
+ 2776 03e8 51       		.byte	0x51
+ 2777 03e9 9F       		.byte	0x9f
+ 2778 03ea 2E000000 		.4byte	.LVL67
+ 2779 03ee 31000000 		.4byte	.LVL68-1
+ 2780 03f2 0100     		.2byte	0x1
+ 2781 03f4 51       		.byte	0x51
+ 2782 03f5 31000000 		.4byte	.LVL68-1
+ 2783 03f9 3C000000 		.4byte	.LFE3
+ 2784 03fd 0400     		.2byte	0x4
+ 2785 03ff F3       		.byte	0xf3
+ 2786 0400 01       		.uleb128 0x1
+ 2787 0401 51       		.byte	0x51
+ 2788 0402 9F       		.byte	0x9f
+ 2789 0403 00000000 		.4byte	0
+ 2790 0407 00000000 		.4byte	0
+ 2791              	.LLST17:
+ 2792 040b 00000000 		.4byte	.LVL60
+ 2793 040f 0D000000 		.4byte	.LVL62-1
+ 2794 0413 0100     		.2byte	0x1
+ 2795 0415 52       		.byte	0x52
+ 2796 0416 0D000000 		.4byte	.LVL62-1
+ 2797 041a 12000000 		.4byte	.LVL63
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 59
+
+
+ 2798 041e 0400     		.2byte	0x4
+ 2799 0420 F3       		.byte	0xf3
+ 2800 0421 01       		.uleb128 0x1
+ 2801 0422 52       		.byte	0x52
+ 2802 0423 9F       		.byte	0x9f
+ 2803 0424 12000000 		.4byte	.LVL63
+ 2804 0428 19000000 		.4byte	.LVL64-1
+ 2805 042c 0100     		.2byte	0x1
+ 2806 042e 52       		.byte	0x52
+ 2807 042f 19000000 		.4byte	.LVL64-1
+ 2808 0433 2E000000 		.4byte	.LVL67
+ 2809 0437 0400     		.2byte	0x4
+ 2810 0439 F3       		.byte	0xf3
+ 2811 043a 01       		.uleb128 0x1
+ 2812 043b 52       		.byte	0x52
+ 2813 043c 9F       		.byte	0x9f
+ 2814 043d 2E000000 		.4byte	.LVL67
+ 2815 0441 31000000 		.4byte	.LVL68-1
+ 2816 0445 0100     		.2byte	0x1
+ 2817 0447 52       		.byte	0x52
+ 2818 0448 31000000 		.4byte	.LVL68-1
+ 2819 044c 3C000000 		.4byte	.LFE3
+ 2820 0450 0400     		.2byte	0x4
+ 2821 0452 F3       		.byte	0xf3
+ 2822 0453 01       		.uleb128 0x1
+ 2823 0454 52       		.byte	0x52
+ 2824 0455 9F       		.byte	0x9f
+ 2825 0456 00000000 		.4byte	0
+ 2826 045a 00000000 		.4byte	0
+ 2827              	.LLST18:
+ 2828 045e 00000000 		.4byte	.LVL60
+ 2829 0462 0D000000 		.4byte	.LVL62-1
+ 2830 0466 0100     		.2byte	0x1
+ 2831 0468 53       		.byte	0x53
+ 2832 0469 0D000000 		.4byte	.LVL62-1
+ 2833 046d 12000000 		.4byte	.LVL63
+ 2834 0471 0400     		.2byte	0x4
+ 2835 0473 F3       		.byte	0xf3
+ 2836 0474 01       		.uleb128 0x1
+ 2837 0475 53       		.byte	0x53
+ 2838 0476 9F       		.byte	0x9f
+ 2839 0477 12000000 		.4byte	.LVL63
+ 2840 047b 19000000 		.4byte	.LVL64-1
+ 2841 047f 0100     		.2byte	0x1
+ 2842 0481 53       		.byte	0x53
+ 2843 0482 19000000 		.4byte	.LVL64-1
+ 2844 0486 2E000000 		.4byte	.LVL67
+ 2845 048a 0400     		.2byte	0x4
+ 2846 048c F3       		.byte	0xf3
+ 2847 048d 01       		.uleb128 0x1
+ 2848 048e 53       		.byte	0x53
+ 2849 048f 9F       		.byte	0x9f
+ 2850 0490 2E000000 		.4byte	.LVL67
+ 2851 0494 31000000 		.4byte	.LVL68-1
+ 2852 0498 0100     		.2byte	0x1
+ 2853 049a 53       		.byte	0x53
+ 2854 049b 31000000 		.4byte	.LVL68-1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 60
+
+
+ 2855 049f 3C000000 		.4byte	.LFE3
+ 2856 04a3 0400     		.2byte	0x4
+ 2857 04a5 F3       		.byte	0xf3
+ 2858 04a6 01       		.uleb128 0x1
+ 2859 04a7 53       		.byte	0x53
+ 2860 04a8 9F       		.byte	0x9f
+ 2861 04a9 00000000 		.4byte	0
+ 2862 04ad 00000000 		.4byte	0
+ 2863              	.LLST19:
+ 2864 04b1 00000000 		.4byte	.LVL70
+ 2865 04b5 0D000000 		.4byte	.LVL72-1
+ 2866 04b9 0100     		.2byte	0x1
+ 2867 04bb 50       		.byte	0x50
+ 2868 04bc 0D000000 		.4byte	.LVL72-1
+ 2869 04c0 12000000 		.4byte	.LVL73
+ 2870 04c4 0100     		.2byte	0x1
+ 2871 04c6 54       		.byte	0x54
+ 2872 04c7 12000000 		.4byte	.LVL73
+ 2873 04cb 19000000 		.4byte	.LVL74-1
+ 2874 04cf 0100     		.2byte	0x1
+ 2875 04d1 50       		.byte	0x50
+ 2876 04d2 19000000 		.4byte	.LVL74-1
+ 2877 04d6 2E000000 		.4byte	.LVL77
+ 2878 04da 0100     		.2byte	0x1
+ 2879 04dc 54       		.byte	0x54
+ 2880 04dd 2E000000 		.4byte	.LVL77
+ 2881 04e1 31000000 		.4byte	.LVL78-1
+ 2882 04e5 0100     		.2byte	0x1
+ 2883 04e7 50       		.byte	0x50
+ 2884 04e8 31000000 		.4byte	.LVL78-1
+ 2885 04ec 34000000 		.4byte	.LVL79
+ 2886 04f0 0100     		.2byte	0x1
+ 2887 04f2 54       		.byte	0x54
+ 2888 04f3 34000000 		.4byte	.LVL79
+ 2889 04f7 3C000000 		.4byte	.LFE4
+ 2890 04fb 0400     		.2byte	0x4
+ 2891 04fd F3       		.byte	0xf3
+ 2892 04fe 01       		.uleb128 0x1
+ 2893 04ff 50       		.byte	0x50
+ 2894 0500 9F       		.byte	0x9f
+ 2895 0501 00000000 		.4byte	0
+ 2896 0505 00000000 		.4byte	0
+ 2897              	.LLST20:
+ 2898 0509 00000000 		.4byte	.LVL70
+ 2899 050d 0A000000 		.4byte	.LVL71
+ 2900 0511 0100     		.2byte	0x1
+ 2901 0513 51       		.byte	0x51
+ 2902 0514 0A000000 		.4byte	.LVL71
+ 2903 0518 12000000 		.4byte	.LVL73
+ 2904 051c 0400     		.2byte	0x4
+ 2905 051e F3       		.byte	0xf3
+ 2906 051f 01       		.uleb128 0x1
+ 2907 0520 51       		.byte	0x51
+ 2908 0521 9F       		.byte	0x9f
+ 2909 0522 12000000 		.4byte	.LVL73
+ 2910 0526 19000000 		.4byte	.LVL74-1
+ 2911 052a 0100     		.2byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 61
+
+
+ 2912 052c 51       		.byte	0x51
+ 2913 052d 19000000 		.4byte	.LVL74-1
+ 2914 0531 2E000000 		.4byte	.LVL77
+ 2915 0535 0400     		.2byte	0x4
+ 2916 0537 F3       		.byte	0xf3
+ 2917 0538 01       		.uleb128 0x1
+ 2918 0539 51       		.byte	0x51
+ 2919 053a 9F       		.byte	0x9f
+ 2920 053b 2E000000 		.4byte	.LVL77
+ 2921 053f 31000000 		.4byte	.LVL78-1
+ 2922 0543 0100     		.2byte	0x1
+ 2923 0545 51       		.byte	0x51
+ 2924 0546 31000000 		.4byte	.LVL78-1
+ 2925 054a 3C000000 		.4byte	.LFE4
+ 2926 054e 0400     		.2byte	0x4
+ 2927 0550 F3       		.byte	0xf3
+ 2928 0551 01       		.uleb128 0x1
+ 2929 0552 51       		.byte	0x51
+ 2930 0553 9F       		.byte	0x9f
+ 2931 0554 00000000 		.4byte	0
+ 2932 0558 00000000 		.4byte	0
+ 2933              	.LLST21:
+ 2934 055c 00000000 		.4byte	.LVL70
+ 2935 0560 0D000000 		.4byte	.LVL72-1
+ 2936 0564 0100     		.2byte	0x1
+ 2937 0566 52       		.byte	0x52
+ 2938 0567 0D000000 		.4byte	.LVL72-1
+ 2939 056b 12000000 		.4byte	.LVL73
+ 2940 056f 0400     		.2byte	0x4
+ 2941 0571 F3       		.byte	0xf3
+ 2942 0572 01       		.uleb128 0x1
+ 2943 0573 52       		.byte	0x52
+ 2944 0574 9F       		.byte	0x9f
+ 2945 0575 12000000 		.4byte	.LVL73
+ 2946 0579 19000000 		.4byte	.LVL74-1
+ 2947 057d 0100     		.2byte	0x1
+ 2948 057f 52       		.byte	0x52
+ 2949 0580 19000000 		.4byte	.LVL74-1
+ 2950 0584 2E000000 		.4byte	.LVL77
+ 2951 0588 0400     		.2byte	0x4
+ 2952 058a F3       		.byte	0xf3
+ 2953 058b 01       		.uleb128 0x1
+ 2954 058c 52       		.byte	0x52
+ 2955 058d 9F       		.byte	0x9f
+ 2956 058e 2E000000 		.4byte	.LVL77
+ 2957 0592 31000000 		.4byte	.LVL78-1
+ 2958 0596 0100     		.2byte	0x1
+ 2959 0598 52       		.byte	0x52
+ 2960 0599 31000000 		.4byte	.LVL78-1
+ 2961 059d 3C000000 		.4byte	.LFE4
+ 2962 05a1 0400     		.2byte	0x4
+ 2963 05a3 F3       		.byte	0xf3
+ 2964 05a4 01       		.uleb128 0x1
+ 2965 05a5 52       		.byte	0x52
+ 2966 05a6 9F       		.byte	0x9f
+ 2967 05a7 00000000 		.4byte	0
+ 2968 05ab 00000000 		.4byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 62
+
+
+ 2969              	.LLST22:
+ 2970 05af 00000000 		.4byte	.LVL70
+ 2971 05b3 0D000000 		.4byte	.LVL72-1
+ 2972 05b7 0100     		.2byte	0x1
+ 2973 05b9 53       		.byte	0x53
+ 2974 05ba 0D000000 		.4byte	.LVL72-1
+ 2975 05be 12000000 		.4byte	.LVL73
+ 2976 05c2 0400     		.2byte	0x4
+ 2977 05c4 F3       		.byte	0xf3
+ 2978 05c5 01       		.uleb128 0x1
+ 2979 05c6 53       		.byte	0x53
+ 2980 05c7 9F       		.byte	0x9f
+ 2981 05c8 12000000 		.4byte	.LVL73
+ 2982 05cc 19000000 		.4byte	.LVL74-1
+ 2983 05d0 0100     		.2byte	0x1
+ 2984 05d2 53       		.byte	0x53
+ 2985 05d3 19000000 		.4byte	.LVL74-1
+ 2986 05d7 2E000000 		.4byte	.LVL77
+ 2987 05db 0400     		.2byte	0x4
+ 2988 05dd F3       		.byte	0xf3
+ 2989 05de 01       		.uleb128 0x1
+ 2990 05df 53       		.byte	0x53
+ 2991 05e0 9F       		.byte	0x9f
+ 2992 05e1 2E000000 		.4byte	.LVL77
+ 2993 05e5 31000000 		.4byte	.LVL78-1
+ 2994 05e9 0100     		.2byte	0x1
+ 2995 05eb 53       		.byte	0x53
+ 2996 05ec 31000000 		.4byte	.LVL78-1
+ 2997 05f0 3C000000 		.4byte	.LFE4
+ 2998 05f4 0400     		.2byte	0x4
+ 2999 05f6 F3       		.byte	0xf3
+ 3000 05f7 01       		.uleb128 0x1
+ 3001 05f8 53       		.byte	0x53
+ 3002 05f9 9F       		.byte	0x9f
+ 3003 05fa 00000000 		.4byte	0
+ 3004 05fe 00000000 		.4byte	0
+ 3005              		.section	.debug_aranges,"",%progbits
+ 3006 0000 3C000000 		.4byte	0x3c
+ 3007 0004 0200     		.2byte	0x2
+ 3008 0006 00000000 		.4byte	.Ldebug_info0
+ 3009 000a 04       		.byte	0x4
+ 3010 000b 00       		.byte	0
+ 3011 000c 0000     		.2byte	0
+ 3012 000e 0000     		.2byte	0
+ 3013 0010 00000000 		.4byte	.LFB0
+ 3014 0014 2C000000 		.4byte	.LFE0-.LFB0
+ 3015 0018 00000000 		.4byte	.LFB2
+ 3016 001c 54000000 		.4byte	.LFE2-.LFB2
+ 3017 0020 00000000 		.4byte	.LFB1
+ 3018 0024 04010000 		.4byte	.LFE1-.LFB1
+ 3019 0028 00000000 		.4byte	.LFB3
+ 3020 002c 3C000000 		.4byte	.LFE3-.LFB3
+ 3021 0030 00000000 		.4byte	.LFB4
+ 3022 0034 3C000000 		.4byte	.LFE4-.LFB4
+ 3023 0038 00000000 		.4byte	0
+ 3024 003c 00000000 		.4byte	0
+ 3025              		.section	.debug_ranges,"",%progbits
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 63
+
+
+ 3026              	.Ldebug_ranges0:
+ 3027 0000 00000000 		.4byte	.LFB0
+ 3028 0004 2C000000 		.4byte	.LFE0
+ 3029 0008 00000000 		.4byte	.LFB2
+ 3030 000c 54000000 		.4byte	.LFE2
+ 3031 0010 00000000 		.4byte	.LFB1
+ 3032 0014 04010000 		.4byte	.LFE1
+ 3033 0018 00000000 		.4byte	.LFB3
+ 3034 001c 3C000000 		.4byte	.LFE3
+ 3035 0020 00000000 		.4byte	.LFB4
+ 3036 0024 3C000000 		.4byte	.LFE4
+ 3037 0028 00000000 		.4byte	0
+ 3038 002c 00000000 		.4byte	0
+ 3039              		.section	.debug_line,"",%progbits
+ 3040              	.Ldebug_line0:
+ 3041 0000 47020000 		.section	.debug_str,"MS",%progbits,1
+ 3041      02003A01 
+ 3041      00000201 
+ 3041      FB0E0D00 
+ 3041      01010101 
+ 3042              	.LASF69:
+ 3043 0000 75387838 		.ascii	"u8x8_d_st7528_generic\000"
+ 3043      5F645F73 
+ 3043      74373532 
+ 3043      385F6765 
+ 3043      6E657269 
+ 3044              	.LASF26:
+ 3045 0016 785F6F66 		.ascii	"x_offset\000"
+ 3045      66736574 
+ 3045      00
+ 3046              	.LASF27:
+ 3047 001f 69735F66 		.ascii	"is_font_inverse_mode\000"
+ 3047      6F6E745F 
+ 3047      696E7665 
+ 3047      7273655F 
+ 3047      6D6F6465 
+ 3048              	.LASF66:
+ 3049 0034 64657374 		.ascii	"dest\000"
+ 3049      00
+ 3050              	.LASF48:
+ 3051 0039 7370695F 		.ascii	"spi_mode\000"
+ 3051      6D6F6465 
+ 3051      00
+ 3052              	.LASF71:
+ 3053 0042 6172675F 		.ascii	"arg_ptr\000"
+ 3053      70747200 
+ 3054              	.LASF39:
+ 3055 004a 63686970 		.ascii	"chip_enable_level\000"
+ 3055      5F656E61 
+ 3055      626C655F 
+ 3055      6C657665 
+ 3055      6C00
+ 3056              	.LASF24:
+ 3057 005c 666F6E74 		.ascii	"font\000"
+ 3057      00
+ 3058              	.LASF35:
+ 3059 0061 6465626F 		.ascii	"debounce_result_msg\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 64
+
+
+ 3059      756E6365 
+ 3059      5F726573 
+ 3059      756C745F 
+ 3059      6D736700 
+ 3060              	.LASF2:
+ 3061 0075 73686F72 		.ascii	"short int\000"
+ 3061      7420696E 
+ 3061      7400
+ 3062              	.LASF22:
+ 3063 007f 6770696F 		.ascii	"gpio_and_delay_cb\000"
+ 3063      5F616E64 
+ 3063      5F64656C 
+ 3063      61795F63 
+ 3063      6200
+ 3064              	.LASF52:
+ 3065 0091 74696C65 		.ascii	"tile_width\000"
+ 3065      5F776964 
+ 3065      746800
+ 3066              	.LASF74:
+ 3067 009c 73697A65 		.ascii	"sizetype\000"
+ 3067      74797065 
+ 3067      00
+ 3068              	.LASF45:
+ 3069 00a5 7364615F 		.ascii	"sda_setup_time_ns\000"
+ 3069      73657475 
+ 3069      705F7469 
+ 3069      6D655F6E 
+ 3069      7300
+ 3070              	.LASF75:
+ 3071 00b7 75387838 		.ascii	"u8x8_d_st7528_powersave0_seq\000"
+ 3071      5F645F73 
+ 3071      74373532 
+ 3071      385F706F 
+ 3071      77657273 
+ 3072              	.LASF81:
+ 3073 00d4 75387838 		.ascii	"u8x8_st7528_160x100_display_info\000"
+ 3073      5F737437 
+ 3073      3532385F 
+ 3073      31363078 
+ 3073      3130305F 
+ 3074              	.LASF44:
+ 3075 00f5 706F7374 		.ascii	"post_reset_wait_ms\000"
+ 3075      5F726573 
+ 3075      65745F77 
+ 3075      6169745F 
+ 3075      6D7300
+ 3076              	.LASF7:
+ 3077 0108 5F5F7569 		.ascii	"__uint32_t\000"
+ 3077      6E743332 
+ 3077      5F7400
+ 3078              	.LASF4:
+ 3079 0113 5F5F7569 		.ascii	"__uint16_t\000"
+ 3079      6E743136 
+ 3079      5F7400
+ 3080              	.LASF87:
+ 3081 011e 75387838 		.ascii	"u8x8_cad_EndTransfer\000"
+ 3081      5F636164 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 65
+
+
+ 3081      5F456E64 
+ 3081      5472616E 
+ 3081      73666572 
+ 3082              	.LASF94:
+ 3083 0133 433A5C55 		.ascii	"C:\\Users\\brian\\Documents\\PSoC Creator\\Lab7\\La"
+ 3083      73657273 
+ 3083      5C627269 
+ 3083      616E5C44 
+ 3083      6F63756D 
+ 3084 0160 62372E63 		.ascii	"b7.cydsn\000"
+ 3084      7964736E 
+ 3084      00
+ 3085              	.LASF51:
+ 3086 0169 77726974 		.ascii	"write_pulse_width_ns\000"
+ 3086      655F7075 
+ 3086      6C73655F 
+ 3086      77696474 
+ 3086      685F6E73 
+ 3087              	.LASF12:
+ 3088 017e 75696E74 		.ascii	"uint8_t\000"
+ 3088      385F7400 
+ 3089              	.LASF41:
+ 3090 0186 706F7374 		.ascii	"post_chip_enable_wait_ns\000"
+ 3090      5F636869 
+ 3090      705F656E 
+ 3090      61626C65 
+ 3090      5F776169 
+ 3091              	.LASF65:
+ 3092 019f 75387838 		.ascii	"u8x8\000"
+ 3092      00
+ 3093              	.LASF60:
+ 3094 01a4 74696C65 		.ascii	"tile_ptr\000"
+ 3094      5F707472 
+ 3094      00
+ 3095              	.LASF70:
+ 3096 01ad 6172675F 		.ascii	"arg_int\000"
+ 3096      696E7400 
+ 3097              	.LASF89:
+ 3098 01b5 75387838 		.ascii	"u8x8_cad_SendData\000"
+ 3098      5F636164 
+ 3098      5F53656E 
+ 3098      64446174 
+ 3098      6100
+ 3099              	.LASF23:
+ 3100 01c7 6275735F 		.ascii	"bus_clock\000"
+ 3100      636C6F63 
+ 3100      6B00
+ 3101              	.LASF54:
+ 3102 01d1 64656661 		.ascii	"default_x_offset\000"
+ 3102      756C745F 
+ 3102      785F6F66 
+ 3102      66736574 
+ 3102      00
+ 3103              	.LASF36:
+ 3104 01e2 75387838 		.ascii	"u8x8_display_info_t\000"
+ 3104      5F646973 
+ 3104      706C6179 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 66
+
+
+ 3104      5F696E66 
+ 3104      6F5F7400 
+ 3105              	.LASF33:
+ 3106 01f6 6465626F 		.ascii	"debounce_last_pin_state\000"
+ 3106      756E6365 
+ 3106      5F6C6173 
+ 3106      745F7069 
+ 3106      6E5F7374 
+ 3107              	.LASF9:
+ 3108 020e 6C6F6E67 		.ascii	"long long int\000"
+ 3108      206C6F6E 
+ 3108      6720696E 
+ 3108      7400
+ 3109              	.LASF31:
+ 3110 021c 6770696F 		.ascii	"gpio_result\000"
+ 3110      5F726573 
+ 3110      756C7400 
+ 3111              	.LASF46:
+ 3112 0228 73636B5F 		.ascii	"sck_pulse_width_ns\000"
+ 3112      70756C73 
+ 3112      655F7769 
+ 3112      6474685F 
+ 3112      6E7300
+ 3113              	.LASF85:
+ 3114 023b 75387838 		.ascii	"u8x8_cad_SendCmd\000"
+ 3114      5F636164 
+ 3114      5F53656E 
+ 3114      64436D64 
+ 3114      00
+ 3115              	.LASF91:
+ 3116 024c 75387838 		.ascii	"u8x8_d_helper_display_init\000"
+ 3116      5F645F68 
+ 3116      656C7065 
+ 3116      725F6469 
+ 3116      73706C61 
+ 3117              	.LASF6:
+ 3118 0267 6C6F6E67 		.ascii	"long int\000"
+ 3118      20696E74 
+ 3118      00
+ 3119              	.LASF77:
+ 3120 0270 75387838 		.ascii	"u8x8_d_st7528_flip0_seq\000"
+ 3120      5F645F73 
+ 3120      74373532 
+ 3120      385F666C 
+ 3120      6970305F 
+ 3121              	.LASF83:
+ 3122 0288 75387838 		.ascii	"u8x8_st7528_erc16064_display_info\000"
+ 3122      5F737437 
+ 3122      3532385F 
+ 3122      65726331 
+ 3122      36303634 
+ 3123              	.LASF61:
+ 3124 02aa 785F706F 		.ascii	"x_pos\000"
+ 3124      7300
+ 3125              	.LASF82:
+ 3126 02b0 75387838 		.ascii	"u8x8_d_st7528_erc16064_init_seq\000"
+ 3126      5F645F73 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 67
+
+
+ 3126      74373532 
+ 3126      385F6572 
+ 3126      63313630 
+ 3127              	.LASF3:
+ 3128 02d0 5F5F7569 		.ascii	"__uint8_t\000"
+ 3128      6E74385F 
+ 3128      7400
+ 3129              	.LASF19:
+ 3130 02da 64697370 		.ascii	"display_cb\000"
+ 3130      6C61795F 
+ 3130      636200
+ 3131              	.LASF68:
+ 3132 02e5 75387838 		.ascii	"u8x8_st7528_8to32\000"
+ 3132      5F737437 
+ 3132      3532385F 
+ 3132      38746F33 
+ 3132      3200
+ 3133              	.LASF50:
+ 3134 02f7 64617461 		.ascii	"data_setup_time_ns\000"
+ 3134      5F736574 
+ 3134      75705F74 
+ 3134      696D655F 
+ 3134      6E7300
+ 3135              	.LASF15:
+ 3136 030a 6C6F6E67 		.ascii	"long double\000"
+ 3136      20646F75 
+ 3136      626C6500 
+ 3137              	.LASF53:
+ 3138 0316 74696C65 		.ascii	"tile_height\000"
+ 3138      5F686569 
+ 3138      67687400 
+ 3139              	.LASF76:
+ 3140 0322 75387838 		.ascii	"u8x8_d_st7528_powersave1_seq\000"
+ 3140      5F645F73 
+ 3140      74373532 
+ 3140      385F706F 
+ 3140      77657273 
+ 3141              	.LASF1:
+ 3142 033f 756E7369 		.ascii	"unsigned char\000"
+ 3142      676E6564 
+ 3142      20636861 
+ 3142      7200
+ 3143              	.LASF0:
+ 3144 034d 7369676E 		.ascii	"signed char\000"
+ 3144      65642063 
+ 3144      68617200 
+ 3145              	.LASF10:
+ 3146 0359 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3146      206C6F6E 
+ 3146      6720756E 
+ 3146      7369676E 
+ 3146      65642069 
+ 3147              	.LASF14:
+ 3148 0370 75696E74 		.ascii	"uint32_t\000"
+ 3148      33325F74 
+ 3148      00
+ 3149              	.LASF59:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 68
+
+
+ 3150 0379 75387838 		.ascii	"u8x8_tile_struct\000"
+ 3150      5F74696C 
+ 3150      655F7374 
+ 3150      72756374 
+ 3150      00
+ 3151              	.LASF11:
+ 3152 038a 756E7369 		.ascii	"unsigned int\000"
+ 3152      676E6564 
+ 3152      20696E74 
+ 3152      00
+ 3153              	.LASF13:
+ 3154 0397 75696E74 		.ascii	"uint16_t\000"
+ 3154      31365F74 
+ 3154      00
+ 3155              	.LASF38:
+ 3156 03a0 75387838 		.ascii	"u8x8_display_info_struct\000"
+ 3156      5F646973 
+ 3156      706C6179 
+ 3156      5F696E66 
+ 3156      6F5F7374 
+ 3157              	.LASF84:
+ 3158 03b9 75387838 		.ascii	"u8x8_cad_StartTransfer\000"
+ 3158      5F636164 
+ 3158      5F537461 
+ 3158      72745472 
+ 3158      616E7366 
+ 3159              	.LASF43:
+ 3160 03d0 72657365 		.ascii	"reset_pulse_width_ms\000"
+ 3160      745F7075 
+ 3160      6C73655F 
+ 3160      77696474 
+ 3160      685F6D73 
+ 3161              	.LASF16:
+ 3162 03e5 75387838 		.ascii	"u8x8_t\000"
+ 3162      5F7400
+ 3163              	.LASF49:
+ 3164 03ec 6932635F 		.ascii	"i2c_bus_clock_100kHz\000"
+ 3164      6275735F 
+ 3164      636C6F63 
+ 3164      6B5F3130 
+ 3164      306B487A 
+ 3165              	.LASF47:
+ 3166 0401 73636B5F 		.ascii	"sck_clock_hz\000"
+ 3166      636C6F63 
+ 3166      6B5F687A 
+ 3166      00
+ 3167              	.LASF5:
+ 3168 040e 73686F72 		.ascii	"short unsigned int\000"
+ 3168      7420756E 
+ 3168      7369676E 
+ 3168      65642069 
+ 3168      6E7400
+ 3169              	.LASF64:
+ 3170 0421 75387838 		.ascii	"u8x8_char_cb\000"
+ 3170      5F636861 
+ 3170      725F6362 
+ 3170      00
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 69
+
+
+ 3171              	.LASF34:
+ 3172 042e 6465626F 		.ascii	"debounce_state\000"
+ 3172      756E6365 
+ 3172      5F737461 
+ 3172      746500
+ 3173              	.LASF86:
+ 3174 043d 75387838 		.ascii	"u8x8_cad_SendArg\000"
+ 3174      5F636164 
+ 3174      5F53656E 
+ 3174      64417267 
+ 3174      00
+ 3175              	.LASF17:
+ 3176 044e 64697370 		.ascii	"display_info\000"
+ 3176      6C61795F 
+ 3176      696E666F 
+ 3176      00
+ 3177              	.LASF57:
+ 3178 045b 70697865 		.ascii	"pixel_height\000"
+ 3178      6C5F6865 
+ 3178      69676874 
+ 3178      00
+ 3179              	.LASF80:
+ 3180 0468 75387838 		.ascii	"u8x8_d_st7528_nhd_c160100_init_seq\000"
+ 3180      5F645F73 
+ 3180      74373532 
+ 3180      385F6E68 
+ 3180      645F6331 
+ 3181              	.LASF73:
+ 3182 048b 75387838 		.ascii	"u8x8_d_st7528_erc16064\000"
+ 3182      5F645F73 
+ 3182      74373532 
+ 3182      385F6572 
+ 3182      63313630 
+ 3183              	.LASF56:
+ 3184 04a2 70697865 		.ascii	"pixel_width\000"
+ 3184      6C5F7769 
+ 3184      64746800 
+ 3185              	.LASF30:
+ 3186 04ae 75746638 		.ascii	"utf8_state\000"
+ 3186      5F737461 
+ 3186      746500
+ 3187              	.LASF37:
+ 3188 04b9 75387838 		.ascii	"u8x8_struct\000"
+ 3188      5F737472 
+ 3188      75637400 
+ 3189              	.LASF62:
+ 3190 04c5 795F706F 		.ascii	"y_pos\000"
+ 3190      7300
+ 3191              	.LASF88:
+ 3192 04cb 75387838 		.ascii	"u8x8_cad_SendSequence\000"
+ 3192      5F636164 
+ 3192      5F53656E 
+ 3192      64536571 
+ 3192      75656E63 
+ 3193              	.LASF8:
+ 3194 04e1 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3194      20756E73 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 70
+
+
+ 3194      69676E65 
+ 3194      6420696E 
+ 3194      7400
+ 3195              	.LASF72:
+ 3196 04f3 75387838 		.ascii	"u8x8_d_st7528_nhd_c160100\000"
+ 3196      5F645F73 
+ 3196      74373532 
+ 3196      385F6E68 
+ 3196      645F6331 
+ 3197              	.LASF21:
+ 3198 050d 62797465 		.ascii	"byte_cb\000"
+ 3198      5F636200 
+ 3199              	.LASF40:
+ 3200 0515 63686970 		.ascii	"chip_disable_level\000"
+ 3200      5F646973 
+ 3200      61626C65 
+ 3200      5F6C6576 
+ 3200      656C00
+ 3201              	.LASF78:
+ 3202 0528 75387838 		.ascii	"u8x8_d_st7528_flip1_seq\000"
+ 3202      5F645F73 
+ 3202      74373532 
+ 3202      385F666C 
+ 3202      6970315F 
+ 3203              	.LASF28:
+ 3204 0540 6932635F 		.ascii	"i2c_address\000"
+ 3204      61646472 
+ 3204      65737300 
+ 3205              	.LASF95:
+ 3206 054c 75387838 		.ascii	"u8x8_d_st7528_graylevel_init\000"
+ 3206      5F645F73 
+ 3206      74373532 
+ 3206      385F6772 
+ 3206      61796C65 
+ 3207              	.LASF55:
+ 3208 0569 666C6970 		.ascii	"flipmode_x_offset\000"
+ 3208      6D6F6465 
+ 3208      5F785F6F 
+ 3208      66667365 
+ 3208      7400
+ 3209              	.LASF67:
+ 3210 057b 6D6F6465 		.ascii	"mode0\000"
+ 3210      3000
+ 3211              	.LASF25:
+ 3212 0581 656E636F 		.ascii	"encoding\000"
+ 3212      64696E67 
+ 3212      00
+ 3213              	.LASF79:
+ 3214 058a 75387838 		.ascii	"u8x8_st7528_8to32_dest_buf\000"
+ 3214      5F737437 
+ 3214      3532385F 
+ 3214      38746F33 
+ 3214      325F6465 
+ 3215              	.LASF93:
+ 3216 05a5 2E2E5C75 		.ascii	"..\\u8g2\\csrc\\u8x8_d_st7528.c\000"
+ 3216      3867325C 
+ 3216      63737263 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccROVcn6.s 			page 71
+
+
+ 3216      5C753878 
+ 3216      385F645F 
+ 3217              	.LASF29:
+ 3218 05c2 6932635F 		.ascii	"i2c_started\000"
+ 3218      73746172 
+ 3218      74656400 
+ 3219              	.LASF90:
+ 3220 05ce 75387838 		.ascii	"u8x8_d_helper_display_setup_memory\000"
+ 3220      5F645F68 
+ 3220      656C7065 
+ 3220      725F6469 
+ 3220      73706C61 
+ 3221              	.LASF20:
+ 3222 05f1 6361645F 		.ascii	"cad_cb\000"
+ 3222      636200
+ 3223              	.LASF58:
+ 3224 05f8 75387838 		.ascii	"u8x8_tile_t\000"
+ 3224      5F74696C 
+ 3224      655F7400 
+ 3225              	.LASF92:
+ 3226 0604 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3226      43313120 
+ 3226      352E342E 
+ 3226      31203230 
+ 3226      31363036 
+ 3227 0637 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 3227      20726576 
+ 3227      6973696F 
+ 3227      6E203233 
+ 3227      37373135 
+ 3228 066a 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 3228      66756E63 
+ 3228      74696F6E 
+ 3228      2D736563 
+ 3228      74696F6E 
+ 3229              	.LASF32:
+ 3230 0692 6465626F 		.ascii	"debounce_default_pin_state\000"
+ 3230      756E6365 
+ 3230      5F646566 
+ 3230      61756C74 
+ 3230      5F70696E 
+ 3231              	.LASF63:
+ 3232 06ad 75387838 		.ascii	"u8x8_msg_cb\000"
+ 3232      5F6D7367 
+ 3232      5F636200 
+ 3233              	.LASF18:
+ 3234 06b9 6E657874 		.ascii	"next_cb\000"
+ 3234      5F636200 
+ 3235              	.LASF42:
+ 3236 06c1 7072655F 		.ascii	"pre_chip_disable_wait_ns\000"
+ 3236      63686970 
+ 3236      5F646973 
+ 3236      61626C65 
+ 3236      5F776169 
+ 3237              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
