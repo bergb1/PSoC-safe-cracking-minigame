@@ -1,0 +1,51 @@
+# Lab7
+# 2021-10-29 15:28:51Z
+
+# IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 0
+# IO_1@[IOP=(1)][IoId=(1)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 1
+# IO_3@[IOP=(1)][IoId=(3)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 3
+set_location "ClockBlock" clockblockcell -1 -1 0
+set_io "SDA_DISPLAY(0)" iocell 12 5
+set_io "SCL_DISPLAY(0)" iocell 12 4
+set_io "PIN_POT(0)" iocell 2 4
+set_io "PIN_O_LED(0)" iocell 2 1
+set_location "PIN_IR" logicalport -1 -1 2
+set_io "PIN_IR(0)" iocell 2 0
+set_io "PIN_BUZZER(0)" iocell 2 3
+set_io "PIN_ALARM(0)" iocell 2 5
+set_location "\PWM_O_LED:PWMUDB:status_2\" 1 3 0 1
+set_location "\PWM_BUZZER:PWMUDB:status_2\" 0 4 0 1
+set_location "\PWM_ALARM:PWMUDB:status_2\" 1 5 0 1
+set_location "Net_899" 0 4 0 3
+set_location "\I2C_DISPLAY:I2C_IRQ\" interrupt -1 -1 15
+set_location "\I2C_DISPLAY:I2C_FF\" i2ccell -1 -1 0
+set_location "\ADC_POT:IRQ\" interrupt -1 -1 0
+set_location "\ADC_POT:ADC_SAR\" sarcell -1 -1 0
+set_location "\PWM_O_LED:PWMUDB:genblk1:ctrlreg\" 1 3 6
+set_location "\PWM_O_LED:PWMUDB:genblk8:stsreg\" 1 3 4
+set_location "\PWM_O_LED:PWMUDB:sP16:pwmdp:u0\" 0 3 2
+set_location "\PWM_O_LED:PWMUDB:sP16:pwmdp:u1\" 1 3 2
+set_location "ISR_IR" interrupt -1 -1 6
+set_location "\PWM_BUZZER:PWMUDB:genblk1:ctrlreg\" 0 4 6
+set_location "\PWM_BUZZER:PWMUDB:genblk8:stsreg\" 0 4 4
+set_location "\PWM_BUZZER:PWMUDB:sP16:pwmdp:u0\" 1 4 2
+set_location "\PWM_BUZZER:PWMUDB:sP16:pwmdp:u1\" 0 4 2
+set_location "\PWM_ALARM:PWMUDB:genblk1:ctrlreg\" 1 5 6
+set_location "\PWM_ALARM:PWMUDB:genblk8:stsreg\" 1 5 4
+set_location "\PWM_ALARM:PWMUDB:sP16:pwmdp:u0\" 0 5 2
+set_location "\PWM_ALARM:PWMUDB:sP16:pwmdp:u1\" 1 5 2
+set_location "\PWM_O_LED:PWMUDB:runmode_enable\" 1 3 0 0
+set_location "\PWM_O_LED:PWMUDB:prevCompare1\" 1 3 0 3
+set_location "\PWM_O_LED:PWMUDB:status_0\" 1 3 1 0
+set_location "Net_503" 1 3 0 2
+set_location "\PWM_BUZZER:PWMUDB:runmode_enable\" 0 4 0 0
+set_location "\PWM_BUZZER:PWMUDB:prevCompare1\" 0 4 1 0
+set_location "\PWM_BUZZER:PWMUDB:status_0\" 0 4 1 1
+set_location "Net_897" 0 4 0 2
+set_location "\PWM_ALARM:PWMUDB:runmode_enable\" 1 5 0 0
+set_location "\PWM_ALARM:PWMUDB:prevCompare1\" 1 5 0 3
+set_location "\PWM_ALARM:PWMUDB:status_0\" 1 5 1 0
+set_location "Net_1117" 1 5 0 2
