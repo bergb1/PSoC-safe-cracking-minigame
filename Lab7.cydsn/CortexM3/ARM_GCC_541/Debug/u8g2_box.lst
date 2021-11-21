@@ -1,0 +1,5150 @@
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"u8g2_box.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.u8g2_DrawBox,"ax",%progbits
+  20              		.align	2
+  21              		.global	u8g2_DrawBox
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	u8g2_DrawBox, %function
+  25              	u8g2_DrawBox:
+  26              	.LFB0:
+  27              		.file 1 "..\\u8g2\\csrc\\u8g2_box.c"
+   1:..\u8g2\csrc/u8g2_box.c **** /*
+   2:..\u8g2\csrc/u8g2_box.c **** 
+   3:..\u8g2\csrc/u8g2_box.c ****   u8g2_box.c
+   4:..\u8g2\csrc/u8g2_box.c **** 
+   5:..\u8g2\csrc/u8g2_box.c ****   Universal 8bit Graphics Library (https://github.com/olikraus/u8g2/)
+   6:..\u8g2\csrc/u8g2_box.c **** 
+   7:..\u8g2\csrc/u8g2_box.c ****   Copyright (c) 2016, olikraus@gmail.com
+   8:..\u8g2\csrc/u8g2_box.c ****   All rights reserved.
+   9:..\u8g2\csrc/u8g2_box.c **** 
+  10:..\u8g2\csrc/u8g2_box.c ****   Redistribution and use in source and binary forms, with or without modification, 
+  11:..\u8g2\csrc/u8g2_box.c ****   are permitted provided that the following conditions are met:
+  12:..\u8g2\csrc/u8g2_box.c **** 
+  13:..\u8g2\csrc/u8g2_box.c ****   * Redistributions of source code must retain the above copyright notice, this list 
+  14:..\u8g2\csrc/u8g2_box.c ****     of conditions and the following disclaimer.
+  15:..\u8g2\csrc/u8g2_box.c ****     
+  16:..\u8g2\csrc/u8g2_box.c ****   * Redistributions in binary form must reproduce the above copyright notice, this 
+  17:..\u8g2\csrc/u8g2_box.c ****     list of conditions and the following disclaimer in the documentation and/or other 
+  18:..\u8g2\csrc/u8g2_box.c ****     materials provided with the distribution.
+  19:..\u8g2\csrc/u8g2_box.c **** 
+  20:..\u8g2\csrc/u8g2_box.c ****   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+  21:..\u8g2\csrc/u8g2_box.c ****   CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+  22:..\u8g2\csrc/u8g2_box.c ****   INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  23:..\u8g2\csrc/u8g2_box.c ****   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+  24:..\u8g2\csrc/u8g2_box.c ****   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+  25:..\u8g2\csrc/u8g2_box.c ****   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  26:..\u8g2\csrc/u8g2_box.c ****   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  27:..\u8g2\csrc/u8g2_box.c ****   NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+  28:..\u8g2\csrc/u8g2_box.c ****   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+  29:..\u8g2\csrc/u8g2_box.c ****   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+  30:..\u8g2\csrc/u8g2_box.c ****   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 2
+
+
+  31:..\u8g2\csrc/u8g2_box.c ****   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+  32:..\u8g2\csrc/u8g2_box.c ****   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
+  33:..\u8g2\csrc/u8g2_box.c **** 
+  34:..\u8g2\csrc/u8g2_box.c **** */
+  35:..\u8g2\csrc/u8g2_box.c **** 
+  36:..\u8g2\csrc/u8g2_box.c **** #include "u8g2.h"
+  37:..\u8g2\csrc/u8g2_box.c **** 
+  38:..\u8g2\csrc/u8g2_box.c **** /*
+  39:..\u8g2\csrc/u8g2_box.c ****   draw a filled box
+  40:..\u8g2\csrc/u8g2_box.c ****   restriction: does not work for w = 0 or h = 0
+  41:..\u8g2\csrc/u8g2_box.c **** */
+  42:..\u8g2\csrc/u8g2_box.c **** void u8g2_DrawBox(u8g2_t *u8g2, u8g2_uint_t x, u8g2_uint_t y, u8g2_uint_t w, u8g2_uint_t h)
+  43:..\u8g2\csrc/u8g2_box.c **** {
+  28              		.loc 1 43 0
+  29              		.cfi_startproc
+  30              		@ args = 4, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  34              		.cfi_def_cfa_offset 24
+  35              		.cfi_offset 4, -24
+  36              		.cfi_offset 5, -20
+  37              		.cfi_offset 6, -16
+  38              		.cfi_offset 7, -12
+  39              		.cfi_offset 8, -8
+  40              		.cfi_offset 14, -4
+  41 0004 82B0     		sub	sp, sp, #8
+  42              		.cfi_def_cfa_offset 32
+  43 0006 8046     		mov	r8, r0
+  44 0008 0F46     		mov	r7, r1
+  45 000a 1546     		mov	r5, r2
+  46 000c 1E46     		mov	r6, r3
+  47 000e BDF82040 		ldrh	r4, [sp, #32]
+  44:..\u8g2\csrc/u8g2_box.c **** #ifdef U8G2_WITH_INTERSECTION
+  45:..\u8g2\csrc/u8g2_box.c ****   if ( u8g2_IsIntersection(u8g2, x, y, x+w, y+h) == 0 ) 
+  48              		.loc 1 45 0
+  49 0012 01EB030E 		add	lr, r1, r3
+  50 0016 1319     		adds	r3, r2, r4
+  51              	.LVL1:
+  52 0018 9BB2     		uxth	r3, r3
+  53 001a 0093     		str	r3, [sp]
+  54 001c 1FFA8EF3 		uxth	r3, lr
+  55 0020 FFF7FEFF 		bl	u8g2_IsIntersection
+  56              	.LVL2:
+  57 0024 60B9     		cbnz	r0, .L3
+  58 0026 0DE0     		b	.L1
+  59              	.LVL3:
+  60              	.L4:
+  46:..\u8g2\csrc/u8g2_box.c ****     return;
+  47:..\u8g2\csrc/u8g2_box.c **** #endif /* U8G2_WITH_INTERSECTION */
+  48:..\u8g2\csrc/u8g2_box.c ****   while( h != 0 )
+  49:..\u8g2\csrc/u8g2_box.c ****   { 
+  50:..\u8g2\csrc/u8g2_box.c ****     u8g2_DrawHVLine(u8g2, x, y, w, 0);
+  61              		.loc 1 50 0
+  62 0028 0023     		movs	r3, #0
+  63 002a 0093     		str	r3, [sp]
+  64 002c 3346     		mov	r3, r6
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 3
+
+
+  65 002e 2A46     		mov	r2, r5
+  66 0030 3946     		mov	r1, r7
+  67 0032 4046     		mov	r0, r8
+  68 0034 FFF7FEFF 		bl	u8g2_DrawHVLine
+  69              	.LVL4:
+  51:..\u8g2\csrc/u8g2_box.c ****     y++;    
+  70              		.loc 1 51 0
+  71 0038 0135     		adds	r5, r5, #1
+  72              	.LVL5:
+  73 003a ADB2     		uxth	r5, r5
+  74              	.LVL6:
+  52:..\u8g2\csrc/u8g2_box.c ****     h--;
+  75              		.loc 1 52 0
+  76 003c 013C     		subs	r4, r4, #1
+  77              	.LVL7:
+  78 003e A4B2     		uxth	r4, r4
+  79              	.LVL8:
+  80              	.L3:
+  48:..\u8g2\csrc/u8g2_box.c ****   { 
+  81              		.loc 1 48 0
+  82 0040 002C     		cmp	r4, #0
+  83 0042 F1D1     		bne	.L4
+  84              	.LVL9:
+  85              	.L1:
+  53:..\u8g2\csrc/u8g2_box.c ****   }
+  54:..\u8g2\csrc/u8g2_box.c **** }
+  86              		.loc 1 54 0
+  87 0044 02B0     		add	sp, sp, #8
+  88              		.cfi_def_cfa_offset 24
+  89              		@ sp needed
+  90 0046 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  91              		.cfi_endproc
+  92              	.LFE0:
+  93              		.size	u8g2_DrawBox, .-u8g2_DrawBox
+  94 004a 00BF     		.section	.text.u8g2_DrawFrame,"ax",%progbits
+  95              		.align	2
+  96              		.global	u8g2_DrawFrame
+  97              		.thumb
+  98              		.thumb_func
+  99              		.type	u8g2_DrawFrame, %function
+ 100              	u8g2_DrawFrame:
+ 101              	.LFB1:
+  55:..\u8g2\csrc/u8g2_box.c **** 
+  56:..\u8g2\csrc/u8g2_box.c **** 
+  57:..\u8g2\csrc/u8g2_box.c **** /*
+  58:..\u8g2\csrc/u8g2_box.c ****   draw a frame (empty box)
+  59:..\u8g2\csrc/u8g2_box.c ****   restriction: does not work for w = 0 or h = 0
+  60:..\u8g2\csrc/u8g2_box.c **** */
+  61:..\u8g2\csrc/u8g2_box.c **** void u8g2_DrawFrame(u8g2_t *u8g2, u8g2_uint_t x, u8g2_uint_t y, u8g2_uint_t w, u8g2_uint_t h)
+  62:..\u8g2\csrc/u8g2_box.c **** {
+ 102              		.loc 1 62 0
+ 103              		.cfi_startproc
+ 104              		@ args = 4, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106              	.LVL10:
+ 107 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 108              		.cfi_def_cfa_offset 32
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 4
+
+
+ 109              		.cfi_offset 4, -32
+ 110              		.cfi_offset 5, -28
+ 111              		.cfi_offset 6, -24
+ 112              		.cfi_offset 7, -20
+ 113              		.cfi_offset 8, -16
+ 114              		.cfi_offset 9, -12
+ 115              		.cfi_offset 10, -8
+ 116              		.cfi_offset 14, -4
+ 117 0004 82B0     		sub	sp, sp, #8
+ 118              		.cfi_def_cfa_offset 40
+ 119 0006 8046     		mov	r8, r0
+ 120 0008 0E46     		mov	r6, r1
+ 121 000a 1446     		mov	r4, r2
+ 122 000c 1F46     		mov	r7, r3
+ 123 000e BDF82890 		ldrh	r9, [sp, #40]
+ 124              	.LVL11:
+  63:..\u8g2\csrc/u8g2_box.c ****   u8g2_uint_t xtmp = x;
+  64:..\u8g2\csrc/u8g2_box.c ****   
+  65:..\u8g2\csrc/u8g2_box.c **** #ifdef U8G2_WITH_INTERSECTION
+  66:..\u8g2\csrc/u8g2_box.c ****   if ( u8g2_IsIntersection(u8g2, x, y, x+w, y+h) == 0 ) 
+ 125              		.loc 1 66 0
+ 126 0012 CD18     		adds	r5, r1, r3
+ 127 0014 ADB2     		uxth	r5, r5
+ 128 0016 02EB0903 		add	r3, r2, r9
+ 129              	.LVL12:
+ 130 001a 9BB2     		uxth	r3, r3
+ 131 001c 0093     		str	r3, [sp]
+ 132 001e 2B46     		mov	r3, r5
+ 133 0020 FFF7FEFF 		bl	u8g2_IsIntersection
+ 134              	.LVL13:
+ 135 0024 80B3     		cbz	r0, .L6
+  67:..\u8g2\csrc/u8g2_box.c ****     return;
+  68:..\u8g2\csrc/u8g2_box.c **** #endif /* U8G2_WITH_INTERSECTION */
+  69:..\u8g2\csrc/u8g2_box.c ****   
+  70:..\u8g2\csrc/u8g2_box.c ****   u8g2_DrawHVLine(u8g2, x, y, w, 0);
+ 136              		.loc 1 70 0
+ 137 0026 0023     		movs	r3, #0
+ 138 0028 0093     		str	r3, [sp]
+ 139 002a 3B46     		mov	r3, r7
+ 140 002c 2246     		mov	r2, r4
+ 141 002e 3146     		mov	r1, r6
+ 142 0030 4046     		mov	r0, r8
+ 143 0032 FFF7FEFF 		bl	u8g2_DrawHVLine
+ 144              	.LVL14:
+  71:..\u8g2\csrc/u8g2_box.c ****   if (h >= 2) {
+ 145              		.loc 1 71 0
+ 146 0036 B9F1010F 		cmp	r9, #1
+ 147 003a 25D9     		bls	.L6
+  72:..\u8g2\csrc/u8g2_box.c ****     h-=2;
+ 148              		.loc 1 72 0
+ 149 003c A9F10209 		sub	r9, r9, #2
+ 150 0040 1FFA89F9 		uxth	r9, r9
+ 151              	.LVL15:
+  73:..\u8g2\csrc/u8g2_box.c ****     y++;
+ 152              		.loc 1 73 0
+ 153 0044 0134     		adds	r4, r4, #1
+ 154 0046 A4B2     		uxth	r4, r4
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 5
+
+
+ 155              	.LVL16:
+  74:..\u8g2\csrc/u8g2_box.c ****     if (h > 0) {
+ 156              		.loc 1 74 0
+ 157 0048 B9F1000F 		cmp	r9, #0
+ 158 004c 14D0     		beq	.L8
+  75:..\u8g2\csrc/u8g2_box.c ****       u8g2_DrawHVLine(u8g2, x, y, h, 1);
+ 159              		.loc 1 75 0
+ 160 004e 4FF0010A 		mov	r10, #1
+ 161 0052 CDF800A0 		str	r10, [sp]
+ 162 0056 4B46     		mov	r3, r9
+ 163 0058 2246     		mov	r2, r4
+ 164 005a 3146     		mov	r1, r6
+ 165 005c 4046     		mov	r0, r8
+ 166 005e FFF7FEFF 		bl	u8g2_DrawHVLine
+ 167              	.LVL17:
+  76:..\u8g2\csrc/u8g2_box.c ****       x+=w;
+  77:..\u8g2\csrc/u8g2_box.c ****       x--;
+ 168              		.loc 1 77 0
+ 169 0062 691E     		subs	r1, r5, #1
+ 170              	.LVL18:
+  78:..\u8g2\csrc/u8g2_box.c ****       u8g2_DrawHVLine(u8g2, x, y, h, 1);
+ 171              		.loc 1 78 0
+ 172 0064 CDF800A0 		str	r10, [sp]
+ 173 0068 4B46     		mov	r3, r9
+ 174 006a 2246     		mov	r2, r4
+ 175 006c 89B2     		uxth	r1, r1
+ 176 006e 4046     		mov	r0, r8
+ 177 0070 FFF7FEFF 		bl	u8g2_DrawHVLine
+ 178              	.LVL19:
+  79:..\u8g2\csrc/u8g2_box.c ****       y+=h;
+ 179              		.loc 1 79 0
+ 180 0074 4C44     		add	r4, r4, r9
+ 181              	.LVL20:
+ 182 0076 A4B2     		uxth	r4, r4
+ 183              	.LVL21:
+ 184              	.L8:
+  80:..\u8g2\csrc/u8g2_box.c ****     }
+  81:..\u8g2\csrc/u8g2_box.c ****     u8g2_DrawHVLine(u8g2, xtmp, y, w, 0);
+ 185              		.loc 1 81 0
+ 186 0078 0023     		movs	r3, #0
+ 187 007a 0093     		str	r3, [sp]
+ 188 007c 3B46     		mov	r3, r7
+ 189 007e 2246     		mov	r2, r4
+ 190 0080 3146     		mov	r1, r6
+ 191 0082 4046     		mov	r0, r8
+ 192 0084 FFF7FEFF 		bl	u8g2_DrawHVLine
+ 193              	.LVL22:
+ 194              	.L6:
+  82:..\u8g2\csrc/u8g2_box.c ****   }
+  83:..\u8g2\csrc/u8g2_box.c **** }
+ 195              		.loc 1 83 0
+ 196 0088 02B0     		add	sp, sp, #8
+ 197              		.cfi_def_cfa_offset 32
+ 198              		@ sp needed
+ 199 008a BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 200              		.cfi_endproc
+ 201              	.LFE1:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 6
+
+
+ 202              		.size	u8g2_DrawFrame, .-u8g2_DrawFrame
+ 203 008e 00BF     		.section	.text.u8g2_DrawRBox,"ax",%progbits
+ 204              		.align	2
+ 205              		.global	u8g2_DrawRBox
+ 206              		.thumb
+ 207              		.thumb_func
+ 208              		.type	u8g2_DrawRBox, %function
+ 209              	u8g2_DrawRBox:
+ 210              	.LFB2:
+  84:..\u8g2\csrc/u8g2_box.c **** 
+  85:..\u8g2\csrc/u8g2_box.c **** 
+  86:..\u8g2\csrc/u8g2_box.c **** 
+  87:..\u8g2\csrc/u8g2_box.c **** 
+  88:..\u8g2\csrc/u8g2_box.c **** void u8g2_DrawRBox(u8g2_t *u8g2, u8g2_uint_t x, u8g2_uint_t y, u8g2_uint_t w, u8g2_uint_t h, u8g2_u
+  89:..\u8g2\csrc/u8g2_box.c **** {
+ 211              		.loc 1 89 0
+ 212              		.cfi_startproc
+ 213              		@ args = 8, pretend = 0, frame = 16
+ 214              		@ frame_needed = 0, uses_anonymous_args = 0
+ 215              	.LVL23:
+ 216 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 217              		.cfi_def_cfa_offset 36
+ 218              		.cfi_offset 4, -36
+ 219              		.cfi_offset 5, -32
+ 220              		.cfi_offset 6, -28
+ 221              		.cfi_offset 7, -24
+ 222              		.cfi_offset 8, -20
+ 223              		.cfi_offset 9, -16
+ 224              		.cfi_offset 10, -12
+ 225              		.cfi_offset 11, -8
+ 226              		.cfi_offset 14, -4
+ 227 0004 87B0     		sub	sp, sp, #28
+ 228              		.cfi_def_cfa_offset 64
+ 229 0006 0390     		str	r0, [sp, #12]
+ 230 0008 8946     		mov	r9, r1
+ 231 000a 9346     		mov	fp, r2
+ 232 000c 9A46     		mov	r10, r3
+ 233 000e BDF84060 		ldrh	r6, [sp, #64]
+ 234 0012 BDF84470 		ldrh	r7, [sp, #68]
+  90:..\u8g2\csrc/u8g2_box.c ****   u8g2_uint_t xl, yu;
+  91:..\u8g2\csrc/u8g2_box.c ****   u8g2_uint_t yl, xr;
+  92:..\u8g2\csrc/u8g2_box.c **** 
+  93:..\u8g2\csrc/u8g2_box.c **** #ifdef U8G2_WITH_INTERSECTION
+  94:..\u8g2\csrc/u8g2_box.c ****   if ( u8g2_IsIntersection(u8g2, x, y, x+w, y+h) == 0 ) 
+ 235              		.loc 1 94 0
+ 236 0016 CC18     		adds	r4, r1, r3
+ 237 0018 A4B2     		uxth	r4, r4
+ 238 001a 9519     		adds	r5, r2, r6
+ 239 001c ADB2     		uxth	r5, r5
+ 240 001e 0095     		str	r5, [sp]
+ 241 0020 2346     		mov	r3, r4
+ 242              	.LVL24:
+ 243 0022 FFF7FEFF 		bl	u8g2_IsIntersection
+ 244              	.LVL25:
+ 245 0026 0028     		cmp	r0, #0
+ 246 0028 64D0     		beq	.L10
+ 247              	.LVL26:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 7
+
+
+  95:..\u8g2\csrc/u8g2_box.c ****     return;
+  96:..\u8g2\csrc/u8g2_box.c **** #endif /* U8G2_WITH_INTERSECTION */
+  97:..\u8g2\csrc/u8g2_box.c **** 
+  98:..\u8g2\csrc/u8g2_box.c ****   xl = x;
+  99:..\u8g2\csrc/u8g2_box.c ****   xl += r;
+ 248              		.loc 1 99 0
+ 249 002a 09EB0708 		add	r8, r9, r7
+ 250 002e 1FFA88F8 		uxth	r8, r8
+ 251              	.LVL27:
+ 100:..\u8g2\csrc/u8g2_box.c ****   yu = y;
+ 101:..\u8g2\csrc/u8g2_box.c ****   yu += r;
+ 252              		.loc 1 101 0
+ 253 0032 0BEB0703 		add	r3, fp, r7
+ 254 0036 9BB2     		uxth	r3, r3
+ 255 0038 1A46     		mov	r2, r3
+ 256              	.LVL28:
+ 102:..\u8g2\csrc/u8g2_box.c ****  
+ 103:..\u8g2\csrc/u8g2_box.c ****   xr = x;
+ 104:..\u8g2\csrc/u8g2_box.c ****   xr += w;
+ 105:..\u8g2\csrc/u8g2_box.c ****   xr -= r;
+ 257              		.loc 1 105 0
+ 258 003a E41B     		subs	r4, r4, r7
+ 259              	.LVL29:
+ 260 003c A4B2     		uxth	r4, r4
+ 261              	.LVL30:
+ 106:..\u8g2\csrc/u8g2_box.c ****   xr -= 1;
+ 262              		.loc 1 106 0
+ 263 003e 013C     		subs	r4, r4, #1
+ 264              	.LVL31:
+ 265 0040 A4B2     		uxth	r4, r4
+ 266              	.LVL32:
+ 107:..\u8g2\csrc/u8g2_box.c ****   
+ 108:..\u8g2\csrc/u8g2_box.c ****   yl = y;
+ 109:..\u8g2\csrc/u8g2_box.c ****   yl += h;
+ 110:..\u8g2\csrc/u8g2_box.c ****   yl -= r; 
+ 267              		.loc 1 110 0
+ 268 0042 ED1B     		subs	r5, r5, r7
+ 269              	.LVL33:
+ 270 0044 ADB2     		uxth	r5, r5
+ 271              	.LVL34:
+ 111:..\u8g2\csrc/u8g2_box.c ****   yl -= 1;
+ 272              		.loc 1 111 0
+ 273 0046 013D     		subs	r5, r5, #1
+ 274              	.LVL35:
+ 275 0048 ADB2     		uxth	r5, r5
+ 276              	.LVL36:
+ 112:..\u8g2\csrc/u8g2_box.c **** 
+ 113:..\u8g2\csrc/u8g2_box.c ****   u8g2_DrawDisc(u8g2, xl, yu, r, U8G2_DRAW_UPPER_LEFT);
+ 277              		.loc 1 113 0
+ 278 004a 0223     		movs	r3, #2
+ 279 004c 0093     		str	r3, [sp]
+ 280 004e 3B46     		mov	r3, r7
+ 281 0050 0492     		str	r2, [sp, #16]
+ 282 0052 4146     		mov	r1, r8
+ 283 0054 0398     		ldr	r0, [sp, #12]
+ 284 0056 FFF7FEFF 		bl	u8g2_DrawDisc
+ 285              	.LVL37:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 8
+
+
+ 114:..\u8g2\csrc/u8g2_box.c ****   u8g2_DrawDisc(u8g2, xr, yu, r, U8G2_DRAW_UPPER_RIGHT);
+ 286              		.loc 1 114 0
+ 287 005a 0123     		movs	r3, #1
+ 288 005c 0093     		str	r3, [sp]
+ 289 005e 3B46     		mov	r3, r7
+ 290 0060 049A     		ldr	r2, [sp, #16]
+ 291 0062 2146     		mov	r1, r4
+ 292 0064 0398     		ldr	r0, [sp, #12]
+ 293 0066 FFF7FEFF 		bl	u8g2_DrawDisc
+ 294              	.LVL38:
+ 115:..\u8g2\csrc/u8g2_box.c ****   u8g2_DrawDisc(u8g2, xl, yl, r, U8G2_DRAW_LOWER_LEFT);
+ 295              		.loc 1 115 0
+ 296 006a 0423     		movs	r3, #4
+ 297 006c 0093     		str	r3, [sp]
+ 298 006e 3B46     		mov	r3, r7
+ 299 0070 2A46     		mov	r2, r5
+ 300 0072 4146     		mov	r1, r8
+ 301 0074 0398     		ldr	r0, [sp, #12]
+ 302 0076 FFF7FEFF 		bl	u8g2_DrawDisc
+ 303              	.LVL39:
+ 116:..\u8g2\csrc/u8g2_box.c ****   u8g2_DrawDisc(u8g2, xr, yl, r, U8G2_DRAW_LOWER_RIGHT);
+ 304              		.loc 1 116 0
+ 305 007a 0823     		movs	r3, #8
+ 306 007c 0093     		str	r3, [sp]
+ 307 007e 3B46     		mov	r3, r7
+ 308 0080 2A46     		mov	r2, r5
+ 309 0082 2146     		mov	r1, r4
+ 310 0084 0398     		ldr	r0, [sp, #12]
+ 311 0086 FFF7FEFF 		bl	u8g2_DrawDisc
+ 312              	.LVL40:
+ 313              	.LBB2:
+ 117:..\u8g2\csrc/u8g2_box.c **** 
+ 118:..\u8g2\csrc/u8g2_box.c ****   {
+ 119:..\u8g2\csrc/u8g2_box.c ****     u8g2_uint_t ww, hh;
+ 120:..\u8g2\csrc/u8g2_box.c **** 
+ 121:..\u8g2\csrc/u8g2_box.c ****     ww = w;
+ 122:..\u8g2\csrc/u8g2_box.c ****     ww -= r;
+ 314              		.loc 1 122 0
+ 315 008a C7EB0A03 		rsb	r3, r7, r10
+ 316 008e 9BB2     		uxth	r3, r3
+ 317              	.LVL41:
+ 123:..\u8g2\csrc/u8g2_box.c ****     ww -= r;
+ 318              		.loc 1 123 0
+ 319 0090 DB1B     		subs	r3, r3, r7
+ 320              	.LVL42:
+ 321 0092 9BB2     		uxth	r3, r3
+ 322              	.LVL43:
+ 124:..\u8g2\csrc/u8g2_box.c ****     xl++;
+ 323              		.loc 1 124 0
+ 324 0094 08F10108 		add	r8, r8, #1
+ 325              	.LVL44:
+ 326 0098 1FFA88F8 		uxth	r8, r8
+ 327              	.LVL45:
+ 125:..\u8g2\csrc/u8g2_box.c ****     yu++;
+ 328              		.loc 1 125 0
+ 329 009c 049A     		ldr	r2, [sp, #16]
+ 330 009e 541C     		adds	r4, r2, #1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 9
+
+
+ 331              	.LVL46:
+ 332 00a0 A4B2     		uxth	r4, r4
+ 333              	.LVL47:
+ 126:..\u8g2\csrc/u8g2_box.c ****     
+ 127:..\u8g2\csrc/u8g2_box.c ****     if ( ww >= 3 )
+ 334              		.loc 1 127 0
+ 335 00a2 022B     		cmp	r3, #2
+ 336 00a4 17D9     		bls	.L12
+ 128:..\u8g2\csrc/u8g2_box.c ****     {
+ 129:..\u8g2\csrc/u8g2_box.c ****       ww -= 2;
+ 337              		.loc 1 129 0
+ 338 00a6 023B     		subs	r3, r3, #2
+ 339              	.LVL48:
+ 340 00a8 9BB2     		uxth	r3, r3
+ 341              	.LVL49:
+ 342 00aa 1946     		mov	r1, r3
+ 343              	.LVL50:
+ 130:..\u8g2\csrc/u8g2_box.c ****       u8g2_DrawBox(u8g2, xl, y, ww, r+1);
+ 344              		.loc 1 130 0
+ 345 00ac 7B1C     		adds	r3, r7, #1
+ 346 00ae 9BB2     		uxth	r3, r3
+ 347 00b0 0593     		str	r3, [sp, #20]
+ 348 00b2 0093     		str	r3, [sp]
+ 349 00b4 0491     		str	r1, [sp, #16]
+ 350 00b6 0B46     		mov	r3, r1
+ 351 00b8 5A46     		mov	r2, fp
+ 352 00ba 4146     		mov	r1, r8
+ 353              	.LVL51:
+ 354 00bc DDF80CB0 		ldr	fp, [sp, #12]
+ 355 00c0 5846     		mov	r0, fp
+ 356 00c2 FFF7FEFF 		bl	u8g2_DrawBox
+ 357              	.LVL52:
+ 131:..\u8g2\csrc/u8g2_box.c ****       u8g2_DrawBox(u8g2, xl, yl, ww, r+1);
+ 358              		.loc 1 131 0
+ 359 00c6 059A     		ldr	r2, [sp, #20]
+ 360 00c8 0092     		str	r2, [sp]
+ 361 00ca 049B     		ldr	r3, [sp, #16]
+ 362 00cc 2A46     		mov	r2, r5
+ 363 00ce 4146     		mov	r1, r8
+ 364 00d0 5846     		mov	r0, fp
+ 365 00d2 FFF7FEFF 		bl	u8g2_DrawBox
+ 366              	.LVL53:
+ 367              	.L12:
+ 132:..\u8g2\csrc/u8g2_box.c ****     }
+ 133:..\u8g2\csrc/u8g2_box.c ****     
+ 134:..\u8g2\csrc/u8g2_box.c ****     hh = h;
+ 135:..\u8g2\csrc/u8g2_box.c ****     hh -= r;
+ 368              		.loc 1 135 0
+ 369 00d6 F61B     		subs	r6, r6, r7
+ 370              	.LVL54:
+ 371 00d8 B6B2     		uxth	r6, r6
+ 372              	.LVL55:
+ 136:..\u8g2\csrc/u8g2_box.c ****     hh -= r;
+ 373              		.loc 1 136 0
+ 374 00da F71B     		subs	r7, r6, r7
+ 375              	.LVL56:
+ 376 00dc BFB2     		uxth	r7, r7
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 10
+
+
+ 377              	.LVL57:
+ 137:..\u8g2\csrc/u8g2_box.c ****     //h--;
+ 138:..\u8g2\csrc/u8g2_box.c ****     if ( hh >= 3 )
+ 378              		.loc 1 138 0
+ 379 00de 022F     		cmp	r7, #2
+ 380 00e0 08D9     		bls	.L10
+ 139:..\u8g2\csrc/u8g2_box.c ****     {
+ 140:..\u8g2\csrc/u8g2_box.c ****       hh -= 2;
+ 381              		.loc 1 140 0
+ 382 00e2 023F     		subs	r7, r7, #2
+ 383              	.LVL58:
+ 384 00e4 BFB2     		uxth	r7, r7
+ 385              	.LVL59:
+ 141:..\u8g2\csrc/u8g2_box.c ****       u8g2_DrawBox(u8g2, x, yu, w, hh);
+ 386              		.loc 1 141 0
+ 387 00e6 0097     		str	r7, [sp]
+ 388 00e8 5346     		mov	r3, r10
+ 389 00ea 2246     		mov	r2, r4
+ 390 00ec 4946     		mov	r1, r9
+ 391 00ee 0398     		ldr	r0, [sp, #12]
+ 392 00f0 FFF7FEFF 		bl	u8g2_DrawBox
+ 393              	.LVL60:
+ 394              	.L10:
+ 395              	.LBE2:
+ 142:..\u8g2\csrc/u8g2_box.c ****     }
+ 143:..\u8g2\csrc/u8g2_box.c ****   }
+ 144:..\u8g2\csrc/u8g2_box.c **** }
+ 396              		.loc 1 144 0
+ 397 00f4 07B0     		add	sp, sp, #28
+ 398              		.cfi_def_cfa_offset 36
+ 399              		@ sp needed
+ 400 00f6 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 401              		.cfi_endproc
+ 402              	.LFE2:
+ 403              		.size	u8g2_DrawRBox, .-u8g2_DrawRBox
+ 404 00fa 00BF     		.section	.text.u8g2_DrawRFrame,"ax",%progbits
+ 405              		.align	2
+ 406              		.global	u8g2_DrawRFrame
+ 407              		.thumb
+ 408              		.thumb_func
+ 409              		.type	u8g2_DrawRFrame, %function
+ 410              	u8g2_DrawRFrame:
+ 411              	.LFB3:
+ 145:..\u8g2\csrc/u8g2_box.c **** 
+ 146:..\u8g2\csrc/u8g2_box.c **** 
+ 147:..\u8g2\csrc/u8g2_box.c **** void u8g2_DrawRFrame(u8g2_t *u8g2, u8g2_uint_t x, u8g2_uint_t y, u8g2_uint_t w, u8g2_uint_t h, u8g2
+ 148:..\u8g2\csrc/u8g2_box.c **** {
+ 412              		.loc 1 148 0
+ 413              		.cfi_startproc
+ 414              		@ args = 8, pretend = 0, frame = 8
+ 415              		@ frame_needed = 0, uses_anonymous_args = 0
+ 416              	.LVL61:
+ 417 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 418              		.cfi_def_cfa_offset 36
+ 419              		.cfi_offset 4, -36
+ 420              		.cfi_offset 5, -32
+ 421              		.cfi_offset 6, -28
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 11
+
+
+ 422              		.cfi_offset 7, -24
+ 423              		.cfi_offset 8, -20
+ 424              		.cfi_offset 9, -16
+ 425              		.cfi_offset 10, -12
+ 426              		.cfi_offset 11, -8
+ 427              		.cfi_offset 14, -4
+ 428 0004 85B0     		sub	sp, sp, #20
+ 429              		.cfi_def_cfa_offset 56
+ 430 0006 0290     		str	r0, [sp, #8]
+ 431 0008 8A46     		mov	r10, r1
+ 432 000a 9346     		mov	fp, r2
+ 433 000c 9846     		mov	r8, r3
+ 434 000e BDF83890 		ldrh	r9, [sp, #56]
+ 435 0012 BDF83C60 		ldrh	r6, [sp, #60]
+ 149:..\u8g2\csrc/u8g2_box.c ****   u8g2_uint_t xl, yu;
+ 150:..\u8g2\csrc/u8g2_box.c **** 
+ 151:..\u8g2\csrc/u8g2_box.c **** #ifdef U8G2_WITH_INTERSECTION
+ 152:..\u8g2\csrc/u8g2_box.c ****   if ( u8g2_IsIntersection(u8g2, x, y, x+w, y+h) == 0 ) 
+ 436              		.loc 1 152 0
+ 437 0016 CD18     		adds	r5, r1, r3
+ 438 0018 ADB2     		uxth	r5, r5
+ 439 001a 02EB0904 		add	r4, r2, r9
+ 440 001e A4B2     		uxth	r4, r4
+ 441 0020 0094     		str	r4, [sp]
+ 442 0022 2B46     		mov	r3, r5
+ 443              	.LVL62:
+ 444 0024 FFF7FEFF 		bl	u8g2_IsIntersection
+ 445              	.LVL63:
+ 446 0028 0028     		cmp	r0, #0
+ 447 002a 6AD0     		beq	.L14
+ 448              	.LVL64:
+ 153:..\u8g2\csrc/u8g2_box.c ****     return;
+ 154:..\u8g2\csrc/u8g2_box.c **** #endif /* U8G2_WITH_INTERSECTION */
+ 155:..\u8g2\csrc/u8g2_box.c **** 
+ 156:..\u8g2\csrc/u8g2_box.c ****   xl = x;
+ 157:..\u8g2\csrc/u8g2_box.c ****   xl += r;
+ 449              		.loc 1 157 0
+ 450 002c 0AEB0607 		add	r7, r10, r6
+ 451 0030 BFB2     		uxth	r7, r7
+ 452              	.LVL65:
+ 158:..\u8g2\csrc/u8g2_box.c ****   yu = y;
+ 159:..\u8g2\csrc/u8g2_box.c ****   yu += r;
+ 453              		.loc 1 159 0
+ 454 0032 0BEB0603 		add	r3, fp, r6
+ 455 0036 9BB2     		uxth	r3, r3
+ 456 0038 1A46     		mov	r2, r3
+ 457              	.LVL66:
+ 458              	.LBB3:
+ 160:..\u8g2\csrc/u8g2_box.c ****  
+ 161:..\u8g2\csrc/u8g2_box.c ****   {
+ 162:..\u8g2\csrc/u8g2_box.c ****     u8g2_uint_t yl, xr;
+ 163:..\u8g2\csrc/u8g2_box.c ****       
+ 164:..\u8g2\csrc/u8g2_box.c ****     xr = x;
+ 165:..\u8g2\csrc/u8g2_box.c ****     xr += w;
+ 166:..\u8g2\csrc/u8g2_box.c ****     xr -= r;
+ 459              		.loc 1 166 0
+ 460 003a AD1B     		subs	r5, r5, r6
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 12
+
+
+ 461              	.LVL67:
+ 462 003c ADB2     		uxth	r5, r5
+ 463              	.LVL68:
+ 167:..\u8g2\csrc/u8g2_box.c ****     xr -= 1;
+ 464              		.loc 1 167 0
+ 465 003e 013D     		subs	r5, r5, #1
+ 466              	.LVL69:
+ 467 0040 ADB2     		uxth	r5, r5
+ 468              	.LVL70:
+ 168:..\u8g2\csrc/u8g2_box.c ****     
+ 169:..\u8g2\csrc/u8g2_box.c ****     yl = y;
+ 170:..\u8g2\csrc/u8g2_box.c ****     yl += h;
+ 171:..\u8g2\csrc/u8g2_box.c ****     yl -= r; 
+ 469              		.loc 1 171 0
+ 470 0042 A41B     		subs	r4, r4, r6
+ 471              	.LVL71:
+ 472 0044 A4B2     		uxth	r4, r4
+ 473              	.LVL72:
+ 172:..\u8g2\csrc/u8g2_box.c ****     yl -= 1;
+ 474              		.loc 1 172 0
+ 475 0046 013C     		subs	r4, r4, #1
+ 476              	.LVL73:
+ 477 0048 A4B2     		uxth	r4, r4
+ 478              	.LVL74:
+ 173:..\u8g2\csrc/u8g2_box.c **** 
+ 174:..\u8g2\csrc/u8g2_box.c ****     u8g2_DrawCircle(u8g2, xl, yu, r, U8G2_DRAW_UPPER_LEFT);
+ 479              		.loc 1 174 0
+ 480 004a 0223     		movs	r3, #2
+ 481 004c 0093     		str	r3, [sp]
+ 482 004e 3346     		mov	r3, r6
+ 483 0050 0392     		str	r2, [sp, #12]
+ 484 0052 3946     		mov	r1, r7
+ 485 0054 0298     		ldr	r0, [sp, #8]
+ 486 0056 FFF7FEFF 		bl	u8g2_DrawCircle
+ 487              	.LVL75:
+ 175:..\u8g2\csrc/u8g2_box.c ****     u8g2_DrawCircle(u8g2, xr, yu, r, U8G2_DRAW_UPPER_RIGHT);
+ 488              		.loc 1 175 0
+ 489 005a 0123     		movs	r3, #1
+ 490 005c 0093     		str	r3, [sp]
+ 491 005e 3346     		mov	r3, r6
+ 492 0060 039A     		ldr	r2, [sp, #12]
+ 493 0062 2946     		mov	r1, r5
+ 494 0064 0298     		ldr	r0, [sp, #8]
+ 495 0066 FFF7FEFF 		bl	u8g2_DrawCircle
+ 496              	.LVL76:
+ 176:..\u8g2\csrc/u8g2_box.c ****     u8g2_DrawCircle(u8g2, xl, yl, r, U8G2_DRAW_LOWER_LEFT);
+ 497              		.loc 1 176 0
+ 498 006a 0423     		movs	r3, #4
+ 499 006c 0093     		str	r3, [sp]
+ 500 006e 3346     		mov	r3, r6
+ 501 0070 2246     		mov	r2, r4
+ 502 0072 3946     		mov	r1, r7
+ 503 0074 0298     		ldr	r0, [sp, #8]
+ 504 0076 FFF7FEFF 		bl	u8g2_DrawCircle
+ 505              	.LVL77:
+ 177:..\u8g2\csrc/u8g2_box.c ****     u8g2_DrawCircle(u8g2, xr, yl, r, U8G2_DRAW_LOWER_RIGHT);
+ 506              		.loc 1 177 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 13
+
+
+ 507 007a 0823     		movs	r3, #8
+ 508 007c 0093     		str	r3, [sp]
+ 509 007e 3346     		mov	r3, r6
+ 510 0080 2246     		mov	r2, r4
+ 511 0082 2946     		mov	r1, r5
+ 512 0084 0298     		ldr	r0, [sp, #8]
+ 513 0086 FFF7FEFF 		bl	u8g2_DrawCircle
+ 514              	.LVL78:
+ 515              	.LBE3:
+ 516              	.LBB4:
+ 178:..\u8g2\csrc/u8g2_box.c ****   }
+ 179:..\u8g2\csrc/u8g2_box.c **** 
+ 180:..\u8g2\csrc/u8g2_box.c ****   {
+ 181:..\u8g2\csrc/u8g2_box.c ****     u8g2_uint_t ww, hh;
+ 182:..\u8g2\csrc/u8g2_box.c **** 
+ 183:..\u8g2\csrc/u8g2_box.c ****     ww = w;
+ 184:..\u8g2\csrc/u8g2_box.c ****     ww -= r;
+ 517              		.loc 1 184 0
+ 518 008a C6EB0805 		rsb	r5, r6, r8
+ 519              	.LVL79:
+ 520 008e ADB2     		uxth	r5, r5
+ 521              	.LVL80:
+ 185:..\u8g2\csrc/u8g2_box.c ****     ww -= r;
+ 522              		.loc 1 185 0
+ 523 0090 AD1B     		subs	r5, r5, r6
+ 524              	.LVL81:
+ 525 0092 ADB2     		uxth	r5, r5
+ 526              	.LVL82:
+ 186:..\u8g2\csrc/u8g2_box.c ****     hh = h;
+ 187:..\u8g2\csrc/u8g2_box.c ****     hh -= r;
+ 527              		.loc 1 187 0
+ 528 0094 C6EB0903 		rsb	r3, r6, r9
+ 529 0098 9BB2     		uxth	r3, r3
+ 530              	.LVL83:
+ 188:..\u8g2\csrc/u8g2_box.c ****     hh -= r;
+ 531              		.loc 1 188 0
+ 532 009a 9E1B     		subs	r6, r3, r6
+ 533              	.LVL84:
+ 534 009c B6B2     		uxth	r6, r6
+ 535              	.LVL85:
+ 189:..\u8g2\csrc/u8g2_box.c ****     
+ 190:..\u8g2\csrc/u8g2_box.c ****     xl++;
+ 536              		.loc 1 190 0
+ 537 009e 0137     		adds	r7, r7, #1
+ 538              	.LVL86:
+ 539 00a0 BFB2     		uxth	r7, r7
+ 540              	.LVL87:
+ 191:..\u8g2\csrc/u8g2_box.c ****     yu++;
+ 541              		.loc 1 191 0
+ 542 00a2 039A     		ldr	r2, [sp, #12]
+ 543 00a4 541C     		adds	r4, r2, #1
+ 544              	.LVL88:
+ 545 00a6 A4B2     		uxth	r4, r4
+ 546              	.LVL89:
+ 192:..\u8g2\csrc/u8g2_box.c ****     
+ 193:..\u8g2\csrc/u8g2_box.c ****     if ( ww >= 3 )
+ 547              		.loc 1 193 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 14
+
+
+ 548 00a8 022D     		cmp	r5, #2
+ 549 00aa 13D9     		bls	.L16
+ 194:..\u8g2\csrc/u8g2_box.c ****     {
+ 195:..\u8g2\csrc/u8g2_box.c ****       ww -= 2;
+ 550              		.loc 1 195 0
+ 551 00ac 023D     		subs	r5, r5, #2
+ 552              	.LVL90:
+ 553 00ae ADB2     		uxth	r5, r5
+ 554              	.LVL91:
+ 196:..\u8g2\csrc/u8g2_box.c ****       h--;
+ 555              		.loc 1 196 0
+ 556 00b0 09F1FF39 		add	r9, r9, #-1
+ 557              	.LVL92:
+ 558 00b4 1FFA89F9 		uxth	r9, r9
+ 559              	.LVL93:
+ 197:..\u8g2\csrc/u8g2_box.c ****       u8g2_DrawHLine(u8g2, xl, y, ww);
+ 560              		.loc 1 197 0
+ 561 00b8 2B46     		mov	r3, r5
+ 562 00ba 5A46     		mov	r2, fp
+ 563 00bc 3946     		mov	r1, r7
+ 564 00be 0298     		ldr	r0, [sp, #8]
+ 565 00c0 FFF7FEFF 		bl	u8g2_DrawHLine
+ 566              	.LVL94:
+ 198:..\u8g2\csrc/u8g2_box.c ****       u8g2_DrawHLine(u8g2, xl, y+h, ww);
+ 567              		.loc 1 198 0
+ 568 00c4 0BEB0902 		add	r2, fp, r9
+ 569 00c8 2B46     		mov	r3, r5
+ 570 00ca 92B2     		uxth	r2, r2
+ 571 00cc 3946     		mov	r1, r7
+ 572 00ce 0298     		ldr	r0, [sp, #8]
+ 573 00d0 FFF7FEFF 		bl	u8g2_DrawHLine
+ 574              	.LVL95:
+ 575              	.L16:
+ 199:..\u8g2\csrc/u8g2_box.c ****     }
+ 200:..\u8g2\csrc/u8g2_box.c ****     
+ 201:..\u8g2\csrc/u8g2_box.c ****     if ( hh >= 3 )
+ 576              		.loc 1 201 0
+ 577 00d4 022E     		cmp	r6, #2
+ 578 00d6 14D9     		bls	.L14
+ 202:..\u8g2\csrc/u8g2_box.c ****     {
+ 203:..\u8g2\csrc/u8g2_box.c ****       hh -= 2;
+ 579              		.loc 1 203 0
+ 580 00d8 023E     		subs	r6, r6, #2
+ 581              	.LVL96:
+ 582 00da B6B2     		uxth	r6, r6
+ 583              	.LVL97:
+ 204:..\u8g2\csrc/u8g2_box.c ****       w--;
+ 584              		.loc 1 204 0
+ 585 00dc 08F1FF38 		add	r8, r8, #-1
+ 586              	.LVL98:
+ 587 00e0 1FFA88F8 		uxth	r8, r8
+ 588              	.LVL99:
+ 205:..\u8g2\csrc/u8g2_box.c ****       u8g2_DrawVLine(u8g2, x, yu, hh);
+ 589              		.loc 1 205 0
+ 590 00e4 3346     		mov	r3, r6
+ 591 00e6 2246     		mov	r2, r4
+ 592 00e8 5146     		mov	r1, r10
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 15
+
+
+ 593 00ea 029D     		ldr	r5, [sp, #8]
+ 594              	.LVL100:
+ 595 00ec 2846     		mov	r0, r5
+ 596 00ee FFF7FEFF 		bl	u8g2_DrawVLine
+ 597              	.LVL101:
+ 206:..\u8g2\csrc/u8g2_box.c ****       u8g2_DrawVLine(u8g2, x+w, yu, hh);
+ 598              		.loc 1 206 0
+ 599 00f2 0AEB0801 		add	r1, r10, r8
+ 600 00f6 3346     		mov	r3, r6
+ 601 00f8 2246     		mov	r2, r4
+ 602 00fa 89B2     		uxth	r1, r1
+ 603 00fc 2846     		mov	r0, r5
+ 604 00fe FFF7FEFF 		bl	u8g2_DrawVLine
+ 605              	.LVL102:
+ 606              	.L14:
+ 607              	.LBE4:
+ 207:..\u8g2\csrc/u8g2_box.c ****     }
+ 208:..\u8g2\csrc/u8g2_box.c ****   }
+ 209:..\u8g2\csrc/u8g2_box.c **** }
+ 608              		.loc 1 209 0
+ 609 0102 05B0     		add	sp, sp, #20
+ 610              		.cfi_def_cfa_offset 36
+ 611              		@ sp needed
+ 612 0104 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 613              		.cfi_endproc
+ 614              	.LFE3:
+ 615              		.size	u8g2_DrawRFrame, .-u8g2_DrawRFrame
+ 616              		.text
+ 617              	.Letext0:
+ 618              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 619              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 620              		.file 4 "..\\u8g2\\csrc\\u8x8.h"
+ 621              		.file 5 "..\\u8g2\\csrc\\u8g2.h"
+ 622              		.section	.debug_info,"",%progbits
+ 623              	.Ldebug_info0:
+ 624 0000 780E0000 		.4byte	0xe78
+ 625 0004 0400     		.2byte	0x4
+ 626 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 627 000a 04       		.byte	0x4
+ 628 000b 01       		.uleb128 0x1
+ 629 000c 31060000 		.4byte	.LASF150
+ 630 0010 0C       		.byte	0xc
+ 631 0011 81000000 		.4byte	.LASF151
+ 632 0015 59050000 		.4byte	.LASF152
+ 633 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 634 001d 00000000 		.4byte	0
+ 635 0021 00000000 		.4byte	.Ldebug_line0
+ 636 0025 02       		.uleb128 0x2
+ 637 0026 CB000000 		.4byte	.LASF0
+ 638 002a 02       		.byte	0x2
+ 639 002b 1B       		.byte	0x1b
+ 640 002c 30000000 		.4byte	0x30
+ 641 0030 03       		.uleb128 0x3
+ 642 0031 01       		.byte	0x1
+ 643 0032 06       		.byte	0x6
+ 644 0033 3E010000 		.4byte	.LASF2
+ 645 0037 02       		.uleb128 0x2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 16
+
+
+ 646 0038 5C000000 		.4byte	.LASF1
+ 647 003c 02       		.byte	0x2
+ 648 003d 1D       		.byte	0x1d
+ 649 003e 42000000 		.4byte	0x42
+ 650 0042 03       		.uleb128 0x3
+ 651 0043 01       		.byte	0x1
+ 652 0044 08       		.byte	0x8
+ 653 0045 D8050000 		.4byte	.LASF3
+ 654 0049 03       		.uleb128 0x3
+ 655 004a 02       		.byte	0x2
+ 656 004b 05       		.byte	0x5
+ 657 004c 12060000 		.4byte	.LASF4
+ 658 0050 02       		.uleb128 0x2
+ 659 0051 81070000 		.4byte	.LASF5
+ 660 0055 02       		.byte	0x2
+ 661 0056 2B       		.byte	0x2b
+ 662 0057 5B000000 		.4byte	0x5b
+ 663 005b 03       		.uleb128 0x3
+ 664 005c 02       		.byte	0x2
+ 665 005d 07       		.byte	0x7
+ 666 005e 75030000 		.4byte	.LASF6
+ 667 0062 03       		.uleb128 0x3
+ 668 0063 04       		.byte	0x4
+ 669 0064 05       		.byte	0x5
+ 670 0065 AF010000 		.4byte	.LASF7
+ 671 0069 02       		.uleb128 0x2
+ 672 006a 4E020000 		.4byte	.LASF8
+ 673 006e 02       		.byte	0x2
+ 674 006f 41       		.byte	0x41
+ 675 0070 74000000 		.4byte	0x74
+ 676 0074 03       		.uleb128 0x3
+ 677 0075 04       		.byte	0x4
+ 678 0076 07       		.byte	0x7
+ 679 0077 2B030000 		.4byte	.LASF9
+ 680 007b 03       		.uleb128 0x3
+ 681 007c 08       		.byte	0x8
+ 682 007d 05       		.byte	0x5
+ 683 007e 30010000 		.4byte	.LASF10
+ 684 0082 03       		.uleb128 0x3
+ 685 0083 08       		.byte	0x8
+ 686 0084 07       		.byte	0x7
+ 687 0085 B4000000 		.4byte	.LASF11
+ 688 0089 04       		.uleb128 0x4
+ 689 008a 04       		.byte	0x4
+ 690 008b 05       		.byte	0x5
+ 691 008c 696E7400 		.ascii	"int\000"
+ 692 0090 03       		.uleb128 0x3
+ 693 0091 04       		.byte	0x4
+ 694 0092 07       		.byte	0x7
+ 695 0093 DE020000 		.4byte	.LASF12
+ 696 0097 02       		.uleb128 0x2
+ 697 0098 17080000 		.4byte	.LASF13
+ 698 009c 03       		.byte	0x3
+ 699 009d 14       		.byte	0x14
+ 700 009e 25000000 		.4byte	0x25
+ 701 00a2 02       		.uleb128 0x2
+ 702 00a3 57080000 		.4byte	.LASF14
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 17
+
+
+ 703 00a7 03       		.byte	0x3
+ 704 00a8 18       		.byte	0x18
+ 705 00a9 37000000 		.4byte	0x37
+ 706 00ad 02       		.uleb128 0x2
+ 707 00ae E8010000 		.4byte	.LASF15
+ 708 00b2 03       		.byte	0x3
+ 709 00b3 24       		.byte	0x24
+ 710 00b4 50000000 		.4byte	0x50
+ 711 00b8 02       		.uleb128 0x2
+ 712 00b9 12070000 		.4byte	.LASF16
+ 713 00bd 03       		.byte	0x3
+ 714 00be 30       		.byte	0x30
+ 715 00bf 69000000 		.4byte	0x69
+ 716 00c3 05       		.uleb128 0x5
+ 717 00c4 04       		.byte	0x4
+ 718 00c5 03       		.uleb128 0x3
+ 719 00c6 08       		.byte	0x8
+ 720 00c7 04       		.byte	0x4
+ 721 00c8 D8040000 		.4byte	.LASF17
+ 722 00cc 02       		.uleb128 0x2
+ 723 00cd EA070000 		.4byte	.LASF18
+ 724 00d1 04       		.byte	0x4
+ 725 00d2 CD       		.byte	0xcd
+ 726 00d3 D7000000 		.4byte	0xd7
+ 727 00d7 06       		.uleb128 0x6
+ 728 00d8 38040000 		.4byte	.LASF39
+ 729 00dc 2C       		.byte	0x2c
+ 730 00dd 04       		.byte	0x4
+ 731 00de 5001     		.2byte	0x150
+ 732 00e0 DC010000 		.4byte	0x1dc
+ 733 00e4 07       		.uleb128 0x7
+ 734 00e5 0E040000 		.4byte	.LASF19
+ 735 00e9 04       		.byte	0x4
+ 736 00ea 5201     		.2byte	0x152
+ 737 00ec 42030000 		.4byte	0x342
+ 738 00f0 00       		.byte	0
+ 739 00f1 07       		.uleb128 0x7
+ 740 00f2 F1010000 		.4byte	.LASF20
+ 741 00f6 04       		.byte	0x4
+ 742 00f7 5301     		.2byte	0x153
+ 743 00f9 17030000 		.4byte	0x317
+ 744 00fd 04       		.byte	0x4
+ 745 00fe 07       		.uleb128 0x7
+ 746 00ff 70010000 		.4byte	.LASF21
+ 747 0103 04       		.byte	0x4
+ 748 0104 5401     		.2byte	0x154
+ 749 0106 E2020000 		.4byte	0x2e2
+ 750 010a 08       		.byte	0x8
+ 751 010b 07       		.uleb128 0x7
+ 752 010c F3040000 		.4byte	.LASF22
+ 753 0110 04       		.byte	0x4
+ 754 0111 5501     		.2byte	0x155
+ 755 0113 E2020000 		.4byte	0x2e2
+ 756 0117 0C       		.byte	0xc
+ 757 0118 07       		.uleb128 0x7
+ 758 0119 66000000 		.4byte	.LASF23
+ 759 011d 04       		.byte	0x4
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 18
+
+
+ 760 011e 5601     		.2byte	0x156
+ 761 0120 E2020000 		.4byte	0x2e2
+ 762 0124 10       		.byte	0x10
+ 763 0125 07       		.uleb128 0x7
+ 764 0126 06020000 		.4byte	.LASF24
+ 765 012a 04       		.byte	0x4
+ 766 012b 5701     		.2byte	0x157
+ 767 012d E2020000 		.4byte	0x2e2
+ 768 0131 14       		.byte	0x14
+ 769 0132 07       		.uleb128 0x7
+ 770 0133 F1070000 		.4byte	.LASF25
+ 771 0137 04       		.byte	0x4
+ 772 0138 5801     		.2byte	0x158
+ 773 013a B8000000 		.4byte	0xb8
+ 774 013e 18       		.byte	0x18
+ 775 013f 07       		.uleb128 0x7
+ 776 0140 40080000 		.4byte	.LASF26
+ 777 0144 04       		.byte	0x4
+ 778 0145 5901     		.2byte	0x159
+ 779 0147 4D030000 		.4byte	0x34d
+ 780 014b 1C       		.byte	0x1c
+ 781 014c 07       		.uleb128 0x7
+ 782 014d 62040000 		.4byte	.LASF27
+ 783 0151 04       		.byte	0x4
+ 784 0152 5A01     		.2byte	0x15a
+ 785 0154 AD000000 		.4byte	0xad
+ 786 0158 20       		.byte	0x20
+ 787 0159 07       		.uleb128 0x7
+ 788 015a 44050000 		.4byte	.LASF28
+ 789 015e 04       		.byte	0x4
+ 790 015f 5B01     		.2byte	0x15b
+ 791 0161 A2000000 		.4byte	0xa2
+ 792 0165 22       		.byte	0x22
+ 793 0166 07       		.uleb128 0x7
+ 794 0167 56010000 		.4byte	.LASF29
+ 795 016b 04       		.byte	0x4
+ 796 016c 5C01     		.2byte	0x15c
+ 797 016e A2000000 		.4byte	0xa2
+ 798 0172 23       		.byte	0x23
+ 799 0173 07       		.uleb128 0x7
+ 800 0174 1F030000 		.4byte	.LASF30
+ 801 0178 04       		.byte	0x4
+ 802 0179 5D01     		.2byte	0x15d
+ 803 017b A2000000 		.4byte	0xa2
+ 804 017f 24       		.byte	0x24
+ 805 0180 07       		.uleb128 0x7
+ 806 0181 79080000 		.4byte	.LASF31
+ 807 0185 04       		.byte	0x4
+ 808 0186 6001     		.2byte	0x160
+ 809 0188 A2000000 		.4byte	0xa2
+ 810 018c 25       		.byte	0x25
+ 811 018d 07       		.uleb128 0x7
+ 812 018e F0000000 		.4byte	.LASF32
+ 813 0192 04       		.byte	0x4
+ 814 0193 6201     		.2byte	0x162
+ 815 0195 A2000000 		.4byte	0xa2
+ 816 0199 26       		.byte	0x26
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 19
+
+
+ 817 019a 07       		.uleb128 0x7
+ 818 019b 04010000 		.4byte	.LASF33
+ 819 019f 04       		.byte	0x4
+ 820 01a0 6301     		.2byte	0x163
+ 821 01a2 A2000000 		.4byte	0xa2
+ 822 01a6 27       		.byte	0x27
+ 823 01a7 07       		.uleb128 0x7
+ 824 01a8 A5080000 		.4byte	.LASF34
+ 825 01ac 04       		.byte	0x4
+ 826 01ad 6401     		.2byte	0x164
+ 827 01af A2000000 		.4byte	0xa2
+ 828 01b3 28       		.byte	0x28
+ 829 01b4 07       		.uleb128 0x7
+ 830 01b5 E4030000 		.4byte	.LASF35
+ 831 01b9 04       		.byte	0x4
+ 832 01ba 6501     		.2byte	0x165
+ 833 01bc A2000000 		.4byte	0xa2
+ 834 01c0 29       		.byte	0x29
+ 835 01c1 07       		.uleb128 0x7
+ 836 01c2 1E080000 		.4byte	.LASF36
+ 837 01c6 04       		.byte	0x4
+ 838 01c7 6601     		.2byte	0x166
+ 839 01c9 A2000000 		.4byte	0xa2
+ 840 01cd 2A       		.byte	0x2a
+ 841 01ce 07       		.uleb128 0x7
+ 842 01cf CA020000 		.4byte	.LASF37
+ 843 01d3 04       		.byte	0x4
+ 844 01d4 6701     		.2byte	0x167
+ 845 01d6 A2000000 		.4byte	0xa2
+ 846 01da 2B       		.byte	0x2b
+ 847 01db 00       		.byte	0
+ 848 01dc 02       		.uleb128 0x2
+ 849 01dd 3A020000 		.4byte	.LASF38
+ 850 01e1 04       		.byte	0x4
+ 851 01e2 CE       		.byte	0xce
+ 852 01e3 E7010000 		.4byte	0x1e7
+ 853 01e7 08       		.uleb128 0x8
+ 854 01e8 CF080000 		.4byte	.LASF40
+ 855 01ec 18       		.byte	0x18
+ 856 01ed 04       		.byte	0x4
+ 857 01ee E7       		.byte	0xe7
+ 858 01ef E2020000 		.4byte	0x2e2
+ 859 01f3 09       		.uleb128 0x9
+ 860 01f4 4E070000 		.4byte	.LASF41
+ 861 01f8 04       		.byte	0x4
+ 862 01f9 EB       		.byte	0xeb
+ 863 01fa A2000000 		.4byte	0xa2
+ 864 01fe 00       		.byte	0
+ 865 01ff 09       		.uleb128 0x9
+ 866 0200 2D080000 		.4byte	.LASF42
+ 867 0204 04       		.byte	0x4
+ 868 0205 EC       		.byte	0xec
+ 869 0206 A2000000 		.4byte	0xa2
+ 870 020a 01       		.byte	0x1
+ 871 020b 09       		.uleb128 0x9
+ 872 020c 97070000 		.4byte	.LASF43
+ 873 0210 04       		.byte	0x4
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 20
+
+
+ 874 0211 EE       		.byte	0xee
+ 875 0212 A2000000 		.4byte	0xa2
+ 876 0216 02       		.byte	0x2
+ 877 0217 09       		.uleb128 0x9
+ 878 0218 96010000 		.4byte	.LASF44
+ 879 021c 04       		.byte	0x4
+ 880 021d EF       		.byte	0xef
+ 881 021e A2000000 		.4byte	0xa2
+ 882 0222 03       		.byte	0x3
+ 883 0223 09       		.uleb128 0x9
+ 884 0224 22000000 		.4byte	.LASF45
+ 885 0228 04       		.byte	0x4
+ 886 0229 F0       		.byte	0xf0
+ 887 022a A2000000 		.4byte	0xa2
+ 888 022e 04       		.byte	0x4
+ 889 022f 09       		.uleb128 0x9
+ 890 0230 D4000000 		.4byte	.LASF46
+ 891 0234 04       		.byte	0x4
+ 892 0235 F1       		.byte	0xf1
+ 893 0236 A2000000 		.4byte	0xa2
+ 894 023a 05       		.byte	0x5
+ 895 023b 09       		.uleb128 0x9
+ 896 023c 83020000 		.4byte	.LASF47
+ 897 0240 04       		.byte	0x4
+ 898 0241 F8       		.byte	0xf8
+ 899 0242 A2000000 		.4byte	0xa2
+ 900 0246 06       		.byte	0x6
+ 901 0247 09       		.uleb128 0x9
+ 902 0248 25040000 		.4byte	.LASF48
+ 903 024c 04       		.byte	0x4
+ 904 024d FC       		.byte	0xfc
+ 905 024e A2000000 		.4byte	0xa2
+ 906 0252 07       		.byte	0x7
+ 907 0253 09       		.uleb128 0x9
+ 908 0254 FC080000 		.4byte	.LASF49
+ 909 0258 04       		.byte	0x4
+ 910 0259 FF       		.byte	0xff
+ 911 025a B8000000 		.4byte	0xb8
+ 912 025e 08       		.byte	0x8
+ 913 025f 07       		.uleb128 0x7
+ 914 0260 45070000 		.4byte	.LASF50
+ 915 0264 04       		.byte	0x4
+ 916 0265 0901     		.2byte	0x109
+ 917 0267 A2000000 		.4byte	0xa2
+ 918 026b 0C       		.byte	0xc
+ 919 026c 07       		.uleb128 0x7
+ 920 026d FD060000 		.4byte	.LASF51
+ 921 0271 04       		.byte	0x4
+ 922 0272 0C01     		.2byte	0x10c
+ 923 0274 A2000000 		.4byte	0xa2
+ 924 0278 0D       		.byte	0xd
+ 925 0279 07       		.uleb128 0x7
+ 926 027a BF060000 		.4byte	.LASF52
+ 927 027e 04       		.byte	0x4
+ 928 027f 1201     		.2byte	0x112
+ 929 0281 A2000000 		.4byte	0xa2
+ 930 0285 0E       		.byte	0xe
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 21
+
+
+ 931 0286 07       		.uleb128 0x7
+ 932 0287 21050000 		.4byte	.LASF53
+ 933 028b 04       		.byte	0x4
+ 934 028c 1401     		.2byte	0x114
+ 935 028e A2000000 		.4byte	0xa2
+ 936 0292 0F       		.byte	0xf
+ 937 0293 07       		.uleb128 0x7
+ 938 0294 9A080000 		.4byte	.LASF54
+ 939 0298 04       		.byte	0x4
+ 940 0299 1701     		.2byte	0x117
+ 941 029b A2000000 		.4byte	0xa2
+ 942 029f 10       		.byte	0x10
+ 943 02a0 07       		.uleb128 0x7
+ 944 02a1 4D050000 		.4byte	.LASF55
+ 945 02a5 04       		.byte	0x4
+ 946 02a6 1801     		.2byte	0x118
+ 947 02a8 A2000000 		.4byte	0xa2
+ 948 02ac 11       		.byte	0x11
+ 949 02ad 07       		.uleb128 0x7
+ 950 02ae 51040000 		.4byte	.LASF56
+ 951 02b2 04       		.byte	0x4
+ 952 02b3 1A01     		.2byte	0x11a
+ 953 02b5 A2000000 		.4byte	0xa2
+ 954 02b9 12       		.byte	0x12
+ 955 02ba 07       		.uleb128 0x7
+ 956 02bb 8E040000 		.4byte	.LASF57
+ 957 02bf 04       		.byte	0x4
+ 958 02c0 1B01     		.2byte	0x11b
+ 959 02c2 A2000000 		.4byte	0xa2
+ 960 02c6 13       		.byte	0x13
+ 961 02c7 07       		.uleb128 0x7
+ 962 02c8 85080000 		.4byte	.LASF58
+ 963 02cc 04       		.byte	0x4
+ 964 02cd 2301     		.2byte	0x123
+ 965 02cf AD000000 		.4byte	0xad
+ 966 02d3 14       		.byte	0x14
+ 967 02d4 07       		.uleb128 0x7
+ 968 02d5 EF080000 		.4byte	.LASF59
+ 969 02d9 04       		.byte	0x4
+ 970 02da 2401     		.2byte	0x124
+ 971 02dc AD000000 		.4byte	0xad
+ 972 02e0 16       		.byte	0x16
+ 973 02e1 00       		.byte	0
+ 974 02e2 02       		.uleb128 0x2
+ 975 02e3 B1050000 		.4byte	.LASF60
+ 976 02e7 04       		.byte	0x4
+ 977 02e8 D1       		.byte	0xd1
+ 978 02e9 ED020000 		.4byte	0x2ed
+ 979 02ed 0A       		.uleb128 0xa
+ 980 02ee 04       		.byte	0x4
+ 981 02ef F3020000 		.4byte	0x2f3
+ 982 02f3 0B       		.uleb128 0xb
+ 983 02f4 A2000000 		.4byte	0xa2
+ 984 02f8 11030000 		.4byte	0x311
+ 985 02fc 0C       		.uleb128 0xc
+ 986 02fd 11030000 		.4byte	0x311
+ 987 0301 0C       		.uleb128 0xc
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 22
+
+
+ 988 0302 A2000000 		.4byte	0xa2
+ 989 0306 0C       		.uleb128 0xc
+ 990 0307 A2000000 		.4byte	0xa2
+ 991 030b 0C       		.uleb128 0xc
+ 992 030c C3000000 		.4byte	0xc3
+ 993 0310 00       		.byte	0
+ 994 0311 0A       		.uleb128 0xa
+ 995 0312 04       		.byte	0x4
+ 996 0313 CC000000 		.4byte	0xcc
+ 997 0317 02       		.uleb128 0x2
+ 998 0318 F9010000 		.4byte	.LASF61
+ 999 031c 04       		.byte	0x4
+ 1000 031d D2       		.byte	0xd2
+ 1001 031e 22030000 		.4byte	0x322
+ 1002 0322 0A       		.uleb128 0xa
+ 1003 0323 04       		.byte	0x4
+ 1004 0324 28030000 		.4byte	0x328
+ 1005 0328 0B       		.uleb128 0xb
+ 1006 0329 AD000000 		.4byte	0xad
+ 1007 032d 3C030000 		.4byte	0x33c
+ 1008 0331 0C       		.uleb128 0xc
+ 1009 0332 11030000 		.4byte	0x311
+ 1010 0336 0C       		.uleb128 0xc
+ 1011 0337 A2000000 		.4byte	0xa2
+ 1012 033b 00       		.byte	0
+ 1013 033c 0A       		.uleb128 0xa
+ 1014 033d 04       		.byte	0x4
+ 1015 033e A2000000 		.4byte	0xa2
+ 1016 0342 0A       		.uleb128 0xa
+ 1017 0343 04       		.byte	0x4
+ 1018 0344 48030000 		.4byte	0x348
+ 1019 0348 0D       		.uleb128 0xd
+ 1020 0349 DC010000 		.4byte	0x1dc
+ 1021 034d 0A       		.uleb128 0xa
+ 1022 034e 04       		.byte	0x4
+ 1023 034f 53030000 		.4byte	0x353
+ 1024 0353 0D       		.uleb128 0xd
+ 1025 0354 A2000000 		.4byte	0xa2
+ 1026 0358 02       		.uleb128 0x2
+ 1027 0359 4A010000 		.4byte	.LASF62
+ 1028 035d 05       		.byte	0x5
+ 1029 035e D2       		.byte	0xd2
+ 1030 035f AD000000 		.4byte	0xad
+ 1031 0363 02       		.uleb128 0x2
+ 1032 0364 3D030000 		.4byte	.LASF63
+ 1033 0368 05       		.byte	0x5
+ 1034 0369 DC       		.byte	0xdc
+ 1035 036a 6E030000 		.4byte	0x36e
+ 1036 036e 06       		.uleb128 0x6
+ 1037 036f E0060000 		.4byte	.LASF64
+ 1038 0373 94       		.byte	0x94
+ 1039 0374 05       		.byte	0x5
+ 1040 0375 3B01     		.2byte	0x13b
+ 1041 0377 28050000 		.4byte	0x528
+ 1042 037b 07       		.uleb128 0x7
+ 1043 037c 1C060000 		.4byte	.LASF65
+ 1044 0380 05       		.byte	0x5
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 23
+
+
+ 1045 0381 3D01     		.2byte	0x13d
+ 1046 0383 CC000000 		.4byte	0xcc
+ 1047 0387 00       		.byte	0
+ 1048 0388 07       		.uleb128 0x7
+ 1049 0389 9E050000 		.4byte	.LASF66
+ 1050 038d 05       		.byte	0x5
+ 1051 038e 3E01     		.2byte	0x13e
+ 1052 0390 C5050000 		.4byte	0x5c5
+ 1053 0394 2C       		.byte	0x2c
+ 1054 0395 0E       		.uleb128 0xe
+ 1055 0396 636200   		.ascii	"cb\000"
+ 1056 0399 05       		.byte	0x5
+ 1057 039a 3F01     		.2byte	0x13f
+ 1058 039c B1070000 		.4byte	0x7b1
+ 1059 03a0 30       		.byte	0x30
+ 1060 03a1 07       		.uleb128 0x7
+ 1061 03a2 4F000000 		.4byte	.LASF67
+ 1062 03a6 05       		.byte	0x5
+ 1063 03a7 4201     		.2byte	0x142
+ 1064 03a9 3C030000 		.4byte	0x33c
+ 1065 03ad 34       		.byte	0x34
+ 1066 03ae 07       		.uleb128 0x7
+ 1067 03af 65030000 		.4byte	.LASF68
+ 1068 03b3 05       		.byte	0x5
+ 1069 03b4 4301     		.2byte	0x143
+ 1070 03b6 A2000000 		.4byte	0xa2
+ 1071 03ba 38       		.byte	0x38
+ 1072 03bb 07       		.uleb128 0x7
+ 1073 03bc 2D070000 		.4byte	.LASF69
+ 1074 03c0 05       		.byte	0x5
+ 1075 03c1 4401     		.2byte	0x144
+ 1076 03c3 A2000000 		.4byte	0xa2
+ 1077 03c7 39       		.byte	0x39
+ 1078 03c8 07       		.uleb128 0x7
+ 1079 03c9 02060000 		.4byte	.LASF70
+ 1080 03cd 05       		.byte	0x5
+ 1081 03ce 4701     		.2byte	0x147
+ 1082 03d0 58030000 		.4byte	0x358
+ 1083 03d4 3A       		.byte	0x3a
+ 1084 03d5 07       		.uleb128 0x7
+ 1085 03d6 EB020000 		.4byte	.LASF71
+ 1086 03da 05       		.byte	0x5
+ 1087 03db 4801     		.2byte	0x148
+ 1088 03dd 58030000 		.4byte	0x358
+ 1089 03e1 3C       		.byte	0x3c
+ 1090 03e2 07       		.uleb128 0x7
+ 1091 03e3 E4040000 		.4byte	.LASF72
+ 1092 03e7 05       		.byte	0x5
+ 1093 03e8 4901     		.2byte	0x149
+ 1094 03ea 58030000 		.4byte	0x358
+ 1095 03ee 3E       		.byte	0x3e
+ 1096 03ef 07       		.uleb128 0x7
+ 1097 03f0 36050000 		.4byte	.LASF73
+ 1098 03f4 05       		.byte	0x5
+ 1099 03f5 4F01     		.2byte	0x14f
+ 1100 03f7 58030000 		.4byte	0x358
+ 1101 03fb 40       		.byte	0x40
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 24
+
+
+ 1102 03fc 07       		.uleb128 0x7
+ 1103 03fd 3D050000 		.4byte	.LASF74
+ 1104 0401 05       		.byte	0x5
+ 1105 0402 5001     		.2byte	0x150
+ 1106 0404 58030000 		.4byte	0x358
+ 1107 0408 42       		.byte	0x42
+ 1108 0409 07       		.uleb128 0x7
+ 1109 040a 4F030000 		.4byte	.LASF75
+ 1110 040e 05       		.byte	0x5
+ 1111 040f 5301     		.2byte	0x153
+ 1112 0411 58030000 		.4byte	0x358
+ 1113 0415 44       		.byte	0x44
+ 1114 0416 07       		.uleb128 0x7
+ 1115 0417 E8080000 		.4byte	.LASF76
+ 1116 041b 05       		.byte	0x5
+ 1117 041c 5401     		.2byte	0x154
+ 1118 041e 58030000 		.4byte	0x358
+ 1119 0422 46       		.byte	0x46
+ 1120 0423 07       		.uleb128 0x7
+ 1121 0424 21060000 		.4byte	.LASF77
+ 1122 0428 05       		.byte	0x5
+ 1123 0429 5901     		.2byte	0x159
+ 1124 042b 58030000 		.4byte	0x358
+ 1125 042f 48       		.byte	0x48
+ 1126 0430 07       		.uleb128 0x7
+ 1127 0431 29060000 		.4byte	.LASF78
+ 1128 0435 05       		.byte	0x5
+ 1129 0436 5A01     		.2byte	0x15a
+ 1130 0438 58030000 		.4byte	0x358
+ 1131 043c 4A       		.byte	0x4a
+ 1132 043d 07       		.uleb128 0x7
+ 1133 043e 19050000 		.4byte	.LASF79
+ 1134 0442 05       		.byte	0x5
+ 1135 0443 5B01     		.2byte	0x15b
+ 1136 0445 58030000 		.4byte	0x358
+ 1137 0449 4C       		.byte	0x4c
+ 1138 044a 07       		.uleb128 0x7
+ 1139 044b FB070000 		.4byte	.LASF80
+ 1140 044f 05       		.byte	0x5
+ 1141 0450 5C01     		.2byte	0x15c
+ 1142 0452 58030000 		.4byte	0x358
+ 1143 0456 4E       		.byte	0x4e
+ 1144 0457 07       		.uleb128 0x7
+ 1145 0458 CB030000 		.4byte	.LASF81
+ 1146 045c 05       		.byte	0x5
+ 1147 045d 6001     		.2byte	0x160
+ 1148 045f 58030000 		.4byte	0x358
+ 1149 0463 50       		.byte	0x50
+ 1150 0464 07       		.uleb128 0x7
+ 1151 0465 D3030000 		.4byte	.LASF82
+ 1152 0469 05       		.byte	0x5
+ 1153 046a 6101     		.2byte	0x161
+ 1154 046c 58030000 		.4byte	0x358
+ 1155 0470 52       		.byte	0x52
+ 1156 0471 07       		.uleb128 0x7
+ 1157 0472 FA040000 		.4byte	.LASF83
+ 1158 0476 05       		.byte	0x5
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 25
+
+
+ 1159 0477 6201     		.2byte	0x162
+ 1160 0479 58030000 		.4byte	0x358
+ 1161 047d 54       		.byte	0x54
+ 1162 047e 07       		.uleb128 0x7
+ 1163 047f 02050000 		.4byte	.LASF84
+ 1164 0483 05       		.byte	0x5
+ 1165 0484 6301     		.2byte	0x163
+ 1166 0486 58030000 		.4byte	0x358
+ 1167 048a 56       		.byte	0x56
+ 1168 048b 07       		.uleb128 0x7
+ 1169 048c 40080000 		.4byte	.LASF26
+ 1170 0490 05       		.byte	0x5
+ 1171 0491 6801     		.2byte	0x168
+ 1172 0493 4D030000 		.4byte	0x34d
+ 1173 0497 58       		.byte	0x58
+ 1174 0498 07       		.uleb128 0x7
+ 1175 0499 64020000 		.4byte	.LASF85
+ 1176 049d 05       		.byte	0x5
+ 1177 049e 6C01     		.2byte	0x16c
+ 1178 04a0 90070000 		.4byte	0x790
+ 1179 04a4 5C       		.byte	0x5c
+ 1180 04a5 07       		.uleb128 0x7
+ 1181 04a6 60070000 		.4byte	.LASF86
+ 1182 04aa 05       		.byte	0x5
+ 1183 04ab 6D01     		.2byte	0x16d
+ 1184 04ad 84070000 		.4byte	0x784
+ 1185 04b1 60       		.byte	0x60
+ 1186 04b2 07       		.uleb128 0x7
+ 1187 04b3 1B040000 		.4byte	.LASF87
+ 1188 04b7 05       		.byte	0x5
+ 1189 04b8 6E01     		.2byte	0x16e
+ 1190 04ba D2060000 		.4byte	0x6d2
+ 1191 04be 74       		.byte	0x74
+ 1192 04bf 07       		.uleb128 0x7
+ 1193 04c0 88030000 		.4byte	.LASF88
+ 1194 04c4 05       		.byte	0x5
+ 1195 04c5 7201     		.2byte	0x172
+ 1196 04c7 A2000000 		.4byte	0xa2
+ 1197 04cb 8C       		.byte	0x8c
+ 1198 04cc 07       		.uleb128 0x7
+ 1199 04cd 6B040000 		.4byte	.LASF89
+ 1200 04d1 05       		.byte	0x5
+ 1201 04d2 7501     		.2byte	0x175
+ 1202 04d4 A2000000 		.4byte	0xa2
+ 1203 04d8 8D       		.byte	0x8d
+ 1204 04d9 07       		.uleb128 0x7
+ 1205 04da 73020000 		.4byte	.LASF90
+ 1206 04de 05       		.byte	0x5
+ 1207 04df 7601     		.2byte	0x176
+ 1208 04e1 97000000 		.4byte	0x97
+ 1209 04e5 8E       		.byte	0x8e
+ 1210 04e6 07       		.uleb128 0x7
+ 1211 04e7 29020000 		.4byte	.LASF91
+ 1212 04eb 05       		.byte	0x5
+ 1213 04ec 7701     		.2byte	0x177
+ 1214 04ee 97000000 		.4byte	0x97
+ 1215 04f2 8F       		.byte	0x8f
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 26
+
+
+ 1216 04f3 07       		.uleb128 0x7
+ 1217 04f4 87010000 		.4byte	.LASF92
+ 1218 04f8 05       		.byte	0x5
+ 1219 04f9 7901     		.2byte	0x179
+ 1220 04fb 97000000 		.4byte	0x97
+ 1221 04ff 90       		.byte	0x90
+ 1222 0500 07       		.uleb128 0x7
+ 1223 0501 A9030000 		.4byte	.LASF93
+ 1224 0505 05       		.byte	0x5
+ 1225 0506 7B01     		.2byte	0x17b
+ 1226 0508 A2000000 		.4byte	0xa2
+ 1227 050c 91       		.byte	0x91
+ 1228 050d 07       		.uleb128 0x7
+ 1229 050e 8C070000 		.4byte	.LASF94
+ 1230 0512 05       		.byte	0x5
+ 1231 0513 7D01     		.2byte	0x17d
+ 1232 0515 A2000000 		.4byte	0xa2
+ 1233 0519 92       		.byte	0x92
+ 1234 051a 07       		.uleb128 0x7
+ 1235 051b EF050000 		.4byte	.LASF95
+ 1236 051f 05       		.byte	0x5
+ 1237 0520 8101     		.2byte	0x181
+ 1238 0522 A2000000 		.4byte	0xa2
+ 1239 0526 93       		.byte	0x93
+ 1240 0527 00       		.byte	0
+ 1241 0528 02       		.uleb128 0x2
+ 1242 0529 3B070000 		.4byte	.LASF96
+ 1243 052d 05       		.byte	0x5
+ 1244 052e DD       		.byte	0xdd
+ 1245 052f 33050000 		.4byte	0x533
+ 1246 0533 06       		.uleb128 0x6
+ 1247 0534 BD050000 		.4byte	.LASF97
+ 1248 0538 0C       		.byte	0xc
+ 1249 0539 05       		.byte	0x5
+ 1250 053a 3101     		.2byte	0x131
+ 1251 053c 68050000 		.4byte	0x568
+ 1252 0540 07       		.uleb128 0x7
+ 1253 0541 A3000000 		.4byte	.LASF98
+ 1254 0545 05       		.byte	0x5
+ 1255 0546 3301     		.2byte	0x133
+ 1256 0548 68050000 		.4byte	0x568
+ 1257 054c 00       		.byte	0
+ 1258 054d 07       		.uleb128 0x7
+ 1259 054e C8010000 		.4byte	.LASF99
+ 1260 0552 05       		.byte	0x5
+ 1261 0553 3401     		.2byte	0x134
+ 1262 0555 8A050000 		.4byte	0x58a
+ 1263 0559 04       		.byte	0x4
+ 1264 055a 07       		.uleb128 0x7
+ 1265 055b DB030000 		.4byte	.LASF100
+ 1266 055f 05       		.byte	0x5
+ 1267 0560 3501     		.2byte	0x135
+ 1268 0562 95050000 		.4byte	0x595
+ 1269 0566 08       		.byte	0x8
+ 1270 0567 00       		.byte	0
+ 1271 0568 02       		.uleb128 0x2
+ 1272 0569 B0070000 		.4byte	.LASF101
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 27
+
+
+ 1273 056d 05       		.byte	0x5
+ 1274 056e DF       		.byte	0xdf
+ 1275 056f 73050000 		.4byte	0x573
+ 1276 0573 0A       		.uleb128 0xa
+ 1277 0574 04       		.byte	0x4
+ 1278 0575 79050000 		.4byte	0x579
+ 1279 0579 0F       		.uleb128 0xf
+ 1280 057a 84050000 		.4byte	0x584
+ 1281 057e 0C       		.uleb128 0xc
+ 1282 057f 84050000 		.4byte	0x584
+ 1283 0583 00       		.byte	0
+ 1284 0584 0A       		.uleb128 0xa
+ 1285 0585 04       		.byte	0x4
+ 1286 0586 63030000 		.4byte	0x363
+ 1287 058a 02       		.uleb128 0x2
+ 1288 058b 37000000 		.4byte	.LASF102
+ 1289 058f 05       		.byte	0x5
+ 1290 0590 E0       		.byte	0xe0
+ 1291 0591 73050000 		.4byte	0x573
+ 1292 0595 02       		.uleb128 0x2
+ 1293 0596 EC060000 		.4byte	.LASF103
+ 1294 059a 05       		.byte	0x5
+ 1295 059b E1       		.byte	0xe1
+ 1296 059c A0050000 		.4byte	0x5a0
+ 1297 05a0 0A       		.uleb128 0xa
+ 1298 05a1 04       		.byte	0x4
+ 1299 05a2 A6050000 		.4byte	0x5a6
+ 1300 05a6 0F       		.uleb128 0xf
+ 1301 05a7 C5050000 		.4byte	0x5c5
+ 1302 05ab 0C       		.uleb128 0xc
+ 1303 05ac 84050000 		.4byte	0x584
+ 1304 05b0 0C       		.uleb128 0xc
+ 1305 05b1 58030000 		.4byte	0x358
+ 1306 05b5 0C       		.uleb128 0xc
+ 1307 05b6 58030000 		.4byte	0x358
+ 1308 05ba 0C       		.uleb128 0xc
+ 1309 05bb 58030000 		.4byte	0x358
+ 1310 05bf 0C       		.uleb128 0xc
+ 1311 05c0 A2000000 		.4byte	0xa2
+ 1312 05c4 00       		.byte	0
+ 1313 05c5 02       		.uleb128 0x2
+ 1314 05c6 95020000 		.4byte	.LASF104
+ 1315 05ca 05       		.byte	0x5
+ 1316 05cb E2       		.byte	0xe2
+ 1317 05cc A0050000 		.4byte	0x5a0
+ 1318 05d0 08       		.uleb128 0x8
+ 1319 05d1 1B070000 		.4byte	.LASF105
+ 1320 05d5 18       		.byte	0x18
+ 1321 05d6 05       		.byte	0x5
+ 1322 05d7 E8       		.byte	0xe8
+ 1323 05d8 D2060000 		.4byte	0x6d2
+ 1324 05dc 09       		.uleb128 0x9
+ 1325 05dd 99000000 		.4byte	.LASF106
+ 1326 05e1 05       		.byte	0x5
+ 1327 05e2 EB       		.byte	0xeb
+ 1328 05e3 A2000000 		.4byte	0xa2
+ 1329 05e7 00       		.byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 28
+
+
+ 1330 05e8 09       		.uleb128 0x9
+ 1331 05e9 E7000000 		.4byte	.LASF107
+ 1332 05ed 05       		.byte	0x5
+ 1333 05ee EC       		.byte	0xec
+ 1334 05ef A2000000 		.4byte	0xa2
+ 1335 05f3 01       		.byte	0x1
+ 1336 05f4 09       		.uleb128 0x9
+ 1337 05f5 59020000 		.4byte	.LASF108
+ 1338 05f9 05       		.byte	0x5
+ 1339 05fa ED       		.byte	0xed
+ 1340 05fb A2000000 		.4byte	0xa2
+ 1341 05ff 02       		.byte	0x2
+ 1342 0600 09       		.uleb128 0x9
+ 1343 0601 A0040000 		.4byte	.LASF109
+ 1344 0605 05       		.byte	0x5
+ 1345 0606 EE       		.byte	0xee
+ 1346 0607 A2000000 		.4byte	0xa2
+ 1347 060b 03       		.byte	0x3
+ 1348 060c 09       		.uleb128 0x9
+ 1349 060d B6020000 		.4byte	.LASF110
+ 1350 0611 05       		.byte	0x5
+ 1351 0612 F1       		.byte	0xf1
+ 1352 0613 A2000000 		.4byte	0xa2
+ 1353 0617 04       		.byte	0x4
+ 1354 0618 09       		.uleb128 0x9
+ 1355 0619 6C070000 		.4byte	.LASF111
+ 1356 061d 05       		.byte	0x5
+ 1357 061e F2       		.byte	0xf2
+ 1358 061f A2000000 		.4byte	0xa2
+ 1359 0623 05       		.byte	0x5
+ 1360 0624 09       		.uleb128 0x9
+ 1361 0625 10010000 		.4byte	.LASF112
+ 1362 0629 05       		.byte	0x5
+ 1363 062a F3       		.byte	0xf3
+ 1364 062b A2000000 		.4byte	0xa2
+ 1365 062f 06       		.byte	0x6
+ 1366 0630 09       		.uleb128 0x9
+ 1367 0631 20010000 		.4byte	.LASF113
+ 1368 0635 05       		.byte	0x5
+ 1369 0636 F4       		.byte	0xf4
+ 1370 0637 A2000000 		.4byte	0xa2
+ 1371 063b 07       		.byte	0x7
+ 1372 063c 09       		.uleb128 0x9
+ 1373 063d AB040000 		.4byte	.LASF114
+ 1374 0641 05       		.byte	0x5
+ 1375 0642 F5       		.byte	0xf5
+ 1376 0643 A2000000 		.4byte	0xa2
+ 1377 0647 08       		.byte	0x8
+ 1378 0648 09       		.uleb128 0x9
+ 1379 0649 0A050000 		.4byte	.LASF115
+ 1380 064d 05       		.byte	0x5
+ 1381 064e F8       		.byte	0xf8
+ 1382 064f 97000000 		.4byte	0x97
+ 1383 0653 09       		.byte	0x9
+ 1384 0654 09       		.uleb128 0x9
+ 1385 0655 D8010000 		.4byte	.LASF116
+ 1386 0659 05       		.byte	0x5
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 29
+
+
+ 1387 065a F9       		.byte	0xf9
+ 1388 065b 97000000 		.4byte	0x97
+ 1389 065f 0A       		.byte	0xa
+ 1390 0660 09       		.uleb128 0x9
+ 1391 0661 44050000 		.4byte	.LASF28
+ 1392 0665 05       		.byte	0x5
+ 1393 0666 FA       		.byte	0xfa
+ 1394 0667 97000000 		.4byte	0x97
+ 1395 066b 0B       		.byte	0xb
+ 1396 066c 09       		.uleb128 0x9
+ 1397 066d FB000000 		.4byte	.LASF117
+ 1398 0671 05       		.byte	0x5
+ 1399 0672 FB       		.byte	0xfb
+ 1400 0673 97000000 		.4byte	0x97
+ 1401 0677 0C       		.byte	0xc
+ 1402 0678 09       		.uleb128 0x9
+ 1403 0679 E6050000 		.4byte	.LASF118
+ 1404 067d 05       		.byte	0x5
+ 1405 067e FE       		.byte	0xfe
+ 1406 067f 97000000 		.4byte	0x97
+ 1407 0683 0D       		.byte	0xd
+ 1408 0684 09       		.uleb128 0x9
+ 1409 0685 AC020000 		.4byte	.LASF119
+ 1410 0689 05       		.byte	0x5
+ 1411 068a FF       		.byte	0xff
+ 1412 068b 97000000 		.4byte	0x97
+ 1413 068f 0E       		.byte	0xe
+ 1414 0690 07       		.uleb128 0x7
+ 1415 0691 7B010000 		.4byte	.LASF120
+ 1416 0695 05       		.byte	0x5
+ 1417 0696 0001     		.2byte	0x100
+ 1418 0698 97000000 		.4byte	0x97
+ 1419 069c 0F       		.byte	0xf
+ 1420 069d 07       		.uleb128 0x7
+ 1421 069e 01040000 		.4byte	.LASF121
+ 1422 06a2 05       		.byte	0x5
+ 1423 06a3 0101     		.2byte	0x101
+ 1424 06a5 97000000 		.4byte	0x97
+ 1425 06a9 10       		.byte	0x10
+ 1426 06aa 07       		.uleb128 0x7
+ 1427 06ab 7C040000 		.4byte	.LASF122
+ 1428 06af 05       		.byte	0x5
+ 1429 06b0 0401     		.2byte	0x104
+ 1430 06b2 AD000000 		.4byte	0xad
+ 1431 06b6 12       		.byte	0x12
+ 1432 06b7 07       		.uleb128 0x7
+ 1433 06b8 45080000 		.4byte	.LASF123
+ 1434 06bc 05       		.byte	0x5
+ 1435 06bd 0501     		.2byte	0x105
+ 1436 06bf AD000000 		.4byte	0xad
+ 1437 06c3 14       		.byte	0x14
+ 1438 06c4 07       		.uleb128 0x7
+ 1439 06c5 10000000 		.4byte	.LASF124
+ 1440 06c9 05       		.byte	0x5
+ 1441 06ca 0901     		.2byte	0x109
+ 1442 06cc AD000000 		.4byte	0xad
+ 1443 06d0 16       		.byte	0x16
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 30
+
+
+ 1444 06d1 00       		.byte	0
+ 1445 06d2 10       		.uleb128 0x10
+ 1446 06d3 18020000 		.4byte	.LASF125
+ 1447 06d7 05       		.byte	0x5
+ 1448 06d8 0C01     		.2byte	0x10c
+ 1449 06da D0050000 		.4byte	0x5d0
+ 1450 06de 06       		.uleb128 0x6
+ 1451 06df 03080000 		.4byte	.LASF126
+ 1452 06e3 14       		.byte	0x14
+ 1453 06e4 05       		.byte	0x5
+ 1454 06e5 0F01     		.2byte	0x10f
+ 1455 06e7 84070000 		.4byte	0x784
+ 1456 06eb 07       		.uleb128 0x7
+ 1457 06ec 44030000 		.4byte	.LASF127
+ 1458 06f0 05       		.byte	0x5
+ 1459 06f1 1101     		.2byte	0x111
+ 1460 06f3 4D030000 		.4byte	0x34d
+ 1461 06f7 00       		.byte	0
+ 1462 06f8 07       		.uleb128 0x7
+ 1463 06f9 D8070000 		.4byte	.LASF128
+ 1464 06fd 05       		.byte	0x5
+ 1465 06fe 1301     		.2byte	0x113
+ 1466 0700 58030000 		.4byte	0x358
+ 1467 0704 04       		.byte	0x4
+ 1468 0705 07       		.uleb128 0x7
+ 1469 0706 E1070000 		.4byte	.LASF129
+ 1470 070a 05       		.byte	0x5
+ 1471 070b 1401     		.2byte	0x114
+ 1472 070d 58030000 		.4byte	0x358
+ 1473 0711 06       		.byte	0x6
+ 1474 0712 0E       		.uleb128 0xe
+ 1475 0713 7800     		.ascii	"x\000"
+ 1476 0715 05       		.byte	0x5
+ 1477 0716 1601     		.2byte	0x116
+ 1478 0718 97000000 		.4byte	0x97
+ 1479 071c 08       		.byte	0x8
+ 1480 071d 0E       		.uleb128 0xe
+ 1481 071e 7900     		.ascii	"y\000"
+ 1482 0720 05       		.byte	0x5
+ 1483 0721 1701     		.2byte	0x117
+ 1484 0723 97000000 		.4byte	0x97
+ 1485 0727 09       		.byte	0x9
+ 1486 0728 07       		.uleb128 0x7
+ 1487 0729 CC050000 		.4byte	.LASF130
+ 1488 072d 05       		.byte	0x5
+ 1489 072e 1801     		.2byte	0x118
+ 1490 0730 97000000 		.4byte	0x97
+ 1491 0734 0A       		.byte	0xa
+ 1492 0735 07       		.uleb128 0x7
+ 1493 0736 CB040000 		.4byte	.LASF131
+ 1494 073a 05       		.byte	0x5
+ 1495 073b 1901     		.2byte	0x119
+ 1496 073d 97000000 		.4byte	0x97
+ 1497 0741 0B       		.byte	0xb
+ 1498 0742 07       		.uleb128 0x7
+ 1499 0743 BC040000 		.4byte	.LASF132
+ 1500 0747 05       		.byte	0x5
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 31
+
+
+ 1501 0748 1B01     		.2byte	0x11b
+ 1502 074a A2000000 		.4byte	0xa2
+ 1503 074e 0C       		.byte	0xc
+ 1504 074f 07       		.uleb128 0x7
+ 1505 0750 10030000 		.4byte	.LASF133
+ 1506 0754 05       		.byte	0x5
+ 1507 0755 1C01     		.2byte	0x11c
+ 1508 0757 A2000000 		.4byte	0xa2
+ 1509 075b 0D       		.byte	0xd
+ 1510 075c 07       		.uleb128 0x7
+ 1511 075d A8050000 		.4byte	.LASF134
+ 1512 0761 05       		.byte	0x5
+ 1513 0762 1D01     		.2byte	0x11d
+ 1514 0764 A2000000 		.4byte	0xa2
+ 1515 0768 0E       		.byte	0xe
+ 1516 0769 07       		.uleb128 0x7
+ 1517 076a 91080000 		.4byte	.LASF135
+ 1518 076e 05       		.byte	0x5
+ 1519 076f 1E01     		.2byte	0x11e
+ 1520 0771 A2000000 		.4byte	0xa2
+ 1521 0775 0F       		.byte	0xf
+ 1522 0776 0E       		.uleb128 0xe
+ 1523 0777 64697200 		.ascii	"dir\000"
+ 1524 077b 05       		.byte	0x5
+ 1525 077c 2001     		.2byte	0x120
+ 1526 077e A2000000 		.4byte	0xa2
+ 1527 0782 10       		.byte	0x10
+ 1528 0783 00       		.byte	0
+ 1529 0784 10       		.uleb128 0x10
+ 1530 0785 6E000000 		.4byte	.LASF136
+ 1531 0789 05       		.byte	0x5
+ 1532 078a 2301     		.2byte	0x123
+ 1533 078c DE060000 		.4byte	0x6de
+ 1534 0790 10       		.uleb128 0x10
+ 1535 0791 5F080000 		.4byte	.LASF137
+ 1536 0795 05       		.byte	0x5
+ 1537 0796 3801     		.2byte	0x138
+ 1538 0798 9C070000 		.4byte	0x79c
+ 1539 079c 0A       		.uleb128 0xa
+ 1540 079d 04       		.byte	0x4
+ 1541 079e A2070000 		.4byte	0x7a2
+ 1542 07a2 0B       		.uleb128 0xb
+ 1543 07a3 58030000 		.4byte	0x358
+ 1544 07a7 B1070000 		.4byte	0x7b1
+ 1545 07ab 0C       		.uleb128 0xc
+ 1546 07ac 84050000 		.4byte	0x584
+ 1547 07b0 00       		.byte	0
+ 1548 07b1 0A       		.uleb128 0xa
+ 1549 07b2 04       		.byte	0x4
+ 1550 07b3 B7070000 		.4byte	0x7b7
+ 1551 07b7 0D       		.uleb128 0xd
+ 1552 07b8 28050000 		.4byte	0x528
+ 1553 07bc 11       		.uleb128 0x11
+ 1554 07bd 44040000 		.4byte	.LASF139
+ 1555 07c1 01       		.byte	0x1
+ 1556 07c2 2A       		.byte	0x2a
+ 1557 07c3 00000000 		.4byte	.LFB0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 32
+
+
+ 1558 07c7 4A000000 		.4byte	.LFE0-.LFB0
+ 1559 07cb 01       		.uleb128 0x1
+ 1560 07cc 9C       		.byte	0x9c
+ 1561 07cd 70080000 		.4byte	0x870
+ 1562 07d1 12       		.uleb128 0x12
+ 1563 07d2 FC030000 		.4byte	.LASF138
+ 1564 07d6 01       		.byte	0x1
+ 1565 07d7 2A       		.byte	0x2a
+ 1566 07d8 84050000 		.4byte	0x584
+ 1567 07dc 00000000 		.4byte	.LLST0
+ 1568 07e0 13       		.uleb128 0x13
+ 1569 07e1 7800     		.ascii	"x\000"
+ 1570 07e3 01       		.byte	0x1
+ 1571 07e4 2A       		.byte	0x2a
+ 1572 07e5 58030000 		.4byte	0x358
+ 1573 07e9 1E000000 		.4byte	.LLST1
+ 1574 07ed 13       		.uleb128 0x13
+ 1575 07ee 7900     		.ascii	"y\000"
+ 1576 07f0 01       		.byte	0x1
+ 1577 07f1 2A       		.byte	0x2a
+ 1578 07f2 58030000 		.4byte	0x358
+ 1579 07f6 3F000000 		.4byte	.LLST2
+ 1580 07fa 13       		.uleb128 0x13
+ 1581 07fb 7700     		.ascii	"w\000"
+ 1582 07fd 01       		.byte	0x1
+ 1583 07fe 2A       		.byte	0x2a
+ 1584 07ff 58030000 		.4byte	0x358
+ 1585 0803 76000000 		.4byte	.LLST3
+ 1586 0807 13       		.uleb128 0x13
+ 1587 0808 6800     		.ascii	"h\000"
+ 1588 080a 01       		.byte	0x1
+ 1589 080b 2A       		.byte	0x2a
+ 1590 080c 58030000 		.4byte	0x358
+ 1591 0810 97000000 		.4byte	.LLST4
+ 1592 0814 14       		.uleb128 0x14
+ 1593 0815 24000000 		.4byte	.LVL2
+ 1594 0819 330E0000 		.4byte	0xe33
+ 1595 081d 47080000 		.4byte	0x847
+ 1596 0821 15       		.uleb128 0x15
+ 1597 0822 01       		.uleb128 0x1
+ 1598 0823 50       		.byte	0x50
+ 1599 0824 02       		.uleb128 0x2
+ 1600 0825 78       		.byte	0x78
+ 1601 0826 00       		.sleb128 0
+ 1602 0827 15       		.uleb128 0x15
+ 1603 0828 01       		.uleb128 0x1
+ 1604 0829 51       		.byte	0x51
+ 1605 082a 02       		.uleb128 0x2
+ 1606 082b 77       		.byte	0x77
+ 1607 082c 00       		.sleb128 0
+ 1608 082d 15       		.uleb128 0x15
+ 1609 082e 01       		.uleb128 0x1
+ 1610 082f 52       		.byte	0x52
+ 1611 0830 02       		.uleb128 0x2
+ 1612 0831 75       		.byte	0x75
+ 1613 0832 00       		.sleb128 0
+ 1614 0833 15       		.uleb128 0x15
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 33
+
+
+ 1615 0834 01       		.uleb128 0x1
+ 1616 0835 53       		.byte	0x53
+ 1617 0836 05       		.uleb128 0x5
+ 1618 0837 77       		.byte	0x77
+ 1619 0838 00       		.sleb128 0
+ 1620 0839 76       		.byte	0x76
+ 1621 083a 00       		.sleb128 0
+ 1622 083b 22       		.byte	0x22
+ 1623 083c 15       		.uleb128 0x15
+ 1624 083d 02       		.uleb128 0x2
+ 1625 083e 7D       		.byte	0x7d
+ 1626 083f 00       		.sleb128 0
+ 1627 0840 05       		.uleb128 0x5
+ 1628 0841 75       		.byte	0x75
+ 1629 0842 00       		.sleb128 0
+ 1630 0843 74       		.byte	0x74
+ 1631 0844 00       		.sleb128 0
+ 1632 0845 22       		.byte	0x22
+ 1633 0846 00       		.byte	0
+ 1634 0847 16       		.uleb128 0x16
+ 1635 0848 38000000 		.4byte	.LVL4
+ 1636 084c 3F0E0000 		.4byte	0xe3f
+ 1637 0850 15       		.uleb128 0x15
+ 1638 0851 01       		.uleb128 0x1
+ 1639 0852 50       		.byte	0x50
+ 1640 0853 02       		.uleb128 0x2
+ 1641 0854 78       		.byte	0x78
+ 1642 0855 00       		.sleb128 0
+ 1643 0856 15       		.uleb128 0x15
+ 1644 0857 01       		.uleb128 0x1
+ 1645 0858 51       		.byte	0x51
+ 1646 0859 02       		.uleb128 0x2
+ 1647 085a 77       		.byte	0x77
+ 1648 085b 00       		.sleb128 0
+ 1649 085c 15       		.uleb128 0x15
+ 1650 085d 01       		.uleb128 0x1
+ 1651 085e 52       		.byte	0x52
+ 1652 085f 02       		.uleb128 0x2
+ 1653 0860 75       		.byte	0x75
+ 1654 0861 00       		.sleb128 0
+ 1655 0862 15       		.uleb128 0x15
+ 1656 0863 01       		.uleb128 0x1
+ 1657 0864 53       		.byte	0x53
+ 1658 0865 02       		.uleb128 0x2
+ 1659 0866 76       		.byte	0x76
+ 1660 0867 00       		.sleb128 0
+ 1661 0868 15       		.uleb128 0x15
+ 1662 0869 02       		.uleb128 0x2
+ 1663 086a 7D       		.byte	0x7d
+ 1664 086b 00       		.sleb128 0
+ 1665 086c 01       		.uleb128 0x1
+ 1666 086d 30       		.byte	0x30
+ 1667 086e 00       		.byte	0
+ 1668 086f 00       		.byte	0
+ 1669 0870 11       		.uleb128 0x11
+ 1670 0871 C9070000 		.4byte	.LASF140
+ 1671 0875 01       		.byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 34
+
+
+ 1672 0876 3D       		.byte	0x3d
+ 1673 0877 00000000 		.4byte	.LFB1
+ 1674 087b 8E000000 		.4byte	.LFE1-.LFB1
+ 1675 087f 01       		.uleb128 0x1
+ 1676 0880 9C       		.byte	0x9c
+ 1677 0881 B6090000 		.4byte	0x9b6
+ 1678 0885 12       		.uleb128 0x12
+ 1679 0886 FC030000 		.4byte	.LASF138
+ 1680 088a 01       		.byte	0x1
+ 1681 088b 3D       		.byte	0x3d
+ 1682 088c 84050000 		.4byte	0x584
+ 1683 0890 C1000000 		.4byte	.LLST5
+ 1684 0894 13       		.uleb128 0x13
+ 1685 0895 7800     		.ascii	"x\000"
+ 1686 0897 01       		.byte	0x1
+ 1687 0898 3D       		.byte	0x3d
+ 1688 0899 58030000 		.4byte	0x358
+ 1689 089d DF000000 		.4byte	.LLST6
+ 1690 08a1 13       		.uleb128 0x13
+ 1691 08a2 7900     		.ascii	"y\000"
+ 1692 08a4 01       		.byte	0x1
+ 1693 08a5 3D       		.byte	0x3d
+ 1694 08a6 58030000 		.4byte	0x358
+ 1695 08aa 23010000 		.4byte	.LLST7
+ 1696 08ae 13       		.uleb128 0x13
+ 1697 08af 7700     		.ascii	"w\000"
+ 1698 08b1 01       		.byte	0x1
+ 1699 08b2 3D       		.byte	0x3d
+ 1700 08b3 58030000 		.4byte	0x358
+ 1701 08b7 5A010000 		.4byte	.LLST8
+ 1702 08bb 13       		.uleb128 0x13
+ 1703 08bc 6800     		.ascii	"h\000"
+ 1704 08be 01       		.byte	0x1
+ 1705 08bf 3D       		.byte	0x3d
+ 1706 08c0 58030000 		.4byte	0x358
+ 1707 08c4 7B010000 		.4byte	.LLST9
+ 1708 08c8 17       		.uleb128 0x17
+ 1709 08c9 6B010000 		.4byte	.LASF142
+ 1710 08cd 01       		.byte	0x1
+ 1711 08ce 3F       		.byte	0x3f
+ 1712 08cf 58030000 		.4byte	0x358
+ 1713 08d3 9A010000 		.4byte	.LLST10
+ 1714 08d7 14       		.uleb128 0x14
+ 1715 08d8 24000000 		.4byte	.LVL13
+ 1716 08dc 330E0000 		.4byte	0xe33
+ 1717 08e0 07090000 		.4byte	0x907
+ 1718 08e4 15       		.uleb128 0x15
+ 1719 08e5 01       		.uleb128 0x1
+ 1720 08e6 50       		.byte	0x50
+ 1721 08e7 02       		.uleb128 0x2
+ 1722 08e8 78       		.byte	0x78
+ 1723 08e9 00       		.sleb128 0
+ 1724 08ea 15       		.uleb128 0x15
+ 1725 08eb 01       		.uleb128 0x1
+ 1726 08ec 51       		.byte	0x51
+ 1727 08ed 02       		.uleb128 0x2
+ 1728 08ee 76       		.byte	0x76
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 35
+
+
+ 1729 08ef 00       		.sleb128 0
+ 1730 08f0 15       		.uleb128 0x15
+ 1731 08f1 01       		.uleb128 0x1
+ 1732 08f2 52       		.byte	0x52
+ 1733 08f3 02       		.uleb128 0x2
+ 1734 08f4 74       		.byte	0x74
+ 1735 08f5 00       		.sleb128 0
+ 1736 08f6 15       		.uleb128 0x15
+ 1737 08f7 01       		.uleb128 0x1
+ 1738 08f8 53       		.byte	0x53
+ 1739 08f9 02       		.uleb128 0x2
+ 1740 08fa 75       		.byte	0x75
+ 1741 08fb 00       		.sleb128 0
+ 1742 08fc 15       		.uleb128 0x15
+ 1743 08fd 02       		.uleb128 0x2
+ 1744 08fe 7D       		.byte	0x7d
+ 1745 08ff 00       		.sleb128 0
+ 1746 0900 05       		.uleb128 0x5
+ 1747 0901 74       		.byte	0x74
+ 1748 0902 00       		.sleb128 0
+ 1749 0903 79       		.byte	0x79
+ 1750 0904 00       		.sleb128 0
+ 1751 0905 22       		.byte	0x22
+ 1752 0906 00       		.byte	0
+ 1753 0907 14       		.uleb128 0x14
+ 1754 0908 36000000 		.4byte	.LVL14
+ 1755 090c 3F0E0000 		.4byte	0xe3f
+ 1756 0910 33090000 		.4byte	0x933
+ 1757 0914 15       		.uleb128 0x15
+ 1758 0915 01       		.uleb128 0x1
+ 1759 0916 50       		.byte	0x50
+ 1760 0917 02       		.uleb128 0x2
+ 1761 0918 78       		.byte	0x78
+ 1762 0919 00       		.sleb128 0
+ 1763 091a 15       		.uleb128 0x15
+ 1764 091b 01       		.uleb128 0x1
+ 1765 091c 51       		.byte	0x51
+ 1766 091d 02       		.uleb128 0x2
+ 1767 091e 76       		.byte	0x76
+ 1768 091f 00       		.sleb128 0
+ 1769 0920 15       		.uleb128 0x15
+ 1770 0921 01       		.uleb128 0x1
+ 1771 0922 52       		.byte	0x52
+ 1772 0923 02       		.uleb128 0x2
+ 1773 0924 74       		.byte	0x74
+ 1774 0925 00       		.sleb128 0
+ 1775 0926 15       		.uleb128 0x15
+ 1776 0927 01       		.uleb128 0x1
+ 1777 0928 53       		.byte	0x53
+ 1778 0929 02       		.uleb128 0x2
+ 1779 092a 77       		.byte	0x77
+ 1780 092b 00       		.sleb128 0
+ 1781 092c 15       		.uleb128 0x15
+ 1782 092d 02       		.uleb128 0x2
+ 1783 092e 7D       		.byte	0x7d
+ 1784 092f 00       		.sleb128 0
+ 1785 0930 01       		.uleb128 0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 36
+
+
+ 1786 0931 30       		.byte	0x30
+ 1787 0932 00       		.byte	0
+ 1788 0933 14       		.uleb128 0x14
+ 1789 0934 62000000 		.4byte	.LVL17
+ 1790 0938 3F0E0000 		.4byte	0xe3f
+ 1791 093c 60090000 		.4byte	0x960
+ 1792 0940 15       		.uleb128 0x15
+ 1793 0941 01       		.uleb128 0x1
+ 1794 0942 50       		.byte	0x50
+ 1795 0943 02       		.uleb128 0x2
+ 1796 0944 78       		.byte	0x78
+ 1797 0945 00       		.sleb128 0
+ 1798 0946 15       		.uleb128 0x15
+ 1799 0947 01       		.uleb128 0x1
+ 1800 0948 51       		.byte	0x51
+ 1801 0949 02       		.uleb128 0x2
+ 1802 094a 76       		.byte	0x76
+ 1803 094b 00       		.sleb128 0
+ 1804 094c 15       		.uleb128 0x15
+ 1805 094d 01       		.uleb128 0x1
+ 1806 094e 52       		.byte	0x52
+ 1807 094f 02       		.uleb128 0x2
+ 1808 0950 74       		.byte	0x74
+ 1809 0951 00       		.sleb128 0
+ 1810 0952 15       		.uleb128 0x15
+ 1811 0953 01       		.uleb128 0x1
+ 1812 0954 53       		.byte	0x53
+ 1813 0955 02       		.uleb128 0x2
+ 1814 0956 79       		.byte	0x79
+ 1815 0957 00       		.sleb128 0
+ 1816 0958 15       		.uleb128 0x15
+ 1817 0959 02       		.uleb128 0x2
+ 1818 095a 7D       		.byte	0x7d
+ 1819 095b 00       		.sleb128 0
+ 1820 095c 02       		.uleb128 0x2
+ 1821 095d 7A       		.byte	0x7a
+ 1822 095e 00       		.sleb128 0
+ 1823 095f 00       		.byte	0
+ 1824 0960 14       		.uleb128 0x14
+ 1825 0961 74000000 		.4byte	.LVL19
+ 1826 0965 3F0E0000 		.4byte	0xe3f
+ 1827 0969 8D090000 		.4byte	0x98d
+ 1828 096d 15       		.uleb128 0x15
+ 1829 096e 01       		.uleb128 0x1
+ 1830 096f 50       		.byte	0x50
+ 1831 0970 02       		.uleb128 0x2
+ 1832 0971 78       		.byte	0x78
+ 1833 0972 00       		.sleb128 0
+ 1834 0973 15       		.uleb128 0x15
+ 1835 0974 01       		.uleb128 0x1
+ 1836 0975 51       		.byte	0x51
+ 1837 0976 02       		.uleb128 0x2
+ 1838 0977 75       		.byte	0x75
+ 1839 0978 7F       		.sleb128 -1
+ 1840 0979 15       		.uleb128 0x15
+ 1841 097a 01       		.uleb128 0x1
+ 1842 097b 52       		.byte	0x52
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 37
+
+
+ 1843 097c 02       		.uleb128 0x2
+ 1844 097d 74       		.byte	0x74
+ 1845 097e 00       		.sleb128 0
+ 1846 097f 15       		.uleb128 0x15
+ 1847 0980 01       		.uleb128 0x1
+ 1848 0981 53       		.byte	0x53
+ 1849 0982 02       		.uleb128 0x2
+ 1850 0983 79       		.byte	0x79
+ 1851 0984 00       		.sleb128 0
+ 1852 0985 15       		.uleb128 0x15
+ 1853 0986 02       		.uleb128 0x2
+ 1854 0987 7D       		.byte	0x7d
+ 1855 0988 00       		.sleb128 0
+ 1856 0989 02       		.uleb128 0x2
+ 1857 098a 7A       		.byte	0x7a
+ 1858 098b 00       		.sleb128 0
+ 1859 098c 00       		.byte	0
+ 1860 098d 16       		.uleb128 0x16
+ 1861 098e 88000000 		.4byte	.LVL22
+ 1862 0992 3F0E0000 		.4byte	0xe3f
+ 1863 0996 15       		.uleb128 0x15
+ 1864 0997 01       		.uleb128 0x1
+ 1865 0998 50       		.byte	0x50
+ 1866 0999 02       		.uleb128 0x2
+ 1867 099a 78       		.byte	0x78
+ 1868 099b 00       		.sleb128 0
+ 1869 099c 15       		.uleb128 0x15
+ 1870 099d 01       		.uleb128 0x1
+ 1871 099e 51       		.byte	0x51
+ 1872 099f 02       		.uleb128 0x2
+ 1873 09a0 76       		.byte	0x76
+ 1874 09a1 00       		.sleb128 0
+ 1875 09a2 15       		.uleb128 0x15
+ 1876 09a3 01       		.uleb128 0x1
+ 1877 09a4 52       		.byte	0x52
+ 1878 09a5 02       		.uleb128 0x2
+ 1879 09a6 74       		.byte	0x74
+ 1880 09a7 00       		.sleb128 0
+ 1881 09a8 15       		.uleb128 0x15
+ 1882 09a9 01       		.uleb128 0x1
+ 1883 09aa 53       		.byte	0x53
+ 1884 09ab 02       		.uleb128 0x2
+ 1885 09ac 77       		.byte	0x77
+ 1886 09ad 00       		.sleb128 0
+ 1887 09ae 15       		.uleb128 0x15
+ 1888 09af 02       		.uleb128 0x2
+ 1889 09b0 7D       		.byte	0x7d
+ 1890 09b1 00       		.sleb128 0
+ 1891 09b2 01       		.uleb128 0x1
+ 1892 09b3 30       		.byte	0x30
+ 1893 09b4 00       		.byte	0
+ 1894 09b5 00       		.byte	0
+ 1895 09b6 11       		.uleb128 0x11
+ 1896 09b7 D2060000 		.4byte	.LASF141
+ 1897 09bb 01       		.byte	0x1
+ 1898 09bc 58       		.byte	0x58
+ 1899 09bd 00000000 		.4byte	.LFB2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 38
+
+
+ 1900 09c1 FA000000 		.4byte	.LFE2-.LFB2
+ 1901 09c5 01       		.uleb128 0x1
+ 1902 09c6 9C       		.byte	0x9c
+ 1903 09c7 E40B0000 		.4byte	0xbe4
+ 1904 09cb 12       		.uleb128 0x12
+ 1905 09cc FC030000 		.4byte	.LASF138
+ 1906 09d0 01       		.byte	0x1
+ 1907 09d1 58       		.byte	0x58
+ 1908 09d2 84050000 		.4byte	0x584
+ 1909 09d6 BB010000 		.4byte	.LLST11
+ 1910 09da 13       		.uleb128 0x13
+ 1911 09db 7800     		.ascii	"x\000"
+ 1912 09dd 01       		.byte	0x1
+ 1913 09de 58       		.byte	0x58
+ 1914 09df 58030000 		.4byte	0x358
+ 1915 09e3 DA010000 		.4byte	.LLST12
+ 1916 09e7 13       		.uleb128 0x13
+ 1917 09e8 7900     		.ascii	"y\000"
+ 1918 09ea 01       		.byte	0x1
+ 1919 09eb 58       		.byte	0x58
+ 1920 09ec 58030000 		.4byte	0x358
+ 1921 09f0 FB010000 		.4byte	.LLST13
+ 1922 09f4 13       		.uleb128 0x13
+ 1923 09f5 7700     		.ascii	"w\000"
+ 1924 09f7 01       		.byte	0x1
+ 1925 09f8 58       		.byte	0x58
+ 1926 09f9 58030000 		.4byte	0x358
+ 1927 09fd 1C020000 		.4byte	.LLST14
+ 1928 0a01 18       		.uleb128 0x18
+ 1929 0a02 6800     		.ascii	"h\000"
+ 1930 0a04 01       		.byte	0x1
+ 1931 0a05 58       		.byte	0x58
+ 1932 0a06 58030000 		.4byte	0x358
+ 1933 0a0a 02       		.uleb128 0x2
+ 1934 0a0b 91       		.byte	0x91
+ 1935 0a0c 00       		.sleb128 0
+ 1936 0a0d 18       		.uleb128 0x18
+ 1937 0a0e 7200     		.ascii	"r\000"
+ 1938 0a10 01       		.byte	0x1
+ 1939 0a11 58       		.byte	0x58
+ 1940 0a12 58030000 		.4byte	0x358
+ 1941 0a16 02       		.uleb128 0x2
+ 1942 0a17 91       		.byte	0x91
+ 1943 0a18 04       		.sleb128 4
+ 1944 0a19 19       		.uleb128 0x19
+ 1945 0a1a 786C00   		.ascii	"xl\000"
+ 1946 0a1d 01       		.byte	0x1
+ 1947 0a1e 5A       		.byte	0x5a
+ 1948 0a1f 58030000 		.4byte	0x358
+ 1949 0a23 3D020000 		.4byte	.LLST15
+ 1950 0a27 19       		.uleb128 0x19
+ 1951 0a28 797500   		.ascii	"yu\000"
+ 1952 0a2b 01       		.byte	0x1
+ 1953 0a2c 5A       		.byte	0x5a
+ 1954 0a2d 58030000 		.4byte	0x358
+ 1955 0a31 73020000 		.4byte	.LLST16
+ 1956 0a35 19       		.uleb128 0x19
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 39
+
+
+ 1957 0a36 796C00   		.ascii	"yl\000"
+ 1958 0a39 01       		.byte	0x1
+ 1959 0a3a 5B       		.byte	0x5b
+ 1960 0a3b 58030000 		.4byte	0x358
+ 1961 0a3f A8020000 		.4byte	.LLST17
+ 1962 0a43 19       		.uleb128 0x19
+ 1963 0a44 787200   		.ascii	"xr\000"
+ 1964 0a47 01       		.byte	0x1
+ 1965 0a48 5B       		.byte	0x5b
+ 1966 0a49 58030000 		.4byte	0x358
+ 1967 0a4d EE020000 		.4byte	.LLST18
+ 1968 0a51 1A       		.uleb128 0x1a
+ 1969 0a52 8A000000 		.4byte	.LBB2
+ 1970 0a56 6A000000 		.4byte	.LBE2-.LBB2
+ 1971 0a5a 010B0000 		.4byte	0xb01
+ 1972 0a5e 19       		.uleb128 0x19
+ 1973 0a5f 777700   		.ascii	"ww\000"
+ 1974 0a62 01       		.byte	0x1
+ 1975 0a63 77       		.byte	0x77
+ 1976 0a64 58030000 		.4byte	0x358
+ 1977 0a68 74030000 		.4byte	.LLST19
+ 1978 0a6c 19       		.uleb128 0x19
+ 1979 0a6d 686800   		.ascii	"hh\000"
+ 1980 0a70 01       		.byte	0x1
+ 1981 0a71 77       		.byte	0x77
+ 1982 0a72 58030000 		.4byte	0x358
+ 1983 0a76 F3030000 		.4byte	.LLST20
+ 1984 0a7a 14       		.uleb128 0x14
+ 1985 0a7b C6000000 		.4byte	.LVL52
+ 1986 0a7f BC070000 		.4byte	0x7bc
+ 1987 0a83 A50A0000 		.4byte	0xaa5
+ 1988 0a87 15       		.uleb128 0x15
+ 1989 0a88 01       		.uleb128 0x1
+ 1990 0a89 50       		.byte	0x50
+ 1991 0a8a 02       		.uleb128 0x2
+ 1992 0a8b 7B       		.byte	0x7b
+ 1993 0a8c 00       		.sleb128 0
+ 1994 0a8d 15       		.uleb128 0x15
+ 1995 0a8e 01       		.uleb128 0x1
+ 1996 0a8f 51       		.byte	0x51
+ 1997 0a90 02       		.uleb128 0x2
+ 1998 0a91 78       		.byte	0x78
+ 1999 0a92 00       		.sleb128 0
+ 2000 0a93 15       		.uleb128 0x15
+ 2001 0a94 01       		.uleb128 0x1
+ 2002 0a95 53       		.byte	0x53
+ 2003 0a96 04       		.uleb128 0x4
+ 2004 0a97 91       		.byte	0x91
+ 2005 0a98 50       		.sleb128 -48
+ 2006 0a99 94       		.byte	0x94
+ 2007 0a9a 02       		.byte	0x2
+ 2008 0a9b 15       		.uleb128 0x15
+ 2009 0a9c 02       		.uleb128 0x2
+ 2010 0a9d 7D       		.byte	0x7d
+ 2011 0a9e 00       		.sleb128 0
+ 2012 0a9f 04       		.uleb128 0x4
+ 2013 0aa0 91       		.byte	0x91
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 40
+
+
+ 2014 0aa1 54       		.sleb128 -44
+ 2015 0aa2 94       		.byte	0x94
+ 2016 0aa3 02       		.byte	0x2
+ 2017 0aa4 00       		.byte	0
+ 2018 0aa5 14       		.uleb128 0x14
+ 2019 0aa6 D6000000 		.4byte	.LVL53
+ 2020 0aaa BC070000 		.4byte	0x7bc
+ 2021 0aae D60A0000 		.4byte	0xad6
+ 2022 0ab2 15       		.uleb128 0x15
+ 2023 0ab3 01       		.uleb128 0x1
+ 2024 0ab4 50       		.byte	0x50
+ 2025 0ab5 02       		.uleb128 0x2
+ 2026 0ab6 7B       		.byte	0x7b
+ 2027 0ab7 00       		.sleb128 0
+ 2028 0ab8 15       		.uleb128 0x15
+ 2029 0ab9 01       		.uleb128 0x1
+ 2030 0aba 51       		.byte	0x51
+ 2031 0abb 02       		.uleb128 0x2
+ 2032 0abc 78       		.byte	0x78
+ 2033 0abd 00       		.sleb128 0
+ 2034 0abe 15       		.uleb128 0x15
+ 2035 0abf 01       		.uleb128 0x1
+ 2036 0ac0 52       		.byte	0x52
+ 2037 0ac1 02       		.uleb128 0x2
+ 2038 0ac2 75       		.byte	0x75
+ 2039 0ac3 00       		.sleb128 0
+ 2040 0ac4 15       		.uleb128 0x15
+ 2041 0ac5 01       		.uleb128 0x1
+ 2042 0ac6 53       		.byte	0x53
+ 2043 0ac7 04       		.uleb128 0x4
+ 2044 0ac8 91       		.byte	0x91
+ 2045 0ac9 50       		.sleb128 -48
+ 2046 0aca 94       		.byte	0x94
+ 2047 0acb 02       		.byte	0x2
+ 2048 0acc 15       		.uleb128 0x15
+ 2049 0acd 02       		.uleb128 0x2
+ 2050 0ace 7D       		.byte	0x7d
+ 2051 0acf 00       		.sleb128 0
+ 2052 0ad0 04       		.uleb128 0x4
+ 2053 0ad1 91       		.byte	0x91
+ 2054 0ad2 54       		.sleb128 -44
+ 2055 0ad3 94       		.byte	0x94
+ 2056 0ad4 02       		.byte	0x2
+ 2057 0ad5 00       		.byte	0
+ 2058 0ad6 16       		.uleb128 0x16
+ 2059 0ad7 F4000000 		.4byte	.LVL60
+ 2060 0adb BC070000 		.4byte	0x7bc
+ 2061 0adf 15       		.uleb128 0x15
+ 2062 0ae0 01       		.uleb128 0x1
+ 2063 0ae1 50       		.byte	0x50
+ 2064 0ae2 03       		.uleb128 0x3
+ 2065 0ae3 91       		.byte	0x91
+ 2066 0ae4 4C       		.sleb128 -52
+ 2067 0ae5 06       		.byte	0x6
+ 2068 0ae6 15       		.uleb128 0x15
+ 2069 0ae7 01       		.uleb128 0x1
+ 2070 0ae8 51       		.byte	0x51
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 41
+
+
+ 2071 0ae9 02       		.uleb128 0x2
+ 2072 0aea 79       		.byte	0x79
+ 2073 0aeb 00       		.sleb128 0
+ 2074 0aec 15       		.uleb128 0x15
+ 2075 0aed 01       		.uleb128 0x1
+ 2076 0aee 52       		.byte	0x52
+ 2077 0aef 02       		.uleb128 0x2
+ 2078 0af0 74       		.byte	0x74
+ 2079 0af1 00       		.sleb128 0
+ 2080 0af2 15       		.uleb128 0x15
+ 2081 0af3 01       		.uleb128 0x1
+ 2082 0af4 53       		.byte	0x53
+ 2083 0af5 02       		.uleb128 0x2
+ 2084 0af6 7A       		.byte	0x7a
+ 2085 0af7 00       		.sleb128 0
+ 2086 0af8 15       		.uleb128 0x15
+ 2087 0af9 02       		.uleb128 0x2
+ 2088 0afa 7D       		.byte	0x7d
+ 2089 0afb 00       		.sleb128 0
+ 2090 0afc 02       		.uleb128 0x2
+ 2091 0afd 77       		.byte	0x77
+ 2092 0afe 00       		.sleb128 0
+ 2093 0aff 00       		.byte	0
+ 2094 0b00 00       		.byte	0
+ 2095 0b01 14       		.uleb128 0x14
+ 2096 0b02 26000000 		.4byte	.LVL25
+ 2097 0b06 330E0000 		.4byte	0xe33
+ 2098 0b0a 2F0B0000 		.4byte	0xb2f
+ 2099 0b0e 15       		.uleb128 0x15
+ 2100 0b0f 01       		.uleb128 0x1
+ 2101 0b10 50       		.byte	0x50
+ 2102 0b11 03       		.uleb128 0x3
+ 2103 0b12 91       		.byte	0x91
+ 2104 0b13 4C       		.sleb128 -52
+ 2105 0b14 06       		.byte	0x6
+ 2106 0b15 15       		.uleb128 0x15
+ 2107 0b16 01       		.uleb128 0x1
+ 2108 0b17 51       		.byte	0x51
+ 2109 0b18 02       		.uleb128 0x2
+ 2110 0b19 79       		.byte	0x79
+ 2111 0b1a 00       		.sleb128 0
+ 2112 0b1b 15       		.uleb128 0x15
+ 2113 0b1c 01       		.uleb128 0x1
+ 2114 0b1d 52       		.byte	0x52
+ 2115 0b1e 02       		.uleb128 0x2
+ 2116 0b1f 7B       		.byte	0x7b
+ 2117 0b20 00       		.sleb128 0
+ 2118 0b21 15       		.uleb128 0x15
+ 2119 0b22 01       		.uleb128 0x1
+ 2120 0b23 53       		.byte	0x53
+ 2121 0b24 02       		.uleb128 0x2
+ 2122 0b25 74       		.byte	0x74
+ 2123 0b26 00       		.sleb128 0
+ 2124 0b27 15       		.uleb128 0x15
+ 2125 0b28 02       		.uleb128 0x2
+ 2126 0b29 7D       		.byte	0x7d
+ 2127 0b2a 00       		.sleb128 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 42
+
+
+ 2128 0b2b 02       		.uleb128 0x2
+ 2129 0b2c 75       		.byte	0x75
+ 2130 0b2d 00       		.sleb128 0
+ 2131 0b2e 00       		.byte	0
+ 2132 0b2f 14       		.uleb128 0x14
+ 2133 0b30 5A000000 		.4byte	.LVL37
+ 2134 0b34 4B0E0000 		.4byte	0xe4b
+ 2135 0b38 5E0B0000 		.4byte	0xb5e
+ 2136 0b3c 15       		.uleb128 0x15
+ 2137 0b3d 01       		.uleb128 0x1
+ 2138 0b3e 50       		.byte	0x50
+ 2139 0b3f 03       		.uleb128 0x3
+ 2140 0b40 91       		.byte	0x91
+ 2141 0b41 4C       		.sleb128 -52
+ 2142 0b42 06       		.byte	0x6
+ 2143 0b43 15       		.uleb128 0x15
+ 2144 0b44 01       		.uleb128 0x1
+ 2145 0b45 51       		.byte	0x51
+ 2146 0b46 02       		.uleb128 0x2
+ 2147 0b47 78       		.byte	0x78
+ 2148 0b48 00       		.sleb128 0
+ 2149 0b49 15       		.uleb128 0x15
+ 2150 0b4a 01       		.uleb128 0x1
+ 2151 0b4b 52       		.byte	0x52
+ 2152 0b4c 04       		.uleb128 0x4
+ 2153 0b4d 91       		.byte	0x91
+ 2154 0b4e 50       		.sleb128 -48
+ 2155 0b4f 94       		.byte	0x94
+ 2156 0b50 02       		.byte	0x2
+ 2157 0b51 15       		.uleb128 0x15
+ 2158 0b52 01       		.uleb128 0x1
+ 2159 0b53 53       		.byte	0x53
+ 2160 0b54 02       		.uleb128 0x2
+ 2161 0b55 77       		.byte	0x77
+ 2162 0b56 00       		.sleb128 0
+ 2163 0b57 15       		.uleb128 0x15
+ 2164 0b58 02       		.uleb128 0x2
+ 2165 0b59 7D       		.byte	0x7d
+ 2166 0b5a 00       		.sleb128 0
+ 2167 0b5b 01       		.uleb128 0x1
+ 2168 0b5c 32       		.byte	0x32
+ 2169 0b5d 00       		.byte	0
+ 2170 0b5e 14       		.uleb128 0x14
+ 2171 0b5f 6A000000 		.4byte	.LVL38
+ 2172 0b63 4B0E0000 		.4byte	0xe4b
+ 2173 0b67 8D0B0000 		.4byte	0xb8d
+ 2174 0b6b 15       		.uleb128 0x15
+ 2175 0b6c 01       		.uleb128 0x1
+ 2176 0b6d 50       		.byte	0x50
+ 2177 0b6e 03       		.uleb128 0x3
+ 2178 0b6f 91       		.byte	0x91
+ 2179 0b70 4C       		.sleb128 -52
+ 2180 0b71 06       		.byte	0x6
+ 2181 0b72 15       		.uleb128 0x15
+ 2182 0b73 01       		.uleb128 0x1
+ 2183 0b74 51       		.byte	0x51
+ 2184 0b75 02       		.uleb128 0x2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 43
+
+
+ 2185 0b76 74       		.byte	0x74
+ 2186 0b77 00       		.sleb128 0
+ 2187 0b78 15       		.uleb128 0x15
+ 2188 0b79 01       		.uleb128 0x1
+ 2189 0b7a 52       		.byte	0x52
+ 2190 0b7b 04       		.uleb128 0x4
+ 2191 0b7c 91       		.byte	0x91
+ 2192 0b7d 50       		.sleb128 -48
+ 2193 0b7e 94       		.byte	0x94
+ 2194 0b7f 02       		.byte	0x2
+ 2195 0b80 15       		.uleb128 0x15
+ 2196 0b81 01       		.uleb128 0x1
+ 2197 0b82 53       		.byte	0x53
+ 2198 0b83 02       		.uleb128 0x2
+ 2199 0b84 77       		.byte	0x77
+ 2200 0b85 00       		.sleb128 0
+ 2201 0b86 15       		.uleb128 0x15
+ 2202 0b87 02       		.uleb128 0x2
+ 2203 0b88 7D       		.byte	0x7d
+ 2204 0b89 00       		.sleb128 0
+ 2205 0b8a 01       		.uleb128 0x1
+ 2206 0b8b 31       		.byte	0x31
+ 2207 0b8c 00       		.byte	0
+ 2208 0b8d 14       		.uleb128 0x14
+ 2209 0b8e 7A000000 		.4byte	.LVL39
+ 2210 0b92 4B0E0000 		.4byte	0xe4b
+ 2211 0b96 BA0B0000 		.4byte	0xbba
+ 2212 0b9a 15       		.uleb128 0x15
+ 2213 0b9b 01       		.uleb128 0x1
+ 2214 0b9c 50       		.byte	0x50
+ 2215 0b9d 03       		.uleb128 0x3
+ 2216 0b9e 91       		.byte	0x91
+ 2217 0b9f 4C       		.sleb128 -52
+ 2218 0ba0 06       		.byte	0x6
+ 2219 0ba1 15       		.uleb128 0x15
+ 2220 0ba2 01       		.uleb128 0x1
+ 2221 0ba3 51       		.byte	0x51
+ 2222 0ba4 02       		.uleb128 0x2
+ 2223 0ba5 78       		.byte	0x78
+ 2224 0ba6 00       		.sleb128 0
+ 2225 0ba7 15       		.uleb128 0x15
+ 2226 0ba8 01       		.uleb128 0x1
+ 2227 0ba9 52       		.byte	0x52
+ 2228 0baa 02       		.uleb128 0x2
+ 2229 0bab 75       		.byte	0x75
+ 2230 0bac 00       		.sleb128 0
+ 2231 0bad 15       		.uleb128 0x15
+ 2232 0bae 01       		.uleb128 0x1
+ 2233 0baf 53       		.byte	0x53
+ 2234 0bb0 02       		.uleb128 0x2
+ 2235 0bb1 77       		.byte	0x77
+ 2236 0bb2 00       		.sleb128 0
+ 2237 0bb3 15       		.uleb128 0x15
+ 2238 0bb4 02       		.uleb128 0x2
+ 2239 0bb5 7D       		.byte	0x7d
+ 2240 0bb6 00       		.sleb128 0
+ 2241 0bb7 01       		.uleb128 0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 44
+
+
+ 2242 0bb8 34       		.byte	0x34
+ 2243 0bb9 00       		.byte	0
+ 2244 0bba 16       		.uleb128 0x16
+ 2245 0bbb 8A000000 		.4byte	.LVL40
+ 2246 0bbf 4B0E0000 		.4byte	0xe4b
+ 2247 0bc3 15       		.uleb128 0x15
+ 2248 0bc4 01       		.uleb128 0x1
+ 2249 0bc5 50       		.byte	0x50
+ 2250 0bc6 03       		.uleb128 0x3
+ 2251 0bc7 91       		.byte	0x91
+ 2252 0bc8 4C       		.sleb128 -52
+ 2253 0bc9 06       		.byte	0x6
+ 2254 0bca 15       		.uleb128 0x15
+ 2255 0bcb 01       		.uleb128 0x1
+ 2256 0bcc 51       		.byte	0x51
+ 2257 0bcd 02       		.uleb128 0x2
+ 2258 0bce 74       		.byte	0x74
+ 2259 0bcf 00       		.sleb128 0
+ 2260 0bd0 15       		.uleb128 0x15
+ 2261 0bd1 01       		.uleb128 0x1
+ 2262 0bd2 52       		.byte	0x52
+ 2263 0bd3 02       		.uleb128 0x2
+ 2264 0bd4 75       		.byte	0x75
+ 2265 0bd5 00       		.sleb128 0
+ 2266 0bd6 15       		.uleb128 0x15
+ 2267 0bd7 01       		.uleb128 0x1
+ 2268 0bd8 53       		.byte	0x53
+ 2269 0bd9 02       		.uleb128 0x2
+ 2270 0bda 77       		.byte	0x77
+ 2271 0bdb 00       		.sleb128 0
+ 2272 0bdc 15       		.uleb128 0x15
+ 2273 0bdd 02       		.uleb128 0x2
+ 2274 0bde 7D       		.byte	0x7d
+ 2275 0bdf 00       		.sleb128 0
+ 2276 0be0 01       		.uleb128 0x1
+ 2277 0be1 38       		.byte	0x38
+ 2278 0be2 00       		.byte	0
+ 2279 0be3 00       		.byte	0
+ 2280 0be4 11       		.uleb128 0x11
+ 2281 0be5 B8010000 		.4byte	.LASF143
+ 2282 0be9 01       		.byte	0x1
+ 2283 0bea 93       		.byte	0x93
+ 2284 0beb 00000000 		.4byte	.LFB3
+ 2285 0bef 08010000 		.4byte	.LFE3-.LFB3
+ 2286 0bf3 01       		.uleb128 0x1
+ 2287 0bf4 9C       		.byte	0x9c
+ 2288 0bf5 330E0000 		.4byte	0xe33
+ 2289 0bf9 12       		.uleb128 0x12
+ 2290 0bfa FC030000 		.4byte	.LASF138
+ 2291 0bfe 01       		.byte	0x1
+ 2292 0bff 93       		.byte	0x93
+ 2293 0c00 84050000 		.4byte	0x584
+ 2294 0c04 34040000 		.4byte	.LLST21
+ 2295 0c08 13       		.uleb128 0x13
+ 2296 0c09 7800     		.ascii	"x\000"
+ 2297 0c0b 01       		.byte	0x1
+ 2298 0c0c 93       		.byte	0x93
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 45
+
+
+ 2299 0c0d 58030000 		.4byte	0x358
+ 2300 0c11 53040000 		.4byte	.LLST22
+ 2301 0c15 13       		.uleb128 0x13
+ 2302 0c16 7900     		.ascii	"y\000"
+ 2303 0c18 01       		.byte	0x1
+ 2304 0c19 93       		.byte	0x93
+ 2305 0c1a 58030000 		.4byte	0x358
+ 2306 0c1e 74040000 		.4byte	.LLST23
+ 2307 0c22 13       		.uleb128 0x13
+ 2308 0c23 7700     		.ascii	"w\000"
+ 2309 0c25 01       		.byte	0x1
+ 2310 0c26 93       		.byte	0x93
+ 2311 0c27 58030000 		.4byte	0x358
+ 2312 0c2b 95040000 		.4byte	.LLST24
+ 2313 0c2f 13       		.uleb128 0x13
+ 2314 0c30 6800     		.ascii	"h\000"
+ 2315 0c32 01       		.byte	0x1
+ 2316 0c33 93       		.byte	0x93
+ 2317 0c34 58030000 		.4byte	0x358
+ 2318 0c38 C1040000 		.4byte	.LLST25
+ 2319 0c3c 18       		.uleb128 0x18
+ 2320 0c3d 7200     		.ascii	"r\000"
+ 2321 0c3f 01       		.byte	0x1
+ 2322 0c40 93       		.byte	0x93
+ 2323 0c41 58030000 		.4byte	0x358
+ 2324 0c45 02       		.uleb128 0x2
+ 2325 0c46 91       		.byte	0x91
+ 2326 0c47 04       		.sleb128 4
+ 2327 0c48 19       		.uleb128 0x19
+ 2328 0c49 786C00   		.ascii	"xl\000"
+ 2329 0c4c 01       		.byte	0x1
+ 2330 0c4d 95       		.byte	0x95
+ 2331 0c4e 58030000 		.4byte	0x358
+ 2332 0c52 E0040000 		.4byte	.LLST26
+ 2333 0c56 19       		.uleb128 0x19
+ 2334 0c57 797500   		.ascii	"yu\000"
+ 2335 0c5a 01       		.byte	0x1
+ 2336 0c5b 95       		.byte	0x95
+ 2337 0c5c 58030000 		.4byte	0x358
+ 2338 0c60 16050000 		.4byte	.LLST27
+ 2339 0c64 1A       		.uleb128 0x1a
+ 2340 0c65 3A000000 		.4byte	.LBB3
+ 2341 0c69 50000000 		.4byte	.LBE3-.LBB3
+ 2342 0c6d 420D0000 		.4byte	0xd42
+ 2343 0c71 19       		.uleb128 0x19
+ 2344 0c72 796C00   		.ascii	"yl\000"
+ 2345 0c75 01       		.byte	0x1
+ 2346 0c76 A2       		.byte	0xa2
+ 2347 0c77 58030000 		.4byte	0x358
+ 2348 0c7b 4B050000 		.4byte	.LLST28
+ 2349 0c7f 19       		.uleb128 0x19
+ 2350 0c80 787200   		.ascii	"xr\000"
+ 2351 0c83 01       		.byte	0x1
+ 2352 0c84 A2       		.byte	0xa2
+ 2353 0c85 58030000 		.4byte	0x358
+ 2354 0c89 02060000 		.4byte	.LLST29
+ 2355 0c8d 14       		.uleb128 0x14
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 46
+
+
+ 2356 0c8e 5A000000 		.4byte	.LVL75
+ 2357 0c92 570E0000 		.4byte	0xe57
+ 2358 0c96 BC0C0000 		.4byte	0xcbc
+ 2359 0c9a 15       		.uleb128 0x15
+ 2360 0c9b 01       		.uleb128 0x1
+ 2361 0c9c 50       		.byte	0x50
+ 2362 0c9d 03       		.uleb128 0x3
+ 2363 0c9e 91       		.byte	0x91
+ 2364 0c9f 50       		.sleb128 -48
+ 2365 0ca0 06       		.byte	0x6
+ 2366 0ca1 15       		.uleb128 0x15
+ 2367 0ca2 01       		.uleb128 0x1
+ 2368 0ca3 51       		.byte	0x51
+ 2369 0ca4 02       		.uleb128 0x2
+ 2370 0ca5 77       		.byte	0x77
+ 2371 0ca6 00       		.sleb128 0
+ 2372 0ca7 15       		.uleb128 0x15
+ 2373 0ca8 01       		.uleb128 0x1
+ 2374 0ca9 52       		.byte	0x52
+ 2375 0caa 04       		.uleb128 0x4
+ 2376 0cab 91       		.byte	0x91
+ 2377 0cac 54       		.sleb128 -44
+ 2378 0cad 94       		.byte	0x94
+ 2379 0cae 02       		.byte	0x2
+ 2380 0caf 15       		.uleb128 0x15
+ 2381 0cb0 01       		.uleb128 0x1
+ 2382 0cb1 53       		.byte	0x53
+ 2383 0cb2 02       		.uleb128 0x2
+ 2384 0cb3 76       		.byte	0x76
+ 2385 0cb4 00       		.sleb128 0
+ 2386 0cb5 15       		.uleb128 0x15
+ 2387 0cb6 02       		.uleb128 0x2
+ 2388 0cb7 7D       		.byte	0x7d
+ 2389 0cb8 00       		.sleb128 0
+ 2390 0cb9 01       		.uleb128 0x1
+ 2391 0cba 32       		.byte	0x32
+ 2392 0cbb 00       		.byte	0
+ 2393 0cbc 14       		.uleb128 0x14
+ 2394 0cbd 6A000000 		.4byte	.LVL76
+ 2395 0cc1 570E0000 		.4byte	0xe57
+ 2396 0cc5 EB0C0000 		.4byte	0xceb
+ 2397 0cc9 15       		.uleb128 0x15
+ 2398 0cca 01       		.uleb128 0x1
+ 2399 0ccb 50       		.byte	0x50
+ 2400 0ccc 03       		.uleb128 0x3
+ 2401 0ccd 91       		.byte	0x91
+ 2402 0cce 50       		.sleb128 -48
+ 2403 0ccf 06       		.byte	0x6
+ 2404 0cd0 15       		.uleb128 0x15
+ 2405 0cd1 01       		.uleb128 0x1
+ 2406 0cd2 51       		.byte	0x51
+ 2407 0cd3 02       		.uleb128 0x2
+ 2408 0cd4 75       		.byte	0x75
+ 2409 0cd5 00       		.sleb128 0
+ 2410 0cd6 15       		.uleb128 0x15
+ 2411 0cd7 01       		.uleb128 0x1
+ 2412 0cd8 52       		.byte	0x52
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 47
+
+
+ 2413 0cd9 04       		.uleb128 0x4
+ 2414 0cda 91       		.byte	0x91
+ 2415 0cdb 54       		.sleb128 -44
+ 2416 0cdc 94       		.byte	0x94
+ 2417 0cdd 02       		.byte	0x2
+ 2418 0cde 15       		.uleb128 0x15
+ 2419 0cdf 01       		.uleb128 0x1
+ 2420 0ce0 53       		.byte	0x53
+ 2421 0ce1 02       		.uleb128 0x2
+ 2422 0ce2 76       		.byte	0x76
+ 2423 0ce3 00       		.sleb128 0
+ 2424 0ce4 15       		.uleb128 0x15
+ 2425 0ce5 02       		.uleb128 0x2
+ 2426 0ce6 7D       		.byte	0x7d
+ 2427 0ce7 00       		.sleb128 0
+ 2428 0ce8 01       		.uleb128 0x1
+ 2429 0ce9 31       		.byte	0x31
+ 2430 0cea 00       		.byte	0
+ 2431 0ceb 14       		.uleb128 0x14
+ 2432 0cec 7A000000 		.4byte	.LVL77
+ 2433 0cf0 570E0000 		.4byte	0xe57
+ 2434 0cf4 180D0000 		.4byte	0xd18
+ 2435 0cf8 15       		.uleb128 0x15
+ 2436 0cf9 01       		.uleb128 0x1
+ 2437 0cfa 50       		.byte	0x50
+ 2438 0cfb 03       		.uleb128 0x3
+ 2439 0cfc 91       		.byte	0x91
+ 2440 0cfd 50       		.sleb128 -48
+ 2441 0cfe 06       		.byte	0x6
+ 2442 0cff 15       		.uleb128 0x15
+ 2443 0d00 01       		.uleb128 0x1
+ 2444 0d01 51       		.byte	0x51
+ 2445 0d02 02       		.uleb128 0x2
+ 2446 0d03 77       		.byte	0x77
+ 2447 0d04 00       		.sleb128 0
+ 2448 0d05 15       		.uleb128 0x15
+ 2449 0d06 01       		.uleb128 0x1
+ 2450 0d07 52       		.byte	0x52
+ 2451 0d08 02       		.uleb128 0x2
+ 2452 0d09 74       		.byte	0x74
+ 2453 0d0a 00       		.sleb128 0
+ 2454 0d0b 15       		.uleb128 0x15
+ 2455 0d0c 01       		.uleb128 0x1
+ 2456 0d0d 53       		.byte	0x53
+ 2457 0d0e 02       		.uleb128 0x2
+ 2458 0d0f 76       		.byte	0x76
+ 2459 0d10 00       		.sleb128 0
+ 2460 0d11 15       		.uleb128 0x15
+ 2461 0d12 02       		.uleb128 0x2
+ 2462 0d13 7D       		.byte	0x7d
+ 2463 0d14 00       		.sleb128 0
+ 2464 0d15 01       		.uleb128 0x1
+ 2465 0d16 34       		.byte	0x34
+ 2466 0d17 00       		.byte	0
+ 2467 0d18 16       		.uleb128 0x16
+ 2468 0d19 8A000000 		.4byte	.LVL78
+ 2469 0d1d 570E0000 		.4byte	0xe57
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 48
+
+
+ 2470 0d21 15       		.uleb128 0x15
+ 2471 0d22 01       		.uleb128 0x1
+ 2472 0d23 50       		.byte	0x50
+ 2473 0d24 03       		.uleb128 0x3
+ 2474 0d25 91       		.byte	0x91
+ 2475 0d26 50       		.sleb128 -48
+ 2476 0d27 06       		.byte	0x6
+ 2477 0d28 15       		.uleb128 0x15
+ 2478 0d29 01       		.uleb128 0x1
+ 2479 0d2a 51       		.byte	0x51
+ 2480 0d2b 02       		.uleb128 0x2
+ 2481 0d2c 75       		.byte	0x75
+ 2482 0d2d 00       		.sleb128 0
+ 2483 0d2e 15       		.uleb128 0x15
+ 2484 0d2f 01       		.uleb128 0x1
+ 2485 0d30 52       		.byte	0x52
+ 2486 0d31 02       		.uleb128 0x2
+ 2487 0d32 74       		.byte	0x74
+ 2488 0d33 00       		.sleb128 0
+ 2489 0d34 15       		.uleb128 0x15
+ 2490 0d35 01       		.uleb128 0x1
+ 2491 0d36 53       		.byte	0x53
+ 2492 0d37 02       		.uleb128 0x2
+ 2493 0d38 76       		.byte	0x76
+ 2494 0d39 00       		.sleb128 0
+ 2495 0d3a 15       		.uleb128 0x15
+ 2496 0d3b 02       		.uleb128 0x2
+ 2497 0d3c 7D       		.byte	0x7d
+ 2498 0d3d 00       		.sleb128 0
+ 2499 0d3e 01       		.uleb128 0x1
+ 2500 0d3f 38       		.byte	0x38
+ 2501 0d40 00       		.byte	0
+ 2502 0d41 00       		.byte	0
+ 2503 0d42 1A       		.uleb128 0x1a
+ 2504 0d43 8A000000 		.4byte	.LBB4
+ 2505 0d47 78000000 		.4byte	.LBE4-.LBB4
+ 2506 0d4b 080E0000 		.4byte	0xe08
+ 2507 0d4f 19       		.uleb128 0x19
+ 2508 0d50 777700   		.ascii	"ww\000"
+ 2509 0d53 01       		.byte	0x1
+ 2510 0d54 B5       		.byte	0xb5
+ 2511 0d55 58030000 		.4byte	0x358
+ 2512 0d59 AD060000 		.4byte	.LLST30
+ 2513 0d5d 19       		.uleb128 0x19
+ 2514 0d5e 686800   		.ascii	"hh\000"
+ 2515 0d61 01       		.byte	0x1
+ 2516 0d62 B5       		.byte	0xb5
+ 2517 0d63 58030000 		.4byte	0x358
+ 2518 0d67 FE060000 		.4byte	.LLST31
+ 2519 0d6b 14       		.uleb128 0x14
+ 2520 0d6c C4000000 		.4byte	.LVL94
+ 2521 0d70 630E0000 		.4byte	0xe63
+ 2522 0d74 920D0000 		.4byte	0xd92
+ 2523 0d78 15       		.uleb128 0x15
+ 2524 0d79 01       		.uleb128 0x1
+ 2525 0d7a 50       		.byte	0x50
+ 2526 0d7b 03       		.uleb128 0x3
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 49
+
+
+ 2527 0d7c 91       		.byte	0x91
+ 2528 0d7d 50       		.sleb128 -48
+ 2529 0d7e 06       		.byte	0x6
+ 2530 0d7f 15       		.uleb128 0x15
+ 2531 0d80 01       		.uleb128 0x1
+ 2532 0d81 51       		.byte	0x51
+ 2533 0d82 02       		.uleb128 0x2
+ 2534 0d83 77       		.byte	0x77
+ 2535 0d84 00       		.sleb128 0
+ 2536 0d85 15       		.uleb128 0x15
+ 2537 0d86 01       		.uleb128 0x1
+ 2538 0d87 52       		.byte	0x52
+ 2539 0d88 02       		.uleb128 0x2
+ 2540 0d89 7B       		.byte	0x7b
+ 2541 0d8a 00       		.sleb128 0
+ 2542 0d8b 15       		.uleb128 0x15
+ 2543 0d8c 01       		.uleb128 0x1
+ 2544 0d8d 53       		.byte	0x53
+ 2545 0d8e 02       		.uleb128 0x2
+ 2546 0d8f 75       		.byte	0x75
+ 2547 0d90 00       		.sleb128 0
+ 2548 0d91 00       		.byte	0
+ 2549 0d92 14       		.uleb128 0x14
+ 2550 0d93 D4000000 		.4byte	.LVL95
+ 2551 0d97 630E0000 		.4byte	0xe63
+ 2552 0d9b BC0D0000 		.4byte	0xdbc
+ 2553 0d9f 15       		.uleb128 0x15
+ 2554 0da0 01       		.uleb128 0x1
+ 2555 0da1 50       		.byte	0x50
+ 2556 0da2 03       		.uleb128 0x3
+ 2557 0da3 91       		.byte	0x91
+ 2558 0da4 50       		.sleb128 -48
+ 2559 0da5 06       		.byte	0x6
+ 2560 0da6 15       		.uleb128 0x15
+ 2561 0da7 01       		.uleb128 0x1
+ 2562 0da8 51       		.byte	0x51
+ 2563 0da9 02       		.uleb128 0x2
+ 2564 0daa 77       		.byte	0x77
+ 2565 0dab 00       		.sleb128 0
+ 2566 0dac 15       		.uleb128 0x15
+ 2567 0dad 01       		.uleb128 0x1
+ 2568 0dae 52       		.byte	0x52
+ 2569 0daf 05       		.uleb128 0x5
+ 2570 0db0 7B       		.byte	0x7b
+ 2571 0db1 00       		.sleb128 0
+ 2572 0db2 79       		.byte	0x79
+ 2573 0db3 00       		.sleb128 0
+ 2574 0db4 22       		.byte	0x22
+ 2575 0db5 15       		.uleb128 0x15
+ 2576 0db6 01       		.uleb128 0x1
+ 2577 0db7 53       		.byte	0x53
+ 2578 0db8 02       		.uleb128 0x2
+ 2579 0db9 75       		.byte	0x75
+ 2580 0dba 00       		.sleb128 0
+ 2581 0dbb 00       		.byte	0
+ 2582 0dbc 14       		.uleb128 0x14
+ 2583 0dbd F2000000 		.4byte	.LVL101
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 50
+
+
+ 2584 0dc1 6F0E0000 		.4byte	0xe6f
+ 2585 0dc5 E20D0000 		.4byte	0xde2
+ 2586 0dc9 15       		.uleb128 0x15
+ 2587 0dca 01       		.uleb128 0x1
+ 2588 0dcb 50       		.byte	0x50
+ 2589 0dcc 02       		.uleb128 0x2
+ 2590 0dcd 75       		.byte	0x75
+ 2591 0dce 00       		.sleb128 0
+ 2592 0dcf 15       		.uleb128 0x15
+ 2593 0dd0 01       		.uleb128 0x1
+ 2594 0dd1 51       		.byte	0x51
+ 2595 0dd2 02       		.uleb128 0x2
+ 2596 0dd3 7A       		.byte	0x7a
+ 2597 0dd4 00       		.sleb128 0
+ 2598 0dd5 15       		.uleb128 0x15
+ 2599 0dd6 01       		.uleb128 0x1
+ 2600 0dd7 52       		.byte	0x52
+ 2601 0dd8 02       		.uleb128 0x2
+ 2602 0dd9 74       		.byte	0x74
+ 2603 0dda 00       		.sleb128 0
+ 2604 0ddb 15       		.uleb128 0x15
+ 2605 0ddc 01       		.uleb128 0x1
+ 2606 0ddd 53       		.byte	0x53
+ 2607 0dde 02       		.uleb128 0x2
+ 2608 0ddf 76       		.byte	0x76
+ 2609 0de0 00       		.sleb128 0
+ 2610 0de1 00       		.byte	0
+ 2611 0de2 16       		.uleb128 0x16
+ 2612 0de3 02010000 		.4byte	.LVL102
+ 2613 0de7 6F0E0000 		.4byte	0xe6f
+ 2614 0deb 15       		.uleb128 0x15
+ 2615 0dec 01       		.uleb128 0x1
+ 2616 0ded 50       		.byte	0x50
+ 2617 0dee 02       		.uleb128 0x2
+ 2618 0def 75       		.byte	0x75
+ 2619 0df0 00       		.sleb128 0
+ 2620 0df1 15       		.uleb128 0x15
+ 2621 0df2 01       		.uleb128 0x1
+ 2622 0df3 51       		.byte	0x51
+ 2623 0df4 05       		.uleb128 0x5
+ 2624 0df5 7A       		.byte	0x7a
+ 2625 0df6 00       		.sleb128 0
+ 2626 0df7 78       		.byte	0x78
+ 2627 0df8 00       		.sleb128 0
+ 2628 0df9 22       		.byte	0x22
+ 2629 0dfa 15       		.uleb128 0x15
+ 2630 0dfb 01       		.uleb128 0x1
+ 2631 0dfc 52       		.byte	0x52
+ 2632 0dfd 02       		.uleb128 0x2
+ 2633 0dfe 74       		.byte	0x74
+ 2634 0dff 00       		.sleb128 0
+ 2635 0e00 15       		.uleb128 0x15
+ 2636 0e01 01       		.uleb128 0x1
+ 2637 0e02 53       		.byte	0x53
+ 2638 0e03 02       		.uleb128 0x2
+ 2639 0e04 76       		.byte	0x76
+ 2640 0e05 00       		.sleb128 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 51
+
+
+ 2641 0e06 00       		.byte	0
+ 2642 0e07 00       		.byte	0
+ 2643 0e08 16       		.uleb128 0x16
+ 2644 0e09 28000000 		.4byte	.LVL63
+ 2645 0e0d 330E0000 		.4byte	0xe33
+ 2646 0e11 15       		.uleb128 0x15
+ 2647 0e12 01       		.uleb128 0x1
+ 2648 0e13 50       		.byte	0x50
+ 2649 0e14 03       		.uleb128 0x3
+ 2650 0e15 91       		.byte	0x91
+ 2651 0e16 50       		.sleb128 -48
+ 2652 0e17 06       		.byte	0x6
+ 2653 0e18 15       		.uleb128 0x15
+ 2654 0e19 01       		.uleb128 0x1
+ 2655 0e1a 51       		.byte	0x51
+ 2656 0e1b 02       		.uleb128 0x2
+ 2657 0e1c 7A       		.byte	0x7a
+ 2658 0e1d 00       		.sleb128 0
+ 2659 0e1e 15       		.uleb128 0x15
+ 2660 0e1f 01       		.uleb128 0x1
+ 2661 0e20 52       		.byte	0x52
+ 2662 0e21 02       		.uleb128 0x2
+ 2663 0e22 7B       		.byte	0x7b
+ 2664 0e23 00       		.sleb128 0
+ 2665 0e24 15       		.uleb128 0x15
+ 2666 0e25 01       		.uleb128 0x1
+ 2667 0e26 53       		.byte	0x53
+ 2668 0e27 02       		.uleb128 0x2
+ 2669 0e28 75       		.byte	0x75
+ 2670 0e29 00       		.sleb128 0
+ 2671 0e2a 15       		.uleb128 0x15
+ 2672 0e2b 02       		.uleb128 0x2
+ 2673 0e2c 7D       		.byte	0x7d
+ 2674 0e2d 00       		.sleb128 0
+ 2675 0e2e 02       		.uleb128 0x2
+ 2676 0e2f 74       		.byte	0x74
+ 2677 0e30 00       		.sleb128 0
+ 2678 0e31 00       		.byte	0
+ 2679 0e32 00       		.byte	0
+ 2680 0e33 1B       		.uleb128 0x1b
+ 2681 0e34 FC020000 		.4byte	.LASF144
+ 2682 0e38 FC020000 		.4byte	.LASF144
+ 2683 0e3c 05       		.byte	0x5
+ 2684 0e3d 9A05     		.2byte	0x59a
+ 2685 0e3f 1B       		.uleb128 0x1b
+ 2686 0e40 00000000 		.4byte	.LASF145
+ 2687 0e44 00000000 		.4byte	.LASF145
+ 2688 0e48 05       		.byte	0x5
+ 2689 0e49 8505     		.2byte	0x585
+ 2690 0e4b 1B       		.uleb128 0x1b
+ 2691 0e4c BD030000 		.4byte	.LASF146
+ 2692 0e50 BD030000 		.4byte	.LASF146
+ 2693 0e54 05       		.byte	0x5
+ 2694 0e55 A705     		.2byte	0x5a7
+ 2695 0e57 1B       		.uleb128 0x1b
+ 2696 0e58 55030000 		.4byte	.LASF147
+ 2697 0e5c 55030000 		.4byte	.LASF147
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 52
+
+
+ 2698 0e60 05       		.byte	0x5
+ 2699 0e61 A605     		.2byte	0x5a6
+ 2700 0e63 1B       		.uleb128 0x1b
+ 2701 0e64 C0080000 		.4byte	.LASF148
+ 2702 0e68 C0080000 		.4byte	.LASF148
+ 2703 0e6c 05       		.byte	0x5
+ 2704 0e6d 8805     		.2byte	0x588
+ 2705 0e6f 1B       		.uleb128 0x1b
+ 2706 0e70 8F050000 		.4byte	.LASF149
+ 2707 0e74 8F050000 		.4byte	.LASF149
+ 2708 0e78 05       		.byte	0x5
+ 2709 0e79 8905     		.2byte	0x589
+ 2710 0e7b 00       		.byte	0
+ 2711              		.section	.debug_abbrev,"",%progbits
+ 2712              	.Ldebug_abbrev0:
+ 2713 0000 01       		.uleb128 0x1
+ 2714 0001 11       		.uleb128 0x11
+ 2715 0002 01       		.byte	0x1
+ 2716 0003 25       		.uleb128 0x25
+ 2717 0004 0E       		.uleb128 0xe
+ 2718 0005 13       		.uleb128 0x13
+ 2719 0006 0B       		.uleb128 0xb
+ 2720 0007 03       		.uleb128 0x3
+ 2721 0008 0E       		.uleb128 0xe
+ 2722 0009 1B       		.uleb128 0x1b
+ 2723 000a 0E       		.uleb128 0xe
+ 2724 000b 55       		.uleb128 0x55
+ 2725 000c 17       		.uleb128 0x17
+ 2726 000d 11       		.uleb128 0x11
+ 2727 000e 01       		.uleb128 0x1
+ 2728 000f 10       		.uleb128 0x10
+ 2729 0010 17       		.uleb128 0x17
+ 2730 0011 00       		.byte	0
+ 2731 0012 00       		.byte	0
+ 2732 0013 02       		.uleb128 0x2
+ 2733 0014 16       		.uleb128 0x16
+ 2734 0015 00       		.byte	0
+ 2735 0016 03       		.uleb128 0x3
+ 2736 0017 0E       		.uleb128 0xe
+ 2737 0018 3A       		.uleb128 0x3a
+ 2738 0019 0B       		.uleb128 0xb
+ 2739 001a 3B       		.uleb128 0x3b
+ 2740 001b 0B       		.uleb128 0xb
+ 2741 001c 49       		.uleb128 0x49
+ 2742 001d 13       		.uleb128 0x13
+ 2743 001e 00       		.byte	0
+ 2744 001f 00       		.byte	0
+ 2745 0020 03       		.uleb128 0x3
+ 2746 0021 24       		.uleb128 0x24
+ 2747 0022 00       		.byte	0
+ 2748 0023 0B       		.uleb128 0xb
+ 2749 0024 0B       		.uleb128 0xb
+ 2750 0025 3E       		.uleb128 0x3e
+ 2751 0026 0B       		.uleb128 0xb
+ 2752 0027 03       		.uleb128 0x3
+ 2753 0028 0E       		.uleb128 0xe
+ 2754 0029 00       		.byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 53
+
+
+ 2755 002a 00       		.byte	0
+ 2756 002b 04       		.uleb128 0x4
+ 2757 002c 24       		.uleb128 0x24
+ 2758 002d 00       		.byte	0
+ 2759 002e 0B       		.uleb128 0xb
+ 2760 002f 0B       		.uleb128 0xb
+ 2761 0030 3E       		.uleb128 0x3e
+ 2762 0031 0B       		.uleb128 0xb
+ 2763 0032 03       		.uleb128 0x3
+ 2764 0033 08       		.uleb128 0x8
+ 2765 0034 00       		.byte	0
+ 2766 0035 00       		.byte	0
+ 2767 0036 05       		.uleb128 0x5
+ 2768 0037 0F       		.uleb128 0xf
+ 2769 0038 00       		.byte	0
+ 2770 0039 0B       		.uleb128 0xb
+ 2771 003a 0B       		.uleb128 0xb
+ 2772 003b 00       		.byte	0
+ 2773 003c 00       		.byte	0
+ 2774 003d 06       		.uleb128 0x6
+ 2775 003e 13       		.uleb128 0x13
+ 2776 003f 01       		.byte	0x1
+ 2777 0040 03       		.uleb128 0x3
+ 2778 0041 0E       		.uleb128 0xe
+ 2779 0042 0B       		.uleb128 0xb
+ 2780 0043 0B       		.uleb128 0xb
+ 2781 0044 3A       		.uleb128 0x3a
+ 2782 0045 0B       		.uleb128 0xb
+ 2783 0046 3B       		.uleb128 0x3b
+ 2784 0047 05       		.uleb128 0x5
+ 2785 0048 01       		.uleb128 0x1
+ 2786 0049 13       		.uleb128 0x13
+ 2787 004a 00       		.byte	0
+ 2788 004b 00       		.byte	0
+ 2789 004c 07       		.uleb128 0x7
+ 2790 004d 0D       		.uleb128 0xd
+ 2791 004e 00       		.byte	0
+ 2792 004f 03       		.uleb128 0x3
+ 2793 0050 0E       		.uleb128 0xe
+ 2794 0051 3A       		.uleb128 0x3a
+ 2795 0052 0B       		.uleb128 0xb
+ 2796 0053 3B       		.uleb128 0x3b
+ 2797 0054 05       		.uleb128 0x5
+ 2798 0055 49       		.uleb128 0x49
+ 2799 0056 13       		.uleb128 0x13
+ 2800 0057 38       		.uleb128 0x38
+ 2801 0058 0B       		.uleb128 0xb
+ 2802 0059 00       		.byte	0
+ 2803 005a 00       		.byte	0
+ 2804 005b 08       		.uleb128 0x8
+ 2805 005c 13       		.uleb128 0x13
+ 2806 005d 01       		.byte	0x1
+ 2807 005e 03       		.uleb128 0x3
+ 2808 005f 0E       		.uleb128 0xe
+ 2809 0060 0B       		.uleb128 0xb
+ 2810 0061 0B       		.uleb128 0xb
+ 2811 0062 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 54
+
+
+ 2812 0063 0B       		.uleb128 0xb
+ 2813 0064 3B       		.uleb128 0x3b
+ 2814 0065 0B       		.uleb128 0xb
+ 2815 0066 01       		.uleb128 0x1
+ 2816 0067 13       		.uleb128 0x13
+ 2817 0068 00       		.byte	0
+ 2818 0069 00       		.byte	0
+ 2819 006a 09       		.uleb128 0x9
+ 2820 006b 0D       		.uleb128 0xd
+ 2821 006c 00       		.byte	0
+ 2822 006d 03       		.uleb128 0x3
+ 2823 006e 0E       		.uleb128 0xe
+ 2824 006f 3A       		.uleb128 0x3a
+ 2825 0070 0B       		.uleb128 0xb
+ 2826 0071 3B       		.uleb128 0x3b
+ 2827 0072 0B       		.uleb128 0xb
+ 2828 0073 49       		.uleb128 0x49
+ 2829 0074 13       		.uleb128 0x13
+ 2830 0075 38       		.uleb128 0x38
+ 2831 0076 0B       		.uleb128 0xb
+ 2832 0077 00       		.byte	0
+ 2833 0078 00       		.byte	0
+ 2834 0079 0A       		.uleb128 0xa
+ 2835 007a 0F       		.uleb128 0xf
+ 2836 007b 00       		.byte	0
+ 2837 007c 0B       		.uleb128 0xb
+ 2838 007d 0B       		.uleb128 0xb
+ 2839 007e 49       		.uleb128 0x49
+ 2840 007f 13       		.uleb128 0x13
+ 2841 0080 00       		.byte	0
+ 2842 0081 00       		.byte	0
+ 2843 0082 0B       		.uleb128 0xb
+ 2844 0083 15       		.uleb128 0x15
+ 2845 0084 01       		.byte	0x1
+ 2846 0085 27       		.uleb128 0x27
+ 2847 0086 19       		.uleb128 0x19
+ 2848 0087 49       		.uleb128 0x49
+ 2849 0088 13       		.uleb128 0x13
+ 2850 0089 01       		.uleb128 0x1
+ 2851 008a 13       		.uleb128 0x13
+ 2852 008b 00       		.byte	0
+ 2853 008c 00       		.byte	0
+ 2854 008d 0C       		.uleb128 0xc
+ 2855 008e 05       		.uleb128 0x5
+ 2856 008f 00       		.byte	0
+ 2857 0090 49       		.uleb128 0x49
+ 2858 0091 13       		.uleb128 0x13
+ 2859 0092 00       		.byte	0
+ 2860 0093 00       		.byte	0
+ 2861 0094 0D       		.uleb128 0xd
+ 2862 0095 26       		.uleb128 0x26
+ 2863 0096 00       		.byte	0
+ 2864 0097 49       		.uleb128 0x49
+ 2865 0098 13       		.uleb128 0x13
+ 2866 0099 00       		.byte	0
+ 2867 009a 00       		.byte	0
+ 2868 009b 0E       		.uleb128 0xe
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 55
+
+
+ 2869 009c 0D       		.uleb128 0xd
+ 2870 009d 00       		.byte	0
+ 2871 009e 03       		.uleb128 0x3
+ 2872 009f 08       		.uleb128 0x8
+ 2873 00a0 3A       		.uleb128 0x3a
+ 2874 00a1 0B       		.uleb128 0xb
+ 2875 00a2 3B       		.uleb128 0x3b
+ 2876 00a3 05       		.uleb128 0x5
+ 2877 00a4 49       		.uleb128 0x49
+ 2878 00a5 13       		.uleb128 0x13
+ 2879 00a6 38       		.uleb128 0x38
+ 2880 00a7 0B       		.uleb128 0xb
+ 2881 00a8 00       		.byte	0
+ 2882 00a9 00       		.byte	0
+ 2883 00aa 0F       		.uleb128 0xf
+ 2884 00ab 15       		.uleb128 0x15
+ 2885 00ac 01       		.byte	0x1
+ 2886 00ad 27       		.uleb128 0x27
+ 2887 00ae 19       		.uleb128 0x19
+ 2888 00af 01       		.uleb128 0x1
+ 2889 00b0 13       		.uleb128 0x13
+ 2890 00b1 00       		.byte	0
+ 2891 00b2 00       		.byte	0
+ 2892 00b3 10       		.uleb128 0x10
+ 2893 00b4 16       		.uleb128 0x16
+ 2894 00b5 00       		.byte	0
+ 2895 00b6 03       		.uleb128 0x3
+ 2896 00b7 0E       		.uleb128 0xe
+ 2897 00b8 3A       		.uleb128 0x3a
+ 2898 00b9 0B       		.uleb128 0xb
+ 2899 00ba 3B       		.uleb128 0x3b
+ 2900 00bb 05       		.uleb128 0x5
+ 2901 00bc 49       		.uleb128 0x49
+ 2902 00bd 13       		.uleb128 0x13
+ 2903 00be 00       		.byte	0
+ 2904 00bf 00       		.byte	0
+ 2905 00c0 11       		.uleb128 0x11
+ 2906 00c1 2E       		.uleb128 0x2e
+ 2907 00c2 01       		.byte	0x1
+ 2908 00c3 3F       		.uleb128 0x3f
+ 2909 00c4 19       		.uleb128 0x19
+ 2910 00c5 03       		.uleb128 0x3
+ 2911 00c6 0E       		.uleb128 0xe
+ 2912 00c7 3A       		.uleb128 0x3a
+ 2913 00c8 0B       		.uleb128 0xb
+ 2914 00c9 3B       		.uleb128 0x3b
+ 2915 00ca 0B       		.uleb128 0xb
+ 2916 00cb 27       		.uleb128 0x27
+ 2917 00cc 19       		.uleb128 0x19
+ 2918 00cd 11       		.uleb128 0x11
+ 2919 00ce 01       		.uleb128 0x1
+ 2920 00cf 12       		.uleb128 0x12
+ 2921 00d0 06       		.uleb128 0x6
+ 2922 00d1 40       		.uleb128 0x40
+ 2923 00d2 18       		.uleb128 0x18
+ 2924 00d3 9742     		.uleb128 0x2117
+ 2925 00d5 19       		.uleb128 0x19
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 56
+
+
+ 2926 00d6 01       		.uleb128 0x1
+ 2927 00d7 13       		.uleb128 0x13
+ 2928 00d8 00       		.byte	0
+ 2929 00d9 00       		.byte	0
+ 2930 00da 12       		.uleb128 0x12
+ 2931 00db 05       		.uleb128 0x5
+ 2932 00dc 00       		.byte	0
+ 2933 00dd 03       		.uleb128 0x3
+ 2934 00de 0E       		.uleb128 0xe
+ 2935 00df 3A       		.uleb128 0x3a
+ 2936 00e0 0B       		.uleb128 0xb
+ 2937 00e1 3B       		.uleb128 0x3b
+ 2938 00e2 0B       		.uleb128 0xb
+ 2939 00e3 49       		.uleb128 0x49
+ 2940 00e4 13       		.uleb128 0x13
+ 2941 00e5 02       		.uleb128 0x2
+ 2942 00e6 17       		.uleb128 0x17
+ 2943 00e7 00       		.byte	0
+ 2944 00e8 00       		.byte	0
+ 2945 00e9 13       		.uleb128 0x13
+ 2946 00ea 05       		.uleb128 0x5
+ 2947 00eb 00       		.byte	0
+ 2948 00ec 03       		.uleb128 0x3
+ 2949 00ed 08       		.uleb128 0x8
+ 2950 00ee 3A       		.uleb128 0x3a
+ 2951 00ef 0B       		.uleb128 0xb
+ 2952 00f0 3B       		.uleb128 0x3b
+ 2953 00f1 0B       		.uleb128 0xb
+ 2954 00f2 49       		.uleb128 0x49
+ 2955 00f3 13       		.uleb128 0x13
+ 2956 00f4 02       		.uleb128 0x2
+ 2957 00f5 17       		.uleb128 0x17
+ 2958 00f6 00       		.byte	0
+ 2959 00f7 00       		.byte	0
+ 2960 00f8 14       		.uleb128 0x14
+ 2961 00f9 898201   		.uleb128 0x4109
+ 2962 00fc 01       		.byte	0x1
+ 2963 00fd 11       		.uleb128 0x11
+ 2964 00fe 01       		.uleb128 0x1
+ 2965 00ff 31       		.uleb128 0x31
+ 2966 0100 13       		.uleb128 0x13
+ 2967 0101 01       		.uleb128 0x1
+ 2968 0102 13       		.uleb128 0x13
+ 2969 0103 00       		.byte	0
+ 2970 0104 00       		.byte	0
+ 2971 0105 15       		.uleb128 0x15
+ 2972 0106 8A8201   		.uleb128 0x410a
+ 2973 0109 00       		.byte	0
+ 2974 010a 02       		.uleb128 0x2
+ 2975 010b 18       		.uleb128 0x18
+ 2976 010c 9142     		.uleb128 0x2111
+ 2977 010e 18       		.uleb128 0x18
+ 2978 010f 00       		.byte	0
+ 2979 0110 00       		.byte	0
+ 2980 0111 16       		.uleb128 0x16
+ 2981 0112 898201   		.uleb128 0x4109
+ 2982 0115 01       		.byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 57
+
+
+ 2983 0116 11       		.uleb128 0x11
+ 2984 0117 01       		.uleb128 0x1
+ 2985 0118 31       		.uleb128 0x31
+ 2986 0119 13       		.uleb128 0x13
+ 2987 011a 00       		.byte	0
+ 2988 011b 00       		.byte	0
+ 2989 011c 17       		.uleb128 0x17
+ 2990 011d 34       		.uleb128 0x34
+ 2991 011e 00       		.byte	0
+ 2992 011f 03       		.uleb128 0x3
+ 2993 0120 0E       		.uleb128 0xe
+ 2994 0121 3A       		.uleb128 0x3a
+ 2995 0122 0B       		.uleb128 0xb
+ 2996 0123 3B       		.uleb128 0x3b
+ 2997 0124 0B       		.uleb128 0xb
+ 2998 0125 49       		.uleb128 0x49
+ 2999 0126 13       		.uleb128 0x13
+ 3000 0127 02       		.uleb128 0x2
+ 3001 0128 17       		.uleb128 0x17
+ 3002 0129 00       		.byte	0
+ 3003 012a 00       		.byte	0
+ 3004 012b 18       		.uleb128 0x18
+ 3005 012c 05       		.uleb128 0x5
+ 3006 012d 00       		.byte	0
+ 3007 012e 03       		.uleb128 0x3
+ 3008 012f 08       		.uleb128 0x8
+ 3009 0130 3A       		.uleb128 0x3a
+ 3010 0131 0B       		.uleb128 0xb
+ 3011 0132 3B       		.uleb128 0x3b
+ 3012 0133 0B       		.uleb128 0xb
+ 3013 0134 49       		.uleb128 0x49
+ 3014 0135 13       		.uleb128 0x13
+ 3015 0136 02       		.uleb128 0x2
+ 3016 0137 18       		.uleb128 0x18
+ 3017 0138 00       		.byte	0
+ 3018 0139 00       		.byte	0
+ 3019 013a 19       		.uleb128 0x19
+ 3020 013b 34       		.uleb128 0x34
+ 3021 013c 00       		.byte	0
+ 3022 013d 03       		.uleb128 0x3
+ 3023 013e 08       		.uleb128 0x8
+ 3024 013f 3A       		.uleb128 0x3a
+ 3025 0140 0B       		.uleb128 0xb
+ 3026 0141 3B       		.uleb128 0x3b
+ 3027 0142 0B       		.uleb128 0xb
+ 3028 0143 49       		.uleb128 0x49
+ 3029 0144 13       		.uleb128 0x13
+ 3030 0145 02       		.uleb128 0x2
+ 3031 0146 17       		.uleb128 0x17
+ 3032 0147 00       		.byte	0
+ 3033 0148 00       		.byte	0
+ 3034 0149 1A       		.uleb128 0x1a
+ 3035 014a 0B       		.uleb128 0xb
+ 3036 014b 01       		.byte	0x1
+ 3037 014c 11       		.uleb128 0x11
+ 3038 014d 01       		.uleb128 0x1
+ 3039 014e 12       		.uleb128 0x12
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 58
+
+
+ 3040 014f 06       		.uleb128 0x6
+ 3041 0150 01       		.uleb128 0x1
+ 3042 0151 13       		.uleb128 0x13
+ 3043 0152 00       		.byte	0
+ 3044 0153 00       		.byte	0
+ 3045 0154 1B       		.uleb128 0x1b
+ 3046 0155 2E       		.uleb128 0x2e
+ 3047 0156 00       		.byte	0
+ 3048 0157 3F       		.uleb128 0x3f
+ 3049 0158 19       		.uleb128 0x19
+ 3050 0159 3C       		.uleb128 0x3c
+ 3051 015a 19       		.uleb128 0x19
+ 3052 015b 6E       		.uleb128 0x6e
+ 3053 015c 0E       		.uleb128 0xe
+ 3054 015d 03       		.uleb128 0x3
+ 3055 015e 0E       		.uleb128 0xe
+ 3056 015f 3A       		.uleb128 0x3a
+ 3057 0160 0B       		.uleb128 0xb
+ 3058 0161 3B       		.uleb128 0x3b
+ 3059 0162 05       		.uleb128 0x5
+ 3060 0163 00       		.byte	0
+ 3061 0164 00       		.byte	0
+ 3062 0165 00       		.byte	0
+ 3063              		.section	.debug_loc,"",%progbits
+ 3064              	.Ldebug_loc0:
+ 3065              	.LLST0:
+ 3066 0000 00000000 		.4byte	.LVL0
+ 3067 0004 23000000 		.4byte	.LVL2-1
+ 3068 0008 0100     		.2byte	0x1
+ 3069 000a 50       		.byte	0x50
+ 3070 000b 23000000 		.4byte	.LVL2-1
+ 3071 000f 4A000000 		.4byte	.LFE0
+ 3072 0013 0100     		.2byte	0x1
+ 3073 0015 58       		.byte	0x58
+ 3074 0016 00000000 		.4byte	0
+ 3075 001a 00000000 		.4byte	0
+ 3076              	.LLST1:
+ 3077 001e 00000000 		.4byte	.LVL0
+ 3078 0022 23000000 		.4byte	.LVL2-1
+ 3079 0026 0100     		.2byte	0x1
+ 3080 0028 51       		.byte	0x51
+ 3081 0029 23000000 		.4byte	.LVL2-1
+ 3082 002d 4A000000 		.4byte	.LFE0
+ 3083 0031 0400     		.2byte	0x4
+ 3084 0033 F3       		.byte	0xf3
+ 3085 0034 01       		.uleb128 0x1
+ 3086 0035 51       		.byte	0x51
+ 3087 0036 9F       		.byte	0x9f
+ 3088 0037 00000000 		.4byte	0
+ 3089 003b 00000000 		.4byte	0
+ 3090              	.LLST2:
+ 3091 003f 00000000 		.4byte	.LVL0
+ 3092 0043 23000000 		.4byte	.LVL2-1
+ 3093 0047 0100     		.2byte	0x1
+ 3094 0049 52       		.byte	0x52
+ 3095 004a 23000000 		.4byte	.LVL2-1
+ 3096 004e 28000000 		.4byte	.LVL3
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 59
+
+
+ 3097 0052 0400     		.2byte	0x4
+ 3098 0054 F3       		.byte	0xf3
+ 3099 0055 01       		.uleb128 0x1
+ 3100 0056 52       		.byte	0x52
+ 3101 0057 9F       		.byte	0x9f
+ 3102 0058 28000000 		.4byte	.LVL3
+ 3103 005c 3A000000 		.4byte	.LVL5
+ 3104 0060 0100     		.2byte	0x1
+ 3105 0062 55       		.byte	0x55
+ 3106 0063 3C000000 		.4byte	.LVL6
+ 3107 0067 44000000 		.4byte	.LVL9
+ 3108 006b 0100     		.2byte	0x1
+ 3109 006d 55       		.byte	0x55
+ 3110 006e 00000000 		.4byte	0
+ 3111 0072 00000000 		.4byte	0
+ 3112              	.LLST3:
+ 3113 0076 00000000 		.4byte	.LVL0
+ 3114 007a 18000000 		.4byte	.LVL1
+ 3115 007e 0100     		.2byte	0x1
+ 3116 0080 53       		.byte	0x53
+ 3117 0081 18000000 		.4byte	.LVL1
+ 3118 0085 4A000000 		.4byte	.LFE0
+ 3119 0089 0400     		.2byte	0x4
+ 3120 008b F3       		.byte	0xf3
+ 3121 008c 01       		.uleb128 0x1
+ 3122 008d 53       		.byte	0x53
+ 3123 008e 9F       		.byte	0x9f
+ 3124 008f 00000000 		.4byte	0
+ 3125 0093 00000000 		.4byte	0
+ 3126              	.LLST4:
+ 3127 0097 00000000 		.4byte	.LVL0
+ 3128 009b 28000000 		.4byte	.LVL3
+ 3129 009f 0200     		.2byte	0x2
+ 3130 00a1 91       		.byte	0x91
+ 3131 00a2 00       		.sleb128 0
+ 3132 00a3 28000000 		.4byte	.LVL3
+ 3133 00a7 3E000000 		.4byte	.LVL7
+ 3134 00ab 0100     		.2byte	0x1
+ 3135 00ad 54       		.byte	0x54
+ 3136 00ae 40000000 		.4byte	.LVL8
+ 3137 00b2 44000000 		.4byte	.LVL9
+ 3138 00b6 0100     		.2byte	0x1
+ 3139 00b8 54       		.byte	0x54
+ 3140 00b9 00000000 		.4byte	0
+ 3141 00bd 00000000 		.4byte	0
+ 3142              	.LLST5:
+ 3143 00c1 00000000 		.4byte	.LVL10
+ 3144 00c5 23000000 		.4byte	.LVL13-1
+ 3145 00c9 0100     		.2byte	0x1
+ 3146 00cb 50       		.byte	0x50
+ 3147 00cc 23000000 		.4byte	.LVL13-1
+ 3148 00d0 8E000000 		.4byte	.LFE1
+ 3149 00d4 0100     		.2byte	0x1
+ 3150 00d6 58       		.byte	0x58
+ 3151 00d7 00000000 		.4byte	0
+ 3152 00db 00000000 		.4byte	0
+ 3153              	.LLST6:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 60
+
+
+ 3154 00df 00000000 		.4byte	.LVL10
+ 3155 00e3 23000000 		.4byte	.LVL13-1
+ 3156 00e7 0100     		.2byte	0x1
+ 3157 00e9 51       		.byte	0x51
+ 3158 00ea 23000000 		.4byte	.LVL13-1
+ 3159 00ee 62000000 		.4byte	.LVL17
+ 3160 00f2 0400     		.2byte	0x4
+ 3161 00f4 F3       		.byte	0xf3
+ 3162 00f5 01       		.uleb128 0x1
+ 3163 00f6 51       		.byte	0x51
+ 3164 00f7 9F       		.byte	0x9f
+ 3165 00f8 62000000 		.4byte	.LVL17
+ 3166 00fc 64000000 		.4byte	.LVL18
+ 3167 0100 0100     		.2byte	0x1
+ 3168 0102 55       		.byte	0x55
+ 3169 0103 64000000 		.4byte	.LVL18
+ 3170 0107 73000000 		.4byte	.LVL19-1
+ 3171 010b 0100     		.2byte	0x1
+ 3172 010d 51       		.byte	0x51
+ 3173 010e 73000000 		.4byte	.LVL19-1
+ 3174 0112 78000000 		.4byte	.LVL21
+ 3175 0116 0300     		.2byte	0x3
+ 3176 0118 75       		.byte	0x75
+ 3177 0119 7F       		.sleb128 -1
+ 3178 011a 9F       		.byte	0x9f
+ 3179 011b 00000000 		.4byte	0
+ 3180 011f 00000000 		.4byte	0
+ 3181              	.LLST7:
+ 3182 0123 00000000 		.4byte	.LVL10
+ 3183 0127 23000000 		.4byte	.LVL13-1
+ 3184 012b 0100     		.2byte	0x1
+ 3185 012d 52       		.byte	0x52
+ 3186 012e 23000000 		.4byte	.LVL13-1
+ 3187 0132 48000000 		.4byte	.LVL16
+ 3188 0136 0400     		.2byte	0x4
+ 3189 0138 F3       		.byte	0xf3
+ 3190 0139 01       		.uleb128 0x1
+ 3191 013a 52       		.byte	0x52
+ 3192 013b 9F       		.byte	0x9f
+ 3193 013c 48000000 		.4byte	.LVL16
+ 3194 0140 76000000 		.4byte	.LVL20
+ 3195 0144 0100     		.2byte	0x1
+ 3196 0146 54       		.byte	0x54
+ 3197 0147 78000000 		.4byte	.LVL21
+ 3198 014b 88000000 		.4byte	.LVL22
+ 3199 014f 0100     		.2byte	0x1
+ 3200 0151 54       		.byte	0x54
+ 3201 0152 00000000 		.4byte	0
+ 3202 0156 00000000 		.4byte	0
+ 3203              	.LLST8:
+ 3204 015a 00000000 		.4byte	.LVL10
+ 3205 015e 1A000000 		.4byte	.LVL12
+ 3206 0162 0100     		.2byte	0x1
+ 3207 0164 53       		.byte	0x53
+ 3208 0165 1A000000 		.4byte	.LVL12
+ 3209 0169 8E000000 		.4byte	.LFE1
+ 3210 016d 0400     		.2byte	0x4
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 61
+
+
+ 3211 016f F3       		.byte	0xf3
+ 3212 0170 01       		.uleb128 0x1
+ 3213 0171 53       		.byte	0x53
+ 3214 0172 9F       		.byte	0x9f
+ 3215 0173 00000000 		.4byte	0
+ 3216 0177 00000000 		.4byte	0
+ 3217              	.LLST9:
+ 3218 017b 00000000 		.4byte	.LVL10
+ 3219 017f 44000000 		.4byte	.LVL15
+ 3220 0183 0200     		.2byte	0x2
+ 3221 0185 91       		.byte	0x91
+ 3222 0186 00       		.sleb128 0
+ 3223 0187 44000000 		.4byte	.LVL15
+ 3224 018b 88000000 		.4byte	.LVL22
+ 3225 018f 0100     		.2byte	0x1
+ 3226 0191 59       		.byte	0x59
+ 3227 0192 00000000 		.4byte	0
+ 3228 0196 00000000 		.4byte	0
+ 3229              	.LLST10:
+ 3230 019a 12000000 		.4byte	.LVL11
+ 3231 019e 23000000 		.4byte	.LVL13-1
+ 3232 01a2 0100     		.2byte	0x1
+ 3233 01a4 51       		.byte	0x51
+ 3234 01a5 23000000 		.4byte	.LVL13-1
+ 3235 01a9 8E000000 		.4byte	.LFE1
+ 3236 01ad 0400     		.2byte	0x4
+ 3237 01af F3       		.byte	0xf3
+ 3238 01b0 01       		.uleb128 0x1
+ 3239 01b1 51       		.byte	0x51
+ 3240 01b2 9F       		.byte	0x9f
+ 3241 01b3 00000000 		.4byte	0
+ 3242 01b7 00000000 		.4byte	0
+ 3243              	.LLST11:
+ 3244 01bb 00000000 		.4byte	.LVL23
+ 3245 01bf 25000000 		.4byte	.LVL25-1
+ 3246 01c3 0100     		.2byte	0x1
+ 3247 01c5 50       		.byte	0x50
+ 3248 01c6 25000000 		.4byte	.LVL25-1
+ 3249 01ca FA000000 		.4byte	.LFE2
+ 3250 01ce 0200     		.2byte	0x2
+ 3251 01d0 91       		.byte	0x91
+ 3252 01d1 4C       		.sleb128 -52
+ 3253 01d2 00000000 		.4byte	0
+ 3254 01d6 00000000 		.4byte	0
+ 3255              	.LLST12:
+ 3256 01da 00000000 		.4byte	.LVL23
+ 3257 01de 25000000 		.4byte	.LVL25-1
+ 3258 01e2 0100     		.2byte	0x1
+ 3259 01e4 51       		.byte	0x51
+ 3260 01e5 25000000 		.4byte	.LVL25-1
+ 3261 01e9 FA000000 		.4byte	.LFE2
+ 3262 01ed 0400     		.2byte	0x4
+ 3263 01ef F3       		.byte	0xf3
+ 3264 01f0 01       		.uleb128 0x1
+ 3265 01f1 51       		.byte	0x51
+ 3266 01f2 9F       		.byte	0x9f
+ 3267 01f3 00000000 		.4byte	0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 62
+
+
+ 3268 01f7 00000000 		.4byte	0
+ 3269              	.LLST13:
+ 3270 01fb 00000000 		.4byte	.LVL23
+ 3271 01ff 25000000 		.4byte	.LVL25-1
+ 3272 0203 0100     		.2byte	0x1
+ 3273 0205 52       		.byte	0x52
+ 3274 0206 25000000 		.4byte	.LVL25-1
+ 3275 020a FA000000 		.4byte	.LFE2
+ 3276 020e 0400     		.2byte	0x4
+ 3277 0210 F3       		.byte	0xf3
+ 3278 0211 01       		.uleb128 0x1
+ 3279 0212 52       		.byte	0x52
+ 3280 0213 9F       		.byte	0x9f
+ 3281 0214 00000000 		.4byte	0
+ 3282 0218 00000000 		.4byte	0
+ 3283              	.LLST14:
+ 3284 021c 00000000 		.4byte	.LVL23
+ 3285 0220 22000000 		.4byte	.LVL24
+ 3286 0224 0100     		.2byte	0x1
+ 3287 0226 53       		.byte	0x53
+ 3288 0227 22000000 		.4byte	.LVL24
+ 3289 022b FA000000 		.4byte	.LFE2
+ 3290 022f 0400     		.2byte	0x4
+ 3291 0231 F3       		.byte	0xf3
+ 3292 0232 01       		.uleb128 0x1
+ 3293 0233 53       		.byte	0x53
+ 3294 0234 9F       		.byte	0x9f
+ 3295 0235 00000000 		.4byte	0
+ 3296 0239 00000000 		.4byte	0
+ 3297              	.LLST15:
+ 3298 023d 2A000000 		.4byte	.LVL26
+ 3299 0241 32000000 		.4byte	.LVL27
+ 3300 0245 0100     		.2byte	0x1
+ 3301 0247 59       		.byte	0x59
+ 3302 0248 32000000 		.4byte	.LVL27
+ 3303 024c 98000000 		.4byte	.LVL44
+ 3304 0250 0100     		.2byte	0x1
+ 3305 0252 58       		.byte	0x58
+ 3306 0253 98000000 		.4byte	.LVL44
+ 3307 0257 9C000000 		.4byte	.LVL45
+ 3308 025b 0300     		.2byte	0x3
+ 3309 025d 78       		.byte	0x78
+ 3310 025e 7F       		.sleb128 -1
+ 3311 025f 9F       		.byte	0x9f
+ 3312 0260 9C000000 		.4byte	.LVL45
+ 3313 0264 F4000000 		.4byte	.LVL60
+ 3314 0268 0100     		.2byte	0x1
+ 3315 026a 58       		.byte	0x58
+ 3316 026b 00000000 		.4byte	0
+ 3317 026f 00000000 		.4byte	0
+ 3318              	.LLST16:
+ 3319 0273 32000000 		.4byte	.LVL27
+ 3320 0277 3A000000 		.4byte	.LVL28
+ 3321 027b 0100     		.2byte	0x1
+ 3322 027d 5B       		.byte	0x5b
+ 3323 027e 3A000000 		.4byte	.LVL28
+ 3324 0282 59000000 		.4byte	.LVL37-1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 63
+
+
+ 3325 0286 0100     		.2byte	0x1
+ 3326 0288 52       		.byte	0x52
+ 3327 0289 59000000 		.4byte	.LVL37-1
+ 3328 028d A2000000 		.4byte	.LVL47
+ 3329 0291 0200     		.2byte	0x2
+ 3330 0293 91       		.byte	0x91
+ 3331 0294 50       		.sleb128 -48
+ 3332 0295 A2000000 		.4byte	.LVL47
+ 3333 0299 F4000000 		.4byte	.LVL60
+ 3334 029d 0100     		.2byte	0x1
+ 3335 029f 54       		.byte	0x54
+ 3336 02a0 00000000 		.4byte	0
+ 3337 02a4 00000000 		.4byte	0
+ 3338              	.LLST17:
+ 3339 02a8 42000000 		.4byte	.LVL32
+ 3340 02ac 44000000 		.4byte	.LVL33
+ 3341 02b0 0100     		.2byte	0x1
+ 3342 02b2 55       		.byte	0x55
+ 3343 02b3 44000000 		.4byte	.LVL33
+ 3344 02b7 46000000 		.4byte	.LVL34
+ 3345 02bb 0600     		.2byte	0x6
+ 3346 02bd 7B       		.byte	0x7b
+ 3347 02be 00       		.sleb128 0
+ 3348 02bf 76       		.byte	0x76
+ 3349 02c0 00       		.sleb128 0
+ 3350 02c1 22       		.byte	0x22
+ 3351 02c2 9F       		.byte	0x9f
+ 3352 02c3 46000000 		.4byte	.LVL34
+ 3353 02c7 48000000 		.4byte	.LVL35
+ 3354 02cb 0100     		.2byte	0x1
+ 3355 02cd 55       		.byte	0x55
+ 3356 02ce 48000000 		.4byte	.LVL35
+ 3357 02d2 4A000000 		.4byte	.LVL36
+ 3358 02d6 0300     		.2byte	0x3
+ 3359 02d8 75       		.byte	0x75
+ 3360 02d9 01       		.sleb128 1
+ 3361 02da 9F       		.byte	0x9f
+ 3362 02db 4A000000 		.4byte	.LVL36
+ 3363 02df F4000000 		.4byte	.LVL60
+ 3364 02e3 0100     		.2byte	0x1
+ 3365 02e5 55       		.byte	0x55
+ 3366 02e6 00000000 		.4byte	0
+ 3367 02ea 00000000 		.4byte	0
+ 3368              	.LLST18:
+ 3369 02ee 3A000000 		.4byte	.LVL28
+ 3370 02f2 3C000000 		.4byte	.LVL29
+ 3371 02f6 0100     		.2byte	0x1
+ 3372 02f8 54       		.byte	0x54
+ 3373 02f9 3C000000 		.4byte	.LVL29
+ 3374 02fd 3E000000 		.4byte	.LVL30
+ 3375 0301 0600     		.2byte	0x6
+ 3376 0303 79       		.byte	0x79
+ 3377 0304 00       		.sleb128 0
+ 3378 0305 7A       		.byte	0x7a
+ 3379 0306 00       		.sleb128 0
+ 3380 0307 22       		.byte	0x22
+ 3381 0308 9F       		.byte	0x9f
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 64
+
+
+ 3382 0309 3E000000 		.4byte	.LVL30
+ 3383 030d 40000000 		.4byte	.LVL31
+ 3384 0311 0100     		.2byte	0x1
+ 3385 0313 54       		.byte	0x54
+ 3386 0314 40000000 		.4byte	.LVL31
+ 3387 0318 42000000 		.4byte	.LVL32
+ 3388 031c 0300     		.2byte	0x3
+ 3389 031e 74       		.byte	0x74
+ 3390 031f 01       		.sleb128 1
+ 3391 0320 9F       		.byte	0x9f
+ 3392 0321 42000000 		.4byte	.LVL32
+ 3393 0325 A0000000 		.4byte	.LVL46
+ 3394 0329 0100     		.2byte	0x1
+ 3395 032b 54       		.byte	0x54
+ 3396 032c A0000000 		.4byte	.LVL46
+ 3397 0330 DC000000 		.4byte	.LVL56
+ 3398 0334 1300     		.2byte	0x13
+ 3399 0336 79       		.byte	0x79
+ 3400 0337 00       		.sleb128 0
+ 3401 0338 7A       		.byte	0x7a
+ 3402 0339 00       		.sleb128 0
+ 3403 033a 22       		.byte	0x22
+ 3404 033b 0A       		.byte	0xa
+ 3405 033c FFFF     		.2byte	0xffff
+ 3406 033e 1A       		.byte	0x1a
+ 3407 033f 77       		.byte	0x77
+ 3408 0340 00       		.sleb128 0
+ 3409 0341 1C       		.byte	0x1c
+ 3410 0342 0A       		.byte	0xa
+ 3411 0343 FFFF     		.2byte	0xffff
+ 3412 0345 1A       		.byte	0x1a
+ 3413 0346 31       		.byte	0x31
+ 3414 0347 1C       		.byte	0x1c
+ 3415 0348 9F       		.byte	0x9f
+ 3416 0349 DC000000 		.4byte	.LVL56
+ 3417 034d F4000000 		.4byte	.LVL60
+ 3418 0351 1900     		.2byte	0x19
+ 3419 0353 79       		.byte	0x79
+ 3420 0354 00       		.sleb128 0
+ 3421 0355 7A       		.byte	0x7a
+ 3422 0356 00       		.sleb128 0
+ 3423 0357 22       		.byte	0x22
+ 3424 0358 0A       		.byte	0xa
+ 3425 0359 FFFF     		.2byte	0xffff
+ 3426 035b 1A       		.byte	0x1a
+ 3427 035c 91       		.byte	0x91
+ 3428 035d 04       		.sleb128 4
+ 3429 035e 94       		.byte	0x94
+ 3430 035f 02       		.byte	0x2
+ 3431 0360 0A       		.byte	0xa
+ 3432 0361 FFFF     		.2byte	0xffff
+ 3433 0363 1A       		.byte	0x1a
+ 3434 0364 1C       		.byte	0x1c
+ 3435 0365 0A       		.byte	0xa
+ 3436 0366 FFFF     		.2byte	0xffff
+ 3437 0368 1A       		.byte	0x1a
+ 3438 0369 31       		.byte	0x31
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 65
+
+
+ 3439 036a 1C       		.byte	0x1c
+ 3440 036b 9F       		.byte	0x9f
+ 3441 036c 00000000 		.4byte	0
+ 3442 0370 00000000 		.4byte	0
+ 3443              	.LLST19:
+ 3444 0374 8A000000 		.4byte	.LVL40
+ 3445 0378 90000000 		.4byte	.LVL41
+ 3446 037c 0100     		.2byte	0x1
+ 3447 037e 5A       		.byte	0x5a
+ 3448 037f 90000000 		.4byte	.LVL41
+ 3449 0383 92000000 		.4byte	.LVL42
+ 3450 0387 0100     		.2byte	0x1
+ 3451 0389 53       		.byte	0x53
+ 3452 038a 92000000 		.4byte	.LVL42
+ 3453 038e 94000000 		.4byte	.LVL43
+ 3454 0392 0600     		.2byte	0x6
+ 3455 0394 7A       		.byte	0x7a
+ 3456 0395 00       		.sleb128 0
+ 3457 0396 77       		.byte	0x77
+ 3458 0397 00       		.sleb128 0
+ 3459 0398 1C       		.byte	0x1c
+ 3460 0399 9F       		.byte	0x9f
+ 3461 039a 94000000 		.4byte	.LVL43
+ 3462 039e A8000000 		.4byte	.LVL48
+ 3463 03a2 0100     		.2byte	0x1
+ 3464 03a4 53       		.byte	0x53
+ 3465 03a5 A8000000 		.4byte	.LVL48
+ 3466 03a9 AA000000 		.4byte	.LVL49
+ 3467 03ad 0300     		.2byte	0x3
+ 3468 03af 73       		.byte	0x73
+ 3469 03b0 02       		.sleb128 2
+ 3470 03b1 9F       		.byte	0x9f
+ 3471 03b2 AA000000 		.4byte	.LVL49
+ 3472 03b6 AC000000 		.4byte	.LVL50
+ 3473 03ba 0D00     		.2byte	0xd
+ 3474 03bc 7A       		.byte	0x7a
+ 3475 03bd 00       		.sleb128 0
+ 3476 03be 77       		.byte	0x77
+ 3477 03bf 00       		.sleb128 0
+ 3478 03c0 1C       		.byte	0x1c
+ 3479 03c1 0A       		.byte	0xa
+ 3480 03c2 FFFF     		.2byte	0xffff
+ 3481 03c4 1A       		.byte	0x1a
+ 3482 03c5 77       		.byte	0x77
+ 3483 03c6 00       		.sleb128 0
+ 3484 03c7 1C       		.byte	0x1c
+ 3485 03c8 9F       		.byte	0x9f
+ 3486 03c9 AC000000 		.4byte	.LVL50
+ 3487 03cd BC000000 		.4byte	.LVL51
+ 3488 03d1 0100     		.2byte	0x1
+ 3489 03d3 51       		.byte	0x51
+ 3490 03d4 BC000000 		.4byte	.LVL51
+ 3491 03d8 C5000000 		.4byte	.LVL52-1
+ 3492 03dc 0100     		.2byte	0x1
+ 3493 03de 53       		.byte	0x53
+ 3494 03df C5000000 		.4byte	.LVL52-1
+ 3495 03e3 D6000000 		.4byte	.LVL53
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 66
+
+
+ 3496 03e7 0200     		.2byte	0x2
+ 3497 03e9 91       		.byte	0x91
+ 3498 03ea 50       		.sleb128 -48
+ 3499 03eb 00000000 		.4byte	0
+ 3500 03ef 00000000 		.4byte	0
+ 3501              	.LLST20:
+ 3502 03f3 D6000000 		.4byte	.LVL53
+ 3503 03f7 D8000000 		.4byte	.LVL54
+ 3504 03fb 0100     		.2byte	0x1
+ 3505 03fd 56       		.byte	0x56
+ 3506 03fe DA000000 		.4byte	.LVL55
+ 3507 0402 DE000000 		.4byte	.LVL57
+ 3508 0406 0100     		.2byte	0x1
+ 3509 0408 56       		.byte	0x56
+ 3510 0409 DE000000 		.4byte	.LVL57
+ 3511 040d E4000000 		.4byte	.LVL58
+ 3512 0411 0100     		.2byte	0x1
+ 3513 0413 57       		.byte	0x57
+ 3514 0414 E4000000 		.4byte	.LVL58
+ 3515 0418 E6000000 		.4byte	.LVL59
+ 3516 041c 0300     		.2byte	0x3
+ 3517 041e 77       		.byte	0x77
+ 3518 041f 02       		.sleb128 2
+ 3519 0420 9F       		.byte	0x9f
+ 3520 0421 E6000000 		.4byte	.LVL59
+ 3521 0425 F4000000 		.4byte	.LVL60
+ 3522 0429 0100     		.2byte	0x1
+ 3523 042b 57       		.byte	0x57
+ 3524 042c 00000000 		.4byte	0
+ 3525 0430 00000000 		.4byte	0
+ 3526              	.LLST21:
+ 3527 0434 00000000 		.4byte	.LVL61
+ 3528 0438 27000000 		.4byte	.LVL63-1
+ 3529 043c 0100     		.2byte	0x1
+ 3530 043e 50       		.byte	0x50
+ 3531 043f 27000000 		.4byte	.LVL63-1
+ 3532 0443 08010000 		.4byte	.LFE3
+ 3533 0447 0200     		.2byte	0x2
+ 3534 0449 91       		.byte	0x91
+ 3535 044a 50       		.sleb128 -48
+ 3536 044b 00000000 		.4byte	0
+ 3537 044f 00000000 		.4byte	0
+ 3538              	.LLST22:
+ 3539 0453 00000000 		.4byte	.LVL61
+ 3540 0457 27000000 		.4byte	.LVL63-1
+ 3541 045b 0100     		.2byte	0x1
+ 3542 045d 51       		.byte	0x51
+ 3543 045e 27000000 		.4byte	.LVL63-1
+ 3544 0462 08010000 		.4byte	.LFE3
+ 3545 0466 0400     		.2byte	0x4
+ 3546 0468 F3       		.byte	0xf3
+ 3547 0469 01       		.uleb128 0x1
+ 3548 046a 51       		.byte	0x51
+ 3549 046b 9F       		.byte	0x9f
+ 3550 046c 00000000 		.4byte	0
+ 3551 0470 00000000 		.4byte	0
+ 3552              	.LLST23:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 67
+
+
+ 3553 0474 00000000 		.4byte	.LVL61
+ 3554 0478 27000000 		.4byte	.LVL63-1
+ 3555 047c 0100     		.2byte	0x1
+ 3556 047e 52       		.byte	0x52
+ 3557 047f 27000000 		.4byte	.LVL63-1
+ 3558 0483 08010000 		.4byte	.LFE3
+ 3559 0487 0400     		.2byte	0x4
+ 3560 0489 F3       		.byte	0xf3
+ 3561 048a 01       		.uleb128 0x1
+ 3562 048b 52       		.byte	0x52
+ 3563 048c 9F       		.byte	0x9f
+ 3564 048d 00000000 		.4byte	0
+ 3565 0491 00000000 		.4byte	0
+ 3566              	.LLST24:
+ 3567 0495 00000000 		.4byte	.LVL61
+ 3568 0499 24000000 		.4byte	.LVL62
+ 3569 049d 0100     		.2byte	0x1
+ 3570 049f 53       		.byte	0x53
+ 3571 04a0 24000000 		.4byte	.LVL62
+ 3572 04a4 E4000000 		.4byte	.LVL99
+ 3573 04a8 0400     		.2byte	0x4
+ 3574 04aa F3       		.byte	0xf3
+ 3575 04ab 01       		.uleb128 0x1
+ 3576 04ac 53       		.byte	0x53
+ 3577 04ad 9F       		.byte	0x9f
+ 3578 04ae E4000000 		.4byte	.LVL99
+ 3579 04b2 02010000 		.4byte	.LVL102
+ 3580 04b6 0100     		.2byte	0x1
+ 3581 04b8 58       		.byte	0x58
+ 3582 04b9 00000000 		.4byte	0
+ 3583 04bd 00000000 		.4byte	0
+ 3584              	.LLST25:
+ 3585 04c1 00000000 		.4byte	.LVL61
+ 3586 04c5 B8000000 		.4byte	.LVL93
+ 3587 04c9 0200     		.2byte	0x2
+ 3588 04cb 91       		.byte	0x91
+ 3589 04cc 00       		.sleb128 0
+ 3590 04cd B8000000 		.4byte	.LVL93
+ 3591 04d1 D4000000 		.4byte	.LVL95
+ 3592 04d5 0100     		.2byte	0x1
+ 3593 04d7 59       		.byte	0x59
+ 3594 04d8 00000000 		.4byte	0
+ 3595 04dc 00000000 		.4byte	0
+ 3596              	.LLST26:
+ 3597 04e0 2C000000 		.4byte	.LVL64
+ 3598 04e4 32000000 		.4byte	.LVL65
+ 3599 04e8 0100     		.2byte	0x1
+ 3600 04ea 5A       		.byte	0x5a
+ 3601 04eb 32000000 		.4byte	.LVL65
+ 3602 04ef A0000000 		.4byte	.LVL86
+ 3603 04f3 0100     		.2byte	0x1
+ 3604 04f5 57       		.byte	0x57
+ 3605 04f6 A0000000 		.4byte	.LVL86
+ 3606 04fa A2000000 		.4byte	.LVL87
+ 3607 04fe 0300     		.2byte	0x3
+ 3608 0500 77       		.byte	0x77
+ 3609 0501 7F       		.sleb128 -1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 68
+
+
+ 3610 0502 9F       		.byte	0x9f
+ 3611 0503 A2000000 		.4byte	.LVL87
+ 3612 0507 02010000 		.4byte	.LVL102
+ 3613 050b 0100     		.2byte	0x1
+ 3614 050d 57       		.byte	0x57
+ 3615 050e 00000000 		.4byte	0
+ 3616 0512 00000000 		.4byte	0
+ 3617              	.LLST27:
+ 3618 0516 32000000 		.4byte	.LVL65
+ 3619 051a 3A000000 		.4byte	.LVL66
+ 3620 051e 0100     		.2byte	0x1
+ 3621 0520 5B       		.byte	0x5b
+ 3622 0521 3A000000 		.4byte	.LVL66
+ 3623 0525 59000000 		.4byte	.LVL75-1
+ 3624 0529 0100     		.2byte	0x1
+ 3625 052b 52       		.byte	0x52
+ 3626 052c 59000000 		.4byte	.LVL75-1
+ 3627 0530 A8000000 		.4byte	.LVL89
+ 3628 0534 0200     		.2byte	0x2
+ 3629 0536 91       		.byte	0x91
+ 3630 0537 54       		.sleb128 -44
+ 3631 0538 A8000000 		.4byte	.LVL89
+ 3632 053c 02010000 		.4byte	.LVL102
+ 3633 0540 0100     		.2byte	0x1
+ 3634 0542 54       		.byte	0x54
+ 3635 0543 00000000 		.4byte	0
+ 3636 0547 00000000 		.4byte	0
+ 3637              	.LLST28:
+ 3638 054b 42000000 		.4byte	.LVL70
+ 3639 054f 44000000 		.4byte	.LVL71
+ 3640 0553 0100     		.2byte	0x1
+ 3641 0555 54       		.byte	0x54
+ 3642 0556 44000000 		.4byte	.LVL71
+ 3643 055a 46000000 		.4byte	.LVL72
+ 3644 055e 0600     		.2byte	0x6
+ 3645 0560 7B       		.byte	0x7b
+ 3646 0561 00       		.sleb128 0
+ 3647 0562 79       		.byte	0x79
+ 3648 0563 00       		.sleb128 0
+ 3649 0564 22       		.byte	0x22
+ 3650 0565 9F       		.byte	0x9f
+ 3651 0566 46000000 		.4byte	.LVL72
+ 3652 056a 48000000 		.4byte	.LVL73
+ 3653 056e 0100     		.2byte	0x1
+ 3654 0570 54       		.byte	0x54
+ 3655 0571 48000000 		.4byte	.LVL73
+ 3656 0575 4A000000 		.4byte	.LVL74
+ 3657 0579 0300     		.2byte	0x3
+ 3658 057b 74       		.byte	0x74
+ 3659 057c 01       		.sleb128 1
+ 3660 057d 9F       		.byte	0x9f
+ 3661 057e 4A000000 		.4byte	.LVL74
+ 3662 0582 A6000000 		.4byte	.LVL88
+ 3663 0586 0100     		.2byte	0x1
+ 3664 0588 54       		.byte	0x54
+ 3665 0589 A6000000 		.4byte	.LVL88
+ 3666 058d B4000000 		.4byte	.LVL92
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 69
+
+
+ 3667 0591 1900     		.2byte	0x19
+ 3668 0593 7B       		.byte	0x7b
+ 3669 0594 00       		.sleb128 0
+ 3670 0595 79       		.byte	0x79
+ 3671 0596 00       		.sleb128 0
+ 3672 0597 22       		.byte	0x22
+ 3673 0598 0A       		.byte	0xa
+ 3674 0599 FFFF     		.2byte	0xffff
+ 3675 059b 1A       		.byte	0x1a
+ 3676 059c 91       		.byte	0x91
+ 3677 059d 04       		.sleb128 4
+ 3678 059e 94       		.byte	0x94
+ 3679 059f 02       		.byte	0x2
+ 3680 05a0 0A       		.byte	0xa
+ 3681 05a1 FFFF     		.2byte	0xffff
+ 3682 05a3 1A       		.byte	0x1a
+ 3683 05a4 1C       		.byte	0x1c
+ 3684 05a5 0A       		.byte	0xa
+ 3685 05a6 FFFF     		.2byte	0xffff
+ 3686 05a8 1A       		.byte	0x1a
+ 3687 05a9 31       		.byte	0x31
+ 3688 05aa 1C       		.byte	0x1c
+ 3689 05ab 9F       		.byte	0x9f
+ 3690 05ac B4000000 		.4byte	.LVL92
+ 3691 05b0 B8000000 		.4byte	.LVL93
+ 3692 05b4 1B00     		.2byte	0x1b
+ 3693 05b6 79       		.byte	0x79
+ 3694 05b7 00       		.sleb128 0
+ 3695 05b8 7B       		.byte	0x7b
+ 3696 05b9 00       		.sleb128 0
+ 3697 05ba 22       		.byte	0x22
+ 3698 05bb 23       		.byte	0x23
+ 3699 05bc 01       		.uleb128 0x1
+ 3700 05bd 0A       		.byte	0xa
+ 3701 05be FFFF     		.2byte	0xffff
+ 3702 05c0 1A       		.byte	0x1a
+ 3703 05c1 91       		.byte	0x91
+ 3704 05c2 04       		.sleb128 4
+ 3705 05c3 94       		.byte	0x94
+ 3706 05c4 02       		.byte	0x2
+ 3707 05c5 0A       		.byte	0xa
+ 3708 05c6 FFFF     		.2byte	0xffff
+ 3709 05c8 1A       		.byte	0x1a
+ 3710 05c9 1C       		.byte	0x1c
+ 3711 05ca 0A       		.byte	0xa
+ 3712 05cb FFFF     		.2byte	0xffff
+ 3713 05cd 1A       		.byte	0x1a
+ 3714 05ce 31       		.byte	0x31
+ 3715 05cf 1C       		.byte	0x1c
+ 3716 05d0 9F       		.byte	0x9f
+ 3717 05d1 B8000000 		.4byte	.LVL93
+ 3718 05d5 02010000 		.4byte	.LVL102
+ 3719 05d9 1F00     		.2byte	0x1f
+ 3720 05db 91       		.byte	0x91
+ 3721 05dc 00       		.sleb128 0
+ 3722 05dd 94       		.byte	0x94
+ 3723 05de 02       		.byte	0x2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 70
+
+
+ 3724 05df 0A       		.byte	0xa
+ 3725 05e0 FFFF     		.2byte	0xffff
+ 3726 05e2 1A       		.byte	0x1a
+ 3727 05e3 7B       		.byte	0x7b
+ 3728 05e4 00       		.sleb128 0
+ 3729 05e5 22       		.byte	0x22
+ 3730 05e6 0A       		.byte	0xa
+ 3731 05e7 FFFF     		.2byte	0xffff
+ 3732 05e9 1A       		.byte	0x1a
+ 3733 05ea 91       		.byte	0x91
+ 3734 05eb 04       		.sleb128 4
+ 3735 05ec 94       		.byte	0x94
+ 3736 05ed 02       		.byte	0x2
+ 3737 05ee 0A       		.byte	0xa
+ 3738 05ef FFFF     		.2byte	0xffff
+ 3739 05f1 1A       		.byte	0x1a
+ 3740 05f2 1C       		.byte	0x1c
+ 3741 05f3 0A       		.byte	0xa
+ 3742 05f4 FFFF     		.2byte	0xffff
+ 3743 05f6 1A       		.byte	0x1a
+ 3744 05f7 31       		.byte	0x31
+ 3745 05f8 1C       		.byte	0x1c
+ 3746 05f9 9F       		.byte	0x9f
+ 3747 05fa 00000000 		.4byte	0
+ 3748 05fe 00000000 		.4byte	0
+ 3749              	.LLST29:
+ 3750 0602 3A000000 		.4byte	.LVL66
+ 3751 0606 3C000000 		.4byte	.LVL67
+ 3752 060a 0100     		.2byte	0x1
+ 3753 060c 55       		.byte	0x55
+ 3754 060d 3C000000 		.4byte	.LVL67
+ 3755 0611 3E000000 		.4byte	.LVL68
+ 3756 0615 0600     		.2byte	0x6
+ 3757 0617 7A       		.byte	0x7a
+ 3758 0618 00       		.sleb128 0
+ 3759 0619 78       		.byte	0x78
+ 3760 061a 00       		.sleb128 0
+ 3761 061b 22       		.byte	0x22
+ 3762 061c 9F       		.byte	0x9f
+ 3763 061d 3E000000 		.4byte	.LVL68
+ 3764 0621 40000000 		.4byte	.LVL69
+ 3765 0625 0100     		.2byte	0x1
+ 3766 0627 55       		.byte	0x55
+ 3767 0628 40000000 		.4byte	.LVL69
+ 3768 062c 42000000 		.4byte	.LVL70
+ 3769 0630 0300     		.2byte	0x3
+ 3770 0632 75       		.byte	0x75
+ 3771 0633 01       		.sleb128 1
+ 3772 0634 9F       		.byte	0x9f
+ 3773 0635 42000000 		.4byte	.LVL70
+ 3774 0639 8E000000 		.4byte	.LVL79
+ 3775 063d 0100     		.2byte	0x1
+ 3776 063f 55       		.byte	0x55
+ 3777 0640 8E000000 		.4byte	.LVL79
+ 3778 0644 9C000000 		.4byte	.LVL84
+ 3779 0648 1300     		.2byte	0x13
+ 3780 064a 7A       		.byte	0x7a
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 71
+
+
+ 3781 064b 00       		.sleb128 0
+ 3782 064c 78       		.byte	0x78
+ 3783 064d 00       		.sleb128 0
+ 3784 064e 22       		.byte	0x22
+ 3785 064f 0A       		.byte	0xa
+ 3786 0650 FFFF     		.2byte	0xffff
+ 3787 0652 1A       		.byte	0x1a
+ 3788 0653 76       		.byte	0x76
+ 3789 0654 00       		.sleb128 0
+ 3790 0655 1C       		.byte	0x1c
+ 3791 0656 0A       		.byte	0xa
+ 3792 0657 FFFF     		.2byte	0xffff
+ 3793 0659 1A       		.byte	0x1a
+ 3794 065a 31       		.byte	0x31
+ 3795 065b 1C       		.byte	0x1c
+ 3796 065c 9F       		.byte	0x9f
+ 3797 065d 9C000000 		.4byte	.LVL84
+ 3798 0661 E0000000 		.4byte	.LVL98
+ 3799 0665 1900     		.2byte	0x19
+ 3800 0667 7A       		.byte	0x7a
+ 3801 0668 00       		.sleb128 0
+ 3802 0669 78       		.byte	0x78
+ 3803 066a 00       		.sleb128 0
+ 3804 066b 22       		.byte	0x22
+ 3805 066c 0A       		.byte	0xa
+ 3806 066d FFFF     		.2byte	0xffff
+ 3807 066f 1A       		.byte	0x1a
+ 3808 0670 91       		.byte	0x91
+ 3809 0671 04       		.sleb128 4
+ 3810 0672 94       		.byte	0x94
+ 3811 0673 02       		.byte	0x2
+ 3812 0674 0A       		.byte	0xa
+ 3813 0675 FFFF     		.2byte	0xffff
+ 3814 0677 1A       		.byte	0x1a
+ 3815 0678 1C       		.byte	0x1c
+ 3816 0679 0A       		.byte	0xa
+ 3817 067a FFFF     		.2byte	0xffff
+ 3818 067c 1A       		.byte	0x1a
+ 3819 067d 31       		.byte	0x31
+ 3820 067e 1C       		.byte	0x1c
+ 3821 067f 9F       		.byte	0x9f
+ 3822 0680 E0000000 		.4byte	.LVL98
+ 3823 0684 E4000000 		.4byte	.LVL99
+ 3824 0688 1B00     		.2byte	0x1b
+ 3825 068a 78       		.byte	0x78
+ 3826 068b 00       		.sleb128 0
+ 3827 068c 7A       		.byte	0x7a
+ 3828 068d 00       		.sleb128 0
+ 3829 068e 22       		.byte	0x22
+ 3830 068f 23       		.byte	0x23
+ 3831 0690 01       		.uleb128 0x1
+ 3832 0691 0A       		.byte	0xa
+ 3833 0692 FFFF     		.2byte	0xffff
+ 3834 0694 1A       		.byte	0x1a
+ 3835 0695 91       		.byte	0x91
+ 3836 0696 04       		.sleb128 4
+ 3837 0697 94       		.byte	0x94
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 72
+
+
+ 3838 0698 02       		.byte	0x2
+ 3839 0699 0A       		.byte	0xa
+ 3840 069a FFFF     		.2byte	0xffff
+ 3841 069c 1A       		.byte	0x1a
+ 3842 069d 1C       		.byte	0x1c
+ 3843 069e 0A       		.byte	0xa
+ 3844 069f FFFF     		.2byte	0xffff
+ 3845 06a1 1A       		.byte	0x1a
+ 3846 06a2 31       		.byte	0x31
+ 3847 06a3 1C       		.byte	0x1c
+ 3848 06a4 9F       		.byte	0x9f
+ 3849 06a5 00000000 		.4byte	0
+ 3850 06a9 00000000 		.4byte	0
+ 3851              	.LLST30:
+ 3852 06ad 8A000000 		.4byte	.LVL78
+ 3853 06b1 90000000 		.4byte	.LVL80
+ 3854 06b5 0100     		.2byte	0x1
+ 3855 06b7 58       		.byte	0x58
+ 3856 06b8 90000000 		.4byte	.LVL80
+ 3857 06bc 92000000 		.4byte	.LVL81
+ 3858 06c0 0100     		.2byte	0x1
+ 3859 06c2 55       		.byte	0x55
+ 3860 06c3 92000000 		.4byte	.LVL81
+ 3861 06c7 94000000 		.4byte	.LVL82
+ 3862 06cb 0600     		.2byte	0x6
+ 3863 06cd 78       		.byte	0x78
+ 3864 06ce 00       		.sleb128 0
+ 3865 06cf 76       		.byte	0x76
+ 3866 06d0 00       		.sleb128 0
+ 3867 06d1 1C       		.byte	0x1c
+ 3868 06d2 9F       		.byte	0x9f
+ 3869 06d3 94000000 		.4byte	.LVL82
+ 3870 06d7 AE000000 		.4byte	.LVL90
+ 3871 06db 0100     		.2byte	0x1
+ 3872 06dd 55       		.byte	0x55
+ 3873 06de AE000000 		.4byte	.LVL90
+ 3874 06e2 B0000000 		.4byte	.LVL91
+ 3875 06e6 0300     		.2byte	0x3
+ 3876 06e8 75       		.byte	0x75
+ 3877 06e9 02       		.sleb128 2
+ 3878 06ea 9F       		.byte	0x9f
+ 3879 06eb B0000000 		.4byte	.LVL91
+ 3880 06ef EC000000 		.4byte	.LVL100
+ 3881 06f3 0100     		.2byte	0x1
+ 3882 06f5 55       		.byte	0x55
+ 3883 06f6 00000000 		.4byte	0
+ 3884 06fa 00000000 		.4byte	0
+ 3885              	.LLST31:
+ 3886 06fe 94000000 		.4byte	.LVL82
+ 3887 0702 9A000000 		.4byte	.LVL83
+ 3888 0706 0100     		.2byte	0x1
+ 3889 0708 59       		.byte	0x59
+ 3890 0709 9A000000 		.4byte	.LVL83
+ 3891 070d 9E000000 		.4byte	.LVL85
+ 3892 0711 0100     		.2byte	0x1
+ 3893 0713 53       		.byte	0x53
+ 3894 0714 9E000000 		.4byte	.LVL85
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 73
+
+
+ 3895 0718 DA000000 		.4byte	.LVL96
+ 3896 071c 0100     		.2byte	0x1
+ 3897 071e 56       		.byte	0x56
+ 3898 071f DA000000 		.4byte	.LVL96
+ 3899 0723 DC000000 		.4byte	.LVL97
+ 3900 0727 0300     		.2byte	0x3
+ 3901 0729 76       		.byte	0x76
+ 3902 072a 02       		.sleb128 2
+ 3903 072b 9F       		.byte	0x9f
+ 3904 072c DC000000 		.4byte	.LVL97
+ 3905 0730 02010000 		.4byte	.LVL102
+ 3906 0734 0100     		.2byte	0x1
+ 3907 0736 56       		.byte	0x56
+ 3908 0737 00000000 		.4byte	0
+ 3909 073b 00000000 		.4byte	0
+ 3910              		.section	.debug_aranges,"",%progbits
+ 3911 0000 34000000 		.4byte	0x34
+ 3912 0004 0200     		.2byte	0x2
+ 3913 0006 00000000 		.4byte	.Ldebug_info0
+ 3914 000a 04       		.byte	0x4
+ 3915 000b 00       		.byte	0
+ 3916 000c 0000     		.2byte	0
+ 3917 000e 0000     		.2byte	0
+ 3918 0010 00000000 		.4byte	.LFB0
+ 3919 0014 4A000000 		.4byte	.LFE0-.LFB0
+ 3920 0018 00000000 		.4byte	.LFB1
+ 3921 001c 8E000000 		.4byte	.LFE1-.LFB1
+ 3922 0020 00000000 		.4byte	.LFB2
+ 3923 0024 FA000000 		.4byte	.LFE2-.LFB2
+ 3924 0028 00000000 		.4byte	.LFB3
+ 3925 002c 08010000 		.4byte	.LFE3-.LFB3
+ 3926 0030 00000000 		.4byte	0
+ 3927 0034 00000000 		.4byte	0
+ 3928              		.section	.debug_ranges,"",%progbits
+ 3929              	.Ldebug_ranges0:
+ 3930 0000 00000000 		.4byte	.LFB0
+ 3931 0004 4A000000 		.4byte	.LFE0
+ 3932 0008 00000000 		.4byte	.LFB1
+ 3933 000c 8E000000 		.4byte	.LFE1
+ 3934 0010 00000000 		.4byte	.LFB2
+ 3935 0014 FA000000 		.4byte	.LFE2
+ 3936 0018 00000000 		.4byte	.LFB3
+ 3937 001c 08010000 		.4byte	.LFE3
+ 3938 0020 00000000 		.4byte	0
+ 3939 0024 00000000 		.4byte	0
+ 3940              		.section	.debug_line,"",%progbits
+ 3941              	.Ldebug_line0:
+ 3942 0000 CA010000 		.section	.debug_str,"MS",%progbits,1
+ 3942      02003F01 
+ 3942      00000201 
+ 3942      FB0E0D00 
+ 3942      01010101 
+ 3943              	.LASF145:
+ 3944 0000 75386732 		.ascii	"u8g2_DrawHVLine\000"
+ 3944      5F447261 
+ 3944      7748564C 
+ 3944      696E6500 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 74
+
+
+ 3945              	.LASF124:
+ 3946 0010 73746172 		.ascii	"start_pos_unicode\000"
+ 3946      745F706F 
+ 3946      735F756E 
+ 3946      69636F64 
+ 3946      6500
+ 3947              	.LASF45:
+ 3948 0022 72657365 		.ascii	"reset_pulse_width_ms\000"
+ 3948      745F7075 
+ 3948      6C73655F 
+ 3948      77696474 
+ 3948      685F6D73 
+ 3949              	.LASF102:
+ 3950 0037 75386732 		.ascii	"u8g2_update_page_win_cb\000"
+ 3950      5F757064 
+ 3950      6174655F 
+ 3950      70616765 
+ 3950      5F77696E 
+ 3951              	.LASF67:
+ 3952 004f 74696C65 		.ascii	"tile_buf_ptr\000"
+ 3952      5F627566 
+ 3952      5F707472 
+ 3952      00
+ 3953              	.LASF1:
+ 3954 005c 5F5F7569 		.ascii	"__uint8_t\000"
+ 3954      6E74385F 
+ 3954      7400
+ 3955              	.LASF23:
+ 3956 0066 62797465 		.ascii	"byte_cb\000"
+ 3956      5F636200 
+ 3957              	.LASF136:
+ 3958 006e 75386732 		.ascii	"u8g2_font_decode_t\000"
+ 3958      5F666F6E 
+ 3958      745F6465 
+ 3958      636F6465 
+ 3958      5F7400
+ 3959              	.LASF151:
+ 3960 0081 2E2E5C75 		.ascii	"..\\u8g2\\csrc\\u8g2_box.c\000"
+ 3960      3867325C 
+ 3960      63737263 
+ 3960      5C753867 
+ 3960      325F626F 
+ 3961              	.LASF106:
+ 3962 0099 676C7970 		.ascii	"glyph_cnt\000"
+ 3962      685F636E 
+ 3962      7400
+ 3963              	.LASF98:
+ 3964 00a3 75706461 		.ascii	"update_dimension\000"
+ 3964      74655F64 
+ 3964      696D656E 
+ 3964      73696F6E 
+ 3964      00
+ 3965              	.LASF11:
+ 3966 00b4 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3966      206C6F6E 
+ 3966      6720756E 
+ 3966      7369676E 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 75
+
+
+ 3966      65642069 
+ 3967              	.LASF0:
+ 3968 00cb 5F5F696E 		.ascii	"__int8_t\000"
+ 3968      74385F74 
+ 3968      00
+ 3969              	.LASF46:
+ 3970 00d4 706F7374 		.ascii	"post_reset_wait_ms\000"
+ 3970      5F726573 
+ 3970      65745F77 
+ 3970      6169745F 
+ 3970      6D7300
+ 3971              	.LASF107:
+ 3972 00e7 6262785F 		.ascii	"bbx_mode\000"
+ 3972      6D6F6465 
+ 3972      00
+ 3973              	.LASF32:
+ 3974 00f0 75746638 		.ascii	"utf8_state\000"
+ 3974      5F737461 
+ 3974      746500
+ 3975              	.LASF117:
+ 3976 00fb 795F6F66 		.ascii	"y_offset\000"
+ 3976      66736574 
+ 3976      00
+ 3977              	.LASF33:
+ 3978 0104 6770696F 		.ascii	"gpio_result\000"
+ 3978      5F726573 
+ 3978      756C7400 
+ 3979              	.LASF112:
+ 3980 0110 62697473 		.ascii	"bits_per_char_x\000"
+ 3980      5F706572 
+ 3980      5F636861 
+ 3980      725F7800 
+ 3981              	.LASF113:
+ 3982 0120 62697473 		.ascii	"bits_per_char_y\000"
+ 3982      5F706572 
+ 3982      5F636861 
+ 3982      725F7900 
+ 3983              	.LASF10:
+ 3984 0130 6C6F6E67 		.ascii	"long long int\000"
+ 3984      206C6F6E 
+ 3984      6720696E 
+ 3984      7400
+ 3985              	.LASF2:
+ 3986 013e 7369676E 		.ascii	"signed char\000"
+ 3986      65642063 
+ 3986      68617200 
+ 3987              	.LASF62:
+ 3988 014a 75386732 		.ascii	"u8g2_uint_t\000"
+ 3988      5F75696E 
+ 3988      745F7400 
+ 3989              	.LASF29:
+ 3990 0156 69735F66 		.ascii	"is_font_inverse_mode\000"
+ 3990      6F6E745F 
+ 3990      696E7665 
+ 3990      7273655F 
+ 3990      6D6F6465 
+ 3991              	.LASF142:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 76
+
+
+ 3992 016b 78746D70 		.ascii	"xtmp\000"
+ 3992      00
+ 3993              	.LASF21:
+ 3994 0170 64697370 		.ascii	"display_cb\000"
+ 3994      6C61795F 
+ 3994      636200
+ 3995              	.LASF120:
+ 3996 017b 61736365 		.ascii	"ascent_para\000"
+ 3996      6E745F70 
+ 3996      61726100 
+ 3997              	.LASF92:
+ 3998 0187 676C7970 		.ascii	"glyph_x_offset\000"
+ 3998      685F785F 
+ 3998      6F666673 
+ 3998      657400
+ 3999              	.LASF44:
+ 4000 0196 7072655F 		.ascii	"pre_chip_disable_wait_ns\000"
+ 4000      63686970 
+ 4000      5F646973 
+ 4000      61626C65 
+ 4000      5F776169 
+ 4001              	.LASF7:
+ 4002 01af 6C6F6E67 		.ascii	"long int\000"
+ 4002      20696E74 
+ 4002      00
+ 4003              	.LASF143:
+ 4004 01b8 75386732 		.ascii	"u8g2_DrawRFrame\000"
+ 4004      5F447261 
+ 4004      77524672 
+ 4004      616D6500 
+ 4005              	.LASF99:
+ 4006 01c8 75706461 		.ascii	"update_page_win\000"
+ 4006      74655F70 
+ 4006      6167655F 
+ 4006      77696E00 
+ 4007              	.LASF116:
+ 4008 01d8 6D61785F 		.ascii	"max_char_height\000"
+ 4008      63686172 
+ 4008      5F686569 
+ 4008      67687400 
+ 4009              	.LASF15:
+ 4010 01e8 75696E74 		.ascii	"uint16_t\000"
+ 4010      31365F74 
+ 4010      00
+ 4011              	.LASF20:
+ 4012 01f1 6E657874 		.ascii	"next_cb\000"
+ 4012      5F636200 
+ 4013              	.LASF61:
+ 4014 01f9 75387838 		.ascii	"u8x8_char_cb\000"
+ 4014      5F636861 
+ 4014      725F6362 
+ 4014      00
+ 4015              	.LASF24:
+ 4016 0206 6770696F 		.ascii	"gpio_and_delay_cb\000"
+ 4016      5F616E64 
+ 4016      5F64656C 
+ 4016      61795F63 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 77
+
+
+ 4016      6200
+ 4017              	.LASF125:
+ 4018 0218 75386732 		.ascii	"u8g2_font_info_t\000"
+ 4018      5F666F6E 
+ 4018      745F696E 
+ 4018      666F5F74 
+ 4018      00
+ 4019              	.LASF91:
+ 4020 0229 666F6E74 		.ascii	"font_ref_descent\000"
+ 4020      5F726566 
+ 4020      5F646573 
+ 4020      63656E74 
+ 4020      00
+ 4021              	.LASF38:
+ 4022 023a 75387838 		.ascii	"u8x8_display_info_t\000"
+ 4022      5F646973 
+ 4022      706C6179 
+ 4022      5F696E66 
+ 4022      6F5F7400 
+ 4023              	.LASF8:
+ 4024 024e 5F5F7569 		.ascii	"__uint32_t\000"
+ 4024      6E743332 
+ 4024      5F7400
+ 4025              	.LASF108:
+ 4026 0259 62697473 		.ascii	"bits_per_0\000"
+ 4026      5F706572 
+ 4026      5F3000
+ 4027              	.LASF85:
+ 4028 0264 666F6E74 		.ascii	"font_calc_vref\000"
+ 4028      5F63616C 
+ 4028      635F7672 
+ 4028      656600
+ 4029              	.LASF90:
+ 4030 0273 666F6E74 		.ascii	"font_ref_ascent\000"
+ 4030      5F726566 
+ 4030      5F617363 
+ 4030      656E7400 
+ 4031              	.LASF47:
+ 4032 0283 7364615F 		.ascii	"sda_setup_time_ns\000"
+ 4032      73657475 
+ 4032      705F7469 
+ 4032      6D655F6E 
+ 4032      7300
+ 4033              	.LASF104:
+ 4034 0295 75386732 		.ascii	"u8g2_draw_ll_hvline_cb\000"
+ 4034      5F647261 
+ 4034      775F6C6C 
+ 4034      5F68766C 
+ 4034      696E655F 
+ 4035              	.LASF119:
+ 4036 02ac 64657363 		.ascii	"descent_g\000"
+ 4036      656E745F 
+ 4036      6700
+ 4037              	.LASF110:
+ 4038 02b6 62697473 		.ascii	"bits_per_char_width\000"
+ 4038      5F706572 
+ 4038      5F636861 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 78
+
+
+ 4038      725F7769 
+ 4038      64746800 
+ 4039              	.LASF37:
+ 4040 02ca 6465626F 		.ascii	"debounce_result_msg\000"
+ 4040      756E6365 
+ 4040      5F726573 
+ 4040      756C745F 
+ 4040      6D736700 
+ 4041              	.LASF12:
+ 4042 02de 756E7369 		.ascii	"unsigned int\000"
+ 4042      676E6564 
+ 4042      20696E74 
+ 4042      00
+ 4043              	.LASF71:
+ 4044 02eb 70697865 		.ascii	"pixel_buf_height\000"
+ 4044      6C5F6275 
+ 4044      665F6865 
+ 4044      69676874 
+ 4044      00
+ 4045              	.LASF144:
+ 4046 02fc 75386732 		.ascii	"u8g2_IsIntersection\000"
+ 4046      5F497349 
+ 4046      6E746572 
+ 4046      73656374 
+ 4046      696F6E00 
+ 4047              	.LASF133:
+ 4048 0310 69735F74 		.ascii	"is_transparent\000"
+ 4048      72616E73 
+ 4048      70617265 
+ 4048      6E7400
+ 4049              	.LASF30:
+ 4050 031f 6932635F 		.ascii	"i2c_address\000"
+ 4050      61646472 
+ 4050      65737300 
+ 4051              	.LASF9:
+ 4052 032b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 4052      20756E73 
+ 4052      69676E65 
+ 4052      6420696E 
+ 4052      7400
+ 4053              	.LASF63:
+ 4054 033d 75386732 		.ascii	"u8g2_t\000"
+ 4054      5F7400
+ 4055              	.LASF127:
+ 4056 0344 6465636F 		.ascii	"decode_ptr\000"
+ 4056      64655F70 
+ 4056      747200
+ 4057              	.LASF75:
+ 4058 034f 77696474 		.ascii	"width\000"
+ 4058      6800
+ 4059              	.LASF147:
+ 4060 0355 75386732 		.ascii	"u8g2_DrawCircle\000"
+ 4060      5F447261 
+ 4060      77436972 
+ 4060      636C6500 
+ 4061              	.LASF68:
+ 4062 0365 74696C65 		.ascii	"tile_buf_height\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 79
+
+
+ 4062      5F627566 
+ 4062      5F686569 
+ 4062      67687400 
+ 4063              	.LASF6:
+ 4064 0375 73686F72 		.ascii	"short unsigned int\000"
+ 4064      7420756E 
+ 4064      7369676E 
+ 4064      65642069 
+ 4064      6E7400
+ 4065              	.LASF88:
+ 4066 0388 69735F70 		.ascii	"is_page_clip_window_intersection\000"
+ 4066      6167655F 
+ 4066      636C6970 
+ 4066      5F77696E 
+ 4066      646F775F 
+ 4067              	.LASF93:
+ 4068 03a9 6269746D 		.ascii	"bitmap_transparency\000"
+ 4068      61705F74 
+ 4068      72616E73 
+ 4068      70617265 
+ 4068      6E637900 
+ 4069              	.LASF146:
+ 4070 03bd 75386732 		.ascii	"u8g2_DrawDisc\000"
+ 4070      5F447261 
+ 4070      77446973 
+ 4070      6300
+ 4071              	.LASF81:
+ 4072 03cb 636C6970 		.ascii	"clip_x0\000"
+ 4072      5F783000 
+ 4073              	.LASF82:
+ 4074 03d3 636C6970 		.ascii	"clip_x1\000"
+ 4074      5F783100 
+ 4075              	.LASF100:
+ 4076 03db 64726177 		.ascii	"draw_l90\000"
+ 4076      5F6C3930 
+ 4076      00
+ 4077              	.LASF35:
+ 4078 03e4 6465626F 		.ascii	"debounce_last_pin_state\000"
+ 4078      756E6365 
+ 4078      5F6C6173 
+ 4078      745F7069 
+ 4078      6E5F7374 
+ 4079              	.LASF138:
+ 4080 03fc 75386732 		.ascii	"u8g2\000"
+ 4080      00
+ 4081              	.LASF121:
+ 4082 0401 64657363 		.ascii	"descent_para\000"
+ 4082      656E745F 
+ 4082      70617261 
+ 4082      00
+ 4083              	.LASF19:
+ 4084 040e 64697370 		.ascii	"display_info\000"
+ 4084      6C61795F 
+ 4084      696E666F 
+ 4084      00
+ 4085              	.LASF87:
+ 4086 041b 666F6E74 		.ascii	"font_info\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 80
+
+
+ 4086      5F696E66 
+ 4086      6F00
+ 4087              	.LASF48:
+ 4088 0425 73636B5F 		.ascii	"sck_pulse_width_ns\000"
+ 4088      70756C73 
+ 4088      655F7769 
+ 4088      6474685F 
+ 4088      6E7300
+ 4089              	.LASF39:
+ 4090 0438 75387838 		.ascii	"u8x8_struct\000"
+ 4090      5F737472 
+ 4090      75637400 
+ 4091              	.LASF139:
+ 4092 0444 75386732 		.ascii	"u8g2_DrawBox\000"
+ 4092      5F447261 
+ 4092      77426F78 
+ 4092      00
+ 4093              	.LASF56:
+ 4094 0451 64656661 		.ascii	"default_x_offset\000"
+ 4094      756C745F 
+ 4094      785F6F66 
+ 4094      66736574 
+ 4094      00
+ 4095              	.LASF27:
+ 4096 0462 656E636F 		.ascii	"encoding\000"
+ 4096      64696E67 
+ 4096      00
+ 4097              	.LASF89:
+ 4098 046b 666F6E74 		.ascii	"font_height_mode\000"
+ 4098      5F686569 
+ 4098      6768745F 
+ 4098      6D6F6465 
+ 4098      00
+ 4099              	.LASF122:
+ 4100 047c 73746172 		.ascii	"start_pos_upper_A\000"
+ 4100      745F706F 
+ 4100      735F7570 
+ 4100      7065725F 
+ 4100      4100
+ 4101              	.LASF57:
+ 4102 048e 666C6970 		.ascii	"flipmode_x_offset\000"
+ 4102      6D6F6465 
+ 4102      5F785F6F 
+ 4102      66667365 
+ 4102      7400
+ 4103              	.LASF109:
+ 4104 04a0 62697473 		.ascii	"bits_per_1\000"
+ 4104      5F706572 
+ 4104      5F3100
+ 4105              	.LASF114:
+ 4106 04ab 62697473 		.ascii	"bits_per_delta_x\000"
+ 4106      5F706572 
+ 4106      5F64656C 
+ 4106      74615F78 
+ 4106      00
+ 4107              	.LASF132:
+ 4108 04bc 6465636F 		.ascii	"decode_bit_pos\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 81
+
+
+ 4108      64655F62 
+ 4108      69745F70 
+ 4108      6F7300
+ 4109              	.LASF131:
+ 4110 04cb 676C7970 		.ascii	"glyph_height\000"
+ 4110      685F6865 
+ 4110      69676874 
+ 4110      00
+ 4111              	.LASF17:
+ 4112 04d8 6C6F6E67 		.ascii	"long double\000"
+ 4112      20646F75 
+ 4112      626C6500 
+ 4113              	.LASF72:
+ 4114 04e4 70697865 		.ascii	"pixel_curr_row\000"
+ 4114      6C5F6375 
+ 4114      72725F72 
+ 4114      6F7700
+ 4115              	.LASF22:
+ 4116 04f3 6361645F 		.ascii	"cad_cb\000"
+ 4116      636200
+ 4117              	.LASF83:
+ 4118 04fa 636C6970 		.ascii	"clip_y0\000"
+ 4118      5F793000 
+ 4119              	.LASF84:
+ 4120 0502 636C6970 		.ascii	"clip_y1\000"
+ 4120      5F793100 
+ 4121              	.LASF115:
+ 4122 050a 6D61785F 		.ascii	"max_char_width\000"
+ 4122      63686172 
+ 4122      5F776964 
+ 4122      746800
+ 4123              	.LASF79:
+ 4124 0519 75736572 		.ascii	"user_y0\000"
+ 4124      5F793000 
+ 4125              	.LASF53:
+ 4126 0521 77726974 		.ascii	"write_pulse_width_ns\000"
+ 4126      655F7075 
+ 4126      6C73655F 
+ 4126      77696474 
+ 4126      685F6E73 
+ 4127              	.LASF73:
+ 4128 0536 6275665F 		.ascii	"buf_y0\000"
+ 4128      793000
+ 4129              	.LASF74:
+ 4130 053d 6275665F 		.ascii	"buf_y1\000"
+ 4130      793100
+ 4131              	.LASF28:
+ 4132 0544 785F6F66 		.ascii	"x_offset\000"
+ 4132      66736574 
+ 4132      00
+ 4133              	.LASF55:
+ 4134 054d 74696C65 		.ascii	"tile_height\000"
+ 4134      5F686569 
+ 4134      67687400 
+ 4135              	.LASF152:
+ 4136 0559 433A5C55 		.ascii	"C:\\Users\\brian\\Documents\\PSoC Creator\\Lab7\\La"
+ 4136      73657273 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 82
+
+
+ 4136      5C627269 
+ 4136      616E5C44 
+ 4136      6F63756D 
+ 4137 0586 62372E63 		.ascii	"b7.cydsn\000"
+ 4137      7964736E 
+ 4137      00
+ 4138              	.LASF149:
+ 4139 058f 75386732 		.ascii	"u8g2_DrawVLine\000"
+ 4139      5F447261 
+ 4139      77564C69 
+ 4139      6E6500
+ 4140              	.LASF66:
+ 4141 059e 6C6C5F68 		.ascii	"ll_hvline\000"
+ 4141      766C696E 
+ 4141      6500
+ 4142              	.LASF134:
+ 4143 05a8 66675F63 		.ascii	"fg_color\000"
+ 4143      6F6C6F72 
+ 4143      00
+ 4144              	.LASF60:
+ 4145 05b1 75387838 		.ascii	"u8x8_msg_cb\000"
+ 4145      5F6D7367 
+ 4145      5F636200 
+ 4146              	.LASF97:
+ 4147 05bd 75386732 		.ascii	"u8g2_cb_struct\000"
+ 4147      5F63625F 
+ 4147      73747275 
+ 4147      637400
+ 4148              	.LASF130:
+ 4149 05cc 676C7970 		.ascii	"glyph_width\000"
+ 4149      685F7769 
+ 4149      64746800 
+ 4150              	.LASF3:
+ 4151 05d8 756E7369 		.ascii	"unsigned char\000"
+ 4151      676E6564 
+ 4151      20636861 
+ 4151      7200
+ 4152              	.LASF118:
+ 4153 05e6 61736365 		.ascii	"ascent_A\000"
+ 4153      6E745F41 
+ 4153      00
+ 4154              	.LASF95:
+ 4155 05ef 69735F61 		.ascii	"is_auto_page_clear\000"
+ 4155      75746F5F 
+ 4155      70616765 
+ 4155      5F636C65 
+ 4155      617200
+ 4156              	.LASF70:
+ 4157 0602 70697865 		.ascii	"pixel_buf_width\000"
+ 4157      6C5F6275 
+ 4157      665F7769 
+ 4157      64746800 
+ 4158              	.LASF4:
+ 4159 0612 73686F72 		.ascii	"short int\000"
+ 4159      7420696E 
+ 4159      7400
+ 4160              	.LASF65:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 83
+
+
+ 4161 061c 75387838 		.ascii	"u8x8\000"
+ 4161      00
+ 4162              	.LASF77:
+ 4163 0621 75736572 		.ascii	"user_x0\000"
+ 4163      5F783000 
+ 4164              	.LASF78:
+ 4165 0629 75736572 		.ascii	"user_x1\000"
+ 4165      5F783100 
+ 4166              	.LASF150:
+ 4167 0631 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 4167      43313120 
+ 4167      352E342E 
+ 4167      31203230 
+ 4167      31363036 
+ 4168 0664 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 4168      20726576 
+ 4168      6973696F 
+ 4168      6E203233 
+ 4168      37373135 
+ 4169 0697 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 4169      66756E63 
+ 4169      74696F6E 
+ 4169      2D736563 
+ 4169      74696F6E 
+ 4170              	.LASF52:
+ 4171 06bf 64617461 		.ascii	"data_setup_time_ns\000"
+ 4171      5F736574 
+ 4171      75705F74 
+ 4171      696D655F 
+ 4171      6E7300
+ 4172              	.LASF141:
+ 4173 06d2 75386732 		.ascii	"u8g2_DrawRBox\000"
+ 4173      5F447261 
+ 4173      7752426F 
+ 4173      7800
+ 4174              	.LASF64:
+ 4175 06e0 75386732 		.ascii	"u8g2_struct\000"
+ 4175      5F737472 
+ 4175      75637400 
+ 4176              	.LASF103:
+ 4177 06ec 75386732 		.ascii	"u8g2_draw_l90_cb\000"
+ 4177      5F647261 
+ 4177      775F6C39 
+ 4177      305F6362 
+ 4177      00
+ 4178              	.LASF51:
+ 4179 06fd 6932635F 		.ascii	"i2c_bus_clock_100kHz\000"
+ 4179      6275735F 
+ 4179      636C6F63 
+ 4179      6B5F3130 
+ 4179      306B487A 
+ 4180              	.LASF16:
+ 4181 0712 75696E74 		.ascii	"uint32_t\000"
+ 4181      33325F74 
+ 4181      00
+ 4182              	.LASF105:
+ 4183 071b 5F753867 		.ascii	"_u8g2_font_info_t\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 84
+
+
+ 4183      325F666F 
+ 4183      6E745F69 
+ 4183      6E666F5F 
+ 4183      7400
+ 4184              	.LASF69:
+ 4185 072d 74696C65 		.ascii	"tile_curr_row\000"
+ 4185      5F637572 
+ 4185      725F726F 
+ 4185      7700
+ 4186              	.LASF96:
+ 4187 073b 75386732 		.ascii	"u8g2_cb_t\000"
+ 4187      5F63625F 
+ 4187      7400
+ 4188              	.LASF50:
+ 4189 0745 7370695F 		.ascii	"spi_mode\000"
+ 4189      6D6F6465 
+ 4189      00
+ 4190              	.LASF41:
+ 4191 074e 63686970 		.ascii	"chip_enable_level\000"
+ 4191      5F656E61 
+ 4191      626C655F 
+ 4191      6C657665 
+ 4191      6C00
+ 4192              	.LASF86:
+ 4193 0760 666F6E74 		.ascii	"font_decode\000"
+ 4193      5F646563 
+ 4193      6F646500 
+ 4194              	.LASF111:
+ 4195 076c 62697473 		.ascii	"bits_per_char_height\000"
+ 4195      5F706572 
+ 4195      5F636861 
+ 4195      725F6865 
+ 4195      69676874 
+ 4196              	.LASF5:
+ 4197 0781 5F5F7569 		.ascii	"__uint16_t\000"
+ 4197      6E743136 
+ 4197      5F7400
+ 4198              	.LASF94:
+ 4199 078c 64726177 		.ascii	"draw_color\000"
+ 4199      5F636F6C 
+ 4199      6F7200
+ 4200              	.LASF43:
+ 4201 0797 706F7374 		.ascii	"post_chip_enable_wait_ns\000"
+ 4201      5F636869 
+ 4201      705F656E 
+ 4201      61626C65 
+ 4201      5F776169 
+ 4202              	.LASF101:
+ 4203 07b0 75386732 		.ascii	"u8g2_update_dimension_cb\000"
+ 4203      5F757064 
+ 4203      6174655F 
+ 4203      64696D65 
+ 4203      6E73696F 
+ 4204              	.LASF140:
+ 4205 07c9 75386732 		.ascii	"u8g2_DrawFrame\000"
+ 4205      5F447261 
+ 4205      77467261 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 85
+
+
+ 4205      6D6500
+ 4206              	.LASF128:
+ 4207 07d8 74617267 		.ascii	"target_x\000"
+ 4207      65745F78 
+ 4207      00
+ 4208              	.LASF129:
+ 4209 07e1 74617267 		.ascii	"target_y\000"
+ 4209      65745F79 
+ 4209      00
+ 4210              	.LASF18:
+ 4211 07ea 75387838 		.ascii	"u8x8_t\000"
+ 4211      5F7400
+ 4212              	.LASF25:
+ 4213 07f1 6275735F 		.ascii	"bus_clock\000"
+ 4213      636C6F63 
+ 4213      6B00
+ 4214              	.LASF80:
+ 4215 07fb 75736572 		.ascii	"user_y1\000"
+ 4215      5F793100 
+ 4216              	.LASF126:
+ 4217 0803 5F753867 		.ascii	"_u8g2_font_decode_t\000"
+ 4217      325F666F 
+ 4217      6E745F64 
+ 4217      65636F64 
+ 4217      655F7400 
+ 4218              	.LASF13:
+ 4219 0817 696E7438 		.ascii	"int8_t\000"
+ 4219      5F7400
+ 4220              	.LASF36:
+ 4221 081e 6465626F 		.ascii	"debounce_state\000"
+ 4221      756E6365 
+ 4221      5F737461 
+ 4221      746500
+ 4222              	.LASF42:
+ 4223 082d 63686970 		.ascii	"chip_disable_level\000"
+ 4223      5F646973 
+ 4223      61626C65 
+ 4223      5F6C6576 
+ 4223      656C00
+ 4224              	.LASF26:
+ 4225 0840 666F6E74 		.ascii	"font\000"
+ 4225      00
+ 4226              	.LASF123:
+ 4227 0845 73746172 		.ascii	"start_pos_lower_a\000"
+ 4227      745F706F 
+ 4227      735F6C6F 
+ 4227      7765725F 
+ 4227      6100
+ 4228              	.LASF14:
+ 4229 0857 75696E74 		.ascii	"uint8_t\000"
+ 4229      385F7400 
+ 4230              	.LASF137:
+ 4231 085f 75386732 		.ascii	"u8g2_font_calc_vref_fnptr\000"
+ 4231      5F666F6E 
+ 4231      745F6361 
+ 4231      6C635F76 
+ 4231      7265665F 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccv14trP.s 			page 86
+
+
+ 4232              	.LASF31:
+ 4233 0879 6932635F 		.ascii	"i2c_started\000"
+ 4233      73746172 
+ 4233      74656400 
+ 4234              	.LASF58:
+ 4235 0885 70697865 		.ascii	"pixel_width\000"
+ 4235      6C5F7769 
+ 4235      64746800 
+ 4236              	.LASF135:
+ 4237 0891 62675F63 		.ascii	"bg_color\000"
+ 4237      6F6C6F72 
+ 4237      00
+ 4238              	.LASF54:
+ 4239 089a 74696C65 		.ascii	"tile_width\000"
+ 4239      5F776964 
+ 4239      746800
+ 4240              	.LASF34:
+ 4241 08a5 6465626F 		.ascii	"debounce_default_pin_state\000"
+ 4241      756E6365 
+ 4241      5F646566 
+ 4241      61756C74 
+ 4241      5F70696E 
+ 4242              	.LASF148:
+ 4243 08c0 75386732 		.ascii	"u8g2_DrawHLine\000"
+ 4243      5F447261 
+ 4243      77484C69 
+ 4243      6E6500
+ 4244              	.LASF40:
+ 4245 08cf 75387838 		.ascii	"u8x8_display_info_struct\000"
+ 4245      5F646973 
+ 4245      706C6179 
+ 4245      5F696E66 
+ 4245      6F5F7374 
+ 4246              	.LASF76:
+ 4247 08e8 68656967 		.ascii	"height\000"
+ 4247      687400
+ 4248              	.LASF59:
+ 4249 08ef 70697865 		.ascii	"pixel_height\000"
+ 4249      6C5F6865 
+ 4249      69676874 
+ 4249      00
+ 4250              	.LASF49:
+ 4251 08fc 73636B5F 		.ascii	"sck_clock_hz\000"
+ 4251      636C6F63 
+ 4251      6B5F687A 
+ 4251      00
+ 4252              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
