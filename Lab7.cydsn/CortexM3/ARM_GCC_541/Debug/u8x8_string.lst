@@ -1,0 +1,2697 @@
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"u8x8_string.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.u8x8_GetStringLineCnt,"ax",%progbits
+  20              		.align	2
+  21              		.global	u8x8_GetStringLineCnt
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	u8x8_GetStringLineCnt, %function
+  25              	u8x8_GetStringLineCnt:
+  26              	.LFB0:
+  27              		.file 1 "..\\u8g2\\csrc\\u8x8_string.c"
+   1:..\u8g2\csrc/u8x8_string.c **** /*
+   2:..\u8g2\csrc/u8x8_string.c **** 
+   3:..\u8g2\csrc/u8x8_string.c ****   u8x8_string.c
+   4:..\u8g2\csrc/u8x8_string.c ****   
+   5:..\u8g2\csrc/u8x8_string.c ****   string line procedures
+   6:..\u8g2\csrc/u8x8_string.c ****   
+   7:..\u8g2\csrc/u8x8_string.c ****   Universal 8bit Graphics Library (https://github.com/olikraus/u8g2/)
+   8:..\u8g2\csrc/u8x8_string.c **** 
+   9:..\u8g2\csrc/u8x8_string.c ****   Copyright (c) 2016, olikraus@gmail.com
+  10:..\u8g2\csrc/u8x8_string.c ****   All rights reserved.
+  11:..\u8g2\csrc/u8x8_string.c **** 
+  12:..\u8g2\csrc/u8x8_string.c ****   Redistribution and use in source and binary forms, with or without modification, 
+  13:..\u8g2\csrc/u8x8_string.c ****   are permitted provided that the following conditions are met:
+  14:..\u8g2\csrc/u8x8_string.c **** 
+  15:..\u8g2\csrc/u8x8_string.c ****   * Redistributions of source code must retain the above copyright notice, this list 
+  16:..\u8g2\csrc/u8x8_string.c ****     of conditions and the following disclaimer.
+  17:..\u8g2\csrc/u8x8_string.c ****     
+  18:..\u8g2\csrc/u8x8_string.c ****   * Redistributions in binary form must reproduce the above copyright notice, this 
+  19:..\u8g2\csrc/u8x8_string.c ****     list of conditions and the following disclaimer in the documentation and/or other 
+  20:..\u8g2\csrc/u8x8_string.c ****     materials provided with the distribution.
+  21:..\u8g2\csrc/u8x8_string.c **** 
+  22:..\u8g2\csrc/u8x8_string.c ****   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+  23:..\u8g2\csrc/u8x8_string.c ****   CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+  24:..\u8g2\csrc/u8x8_string.c ****   INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  25:..\u8g2\csrc/u8x8_string.c ****   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+  26:..\u8g2\csrc/u8x8_string.c ****   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+  27:..\u8g2\csrc/u8x8_string.c ****   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  28:..\u8g2\csrc/u8x8_string.c ****   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  29:..\u8g2\csrc/u8x8_string.c ****   NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+  30:..\u8g2\csrc/u8x8_string.c ****   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 2
+
+
+  31:..\u8g2\csrc/u8x8_string.c ****   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+  32:..\u8g2\csrc/u8x8_string.c ****   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:..\u8g2\csrc/u8x8_string.c ****   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+  34:..\u8g2\csrc/u8x8_string.c ****   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    
+  35:..\u8g2\csrc/u8x8_string.c **** 
+  36:..\u8g2\csrc/u8x8_string.c **** */
+  37:..\u8g2\csrc/u8x8_string.c **** 
+  38:..\u8g2\csrc/u8x8_string.c **** #include "u8x8.h"
+  39:..\u8g2\csrc/u8x8_string.c **** 
+  40:..\u8g2\csrc/u8x8_string.c **** uint8_t u8x8_GetStringLineCnt(const char *str)
+  41:..\u8g2\csrc/u8x8_string.c **** {
+  28              		.loc 1 41 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  42:..\u8g2\csrc/u8x8_string.c ****   char e;
+  43:..\u8g2\csrc/u8x8_string.c ****   uint8_t line_cnt = 1;
+  44:..\u8g2\csrc/u8x8_string.c ****   if ( str == NULL )
+  34              		.loc 1 44 0
+  35 0000 0346     		mov	r3, r0
+  36 0002 40B1     		cbz	r0, .L5
+  37 0004 0120     		movs	r0, #1
+  38              	.LVL1:
+  39              	.L3:
+  45:..\u8g2\csrc/u8x8_string.c ****     return 0;
+  46:..\u8g2\csrc/u8x8_string.c ****   for(;;)
+  47:..\u8g2\csrc/u8x8_string.c ****   {
+  48:..\u8g2\csrc/u8x8_string.c ****     e = *str;
+  40              		.loc 1 48 0
+  41 0006 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  42              	.LVL2:
+  49:..\u8g2\csrc/u8x8_string.c ****     if ( e == '\0' )
+  43              		.loc 1 49 0
+  44 0008 32B1     		cbz	r2, .L2
+  50:..\u8g2\csrc/u8x8_string.c ****       break;
+  51:..\u8g2\csrc/u8x8_string.c ****     str++;
+  45              		.loc 1 51 0
+  46 000a 0133     		adds	r3, r3, #1
+  47              	.LVL3:
+  52:..\u8g2\csrc/u8x8_string.c ****     if ( e == '\n' )
+  48              		.loc 1 52 0
+  49 000c 0A2A     		cmp	r2, #10
+  50 000e FAD1     		bne	.L3
+  53:..\u8g2\csrc/u8x8_string.c ****       line_cnt++;
+  51              		.loc 1 53 0
+  52 0010 0130     		adds	r0, r0, #1
+  53              	.LVL4:
+  54 0012 C0B2     		uxtb	r0, r0
+  55              	.LVL5:
+  56 0014 F7E7     		b	.L3
+  57              	.LVL6:
+  58              	.L5:
+  45:..\u8g2\csrc/u8x8_string.c ****   for(;;)
+  59              		.loc 1 45 0
+  60 0016 0020     		movs	r0, #0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 3
+
+
+  61              	.LVL7:
+  62              	.L2:
+  54:..\u8g2\csrc/u8x8_string.c ****   }
+  55:..\u8g2\csrc/u8x8_string.c ****   return line_cnt;
+  56:..\u8g2\csrc/u8x8_string.c **** }
+  63              		.loc 1 56 0
+  64 0018 7047     		bx	lr
+  65              		.cfi_endproc
+  66              	.LFE0:
+  67              		.size	u8x8_GetStringLineCnt, .-u8x8_GetStringLineCnt
+  68 001a 00BF     		.section	.text.u8x8_GetStringLineStart,"ax",%progbits
+  69              		.align	2
+  70              		.global	u8x8_GetStringLineStart
+  71              		.thumb
+  72              		.thumb_func
+  73              		.type	u8x8_GetStringLineStart, %function
+  74              	u8x8_GetStringLineStart:
+  75              	.LFB1:
+  57:..\u8g2\csrc/u8x8_string.c **** 
+  58:..\u8g2\csrc/u8x8_string.c **** 
+  59:..\u8g2\csrc/u8x8_string.c **** /*
+  60:..\u8g2\csrc/u8x8_string.c ****     Assumes strings, separated by '\n' in "str".
+  61:..\u8g2\csrc/u8x8_string.c ****     Returns the string at index "line_idx". First strng has line_idx = 0
+  62:..\u8g2\csrc/u8x8_string.c ****     Example:
+  63:..\u8g2\csrc/u8x8_string.c ****       Returns "xyz" for line_idx = 1 with str = "abc\nxyz"
+  64:..\u8g2\csrc/u8x8_string.c ****     Support both UTF8 and normal strings.
+  65:..\u8g2\csrc/u8x8_string.c **** */
+  66:..\u8g2\csrc/u8x8_string.c **** const char *u8x8_GetStringLineStart(uint8_t line_idx, const char *str )
+  67:..\u8g2\csrc/u8x8_string.c **** {
+  76              		.loc 1 67 0
+  77              		.cfi_startproc
+  78              		@ args = 0, pretend = 0, frame = 0
+  79              		@ frame_needed = 0, uses_anonymous_args = 0
+  80              		@ link register save eliminated.
+  81              	.LVL8:
+  68:..\u8g2\csrc/u8x8_string.c ****   char e;
+  69:..\u8g2\csrc/u8x8_string.c ****   uint8_t line_cnt = 1;
+  70:..\u8g2\csrc/u8x8_string.c ****   
+  71:..\u8g2\csrc/u8x8_string.c ****   if ( line_idx == 0 )
+  82              		.loc 1 71 0
+  83 0000 60B1     		cbz	r0, .L11
+  67:..\u8g2\csrc/u8x8_string.c ****   char e;
+  84              		.loc 1 67 0
+  85 0002 10B4     		push	{r4}
+  86              		.cfi_def_cfa_offset 4
+  87              		.cfi_offset 4, -4
+  88 0004 0446     		mov	r4, r0
+  89 0006 0122     		movs	r2, #1
+  90              	.LVL9:
+  91              	.L9:
+  72:..\u8g2\csrc/u8x8_string.c ****     return str;
+  73:..\u8g2\csrc/u8x8_string.c **** 
+  74:..\u8g2\csrc/u8x8_string.c ****   for(;;)
+  75:..\u8g2\csrc/u8x8_string.c ****   {
+  76:..\u8g2\csrc/u8x8_string.c ****     e = *str;
+  92              		.loc 1 76 0
+  93 0008 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 4
+
+
+  94              	.LVL10:
+  77:..\u8g2\csrc/u8x8_string.c ****     if ( e == '\0' )
+  95              		.loc 1 77 0
+  96 000a 4BB1     		cbz	r3, .L12
+  78:..\u8g2\csrc/u8x8_string.c ****       break;
+  79:..\u8g2\csrc/u8x8_string.c ****     str++;
+  97              		.loc 1 79 0
+  98 000c 0131     		adds	r1, r1, #1
+  99              	.LVL11:
+  80:..\u8g2\csrc/u8x8_string.c ****     if ( e == '\n' )
+ 100              		.loc 1 80 0
+ 101 000e 0A2B     		cmp	r3, #10
+ 102 0010 FAD1     		bne	.L9
+  81:..\u8g2\csrc/u8x8_string.c ****     {
+  82:..\u8g2\csrc/u8x8_string.c ****       if ( line_cnt == line_idx )
+ 103              		.loc 1 82 0
+ 104 0012 A242     		cmp	r2, r4
+ 105 0014 06D0     		beq	.L13
+  83:..\u8g2\csrc/u8x8_string.c **** 	return str;
+  84:..\u8g2\csrc/u8x8_string.c ****       line_cnt++;
+ 106              		.loc 1 84 0
+ 107 0016 0132     		adds	r2, r2, #1
+ 108              	.LVL12:
+ 109 0018 D2B2     		uxtb	r2, r2
+ 110              	.LVL13:
+ 111 001a F5E7     		b	.L9
+ 112              	.LVL14:
+ 113              	.L11:
+ 114              		.cfi_def_cfa_offset 0
+ 115              		.cfi_restore 4
+  72:..\u8g2\csrc/u8x8_string.c **** 
+ 116              		.loc 1 72 0
+ 117 001c 0846     		mov	r0, r1
+ 118              	.LVL15:
+  85:..\u8g2\csrc/u8x8_string.c ****     }
+  86:..\u8g2\csrc/u8x8_string.c ****   }
+  87:..\u8g2\csrc/u8x8_string.c ****   return NULL;	/* line not found */
+  88:..\u8g2\csrc/u8x8_string.c **** }
+ 119              		.loc 1 88 0
+ 120 001e 7047     		bx	lr
+ 121              	.LVL16:
+ 122              	.L12:
+ 123              		.cfi_def_cfa_offset 4
+ 124              		.cfi_offset 4, -4
+  87:..\u8g2\csrc/u8x8_string.c **** }
+ 125              		.loc 1 87 0
+ 126 0020 0020     		movs	r0, #0
+ 127              	.LVL17:
+ 128 0022 00E0     		b	.L8
+ 129              	.LVL18:
+ 130              	.L13:
+  83:..\u8g2\csrc/u8x8_string.c ****       line_cnt++;
+ 131              		.loc 1 83 0
+ 132 0024 0846     		mov	r0, r1
+ 133              	.LVL19:
+ 134              	.L8:
+ 135              		.loc 1 88 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 5
+
+
+ 136 0026 10BC     		pop	{r4}
+ 137              		.cfi_restore 4
+ 138              		.cfi_def_cfa_offset 0
+ 139 0028 7047     		bx	lr
+ 140              		.cfi_endproc
+ 141              	.LFE1:
+ 142              		.size	u8x8_GetStringLineStart, .-u8x8_GetStringLineStart
+ 143 002a 00BF     		.section	.text.u8x8_CopyStringLine,"ax",%progbits
+ 144              		.align	2
+ 145              		.global	u8x8_CopyStringLine
+ 146              		.thumb
+ 147              		.thumb_func
+ 148              		.type	u8x8_CopyStringLine, %function
+ 149              	u8x8_CopyStringLine:
+ 150              	.LFB2:
+  89:..\u8g2\csrc/u8x8_string.c **** 
+  90:..\u8g2\csrc/u8x8_string.c **** /* copy until first '\n' or '\0' in str */
+  91:..\u8g2\csrc/u8x8_string.c **** /* Important: There is no string overflow check, ensure */
+  92:..\u8g2\csrc/u8x8_string.c **** /* that the destination buffer is large enough */
+  93:..\u8g2\csrc/u8x8_string.c **** void u8x8_CopyStringLine(char *dest, uint8_t line_idx, const char *str)
+  94:..\u8g2\csrc/u8x8_string.c **** {
+ 151              		.loc 1 94 0
+ 152              		.cfi_startproc
+ 153              		@ args = 0, pretend = 0, frame = 0
+ 154              		@ frame_needed = 0, uses_anonymous_args = 0
+ 155              	.LVL20:
+  95:..\u8g2\csrc/u8x8_string.c ****   if ( dest == NULL )
+ 156              		.loc 1 95 0
+ 157 0000 98B1     		cbz	r0, .L20
+  94:..\u8g2\csrc/u8x8_string.c ****   if ( dest == NULL )
+ 158              		.loc 1 94 0
+ 159 0002 10B5     		push	{r4, lr}
+ 160              		.cfi_def_cfa_offset 8
+ 161              		.cfi_offset 4, -8
+ 162              		.cfi_offset 14, -4
+ 163 0004 0B46     		mov	r3, r1
+ 164 0006 0446     		mov	r4, r0
+  96:..\u8g2\csrc/u8x8_string.c ****     return;
+  97:..\u8g2\csrc/u8x8_string.c ****   str = u8x8_GetStringLineStart( line_idx, str );
+ 165              		.loc 1 97 0
+ 166 0008 1146     		mov	r1, r2
+ 167              	.LVL21:
+ 168 000a 1846     		mov	r0, r3
+ 169              	.LVL22:
+ 170 000c FFF7FEFF 		bl	u8x8_GetStringLineStart
+ 171              	.LVL23:
+  98:..\u8g2\csrc/u8x8_string.c ****   if ( str != NULL )
+ 172              		.loc 1 98 0
+ 173 0010 0246     		mov	r2, r0
+ 174 0012 38B1     		cbz	r0, .L17
+ 175              	.LVL24:
+ 176              	.L18:
+  99:..\u8g2\csrc/u8x8_string.c ****   {
+ 100:..\u8g2\csrc/u8x8_string.c ****     for(;;)
+ 101:..\u8g2\csrc/u8x8_string.c ****     {
+ 102:..\u8g2\csrc/u8x8_string.c ****       if ( *str == '\n' || *str == '\0' )
+ 177              		.loc 1 102 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 6
+
+
+ 178 0014 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 179 0016 0A2B     		cmp	r3, #10
+ 180 0018 04D0     		beq	.L17
+ 181              		.loc 1 102 0 is_stmt 0 discriminator 1
+ 182 001a 1BB1     		cbz	r3, .L17
+ 103:..\u8g2\csrc/u8x8_string.c **** 	break;
+ 104:..\u8g2\csrc/u8x8_string.c ****       *dest = *str;
+ 183              		.loc 1 104 0 is_stmt 1
+ 184 001c 04F8013B 		strb	r3, [r4], #1
+ 185              	.LVL25:
+ 105:..\u8g2\csrc/u8x8_string.c ****       dest++;
+ 106:..\u8g2\csrc/u8x8_string.c ****       str++;
+ 186              		.loc 1 106 0
+ 187 0020 0132     		adds	r2, r2, #1
+ 188              	.LVL26:
+ 107:..\u8g2\csrc/u8x8_string.c ****     }
+ 189              		.loc 1 107 0
+ 190 0022 F7E7     		b	.L18
+ 191              	.L17:
+ 108:..\u8g2\csrc/u8x8_string.c ****   }
+ 109:..\u8g2\csrc/u8x8_string.c ****   *dest = '\0';
+ 192              		.loc 1 109 0
+ 193 0024 0023     		movs	r3, #0
+ 194 0026 2370     		strb	r3, [r4]
+ 195 0028 10BD     		pop	{r4, pc}
+ 196              	.LVL27:
+ 197              	.L20:
+ 198              		.cfi_def_cfa_offset 0
+ 199              		.cfi_restore 4
+ 200              		.cfi_restore 14
+ 201 002a 7047     		bx	lr
+ 202              		.cfi_endproc
+ 203              	.LFE2:
+ 204              		.size	u8x8_CopyStringLine, .-u8x8_CopyStringLine
+ 205              		.section	.text.u8x8_DrawUTF8Line,"ax",%progbits
+ 206              		.align	2
+ 207              		.global	u8x8_DrawUTF8Line
+ 208              		.thumb
+ 209              		.thumb_func
+ 210              		.type	u8x8_DrawUTF8Line, %function
+ 211              	u8x8_DrawUTF8Line:
+ 212              	.LFB3:
+ 110:..\u8g2\csrc/u8x8_string.c **** }
+ 111:..\u8g2\csrc/u8x8_string.c **** 
+ 112:..\u8g2\csrc/u8x8_string.c **** /*
+ 113:..\u8g2\csrc/u8x8_string.c ****   Draw a string
+ 114:..\u8g2\csrc/u8x8_string.c ****   Extend the string to size "w"
+ 115:..\u8g2\csrc/u8x8_string.c ****   Center the string within "w"
+ 116:..\u8g2\csrc/u8x8_string.c ****   return the size of the string
+ 117:..\u8g2\csrc/u8x8_string.c **** 
+ 118:..\u8g2\csrc/u8x8_string.c **** */
+ 119:..\u8g2\csrc/u8x8_string.c **** uint8_t u8x8_DrawUTF8Line(u8x8_t *u8x8, uint8_t x, uint8_t y, uint8_t w, const char *s)
+ 120:..\u8g2\csrc/u8x8_string.c **** {
+ 213              		.loc 1 120 0
+ 214              		.cfi_startproc
+ 215              		@ args = 4, pretend = 0, frame = 0
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 7
+
+
+ 217              	.LVL28:
+ 218 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 219              		.cfi_def_cfa_offset 32
+ 220              		.cfi_offset 3, -32
+ 221              		.cfi_offset 4, -28
+ 222              		.cfi_offset 5, -24
+ 223              		.cfi_offset 6, -20
+ 224              		.cfi_offset 7, -16
+ 225              		.cfi_offset 8, -12
+ 226              		.cfi_offset 9, -8
+ 227              		.cfi_offset 14, -4
+ 228 0004 0546     		mov	r5, r0
+ 229 0006 0F46     		mov	r7, r1
+ 230 0008 1646     		mov	r6, r2
+ 231 000a 9846     		mov	r8, r3
+ 232              	.LVL29:
+ 121:..\u8g2\csrc/u8x8_string.c ****   uint8_t d, lw;
+ 122:..\u8g2\csrc/u8x8_string.c ****   uint8_t cx, dx;
+ 123:..\u8g2\csrc/u8x8_string.c ****     
+ 124:..\u8g2\csrc/u8x8_string.c ****   d = 0;
+ 125:..\u8g2\csrc/u8x8_string.c ****   
+ 126:..\u8g2\csrc/u8x8_string.c ****   lw = u8x8_GetUTF8Len(u8x8, s);
+ 233              		.loc 1 126 0
+ 234 000c 0899     		ldr	r1, [sp, #32]
+ 235              	.LVL30:
+ 236 000e FFF7FEFF 		bl	u8x8_GetUTF8Len
+ 237              	.LVL31:
+ 127:..\u8g2\csrc/u8x8_string.c ****   if ( lw < w )
+ 238              		.loc 1 127 0
+ 239 0012 4045     		cmp	r0, r8
+ 240 0014 04D2     		bcs	.L27
+ 241              	.LVL32:
+ 128:..\u8g2\csrc/u8x8_string.c ****   {
+ 129:..\u8g2\csrc/u8x8_string.c ****     d = w;
+ 130:..\u8g2\csrc/u8x8_string.c ****     d -=lw;
+ 242              		.loc 1 130 0
+ 243 0016 C0EB0809 		rsb	r9, r0, r8
+ 244              	.LVL33:
+ 131:..\u8g2\csrc/u8x8_string.c ****     d /= 2;
+ 245              		.loc 1 131 0
+ 246 001a C9F34609 		ubfx	r9, r9, #1, #7
+ 247              	.LVL34:
+ 248 001e 01E0     		b	.L22
+ 249              	.LVL35:
+ 250              	.L27:
+ 124:..\u8g2\csrc/u8x8_string.c ****   
+ 251              		.loc 1 124 0
+ 252 0020 4FF00009 		mov	r9, #0
+ 253              	.LVL36:
+ 254              	.L22:
+ 132:..\u8g2\csrc/u8x8_string.c ****   }
+ 133:..\u8g2\csrc/u8x8_string.c ****     
+ 134:..\u8g2\csrc/u8x8_string.c ****   cx = x;
+ 135:..\u8g2\csrc/u8x8_string.c ****   dx = cx + d;
+ 255              		.loc 1 135 0
+ 256 0024 B944     		add	r9, r9, r7
+ 257              	.LVL37:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 8
+
+
+ 258 0026 5FFA89F9 		uxtb	r9, r9
+ 259              	.LVL38:
+ 134:..\u8g2\csrc/u8x8_string.c ****   dx = cx + d;
+ 260              		.loc 1 134 0
+ 261 002a 3C46     		mov	r4, r7
+ 136:..\u8g2\csrc/u8x8_string.c ****   while( cx < dx )
+ 262              		.loc 1 136 0
+ 263 002c 07E0     		b	.L23
+ 264              	.LVL39:
+ 265              	.L24:
+ 137:..\u8g2\csrc/u8x8_string.c ****   {
+ 138:..\u8g2\csrc/u8x8_string.c ****     u8x8_DrawUTF8(u8x8, cx, y, " ");
+ 266              		.loc 1 138 0
+ 267 002e 124B     		ldr	r3, .L29
+ 268 0030 3246     		mov	r2, r6
+ 269 0032 2146     		mov	r1, r4
+ 270 0034 2846     		mov	r0, r5
+ 271 0036 FFF7FEFF 		bl	u8x8_DrawUTF8
+ 272              	.LVL40:
+ 139:..\u8g2\csrc/u8x8_string.c ****     cx++;
+ 273              		.loc 1 139 0
+ 274 003a 0134     		adds	r4, r4, #1
+ 275              	.LVL41:
+ 276 003c E4B2     		uxtb	r4, r4
+ 277              	.LVL42:
+ 278              	.L23:
+ 136:..\u8g2\csrc/u8x8_string.c ****   while( cx < dx )
+ 279              		.loc 1 136 0
+ 280 003e 4C45     		cmp	r4, r9
+ 281 0040 F5D3     		bcc	.L24
+ 140:..\u8g2\csrc/u8x8_string.c ****   }
+ 141:..\u8g2\csrc/u8x8_string.c ****   cx += u8x8_DrawUTF8(u8x8, cx, y, s);
+ 282              		.loc 1 141 0
+ 283 0042 089B     		ldr	r3, [sp, #32]
+ 284 0044 3246     		mov	r2, r6
+ 285 0046 2146     		mov	r1, r4
+ 286 0048 2846     		mov	r0, r5
+ 287 004a FFF7FEFF 		bl	u8x8_DrawUTF8
+ 288              	.LVL43:
+ 289 004e 2044     		add	r0, r0, r4
+ 290 0050 C4B2     		uxtb	r4, r0
+ 291              	.LVL44:
+ 142:..\u8g2\csrc/u8x8_string.c ****   dx = x + w;
+ 292              		.loc 1 142 0
+ 293 0052 B844     		add	r8, r8, r7
+ 294 0054 5FFA88F8 		uxtb	r8, r8
+ 295              	.LVL45:
+ 143:..\u8g2\csrc/u8x8_string.c ****   while( cx < dx )
+ 296              		.loc 1 143 0
+ 297 0058 07E0     		b	.L25
+ 298              	.L26:
+ 144:..\u8g2\csrc/u8x8_string.c ****   {
+ 145:..\u8g2\csrc/u8x8_string.c ****     u8x8_DrawUTF8(u8x8, cx, y, " ");
+ 299              		.loc 1 145 0
+ 300 005a 074B     		ldr	r3, .L29
+ 301 005c 3246     		mov	r2, r6
+ 302 005e 2146     		mov	r1, r4
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 9
+
+
+ 303 0060 2846     		mov	r0, r5
+ 304 0062 FFF7FEFF 		bl	u8x8_DrawUTF8
+ 305              	.LVL46:
+ 146:..\u8g2\csrc/u8x8_string.c ****     cx++;
+ 306              		.loc 1 146 0
+ 307 0066 0134     		adds	r4, r4, #1
+ 308              	.LVL47:
+ 309 0068 E4B2     		uxtb	r4, r4
+ 310              	.LVL48:
+ 311              	.L25:
+ 143:..\u8g2\csrc/u8x8_string.c ****   while( cx < dx )
+ 312              		.loc 1 143 0
+ 313 006a 4445     		cmp	r4, r8
+ 314 006c F5D3     		bcc	.L26
+ 147:..\u8g2\csrc/u8x8_string.c ****   }
+ 148:..\u8g2\csrc/u8x8_string.c ****   cx -= x;
+ 315              		.loc 1 148 0
+ 316 006e E01B     		subs	r0, r4, r7
+ 317              	.LVL49:
+ 149:..\u8g2\csrc/u8x8_string.c ****   return cx;
+ 150:..\u8g2\csrc/u8x8_string.c **** }
+ 318              		.loc 1 150 0
+ 319 0070 C0B2     		uxtb	r0, r0
+ 320 0072 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 321              	.LVL50:
+ 322              	.L30:
+ 323 0076 00BF     		.align	2
+ 324              	.L29:
+ 325 0078 00000000 		.word	.LC0
+ 326              		.cfi_endproc
+ 327              	.LFE3:
+ 328              		.size	u8x8_DrawUTF8Line, .-u8x8_DrawUTF8Line
+ 329              		.section	.text.u8x8_DrawUTF8Lines,"ax",%progbits
+ 330              		.align	2
+ 331              		.global	u8x8_DrawUTF8Lines
+ 332              		.thumb
+ 333              		.thumb_func
+ 334              		.type	u8x8_DrawUTF8Lines, %function
+ 335              	u8x8_DrawUTF8Lines:
+ 336              	.LFB4:
+ 151:..\u8g2\csrc/u8x8_string.c **** 
+ 152:..\u8g2\csrc/u8x8_string.c **** /*
+ 153:..\u8g2\csrc/u8x8_string.c ****   draw several lines at position x,y.
+ 154:..\u8g2\csrc/u8x8_string.c ****   lines are stored in s and must be separated with '\n'.
+ 155:..\u8g2\csrc/u8x8_string.c ****   lines can be centered with respect to "w" 
+ 156:..\u8g2\csrc/u8x8_string.c ****   if s == NULL nothing is drawn and 0 is returned
+ 157:..\u8g2\csrc/u8x8_string.c ****   returns the number of lines in s
+ 158:..\u8g2\csrc/u8x8_string.c **** */
+ 159:..\u8g2\csrc/u8x8_string.c **** uint8_t u8x8_DrawUTF8Lines(u8x8_t *u8x8, uint8_t x, uint8_t y, uint8_t w, const char *s)
+ 160:..\u8g2\csrc/u8x8_string.c **** {
+ 337              		.loc 1 160 0
+ 338              		.cfi_startproc
+ 339              		@ args = 4, pretend = 0, frame = 0
+ 340              		@ frame_needed = 0, uses_anonymous_args = 0
+ 341              	.LVL51:
+ 342 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 343              		.cfi_def_cfa_offset 32
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 10
+
+
+ 344              		.cfi_offset 4, -32
+ 345              		.cfi_offset 5, -28
+ 346              		.cfi_offset 6, -24
+ 347              		.cfi_offset 7, -20
+ 348              		.cfi_offset 8, -16
+ 349              		.cfi_offset 9, -12
+ 350              		.cfi_offset 10, -8
+ 351              		.cfi_offset 14, -4
+ 352 0004 82B0     		sub	sp, sp, #8
+ 353              		.cfi_def_cfa_offset 40
+ 354 0006 8246     		mov	r10, r0
+ 355 0008 8946     		mov	r9, r1
+ 356 000a 1546     		mov	r5, r2
+ 357 000c 9846     		mov	r8, r3
+ 358 000e 0A9E     		ldr	r6, [sp, #40]
+ 161:..\u8g2\csrc/u8x8_string.c ****   uint8_t i;
+ 162:..\u8g2\csrc/u8x8_string.c ****   uint8_t cnt;
+ 163:..\u8g2\csrc/u8x8_string.c ****   cnt = u8x8_GetStringLineCnt(s);
+ 359              		.loc 1 163 0
+ 360 0010 3046     		mov	r0, r6
+ 361              	.LVL52:
+ 362 0012 FFF7FEFF 		bl	u8x8_GetStringLineCnt
+ 363              	.LVL53:
+ 364 0016 0746     		mov	r7, r0
+ 365              	.LVL54:
+ 164:..\u8g2\csrc/u8x8_string.c ****   for( i = 0; i < cnt; i++ )
+ 366              		.loc 1 164 0
+ 367 0018 0024     		movs	r4, #0
+ 368 001a 0EE0     		b	.L32
+ 369              	.LVL55:
+ 370              	.L33:
+ 165:..\u8g2\csrc/u8x8_string.c ****   {
+ 166:..\u8g2\csrc/u8x8_string.c ****     u8x8_DrawUTF8Line(u8x8, x, y, w, u8x8_GetStringLineStart(i, s));
+ 371              		.loc 1 166 0 discriminator 3
+ 372 001c 3146     		mov	r1, r6
+ 373 001e 2046     		mov	r0, r4
+ 374 0020 FFF7FEFF 		bl	u8x8_GetStringLineStart
+ 375              	.LVL56:
+ 376 0024 0090     		str	r0, [sp]
+ 377 0026 4346     		mov	r3, r8
+ 378 0028 2A46     		mov	r2, r5
+ 379 002a 4946     		mov	r1, r9
+ 380 002c 5046     		mov	r0, r10
+ 381 002e FFF7FEFF 		bl	u8x8_DrawUTF8Line
+ 382              	.LVL57:
+ 167:..\u8g2\csrc/u8x8_string.c ****     y++;
+ 383              		.loc 1 167 0 discriminator 3
+ 384 0032 0135     		adds	r5, r5, #1
+ 385              	.LVL58:
+ 386 0034 EDB2     		uxtb	r5, r5
+ 387              	.LVL59:
+ 164:..\u8g2\csrc/u8x8_string.c ****   for( i = 0; i < cnt; i++ )
+ 388              		.loc 1 164 0 discriminator 3
+ 389 0036 0134     		adds	r4, r4, #1
+ 390              	.LVL60:
+ 391 0038 E4B2     		uxtb	r4, r4
+ 392              	.LVL61:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 11
+
+
+ 393              	.L32:
+ 164:..\u8g2\csrc/u8x8_string.c ****   for( i = 0; i < cnt; i++ )
+ 394              		.loc 1 164 0 is_stmt 0 discriminator 1
+ 395 003a BC42     		cmp	r4, r7
+ 396 003c EED3     		bcc	.L33
+ 168:..\u8g2\csrc/u8x8_string.c ****   }
+ 169:..\u8g2\csrc/u8x8_string.c ****   return cnt;
+ 170:..\u8g2\csrc/u8x8_string.c **** }
+ 397              		.loc 1 170 0 is_stmt 1
+ 398 003e 3846     		mov	r0, r7
+ 399 0040 02B0     		add	sp, sp, #8
+ 400              		.cfi_def_cfa_offset 32
+ 401              		@ sp needed
+ 402 0042 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 403              		.cfi_endproc
+ 404              	.LFE4:
+ 405              		.size	u8x8_DrawUTF8Lines, .-u8x8_DrawUTF8Lines
+ 406 0046 00BF     		.section	.rodata.str1.4,"aMS",%progbits,1
+ 407              		.align	2
+ 408              	.LC0:
+ 409 0000 2000     		.ascii	" \000"
+ 410              		.text
+ 411              	.Letext0:
+ 412              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 413              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 414              		.file 4 "..\\u8g2\\csrc\\u8x8.h"
+ 415              		.section	.debug_info,"",%progbits
+ 416              	.Ldebug_info0:
+ 417 0000 40060000 		.4byte	0x640
+ 418 0004 0400     		.2byte	0x4
+ 419 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 420 000a 04       		.byte	0x4
+ 421 000b 01       		.uleb128 0x1
+ 422 000c 0A040000 		.4byte	.LASF71
+ 423 0010 0C       		.byte	0xc
+ 424 0011 56010000 		.4byte	.LASF72
+ 425 0015 E5000000 		.4byte	.LASF73
+ 426 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 427 001d 00000000 		.4byte	0
+ 428 0021 00000000 		.4byte	.Ldebug_line0
+ 429 0025 02       		.uleb128 0x2
+ 430 0026 01       		.byte	0x1
+ 431 0027 06       		.byte	0x6
+ 432 0028 62020000 		.4byte	.LASF0
+ 433 002c 03       		.uleb128 0x3
+ 434 002d 04020000 		.4byte	.LASF3
+ 435 0031 02       		.byte	0x2
+ 436 0032 1D       		.byte	0x1d
+ 437 0033 37000000 		.4byte	0x37
+ 438 0037 02       		.uleb128 0x2
+ 439 0038 01       		.byte	0x1
+ 440 0039 08       		.byte	0x8
+ 441 003a 54020000 		.4byte	.LASF1
+ 442 003e 02       		.uleb128 0x2
+ 443 003f 02       		.byte	0x2
+ 444 0040 05       		.byte	0x5
+ 445 0041 6B000000 		.4byte	.LASF2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 12
+
+
+ 446 0045 03       		.uleb128 0x3
+ 447 0046 C2000000 		.4byte	.LASF4
+ 448 004a 02       		.byte	0x2
+ 449 004b 2B       		.byte	0x2b
+ 450 004c 50000000 		.4byte	0x50
+ 451 0050 02       		.uleb128 0x2
+ 452 0051 02       		.byte	0x2
+ 453 0052 07       		.byte	0x7
+ 454 0053 04030000 		.4byte	.LASF5
+ 455 0057 02       		.uleb128 0x2
+ 456 0058 04       		.byte	0x4
+ 457 0059 05       		.byte	0x5
+ 458 005a FB010000 		.4byte	.LASF6
+ 459 005e 03       		.uleb128 0x3
+ 460 005f B7000000 		.4byte	.LASF7
+ 461 0063 02       		.byte	0x2
+ 462 0064 41       		.byte	0x41
+ 463 0065 69000000 		.4byte	0x69
+ 464 0069 02       		.uleb128 0x2
+ 465 006a 04       		.byte	0x4
+ 466 006b 07       		.byte	0x7
+ 467 006c 88030000 		.4byte	.LASF8
+ 468 0070 02       		.uleb128 0x2
+ 469 0071 08       		.byte	0x8
+ 470 0072 05       		.byte	0x5
+ 471 0073 CE010000 		.4byte	.LASF9
+ 472 0077 02       		.uleb128 0x2
+ 473 0078 08       		.byte	0x8
+ 474 0079 07       		.byte	0x7
+ 475 007a 6E020000 		.4byte	.LASF10
+ 476 007e 04       		.uleb128 0x4
+ 477 007f 04       		.byte	0x4
+ 478 0080 05       		.byte	0x5
+ 479 0081 696E7400 		.ascii	"int\000"
+ 480 0085 02       		.uleb128 0x2
+ 481 0086 04       		.byte	0x4
+ 482 0087 07       		.byte	0x7
+ 483 0088 8E020000 		.4byte	.LASF11
+ 484 008c 03       		.uleb128 0x3
+ 485 008d 30010000 		.4byte	.LASF12
+ 486 0091 03       		.byte	0x3
+ 487 0092 18       		.byte	0x18
+ 488 0093 2C000000 		.4byte	0x2c
+ 489 0097 03       		.uleb128 0x3
+ 490 0098 9B020000 		.4byte	.LASF13
+ 491 009c 03       		.byte	0x3
+ 492 009d 24       		.byte	0x24
+ 493 009e 45000000 		.4byte	0x45
+ 494 00a2 03       		.uleb128 0x3
+ 495 00a3 85020000 		.4byte	.LASF14
+ 496 00a7 03       		.byte	0x3
+ 497 00a8 30       		.byte	0x30
+ 498 00a9 5E000000 		.4byte	0x5e
+ 499 00ad 05       		.uleb128 0x5
+ 500 00ae 04       		.byte	0x4
+ 501 00af 02       		.uleb128 0x2
+ 502 00b0 08       		.byte	0x8
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 13
+
+
+ 503 00b1 04       		.byte	0x4
+ 504 00b2 3C020000 		.4byte	.LASF15
+ 505 00b6 03       		.uleb128 0x3
+ 506 00b7 DB020000 		.4byte	.LASF16
+ 507 00bb 04       		.byte	0x4
+ 508 00bc CD       		.byte	0xcd
+ 509 00bd C1000000 		.4byte	0xc1
+ 510 00c1 06       		.uleb128 0x6
+ 511 00c2 7C030000 		.4byte	.LASF37
+ 512 00c6 2C       		.byte	0x2c
+ 513 00c7 04       		.byte	0x4
+ 514 00c8 5001     		.2byte	0x150
+ 515 00ca C6010000 		.4byte	0x1c6
+ 516 00ce 07       		.uleb128 0x7
+ 517 00cf 38030000 		.4byte	.LASF17
+ 518 00d3 04       		.byte	0x4
+ 519 00d4 5201     		.2byte	0x152
+ 520 00d6 26030000 		.4byte	0x326
+ 521 00da 00       		.byte	0
+ 522 00db 07       		.uleb128 0x7
+ 523 00dc BF040000 		.4byte	.LASF18
+ 524 00e0 04       		.byte	0x4
+ 525 00e1 5301     		.2byte	0x153
+ 526 00e3 01030000 		.4byte	0x301
+ 527 00e7 04       		.byte	0x4
+ 528 00e8 07       		.uleb128 0x7
+ 529 00e9 0E020000 		.4byte	.LASF19
+ 530 00ed 04       		.byte	0x4
+ 531 00ee 5401     		.2byte	0x154
+ 532 00f0 CC020000 		.4byte	0x2cc
+ 533 00f4 08       		.byte	0x8
+ 534 00f5 07       		.uleb128 0x7
+ 535 00f6 E8030000 		.4byte	.LASF20
+ 536 00fa 04       		.byte	0x4
+ 537 00fb 5501     		.2byte	0x155
+ 538 00fd CC020000 		.4byte	0x2cc
+ 539 0101 0C       		.byte	0xc
+ 540 0102 07       		.uleb128 0x7
+ 541 0103 9A030000 		.4byte	.LASF21
+ 542 0107 04       		.byte	0x4
+ 543 0108 5601     		.2byte	0x156
+ 544 010a CC020000 		.4byte	0x2cc
+ 545 010e 10       		.byte	0x10
+ 546 010f 07       		.uleb128 0x7
+ 547 0110 75000000 		.4byte	.LASF22
+ 548 0114 04       		.byte	0x4
+ 549 0115 5701     		.2byte	0x157
+ 550 0117 CC020000 		.4byte	0x2cc
+ 551 011b 14       		.byte	0x14
+ 552 011c 07       		.uleb128 0x7
+ 553 011d 87010000 		.4byte	.LASF23
+ 554 0121 04       		.byte	0x4
+ 555 0122 5801     		.2byte	0x158
+ 556 0124 A2000000 		.4byte	0xa2
+ 557 0128 18       		.byte	0x18
+ 558 0129 07       		.uleb128 0x7
+ 559 012a 3E000000 		.4byte	.LASF24
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 14
+
+
+ 560 012e 04       		.byte	0x4
+ 561 012f 5901     		.2byte	0x159
+ 562 0131 31030000 		.4byte	0x331
+ 563 0135 1C       		.byte	0x1c
+ 564 0136 07       		.uleb128 0x7
+ 565 0137 D3030000 		.4byte	.LASF25
+ 566 013b 04       		.byte	0x4
+ 567 013c 5A01     		.2byte	0x15a
+ 568 013e 97000000 		.4byte	0x97
+ 569 0142 20       		.byte	0x20
+ 570 0143 07       		.uleb128 0x7
+ 571 0144 00000000 		.4byte	.LASF26
+ 572 0148 04       		.byte	0x4
+ 573 0149 5B01     		.2byte	0x15b
+ 574 014b 8C000000 		.4byte	0x8c
+ 575 014f 22       		.byte	0x22
+ 576 0150 07       		.uleb128 0x7
+ 577 0151 09000000 		.4byte	.LASF27
+ 578 0155 04       		.byte	0x4
+ 579 0156 5C01     		.2byte	0x15c
+ 580 0158 8C000000 		.4byte	0x8c
+ 581 015c 23       		.byte	0x23
+ 582 015d 07       		.uleb128 0x7
+ 583 015e B5030000 		.4byte	.LASF28
+ 584 0162 04       		.byte	0x4
+ 585 0163 5D01     		.2byte	0x15d
+ 586 0165 8C000000 		.4byte	0x8c
+ 587 0169 24       		.byte	0x24
+ 588 016a 07       		.uleb128 0x7
+ 589 016b DC030000 		.4byte	.LASF29
+ 590 016f 04       		.byte	0x4
+ 591 0170 6001     		.2byte	0x160
+ 592 0172 8C000000 		.4byte	0x8c
+ 593 0176 25       		.byte	0x25
+ 594 0177 07       		.uleb128 0x7
+ 595 0178 71030000 		.4byte	.LASF30
+ 596 017c 04       		.byte	0x4
+ 597 017d 6201     		.2byte	0x162
+ 598 017f 8C000000 		.4byte	0x8c
+ 599 0183 26       		.byte	0x26
+ 600 0184 07       		.uleb128 0x7
+ 601 0185 DC010000 		.4byte	.LASF31
+ 602 0189 04       		.byte	0x4
+ 603 018a 6301     		.2byte	0x163
+ 604 018c 8C000000 		.4byte	0x8c
+ 605 0190 27       		.byte	0x27
+ 606 0191 07       		.uleb128 0x7
+ 607 0192 98040000 		.4byte	.LASF32
+ 608 0196 04       		.byte	0x4
+ 609 0197 6401     		.2byte	0x164
+ 610 0199 8C000000 		.4byte	0x8c
+ 611 019d 28       		.byte	0x28
+ 612 019e 07       		.uleb128 0x7
+ 613 019f B6010000 		.4byte	.LASF33
+ 614 01a3 04       		.byte	0x4
+ 615 01a4 6501     		.2byte	0x165
+ 616 01a6 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 15
+
+
+ 617 01aa 29       		.byte	0x29
+ 618 01ab 07       		.uleb128 0x7
+ 619 01ac 29030000 		.4byte	.LASF34
+ 620 01b0 04       		.byte	0x4
+ 621 01b1 6601     		.2byte	0x166
+ 622 01b3 8C000000 		.4byte	0x8c
+ 623 01b7 2A       		.byte	0x2a
+ 624 01b8 07       		.uleb128 0x7
+ 625 01b9 43000000 		.4byte	.LASF35
+ 626 01bd 04       		.byte	0x4
+ 627 01be 6701     		.2byte	0x167
+ 628 01c0 8C000000 		.4byte	0x8c
+ 629 01c4 2B       		.byte	0x2b
+ 630 01c5 00       		.byte	0
+ 631 01c6 03       		.uleb128 0x3
+ 632 01c7 A2010000 		.4byte	.LASF36
+ 633 01cb 04       		.byte	0x4
+ 634 01cc CE       		.byte	0xce
+ 635 01cd D1010000 		.4byte	0x1d1
+ 636 01d1 08       		.uleb128 0x8
+ 637 01d2 A4020000 		.4byte	.LASF38
+ 638 01d6 18       		.byte	0x18
+ 639 01d7 04       		.byte	0x4
+ 640 01d8 E7       		.byte	0xe7
+ 641 01d9 CC020000 		.4byte	0x2cc
+ 642 01dd 09       		.uleb128 0x9
+ 643 01de 2C000000 		.4byte	.LASF39
+ 644 01e2 04       		.byte	0x4
+ 645 01e3 EB       		.byte	0xeb
+ 646 01e4 8C000000 		.4byte	0x8c
+ 647 01e8 00       		.byte	0
+ 648 01e9 09       		.uleb128 0x9
+ 649 01ea A2030000 		.4byte	.LASF40
+ 650 01ee 04       		.byte	0x4
+ 651 01ef EC       		.byte	0xec
+ 652 01f0 8C000000 		.4byte	0x8c
+ 653 01f4 01       		.byte	0x1
+ 654 01f5 09       		.uleb128 0x9
+ 655 01f6 38010000 		.4byte	.LASF41
+ 656 01fa 04       		.byte	0x4
+ 657 01fb EE       		.byte	0xee
+ 658 01fc 8C000000 		.4byte	0x8c
+ 659 0200 02       		.byte	0x2
+ 660 0201 09       		.uleb128 0x9
+ 661 0202 D5040000 		.4byte	.LASF42
+ 662 0206 04       		.byte	0x4
+ 663 0207 EF       		.byte	0xef
+ 664 0208 8C000000 		.4byte	0x8c
+ 665 020c 03       		.byte	0x3
+ 666 020d 09       		.uleb128 0x9
+ 667 020e C6020000 		.4byte	.LASF43
+ 668 0212 04       		.byte	0x4
+ 669 0213 F0       		.byte	0xf0
+ 670 0214 8C000000 		.4byte	0x8c
+ 671 0218 04       		.byte	0x4
+ 672 0219 09       		.uleb128 0x9
+ 673 021a A4000000 		.4byte	.LASF44
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 16
+
+
+ 674 021e 04       		.byte	0x4
+ 675 021f F1       		.byte	0xf1
+ 676 0220 8C000000 		.4byte	0x8c
+ 677 0224 05       		.byte	0x5
+ 678 0225 09       		.uleb128 0x9
+ 679 0226 92000000 		.4byte	.LASF45
+ 680 022a 04       		.byte	0x4
+ 681 022b F8       		.byte	0xf8
+ 682 022c 8C000000 		.4byte	0x8c
+ 683 0230 06       		.byte	0x6
+ 684 0231 09       		.uleb128 0x9
+ 685 0232 E8010000 		.4byte	.LASF46
+ 686 0236 04       		.byte	0x4
+ 687 0237 FC       		.byte	0xfc
+ 688 0238 8C000000 		.4byte	0x8c
+ 689 023c 07       		.byte	0x7
+ 690 023d 09       		.uleb128 0x9
+ 691 023e F7020000 		.4byte	.LASF47
+ 692 0242 04       		.byte	0x4
+ 693 0243 FF       		.byte	0xff
+ 694 0244 A2000000 		.4byte	0xa2
+ 695 0248 08       		.byte	0x8
+ 696 0249 07       		.uleb128 0x7
+ 697 024a 23000000 		.4byte	.LASF48
+ 698 024e 04       		.byte	0x4
+ 699 024f 0901     		.2byte	0x109
+ 700 0251 8C000000 		.4byte	0x8c
+ 701 0255 0C       		.byte	0xc
+ 702 0256 07       		.uleb128 0x7
+ 703 0257 E2020000 		.4byte	.LASF49
+ 704 025b 04       		.byte	0x4
+ 705 025c 0C01     		.2byte	0x10c
+ 706 025e 8C000000 		.4byte	0x8c
+ 707 0262 0D       		.byte	0xd
+ 708 0263 07       		.uleb128 0x7
+ 709 0264 19020000 		.4byte	.LASF50
+ 710 0268 04       		.byte	0x4
+ 711 0269 1201     		.2byte	0x112
+ 712 026b 8C000000 		.4byte	0x8c
+ 713 026f 0E       		.byte	0xe
+ 714 0270 07       		.uleb128 0x7
+ 715 0271 1B010000 		.4byte	.LASF51
+ 716 0275 04       		.byte	0x4
+ 717 0276 1401     		.2byte	0x114
+ 718 0278 8C000000 		.4byte	0x8c
+ 719 027c 0F       		.byte	0xf
+ 720 027d 07       		.uleb128 0x7
+ 721 027e 87000000 		.4byte	.LASF52
+ 722 0282 04       		.byte	0x4
+ 723 0283 1701     		.2byte	0x117
+ 724 0285 8C000000 		.4byte	0x8c
+ 725 0289 10       		.byte	0x10
+ 726 028a 07       		.uleb128 0x7
+ 727 028b 48020000 		.4byte	.LASF53
+ 728 028f 04       		.byte	0x4
+ 729 0290 1801     		.2byte	0x118
+ 730 0292 8C000000 		.4byte	0x8c
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 17
+
+
+ 731 0296 11       		.byte	0x11
+ 732 0297 07       		.uleb128 0x7
+ 733 0298 91010000 		.4byte	.LASF54
+ 734 029c 04       		.byte	0x4
+ 735 029d 1A01     		.2byte	0x11a
+ 736 029f 8C000000 		.4byte	0x8c
+ 737 02a3 12       		.byte	0x12
+ 738 02a4 07       		.uleb128 0x7
+ 739 02a5 C1030000 		.4byte	.LASF55
+ 740 02a9 04       		.byte	0x4
+ 741 02aa 1B01     		.2byte	0x11b
+ 742 02ac 8C000000 		.4byte	0x8c
+ 743 02b0 13       		.byte	0x13
+ 744 02b1 07       		.uleb128 0x7
+ 745 02b2 65030000 		.4byte	.LASF56
+ 746 02b6 04       		.byte	0x4
+ 747 02b7 2301     		.2byte	0x123
+ 748 02b9 97000000 		.4byte	0x97
+ 749 02bd 14       		.byte	0x14
+ 750 02be 07       		.uleb128 0x7
+ 751 02bf 45030000 		.4byte	.LASF57
+ 752 02c3 04       		.byte	0x4
+ 753 02c4 2401     		.2byte	0x124
+ 754 02c6 97000000 		.4byte	0x97
+ 755 02ca 16       		.byte	0x16
+ 756 02cb 00       		.byte	0
+ 757 02cc 03       		.uleb128 0x3
+ 758 02cd B3040000 		.4byte	.LASF58
+ 759 02d1 04       		.byte	0x4
+ 760 02d2 D1       		.byte	0xd1
+ 761 02d3 D7020000 		.4byte	0x2d7
+ 762 02d7 0A       		.uleb128 0xa
+ 763 02d8 04       		.byte	0x4
+ 764 02d9 DD020000 		.4byte	0x2dd
+ 765 02dd 0B       		.uleb128 0xb
+ 766 02de 8C000000 		.4byte	0x8c
+ 767 02e2 FB020000 		.4byte	0x2fb
+ 768 02e6 0C       		.uleb128 0xc
+ 769 02e7 FB020000 		.4byte	0x2fb
+ 770 02eb 0C       		.uleb128 0xc
+ 771 02ec 8C000000 		.4byte	0x8c
+ 772 02f0 0C       		.uleb128 0xc
+ 773 02f1 8C000000 		.4byte	0x8c
+ 774 02f5 0C       		.uleb128 0xc
+ 775 02f6 AD000000 		.4byte	0xad
+ 776 02fa 00       		.byte	0
+ 777 02fb 0A       		.uleb128 0xa
+ 778 02fc 04       		.byte	0x4
+ 779 02fd B6000000 		.4byte	0xb6
+ 780 0301 03       		.uleb128 0x3
+ 781 0302 17030000 		.4byte	.LASF59
+ 782 0306 04       		.byte	0x4
+ 783 0307 D2       		.byte	0xd2
+ 784 0308 0C030000 		.4byte	0x30c
+ 785 030c 0A       		.uleb128 0xa
+ 786 030d 04       		.byte	0x4
+ 787 030e 12030000 		.4byte	0x312
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 18
+
+
+ 788 0312 0B       		.uleb128 0xb
+ 789 0313 97000000 		.4byte	0x97
+ 790 0317 26030000 		.4byte	0x326
+ 791 031b 0C       		.uleb128 0xc
+ 792 031c FB020000 		.4byte	0x2fb
+ 793 0320 0C       		.uleb128 0xc
+ 794 0321 8C000000 		.4byte	0x8c
+ 795 0325 00       		.byte	0
+ 796 0326 0A       		.uleb128 0xa
+ 797 0327 04       		.byte	0x4
+ 798 0328 2C030000 		.4byte	0x32c
+ 799 032c 0D       		.uleb128 0xd
+ 800 032d C6010000 		.4byte	0x1c6
+ 801 0331 0A       		.uleb128 0xa
+ 802 0332 04       		.byte	0x4
+ 803 0333 37030000 		.4byte	0x337
+ 804 0337 0D       		.uleb128 0xd
+ 805 0338 8C000000 		.4byte	0x8c
+ 806 033c 0E       		.uleb128 0xe
+ 807 033d 71010000 		.4byte	.LASF62
+ 808 0341 01       		.byte	0x1
+ 809 0342 28       		.byte	0x28
+ 810 0343 8C000000 		.4byte	0x8c
+ 811 0347 00000000 		.4byte	.LFB0
+ 812 034b 1A000000 		.4byte	.LFE0-.LFB0
+ 813 034f 01       		.uleb128 0x1
+ 814 0350 9C       		.byte	0x9c
+ 815 0351 81030000 		.4byte	0x381
+ 816 0355 0F       		.uleb128 0xf
+ 817 0356 73747200 		.ascii	"str\000"
+ 818 035a 01       		.byte	0x1
+ 819 035b 28       		.byte	0x28
+ 820 035c 81030000 		.4byte	0x381
+ 821 0360 00000000 		.4byte	.LLST0
+ 822 0364 10       		.uleb128 0x10
+ 823 0365 6500     		.ascii	"e\000"
+ 824 0367 01       		.byte	0x1
+ 825 0368 2A       		.byte	0x2a
+ 826 0369 87030000 		.4byte	0x387
+ 827 036d 34000000 		.4byte	.LLST1
+ 828 0371 11       		.uleb128 0x11
+ 829 0372 EF030000 		.4byte	.LASF60
+ 830 0376 01       		.byte	0x1
+ 831 0377 2B       		.byte	0x2b
+ 832 0378 8C000000 		.4byte	0x8c
+ 833 037c 47000000 		.4byte	.LLST2
+ 834 0380 00       		.byte	0
+ 835 0381 0A       		.uleb128 0xa
+ 836 0382 04       		.byte	0x4
+ 837 0383 8E030000 		.4byte	0x38e
+ 838 0387 02       		.uleb128 0x2
+ 839 0388 01       		.byte	0x1
+ 840 0389 08       		.byte	0x8
+ 841 038a 24030000 		.4byte	.LASF61
+ 842 038e 0D       		.uleb128 0xd
+ 843 038f 87030000 		.4byte	0x387
+ 844 0393 0E       		.uleb128 0xe
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 19
+
+
+ 845 0394 CD000000 		.4byte	.LASF63
+ 846 0398 01       		.byte	0x1
+ 847 0399 42       		.byte	0x42
+ 848 039a 81030000 		.4byte	0x381
+ 849 039e 00000000 		.4byte	.LFB1
+ 850 03a2 2A000000 		.4byte	.LFE1-.LFB1
+ 851 03a6 01       		.uleb128 0x1
+ 852 03a7 9C       		.byte	0x9c
+ 853 03a8 E7030000 		.4byte	0x3e7
+ 854 03ac 12       		.uleb128 0x12
+ 855 03ad BD020000 		.4byte	.LASF64
+ 856 03b1 01       		.byte	0x1
+ 857 03b2 42       		.byte	0x42
+ 858 03b3 8C000000 		.4byte	0x8c
+ 859 03b7 7D000000 		.4byte	.LLST3
+ 860 03bb 0F       		.uleb128 0xf
+ 861 03bc 73747200 		.ascii	"str\000"
+ 862 03c0 01       		.byte	0x1
+ 863 03c1 42       		.byte	0x42
+ 864 03c2 81030000 		.4byte	0x381
+ 865 03c6 D0000000 		.4byte	.LLST4
+ 866 03ca 10       		.uleb128 0x10
+ 867 03cb 6500     		.ascii	"e\000"
+ 868 03cd 01       		.byte	0x1
+ 869 03ce 44       		.byte	0x44
+ 870 03cf 87030000 		.4byte	0x387
+ 871 03d3 EE000000 		.4byte	.LLST5
+ 872 03d7 11       		.uleb128 0x11
+ 873 03d8 EF030000 		.4byte	.LASF60
+ 874 03dc 01       		.byte	0x1
+ 875 03dd 45       		.byte	0x45
+ 876 03de 8C000000 		.4byte	0x8c
+ 877 03e2 0C010000 		.4byte	.LLST6
+ 878 03e6 00       		.byte	0
+ 879 03e7 13       		.uleb128 0x13
+ 880 03e8 57000000 		.4byte	.LASF74
+ 881 03ec 01       		.byte	0x1
+ 882 03ed 5D       		.byte	0x5d
+ 883 03ee 00000000 		.4byte	.LFB2
+ 884 03f2 2C000000 		.4byte	.LFE2-.LFB2
+ 885 03f6 01       		.uleb128 0x1
+ 886 03f7 9C       		.byte	0x9c
+ 887 03f8 3B040000 		.4byte	0x43b
+ 888 03fc 12       		.uleb128 0x12
+ 889 03fd 1E000000 		.4byte	.LASF65
+ 890 0401 01       		.byte	0x1
+ 891 0402 5D       		.byte	0x5d
+ 892 0403 3B040000 		.4byte	0x43b
+ 893 0407 4D010000 		.4byte	.LLST7
+ 894 040b 12       		.uleb128 0x12
+ 895 040c BD020000 		.4byte	.LASF64
+ 896 0410 01       		.byte	0x1
+ 897 0411 5D       		.byte	0x5d
+ 898 0412 8C000000 		.4byte	0x8c
+ 899 0416 76010000 		.4byte	.LLST8
+ 900 041a 0F       		.uleb128 0xf
+ 901 041b 73747200 		.ascii	"str\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 20
+
+
+ 902 041f 01       		.byte	0x1
+ 903 0420 5D       		.byte	0x5d
+ 904 0421 81030000 		.4byte	0x381
+ 905 0425 A2010000 		.4byte	.LLST9
+ 906 0429 14       		.uleb128 0x14
+ 907 042a 10000000 		.4byte	.LVL23
+ 908 042e 93030000 		.4byte	0x393
+ 909 0432 15       		.uleb128 0x15
+ 910 0433 01       		.uleb128 0x1
+ 911 0434 51       		.byte	0x51
+ 912 0435 03       		.uleb128 0x3
+ 913 0436 F3       		.byte	0xf3
+ 914 0437 01       		.uleb128 0x1
+ 915 0438 52       		.byte	0x52
+ 916 0439 00       		.byte	0
+ 917 043a 00       		.byte	0
+ 918 043b 0A       		.uleb128 0xa
+ 919 043c 04       		.byte	0x4
+ 920 043d 87030000 		.4byte	0x387
+ 921 0441 0E       		.uleb128 0xe
+ 922 0442 F8030000 		.4byte	.LASF66
+ 923 0446 01       		.byte	0x1
+ 924 0447 77       		.byte	0x77
+ 925 0448 8C000000 		.4byte	0x8c
+ 926 044c 00000000 		.4byte	.LFB3
+ 927 0450 7C000000 		.4byte	.LFE3-.LFB3
+ 928 0454 01       		.uleb128 0x1
+ 929 0455 9C       		.byte	0x9c
+ 930 0456 65050000 		.4byte	0x565
+ 931 045a 12       		.uleb128 0x12
+ 932 045b 51010000 		.4byte	.LASF67
+ 933 045f 01       		.byte	0x1
+ 934 0460 77       		.byte	0x77
+ 935 0461 FB020000 		.4byte	0x2fb
+ 936 0465 D9010000 		.4byte	.LLST10
+ 937 0469 0F       		.uleb128 0xf
+ 938 046a 7800     		.ascii	"x\000"
+ 939 046c 01       		.byte	0x1
+ 940 046d 77       		.byte	0x77
+ 941 046e 8C000000 		.4byte	0x8c
+ 942 0472 05020000 		.4byte	.LLST11
+ 943 0476 0F       		.uleb128 0xf
+ 944 0477 7900     		.ascii	"y\000"
+ 945 0479 01       		.byte	0x1
+ 946 047a 77       		.byte	0x77
+ 947 047b 8C000000 		.4byte	0x8c
+ 948 047f 26020000 		.4byte	.LLST12
+ 949 0483 0F       		.uleb128 0xf
+ 950 0484 7700     		.ascii	"w\000"
+ 951 0486 01       		.byte	0x1
+ 952 0487 77       		.byte	0x77
+ 953 0488 8C000000 		.4byte	0x8c
+ 954 048c 47020000 		.4byte	.LLST13
+ 955 0490 0F       		.uleb128 0xf
+ 956 0491 7300     		.ascii	"s\000"
+ 957 0493 01       		.byte	0x1
+ 958 0494 77       		.byte	0x77
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 21
+
+
+ 959 0495 81030000 		.4byte	0x381
+ 960 0499 68020000 		.4byte	.LLST14
+ 961 049d 10       		.uleb128 0x10
+ 962 049e 6400     		.ascii	"d\000"
+ 963 04a0 01       		.byte	0x1
+ 964 04a1 79       		.byte	0x79
+ 965 04a2 8C000000 		.4byte	0x8c
+ 966 04a6 88020000 		.4byte	.LLST15
+ 967 04aa 10       		.uleb128 0x10
+ 968 04ab 6C7700   		.ascii	"lw\000"
+ 969 04ae 01       		.byte	0x1
+ 970 04af 79       		.byte	0x79
+ 971 04b0 8C000000 		.4byte	0x8c
+ 972 04b4 C9020000 		.4byte	.LLST16
+ 973 04b8 10       		.uleb128 0x10
+ 974 04b9 637800   		.ascii	"cx\000"
+ 975 04bc 01       		.byte	0x1
+ 976 04bd 7A       		.byte	0x7a
+ 977 04be 8C000000 		.4byte	0x8c
+ 978 04c2 DC020000 		.4byte	.LLST17
+ 979 04c6 10       		.uleb128 0x10
+ 980 04c7 647800   		.ascii	"dx\000"
+ 981 04ca 01       		.byte	0x1
+ 982 04cb 7A       		.byte	0x7a
+ 983 04cc 8C000000 		.4byte	0x8c
+ 984 04d0 1B030000 		.4byte	.LLST18
+ 985 04d4 16       		.uleb128 0x16
+ 986 04d5 12000000 		.4byte	.LVL31
+ 987 04d9 2B060000 		.4byte	0x62b
+ 988 04dd EF040000 		.4byte	0x4ef
+ 989 04e1 15       		.uleb128 0x15
+ 990 04e2 01       		.uleb128 0x1
+ 991 04e3 50       		.byte	0x50
+ 992 04e4 02       		.uleb128 0x2
+ 993 04e5 75       		.byte	0x75
+ 994 04e6 00       		.sleb128 0
+ 995 04e7 15       		.uleb128 0x15
+ 996 04e8 01       		.uleb128 0x1
+ 997 04e9 51       		.byte	0x51
+ 998 04ea 03       		.uleb128 0x3
+ 999 04eb 91       		.byte	0x91
+ 1000 04ec 00       		.sleb128 0
+ 1001 04ed 06       		.byte	0x6
+ 1002 04ee 00       		.byte	0
+ 1003 04ef 16       		.uleb128 0x16
+ 1004 04f0 3A000000 		.4byte	.LVL40
+ 1005 04f4 37060000 		.4byte	0x637
+ 1006 04f8 18050000 		.4byte	0x518
+ 1007 04fc 15       		.uleb128 0x15
+ 1008 04fd 01       		.uleb128 0x1
+ 1009 04fe 50       		.byte	0x50
+ 1010 04ff 02       		.uleb128 0x2
+ 1011 0500 75       		.byte	0x75
+ 1012 0501 00       		.sleb128 0
+ 1013 0502 15       		.uleb128 0x15
+ 1014 0503 01       		.uleb128 0x1
+ 1015 0504 51       		.byte	0x51
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 22
+
+
+ 1016 0505 02       		.uleb128 0x2
+ 1017 0506 74       		.byte	0x74
+ 1018 0507 00       		.sleb128 0
+ 1019 0508 15       		.uleb128 0x15
+ 1020 0509 01       		.uleb128 0x1
+ 1021 050a 52       		.byte	0x52
+ 1022 050b 02       		.uleb128 0x2
+ 1023 050c 76       		.byte	0x76
+ 1024 050d 00       		.sleb128 0
+ 1025 050e 15       		.uleb128 0x15
+ 1026 050f 01       		.uleb128 0x1
+ 1027 0510 53       		.byte	0x53
+ 1028 0511 05       		.uleb128 0x5
+ 1029 0512 03       		.byte	0x3
+ 1030 0513 00000000 		.4byte	.LC0
+ 1031 0517 00       		.byte	0
+ 1032 0518 16       		.uleb128 0x16
+ 1033 0519 4E000000 		.4byte	.LVL43
+ 1034 051d 37060000 		.4byte	0x637
+ 1035 0521 3F050000 		.4byte	0x53f
+ 1036 0525 15       		.uleb128 0x15
+ 1037 0526 01       		.uleb128 0x1
+ 1038 0527 50       		.byte	0x50
+ 1039 0528 02       		.uleb128 0x2
+ 1040 0529 75       		.byte	0x75
+ 1041 052a 00       		.sleb128 0
+ 1042 052b 15       		.uleb128 0x15
+ 1043 052c 01       		.uleb128 0x1
+ 1044 052d 51       		.byte	0x51
+ 1045 052e 02       		.uleb128 0x2
+ 1046 052f 74       		.byte	0x74
+ 1047 0530 00       		.sleb128 0
+ 1048 0531 15       		.uleb128 0x15
+ 1049 0532 01       		.uleb128 0x1
+ 1050 0533 52       		.byte	0x52
+ 1051 0534 02       		.uleb128 0x2
+ 1052 0535 76       		.byte	0x76
+ 1053 0536 00       		.sleb128 0
+ 1054 0537 15       		.uleb128 0x15
+ 1055 0538 01       		.uleb128 0x1
+ 1056 0539 53       		.byte	0x53
+ 1057 053a 03       		.uleb128 0x3
+ 1058 053b 91       		.byte	0x91
+ 1059 053c 00       		.sleb128 0
+ 1060 053d 06       		.byte	0x6
+ 1061 053e 00       		.byte	0
+ 1062 053f 14       		.uleb128 0x14
+ 1063 0540 66000000 		.4byte	.LVL46
+ 1064 0544 37060000 		.4byte	0x637
+ 1065 0548 15       		.uleb128 0x15
+ 1066 0549 01       		.uleb128 0x1
+ 1067 054a 50       		.byte	0x50
+ 1068 054b 02       		.uleb128 0x2
+ 1069 054c 75       		.byte	0x75
+ 1070 054d 00       		.sleb128 0
+ 1071 054e 15       		.uleb128 0x15
+ 1072 054f 01       		.uleb128 0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 23
+
+
+ 1073 0550 51       		.byte	0x51
+ 1074 0551 02       		.uleb128 0x2
+ 1075 0552 74       		.byte	0x74
+ 1076 0553 00       		.sleb128 0
+ 1077 0554 15       		.uleb128 0x15
+ 1078 0555 01       		.uleb128 0x1
+ 1079 0556 52       		.byte	0x52
+ 1080 0557 02       		.uleb128 0x2
+ 1081 0558 76       		.byte	0x76
+ 1082 0559 00       		.sleb128 0
+ 1083 055a 15       		.uleb128 0x15
+ 1084 055b 01       		.uleb128 0x1
+ 1085 055c 53       		.byte	0x53
+ 1086 055d 05       		.uleb128 0x5
+ 1087 055e 03       		.byte	0x3
+ 1088 055f 00000000 		.4byte	.LC0
+ 1089 0563 00       		.byte	0
+ 1090 0564 00       		.byte	0
+ 1091 0565 0E       		.uleb128 0xe
+ 1092 0566 52030000 		.4byte	.LASF68
+ 1093 056a 01       		.byte	0x1
+ 1094 056b 9F       		.byte	0x9f
+ 1095 056c 8C000000 		.4byte	0x8c
+ 1096 0570 00000000 		.4byte	.LFB4
+ 1097 0574 46000000 		.4byte	.LFE4-.LFB4
+ 1098 0578 01       		.uleb128 0x1
+ 1099 0579 9C       		.byte	0x9c
+ 1100 057a 2B060000 		.4byte	0x62b
+ 1101 057e 12       		.uleb128 0x12
+ 1102 057f 51010000 		.4byte	.LASF67
+ 1103 0583 01       		.byte	0x1
+ 1104 0584 9F       		.byte	0x9f
+ 1105 0585 FB020000 		.4byte	0x2fb
+ 1106 0589 39030000 		.4byte	.LLST19
+ 1107 058d 0F       		.uleb128 0xf
+ 1108 058e 7800     		.ascii	"x\000"
+ 1109 0590 01       		.byte	0x1
+ 1110 0591 9F       		.byte	0x9f
+ 1111 0592 8C000000 		.4byte	0x8c
+ 1112 0596 57030000 		.4byte	.LLST20
+ 1113 059a 0F       		.uleb128 0xf
+ 1114 059b 7900     		.ascii	"y\000"
+ 1115 059d 01       		.byte	0x1
+ 1116 059e 9F       		.byte	0x9f
+ 1117 059f 8C000000 		.4byte	0x8c
+ 1118 05a3 78030000 		.4byte	.LLST21
+ 1119 05a7 0F       		.uleb128 0xf
+ 1120 05a8 7700     		.ascii	"w\000"
+ 1121 05aa 01       		.byte	0x1
+ 1122 05ab 9F       		.byte	0x9f
+ 1123 05ac 8C000000 		.4byte	0x8c
+ 1124 05b0 AF030000 		.4byte	.LLST22
+ 1125 05b4 17       		.uleb128 0x17
+ 1126 05b5 7300     		.ascii	"s\000"
+ 1127 05b7 01       		.byte	0x1
+ 1128 05b8 9F       		.byte	0x9f
+ 1129 05b9 81030000 		.4byte	0x381
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 24
+
+
+ 1130 05bd 02       		.uleb128 0x2
+ 1131 05be 91       		.byte	0x91
+ 1132 05bf 00       		.sleb128 0
+ 1133 05c0 10       		.uleb128 0x10
+ 1134 05c1 6900     		.ascii	"i\000"
+ 1135 05c3 01       		.byte	0x1
+ 1136 05c4 A1       		.byte	0xa1
+ 1137 05c5 8C000000 		.4byte	0x8c
+ 1138 05c9 D0030000 		.4byte	.LLST23
+ 1139 05cd 18       		.uleb128 0x18
+ 1140 05ce 636E7400 		.ascii	"cnt\000"
+ 1141 05d2 01       		.byte	0x1
+ 1142 05d3 A2       		.byte	0xa2
+ 1143 05d4 8C000000 		.4byte	0x8c
+ 1144 05d8 01       		.uleb128 0x1
+ 1145 05d9 57       		.byte	0x57
+ 1146 05da 16       		.uleb128 0x16
+ 1147 05db 16000000 		.4byte	.LVL53
+ 1148 05df 3C030000 		.4byte	0x33c
+ 1149 05e3 EE050000 		.4byte	0x5ee
+ 1150 05e7 15       		.uleb128 0x15
+ 1151 05e8 01       		.uleb128 0x1
+ 1152 05e9 50       		.byte	0x50
+ 1153 05ea 02       		.uleb128 0x2
+ 1154 05eb 76       		.byte	0x76
+ 1155 05ec 00       		.sleb128 0
+ 1156 05ed 00       		.byte	0
+ 1157 05ee 16       		.uleb128 0x16
+ 1158 05ef 24000000 		.4byte	.LVL56
+ 1159 05f3 93030000 		.4byte	0x393
+ 1160 05f7 08060000 		.4byte	0x608
+ 1161 05fb 15       		.uleb128 0x15
+ 1162 05fc 01       		.uleb128 0x1
+ 1163 05fd 50       		.byte	0x50
+ 1164 05fe 02       		.uleb128 0x2
+ 1165 05ff 74       		.byte	0x74
+ 1166 0600 00       		.sleb128 0
+ 1167 0601 15       		.uleb128 0x15
+ 1168 0602 01       		.uleb128 0x1
+ 1169 0603 51       		.byte	0x51
+ 1170 0604 02       		.uleb128 0x2
+ 1171 0605 76       		.byte	0x76
+ 1172 0606 00       		.sleb128 0
+ 1173 0607 00       		.byte	0
+ 1174 0608 14       		.uleb128 0x14
+ 1175 0609 32000000 		.4byte	.LVL57
+ 1176 060d 41040000 		.4byte	0x441
+ 1177 0611 15       		.uleb128 0x15
+ 1178 0612 01       		.uleb128 0x1
+ 1179 0613 50       		.byte	0x50
+ 1180 0614 02       		.uleb128 0x2
+ 1181 0615 7A       		.byte	0x7a
+ 1182 0616 00       		.sleb128 0
+ 1183 0617 15       		.uleb128 0x15
+ 1184 0618 01       		.uleb128 0x1
+ 1185 0619 51       		.byte	0x51
+ 1186 061a 02       		.uleb128 0x2
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 25
+
+
+ 1187 061b 79       		.byte	0x79
+ 1188 061c 00       		.sleb128 0
+ 1189 061d 15       		.uleb128 0x15
+ 1190 061e 01       		.uleb128 0x1
+ 1191 061f 52       		.byte	0x52
+ 1192 0620 02       		.uleb128 0x2
+ 1193 0621 75       		.byte	0x75
+ 1194 0622 00       		.sleb128 0
+ 1195 0623 15       		.uleb128 0x15
+ 1196 0624 01       		.uleb128 0x1
+ 1197 0625 53       		.byte	0x53
+ 1198 0626 02       		.uleb128 0x2
+ 1199 0627 78       		.byte	0x78
+ 1200 0628 00       		.sleb128 0
+ 1201 0629 00       		.byte	0
+ 1202 062a 00       		.byte	0
+ 1203 062b 19       		.uleb128 0x19
+ 1204 062c 2C020000 		.4byte	.LASF69
+ 1205 0630 2C020000 		.4byte	.LASF69
+ 1206 0634 04       		.byte	0x4
+ 1207 0635 F003     		.2byte	0x3f0
+ 1208 0637 19       		.uleb128 0x19
+ 1209 0638 C7040000 		.4byte	.LASF70
+ 1210 063c C7040000 		.4byte	.LASF70
+ 1211 0640 04       		.byte	0x4
+ 1212 0641 EB03     		.2byte	0x3eb
+ 1213 0643 00       		.byte	0
+ 1214              		.section	.debug_abbrev,"",%progbits
+ 1215              	.Ldebug_abbrev0:
+ 1216 0000 01       		.uleb128 0x1
+ 1217 0001 11       		.uleb128 0x11
+ 1218 0002 01       		.byte	0x1
+ 1219 0003 25       		.uleb128 0x25
+ 1220 0004 0E       		.uleb128 0xe
+ 1221 0005 13       		.uleb128 0x13
+ 1222 0006 0B       		.uleb128 0xb
+ 1223 0007 03       		.uleb128 0x3
+ 1224 0008 0E       		.uleb128 0xe
+ 1225 0009 1B       		.uleb128 0x1b
+ 1226 000a 0E       		.uleb128 0xe
+ 1227 000b 55       		.uleb128 0x55
+ 1228 000c 17       		.uleb128 0x17
+ 1229 000d 11       		.uleb128 0x11
+ 1230 000e 01       		.uleb128 0x1
+ 1231 000f 10       		.uleb128 0x10
+ 1232 0010 17       		.uleb128 0x17
+ 1233 0011 00       		.byte	0
+ 1234 0012 00       		.byte	0
+ 1235 0013 02       		.uleb128 0x2
+ 1236 0014 24       		.uleb128 0x24
+ 1237 0015 00       		.byte	0
+ 1238 0016 0B       		.uleb128 0xb
+ 1239 0017 0B       		.uleb128 0xb
+ 1240 0018 3E       		.uleb128 0x3e
+ 1241 0019 0B       		.uleb128 0xb
+ 1242 001a 03       		.uleb128 0x3
+ 1243 001b 0E       		.uleb128 0xe
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 26
+
+
+ 1244 001c 00       		.byte	0
+ 1245 001d 00       		.byte	0
+ 1246 001e 03       		.uleb128 0x3
+ 1247 001f 16       		.uleb128 0x16
+ 1248 0020 00       		.byte	0
+ 1249 0021 03       		.uleb128 0x3
+ 1250 0022 0E       		.uleb128 0xe
+ 1251 0023 3A       		.uleb128 0x3a
+ 1252 0024 0B       		.uleb128 0xb
+ 1253 0025 3B       		.uleb128 0x3b
+ 1254 0026 0B       		.uleb128 0xb
+ 1255 0027 49       		.uleb128 0x49
+ 1256 0028 13       		.uleb128 0x13
+ 1257 0029 00       		.byte	0
+ 1258 002a 00       		.byte	0
+ 1259 002b 04       		.uleb128 0x4
+ 1260 002c 24       		.uleb128 0x24
+ 1261 002d 00       		.byte	0
+ 1262 002e 0B       		.uleb128 0xb
+ 1263 002f 0B       		.uleb128 0xb
+ 1264 0030 3E       		.uleb128 0x3e
+ 1265 0031 0B       		.uleb128 0xb
+ 1266 0032 03       		.uleb128 0x3
+ 1267 0033 08       		.uleb128 0x8
+ 1268 0034 00       		.byte	0
+ 1269 0035 00       		.byte	0
+ 1270 0036 05       		.uleb128 0x5
+ 1271 0037 0F       		.uleb128 0xf
+ 1272 0038 00       		.byte	0
+ 1273 0039 0B       		.uleb128 0xb
+ 1274 003a 0B       		.uleb128 0xb
+ 1275 003b 00       		.byte	0
+ 1276 003c 00       		.byte	0
+ 1277 003d 06       		.uleb128 0x6
+ 1278 003e 13       		.uleb128 0x13
+ 1279 003f 01       		.byte	0x1
+ 1280 0040 03       		.uleb128 0x3
+ 1281 0041 0E       		.uleb128 0xe
+ 1282 0042 0B       		.uleb128 0xb
+ 1283 0043 0B       		.uleb128 0xb
+ 1284 0044 3A       		.uleb128 0x3a
+ 1285 0045 0B       		.uleb128 0xb
+ 1286 0046 3B       		.uleb128 0x3b
+ 1287 0047 05       		.uleb128 0x5
+ 1288 0048 01       		.uleb128 0x1
+ 1289 0049 13       		.uleb128 0x13
+ 1290 004a 00       		.byte	0
+ 1291 004b 00       		.byte	0
+ 1292 004c 07       		.uleb128 0x7
+ 1293 004d 0D       		.uleb128 0xd
+ 1294 004e 00       		.byte	0
+ 1295 004f 03       		.uleb128 0x3
+ 1296 0050 0E       		.uleb128 0xe
+ 1297 0051 3A       		.uleb128 0x3a
+ 1298 0052 0B       		.uleb128 0xb
+ 1299 0053 3B       		.uleb128 0x3b
+ 1300 0054 05       		.uleb128 0x5
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 27
+
+
+ 1301 0055 49       		.uleb128 0x49
+ 1302 0056 13       		.uleb128 0x13
+ 1303 0057 38       		.uleb128 0x38
+ 1304 0058 0B       		.uleb128 0xb
+ 1305 0059 00       		.byte	0
+ 1306 005a 00       		.byte	0
+ 1307 005b 08       		.uleb128 0x8
+ 1308 005c 13       		.uleb128 0x13
+ 1309 005d 01       		.byte	0x1
+ 1310 005e 03       		.uleb128 0x3
+ 1311 005f 0E       		.uleb128 0xe
+ 1312 0060 0B       		.uleb128 0xb
+ 1313 0061 0B       		.uleb128 0xb
+ 1314 0062 3A       		.uleb128 0x3a
+ 1315 0063 0B       		.uleb128 0xb
+ 1316 0064 3B       		.uleb128 0x3b
+ 1317 0065 0B       		.uleb128 0xb
+ 1318 0066 01       		.uleb128 0x1
+ 1319 0067 13       		.uleb128 0x13
+ 1320 0068 00       		.byte	0
+ 1321 0069 00       		.byte	0
+ 1322 006a 09       		.uleb128 0x9
+ 1323 006b 0D       		.uleb128 0xd
+ 1324 006c 00       		.byte	0
+ 1325 006d 03       		.uleb128 0x3
+ 1326 006e 0E       		.uleb128 0xe
+ 1327 006f 3A       		.uleb128 0x3a
+ 1328 0070 0B       		.uleb128 0xb
+ 1329 0071 3B       		.uleb128 0x3b
+ 1330 0072 0B       		.uleb128 0xb
+ 1331 0073 49       		.uleb128 0x49
+ 1332 0074 13       		.uleb128 0x13
+ 1333 0075 38       		.uleb128 0x38
+ 1334 0076 0B       		.uleb128 0xb
+ 1335 0077 00       		.byte	0
+ 1336 0078 00       		.byte	0
+ 1337 0079 0A       		.uleb128 0xa
+ 1338 007a 0F       		.uleb128 0xf
+ 1339 007b 00       		.byte	0
+ 1340 007c 0B       		.uleb128 0xb
+ 1341 007d 0B       		.uleb128 0xb
+ 1342 007e 49       		.uleb128 0x49
+ 1343 007f 13       		.uleb128 0x13
+ 1344 0080 00       		.byte	0
+ 1345 0081 00       		.byte	0
+ 1346 0082 0B       		.uleb128 0xb
+ 1347 0083 15       		.uleb128 0x15
+ 1348 0084 01       		.byte	0x1
+ 1349 0085 27       		.uleb128 0x27
+ 1350 0086 19       		.uleb128 0x19
+ 1351 0087 49       		.uleb128 0x49
+ 1352 0088 13       		.uleb128 0x13
+ 1353 0089 01       		.uleb128 0x1
+ 1354 008a 13       		.uleb128 0x13
+ 1355 008b 00       		.byte	0
+ 1356 008c 00       		.byte	0
+ 1357 008d 0C       		.uleb128 0xc
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 28
+
+
+ 1358 008e 05       		.uleb128 0x5
+ 1359 008f 00       		.byte	0
+ 1360 0090 49       		.uleb128 0x49
+ 1361 0091 13       		.uleb128 0x13
+ 1362 0092 00       		.byte	0
+ 1363 0093 00       		.byte	0
+ 1364 0094 0D       		.uleb128 0xd
+ 1365 0095 26       		.uleb128 0x26
+ 1366 0096 00       		.byte	0
+ 1367 0097 49       		.uleb128 0x49
+ 1368 0098 13       		.uleb128 0x13
+ 1369 0099 00       		.byte	0
+ 1370 009a 00       		.byte	0
+ 1371 009b 0E       		.uleb128 0xe
+ 1372 009c 2E       		.uleb128 0x2e
+ 1373 009d 01       		.byte	0x1
+ 1374 009e 3F       		.uleb128 0x3f
+ 1375 009f 19       		.uleb128 0x19
+ 1376 00a0 03       		.uleb128 0x3
+ 1377 00a1 0E       		.uleb128 0xe
+ 1378 00a2 3A       		.uleb128 0x3a
+ 1379 00a3 0B       		.uleb128 0xb
+ 1380 00a4 3B       		.uleb128 0x3b
+ 1381 00a5 0B       		.uleb128 0xb
+ 1382 00a6 27       		.uleb128 0x27
+ 1383 00a7 19       		.uleb128 0x19
+ 1384 00a8 49       		.uleb128 0x49
+ 1385 00a9 13       		.uleb128 0x13
+ 1386 00aa 11       		.uleb128 0x11
+ 1387 00ab 01       		.uleb128 0x1
+ 1388 00ac 12       		.uleb128 0x12
+ 1389 00ad 06       		.uleb128 0x6
+ 1390 00ae 40       		.uleb128 0x40
+ 1391 00af 18       		.uleb128 0x18
+ 1392 00b0 9742     		.uleb128 0x2117
+ 1393 00b2 19       		.uleb128 0x19
+ 1394 00b3 01       		.uleb128 0x1
+ 1395 00b4 13       		.uleb128 0x13
+ 1396 00b5 00       		.byte	0
+ 1397 00b6 00       		.byte	0
+ 1398 00b7 0F       		.uleb128 0xf
+ 1399 00b8 05       		.uleb128 0x5
+ 1400 00b9 00       		.byte	0
+ 1401 00ba 03       		.uleb128 0x3
+ 1402 00bb 08       		.uleb128 0x8
+ 1403 00bc 3A       		.uleb128 0x3a
+ 1404 00bd 0B       		.uleb128 0xb
+ 1405 00be 3B       		.uleb128 0x3b
+ 1406 00bf 0B       		.uleb128 0xb
+ 1407 00c0 49       		.uleb128 0x49
+ 1408 00c1 13       		.uleb128 0x13
+ 1409 00c2 02       		.uleb128 0x2
+ 1410 00c3 17       		.uleb128 0x17
+ 1411 00c4 00       		.byte	0
+ 1412 00c5 00       		.byte	0
+ 1413 00c6 10       		.uleb128 0x10
+ 1414 00c7 34       		.uleb128 0x34
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 29
+
+
+ 1415 00c8 00       		.byte	0
+ 1416 00c9 03       		.uleb128 0x3
+ 1417 00ca 08       		.uleb128 0x8
+ 1418 00cb 3A       		.uleb128 0x3a
+ 1419 00cc 0B       		.uleb128 0xb
+ 1420 00cd 3B       		.uleb128 0x3b
+ 1421 00ce 0B       		.uleb128 0xb
+ 1422 00cf 49       		.uleb128 0x49
+ 1423 00d0 13       		.uleb128 0x13
+ 1424 00d1 02       		.uleb128 0x2
+ 1425 00d2 17       		.uleb128 0x17
+ 1426 00d3 00       		.byte	0
+ 1427 00d4 00       		.byte	0
+ 1428 00d5 11       		.uleb128 0x11
+ 1429 00d6 34       		.uleb128 0x34
+ 1430 00d7 00       		.byte	0
+ 1431 00d8 03       		.uleb128 0x3
+ 1432 00d9 0E       		.uleb128 0xe
+ 1433 00da 3A       		.uleb128 0x3a
+ 1434 00db 0B       		.uleb128 0xb
+ 1435 00dc 3B       		.uleb128 0x3b
+ 1436 00dd 0B       		.uleb128 0xb
+ 1437 00de 49       		.uleb128 0x49
+ 1438 00df 13       		.uleb128 0x13
+ 1439 00e0 02       		.uleb128 0x2
+ 1440 00e1 17       		.uleb128 0x17
+ 1441 00e2 00       		.byte	0
+ 1442 00e3 00       		.byte	0
+ 1443 00e4 12       		.uleb128 0x12
+ 1444 00e5 05       		.uleb128 0x5
+ 1445 00e6 00       		.byte	0
+ 1446 00e7 03       		.uleb128 0x3
+ 1447 00e8 0E       		.uleb128 0xe
+ 1448 00e9 3A       		.uleb128 0x3a
+ 1449 00ea 0B       		.uleb128 0xb
+ 1450 00eb 3B       		.uleb128 0x3b
+ 1451 00ec 0B       		.uleb128 0xb
+ 1452 00ed 49       		.uleb128 0x49
+ 1453 00ee 13       		.uleb128 0x13
+ 1454 00ef 02       		.uleb128 0x2
+ 1455 00f0 17       		.uleb128 0x17
+ 1456 00f1 00       		.byte	0
+ 1457 00f2 00       		.byte	0
+ 1458 00f3 13       		.uleb128 0x13
+ 1459 00f4 2E       		.uleb128 0x2e
+ 1460 00f5 01       		.byte	0x1
+ 1461 00f6 3F       		.uleb128 0x3f
+ 1462 00f7 19       		.uleb128 0x19
+ 1463 00f8 03       		.uleb128 0x3
+ 1464 00f9 0E       		.uleb128 0xe
+ 1465 00fa 3A       		.uleb128 0x3a
+ 1466 00fb 0B       		.uleb128 0xb
+ 1467 00fc 3B       		.uleb128 0x3b
+ 1468 00fd 0B       		.uleb128 0xb
+ 1469 00fe 27       		.uleb128 0x27
+ 1470 00ff 19       		.uleb128 0x19
+ 1471 0100 11       		.uleb128 0x11
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 30
+
+
+ 1472 0101 01       		.uleb128 0x1
+ 1473 0102 12       		.uleb128 0x12
+ 1474 0103 06       		.uleb128 0x6
+ 1475 0104 40       		.uleb128 0x40
+ 1476 0105 18       		.uleb128 0x18
+ 1477 0106 9742     		.uleb128 0x2117
+ 1478 0108 19       		.uleb128 0x19
+ 1479 0109 01       		.uleb128 0x1
+ 1480 010a 13       		.uleb128 0x13
+ 1481 010b 00       		.byte	0
+ 1482 010c 00       		.byte	0
+ 1483 010d 14       		.uleb128 0x14
+ 1484 010e 898201   		.uleb128 0x4109
+ 1485 0111 01       		.byte	0x1
+ 1486 0112 11       		.uleb128 0x11
+ 1487 0113 01       		.uleb128 0x1
+ 1488 0114 31       		.uleb128 0x31
+ 1489 0115 13       		.uleb128 0x13
+ 1490 0116 00       		.byte	0
+ 1491 0117 00       		.byte	0
+ 1492 0118 15       		.uleb128 0x15
+ 1493 0119 8A8201   		.uleb128 0x410a
+ 1494 011c 00       		.byte	0
+ 1495 011d 02       		.uleb128 0x2
+ 1496 011e 18       		.uleb128 0x18
+ 1497 011f 9142     		.uleb128 0x2111
+ 1498 0121 18       		.uleb128 0x18
+ 1499 0122 00       		.byte	0
+ 1500 0123 00       		.byte	0
+ 1501 0124 16       		.uleb128 0x16
+ 1502 0125 898201   		.uleb128 0x4109
+ 1503 0128 01       		.byte	0x1
+ 1504 0129 11       		.uleb128 0x11
+ 1505 012a 01       		.uleb128 0x1
+ 1506 012b 31       		.uleb128 0x31
+ 1507 012c 13       		.uleb128 0x13
+ 1508 012d 01       		.uleb128 0x1
+ 1509 012e 13       		.uleb128 0x13
+ 1510 012f 00       		.byte	0
+ 1511 0130 00       		.byte	0
+ 1512 0131 17       		.uleb128 0x17
+ 1513 0132 05       		.uleb128 0x5
+ 1514 0133 00       		.byte	0
+ 1515 0134 03       		.uleb128 0x3
+ 1516 0135 08       		.uleb128 0x8
+ 1517 0136 3A       		.uleb128 0x3a
+ 1518 0137 0B       		.uleb128 0xb
+ 1519 0138 3B       		.uleb128 0x3b
+ 1520 0139 0B       		.uleb128 0xb
+ 1521 013a 49       		.uleb128 0x49
+ 1522 013b 13       		.uleb128 0x13
+ 1523 013c 02       		.uleb128 0x2
+ 1524 013d 18       		.uleb128 0x18
+ 1525 013e 00       		.byte	0
+ 1526 013f 00       		.byte	0
+ 1527 0140 18       		.uleb128 0x18
+ 1528 0141 34       		.uleb128 0x34
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 31
+
+
+ 1529 0142 00       		.byte	0
+ 1530 0143 03       		.uleb128 0x3
+ 1531 0144 08       		.uleb128 0x8
+ 1532 0145 3A       		.uleb128 0x3a
+ 1533 0146 0B       		.uleb128 0xb
+ 1534 0147 3B       		.uleb128 0x3b
+ 1535 0148 0B       		.uleb128 0xb
+ 1536 0149 49       		.uleb128 0x49
+ 1537 014a 13       		.uleb128 0x13
+ 1538 014b 02       		.uleb128 0x2
+ 1539 014c 18       		.uleb128 0x18
+ 1540 014d 00       		.byte	0
+ 1541 014e 00       		.byte	0
+ 1542 014f 19       		.uleb128 0x19
+ 1543 0150 2E       		.uleb128 0x2e
+ 1544 0151 00       		.byte	0
+ 1545 0152 3F       		.uleb128 0x3f
+ 1546 0153 19       		.uleb128 0x19
+ 1547 0154 3C       		.uleb128 0x3c
+ 1548 0155 19       		.uleb128 0x19
+ 1549 0156 6E       		.uleb128 0x6e
+ 1550 0157 0E       		.uleb128 0xe
+ 1551 0158 03       		.uleb128 0x3
+ 1552 0159 0E       		.uleb128 0xe
+ 1553 015a 3A       		.uleb128 0x3a
+ 1554 015b 0B       		.uleb128 0xb
+ 1555 015c 3B       		.uleb128 0x3b
+ 1556 015d 05       		.uleb128 0x5
+ 1557 015e 00       		.byte	0
+ 1558 015f 00       		.byte	0
+ 1559 0160 00       		.byte	0
+ 1560              		.section	.debug_loc,"",%progbits
+ 1561              	.Ldebug_loc0:
+ 1562              	.LLST0:
+ 1563 0000 00000000 		.4byte	.LVL0
+ 1564 0004 06000000 		.4byte	.LVL1
+ 1565 0008 0100     		.2byte	0x1
+ 1566 000a 50       		.byte	0x50
+ 1567 000b 06000000 		.4byte	.LVL1
+ 1568 000f 16000000 		.4byte	.LVL6
+ 1569 0013 0100     		.2byte	0x1
+ 1570 0015 53       		.byte	0x53
+ 1571 0016 16000000 		.4byte	.LVL6
+ 1572 001a 18000000 		.4byte	.LVL7
+ 1573 001e 0100     		.2byte	0x1
+ 1574 0020 50       		.byte	0x50
+ 1575 0021 18000000 		.4byte	.LVL7
+ 1576 0025 1A000000 		.4byte	.LFE0
+ 1577 0029 0100     		.2byte	0x1
+ 1578 002b 53       		.byte	0x53
+ 1579 002c 00000000 		.4byte	0
+ 1580 0030 00000000 		.4byte	0
+ 1581              	.LLST1:
+ 1582 0034 08000000 		.4byte	.LVL2
+ 1583 0038 16000000 		.4byte	.LVL6
+ 1584 003c 0100     		.2byte	0x1
+ 1585 003e 52       		.byte	0x52
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 32
+
+
+ 1586 003f 00000000 		.4byte	0
+ 1587 0043 00000000 		.4byte	0
+ 1588              	.LLST2:
+ 1589 0047 00000000 		.4byte	.LVL0
+ 1590 004b 06000000 		.4byte	.LVL1
+ 1591 004f 0200     		.2byte	0x2
+ 1592 0051 31       		.byte	0x31
+ 1593 0052 9F       		.byte	0x9f
+ 1594 0053 06000000 		.4byte	.LVL1
+ 1595 0057 12000000 		.4byte	.LVL4
+ 1596 005b 0100     		.2byte	0x1
+ 1597 005d 50       		.byte	0x50
+ 1598 005e 14000000 		.4byte	.LVL5
+ 1599 0062 16000000 		.4byte	.LVL6
+ 1600 0066 0100     		.2byte	0x1
+ 1601 0068 50       		.byte	0x50
+ 1602 0069 16000000 		.4byte	.LVL6
+ 1603 006d 18000000 		.4byte	.LVL7
+ 1604 0071 0200     		.2byte	0x2
+ 1605 0073 31       		.byte	0x31
+ 1606 0074 9F       		.byte	0x9f
+ 1607 0075 00000000 		.4byte	0
+ 1608 0079 00000000 		.4byte	0
+ 1609              	.LLST3:
+ 1610 007d 00000000 		.4byte	.LVL8
+ 1611 0081 1E000000 		.4byte	.LVL15
+ 1612 0085 0100     		.2byte	0x1
+ 1613 0087 50       		.byte	0x50
+ 1614 0088 1E000000 		.4byte	.LVL15
+ 1615 008c 20000000 		.4byte	.LVL16
+ 1616 0090 0400     		.2byte	0x4
+ 1617 0092 F3       		.byte	0xf3
+ 1618 0093 01       		.uleb128 0x1
+ 1619 0094 50       		.byte	0x50
+ 1620 0095 9F       		.byte	0x9f
+ 1621 0096 20000000 		.4byte	.LVL16
+ 1622 009a 22000000 		.4byte	.LVL17
+ 1623 009e 0100     		.2byte	0x1
+ 1624 00a0 50       		.byte	0x50
+ 1625 00a1 22000000 		.4byte	.LVL17
+ 1626 00a5 24000000 		.4byte	.LVL18
+ 1627 00a9 0400     		.2byte	0x4
+ 1628 00ab F3       		.byte	0xf3
+ 1629 00ac 01       		.uleb128 0x1
+ 1630 00ad 50       		.byte	0x50
+ 1631 00ae 9F       		.byte	0x9f
+ 1632 00af 24000000 		.4byte	.LVL18
+ 1633 00b3 26000000 		.4byte	.LVL19
+ 1634 00b7 0100     		.2byte	0x1
+ 1635 00b9 50       		.byte	0x50
+ 1636 00ba 26000000 		.4byte	.LVL19
+ 1637 00be 2A000000 		.4byte	.LFE1
+ 1638 00c2 0400     		.2byte	0x4
+ 1639 00c4 F3       		.byte	0xf3
+ 1640 00c5 01       		.uleb128 0x1
+ 1641 00c6 50       		.byte	0x50
+ 1642 00c7 9F       		.byte	0x9f
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 33
+
+
+ 1643 00c8 00000000 		.4byte	0
+ 1644 00cc 00000000 		.4byte	0
+ 1645              	.LLST4:
+ 1646 00d0 00000000 		.4byte	.LVL8
+ 1647 00d4 0E000000 		.4byte	.LVL11
+ 1648 00d8 0100     		.2byte	0x1
+ 1649 00da 51       		.byte	0x51
+ 1650 00db 0E000000 		.4byte	.LVL11
+ 1651 00df 2A000000 		.4byte	.LFE1
+ 1652 00e3 0100     		.2byte	0x1
+ 1653 00e5 51       		.byte	0x51
+ 1654 00e6 00000000 		.4byte	0
+ 1655 00ea 00000000 		.4byte	0
+ 1656              	.LLST5:
+ 1657 00ee 0A000000 		.4byte	.LVL10
+ 1658 00f2 1C000000 		.4byte	.LVL14
+ 1659 00f6 0100     		.2byte	0x1
+ 1660 00f8 53       		.byte	0x53
+ 1661 00f9 20000000 		.4byte	.LVL16
+ 1662 00fd 2A000000 		.4byte	.LFE1
+ 1663 0101 0100     		.2byte	0x1
+ 1664 0103 53       		.byte	0x53
+ 1665 0104 00000000 		.4byte	0
+ 1666 0108 00000000 		.4byte	0
+ 1667              	.LLST6:
+ 1668 010c 00000000 		.4byte	.LVL8
+ 1669 0110 08000000 		.4byte	.LVL9
+ 1670 0114 0200     		.2byte	0x2
+ 1671 0116 31       		.byte	0x31
+ 1672 0117 9F       		.byte	0x9f
+ 1673 0118 08000000 		.4byte	.LVL9
+ 1674 011c 18000000 		.4byte	.LVL12
+ 1675 0120 0100     		.2byte	0x1
+ 1676 0122 52       		.byte	0x52
+ 1677 0123 1A000000 		.4byte	.LVL13
+ 1678 0127 1C000000 		.4byte	.LVL14
+ 1679 012b 0100     		.2byte	0x1
+ 1680 012d 52       		.byte	0x52
+ 1681 012e 1C000000 		.4byte	.LVL14
+ 1682 0132 20000000 		.4byte	.LVL16
+ 1683 0136 0200     		.2byte	0x2
+ 1684 0138 31       		.byte	0x31
+ 1685 0139 9F       		.byte	0x9f
+ 1686 013a 20000000 		.4byte	.LVL16
+ 1687 013e 2A000000 		.4byte	.LFE1
+ 1688 0142 0100     		.2byte	0x1
+ 1689 0144 52       		.byte	0x52
+ 1690 0145 00000000 		.4byte	0
+ 1691 0149 00000000 		.4byte	0
+ 1692              	.LLST7:
+ 1693 014d 00000000 		.4byte	.LVL20
+ 1694 0151 0C000000 		.4byte	.LVL22
+ 1695 0155 0100     		.2byte	0x1
+ 1696 0157 50       		.byte	0x50
+ 1697 0158 0C000000 		.4byte	.LVL22
+ 1698 015c 2A000000 		.4byte	.LVL27
+ 1699 0160 0100     		.2byte	0x1
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 34
+
+
+ 1700 0162 54       		.byte	0x54
+ 1701 0163 2A000000 		.4byte	.LVL27
+ 1702 0167 2C000000 		.4byte	.LFE2
+ 1703 016b 0100     		.2byte	0x1
+ 1704 016d 50       		.byte	0x50
+ 1705 016e 00000000 		.4byte	0
+ 1706 0172 00000000 		.4byte	0
+ 1707              	.LLST8:
+ 1708 0176 00000000 		.4byte	.LVL20
+ 1709 017a 0A000000 		.4byte	.LVL21
+ 1710 017e 0100     		.2byte	0x1
+ 1711 0180 51       		.byte	0x51
+ 1712 0181 0A000000 		.4byte	.LVL21
+ 1713 0185 2A000000 		.4byte	.LVL27
+ 1714 0189 0400     		.2byte	0x4
+ 1715 018b F3       		.byte	0xf3
+ 1716 018c 01       		.uleb128 0x1
+ 1717 018d 51       		.byte	0x51
+ 1718 018e 9F       		.byte	0x9f
+ 1719 018f 2A000000 		.4byte	.LVL27
+ 1720 0193 2C000000 		.4byte	.LFE2
+ 1721 0197 0100     		.2byte	0x1
+ 1722 0199 51       		.byte	0x51
+ 1723 019a 00000000 		.4byte	0
+ 1724 019e 00000000 		.4byte	0
+ 1725              	.LLST9:
+ 1726 01a2 00000000 		.4byte	.LVL20
+ 1727 01a6 0F000000 		.4byte	.LVL23-1
+ 1728 01aa 0100     		.2byte	0x1
+ 1729 01ac 52       		.byte	0x52
+ 1730 01ad 0F000000 		.4byte	.LVL23-1
+ 1731 01b1 10000000 		.4byte	.LVL23
+ 1732 01b5 0400     		.2byte	0x4
+ 1733 01b7 F3       		.byte	0xf3
+ 1734 01b8 01       		.uleb128 0x1
+ 1735 01b9 52       		.byte	0x52
+ 1736 01ba 9F       		.byte	0x9f
+ 1737 01bb 10000000 		.4byte	.LVL23
+ 1738 01bf 14000000 		.4byte	.LVL24
+ 1739 01c3 0100     		.2byte	0x1
+ 1740 01c5 50       		.byte	0x50
+ 1741 01c6 14000000 		.4byte	.LVL24
+ 1742 01ca 2C000000 		.4byte	.LFE2
+ 1743 01ce 0100     		.2byte	0x1
+ 1744 01d0 52       		.byte	0x52
+ 1745 01d1 00000000 		.4byte	0
+ 1746 01d5 00000000 		.4byte	0
+ 1747              	.LLST10:
+ 1748 01d9 00000000 		.4byte	.LVL28
+ 1749 01dd 11000000 		.4byte	.LVL31-1
+ 1750 01e1 0100     		.2byte	0x1
+ 1751 01e3 50       		.byte	0x50
+ 1752 01e4 11000000 		.4byte	.LVL31-1
+ 1753 01e8 76000000 		.4byte	.LVL50
+ 1754 01ec 0100     		.2byte	0x1
+ 1755 01ee 55       		.byte	0x55
+ 1756 01ef 76000000 		.4byte	.LVL50
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 35
+
+
+ 1757 01f3 7C000000 		.4byte	.LFE3
+ 1758 01f7 0400     		.2byte	0x4
+ 1759 01f9 F3       		.byte	0xf3
+ 1760 01fa 01       		.uleb128 0x1
+ 1761 01fb 50       		.byte	0x50
+ 1762 01fc 9F       		.byte	0x9f
+ 1763 01fd 00000000 		.4byte	0
+ 1764 0201 00000000 		.4byte	0
+ 1765              	.LLST11:
+ 1766 0205 00000000 		.4byte	.LVL28
+ 1767 0209 0E000000 		.4byte	.LVL30
+ 1768 020d 0100     		.2byte	0x1
+ 1769 020f 51       		.byte	0x51
+ 1770 0210 0E000000 		.4byte	.LVL30
+ 1771 0214 7C000000 		.4byte	.LFE3
+ 1772 0218 0400     		.2byte	0x4
+ 1773 021a F3       		.byte	0xf3
+ 1774 021b 01       		.uleb128 0x1
+ 1775 021c 51       		.byte	0x51
+ 1776 021d 9F       		.byte	0x9f
+ 1777 021e 00000000 		.4byte	0
+ 1778 0222 00000000 		.4byte	0
+ 1779              	.LLST12:
+ 1780 0226 00000000 		.4byte	.LVL28
+ 1781 022a 11000000 		.4byte	.LVL31-1
+ 1782 022e 0100     		.2byte	0x1
+ 1783 0230 52       		.byte	0x52
+ 1784 0231 11000000 		.4byte	.LVL31-1
+ 1785 0235 7C000000 		.4byte	.LFE3
+ 1786 0239 0400     		.2byte	0x4
+ 1787 023b F3       		.byte	0xf3
+ 1788 023c 01       		.uleb128 0x1
+ 1789 023d 52       		.byte	0x52
+ 1790 023e 9F       		.byte	0x9f
+ 1791 023f 00000000 		.4byte	0
+ 1792 0243 00000000 		.4byte	0
+ 1793              	.LLST13:
+ 1794 0247 00000000 		.4byte	.LVL28
+ 1795 024b 11000000 		.4byte	.LVL31-1
+ 1796 024f 0100     		.2byte	0x1
+ 1797 0251 53       		.byte	0x53
+ 1798 0252 11000000 		.4byte	.LVL31-1
+ 1799 0256 7C000000 		.4byte	.LFE3
+ 1800 025a 0400     		.2byte	0x4
+ 1801 025c F3       		.byte	0xf3
+ 1802 025d 01       		.uleb128 0x1
+ 1803 025e 53       		.byte	0x53
+ 1804 025f 9F       		.byte	0x9f
+ 1805 0260 00000000 		.4byte	0
+ 1806 0264 00000000 		.4byte	0
+ 1807              	.LLST14:
+ 1808 0268 00000000 		.4byte	.LVL28
+ 1809 026c 76000000 		.4byte	.LVL50
+ 1810 0270 0200     		.2byte	0x2
+ 1811 0272 91       		.byte	0x91
+ 1812 0273 00       		.sleb128 0
+ 1813 0274 76000000 		.4byte	.LVL50
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 36
+
+
+ 1814 0278 7C000000 		.4byte	.LFE3
+ 1815 027c 0200     		.2byte	0x2
+ 1816 027e 7D       		.byte	0x7d
+ 1817 027f 00       		.sleb128 0
+ 1818 0280 00000000 		.4byte	0
+ 1819 0284 00000000 		.4byte	0
+ 1820              	.LLST15:
+ 1821 0288 0C000000 		.4byte	.LVL29
+ 1822 028c 16000000 		.4byte	.LVL32
+ 1823 0290 0200     		.2byte	0x2
+ 1824 0292 30       		.byte	0x30
+ 1825 0293 9F       		.byte	0x9f
+ 1826 0294 16000000 		.4byte	.LVL32
+ 1827 0298 1A000000 		.4byte	.LVL33
+ 1828 029c 0100     		.2byte	0x1
+ 1829 029e 58       		.byte	0x58
+ 1830 029f 1A000000 		.4byte	.LVL33
+ 1831 02a3 20000000 		.4byte	.LVL35
+ 1832 02a7 0100     		.2byte	0x1
+ 1833 02a9 59       		.byte	0x59
+ 1834 02aa 20000000 		.4byte	.LVL35
+ 1835 02ae 24000000 		.4byte	.LVL36
+ 1836 02b2 0200     		.2byte	0x2
+ 1837 02b4 30       		.byte	0x30
+ 1838 02b5 9F       		.byte	0x9f
+ 1839 02b6 24000000 		.4byte	.LVL36
+ 1840 02ba 26000000 		.4byte	.LVL37
+ 1841 02be 0100     		.2byte	0x1
+ 1842 02c0 59       		.byte	0x59
+ 1843 02c1 00000000 		.4byte	0
+ 1844 02c5 00000000 		.4byte	0
+ 1845              	.LLST16:
+ 1846 02c9 12000000 		.4byte	.LVL31
+ 1847 02cd 2E000000 		.4byte	.LVL39
+ 1848 02d1 0100     		.2byte	0x1
+ 1849 02d3 50       		.byte	0x50
+ 1850 02d4 00000000 		.4byte	0
+ 1851 02d8 00000000 		.4byte	0
+ 1852              	.LLST17:
+ 1853 02dc 24000000 		.4byte	.LVL36
+ 1854 02e0 2E000000 		.4byte	.LVL39
+ 1855 02e4 0100     		.2byte	0x1
+ 1856 02e6 57       		.byte	0x57
+ 1857 02e7 2E000000 		.4byte	.LVL39
+ 1858 02eb 3C000000 		.4byte	.LVL41
+ 1859 02ef 0100     		.2byte	0x1
+ 1860 02f1 54       		.byte	0x54
+ 1861 02f2 3E000000 		.4byte	.LVL42
+ 1862 02f6 68000000 		.4byte	.LVL47
+ 1863 02fa 0100     		.2byte	0x1
+ 1864 02fc 54       		.byte	0x54
+ 1865 02fd 6A000000 		.4byte	.LVL48
+ 1866 0301 70000000 		.4byte	.LVL49
+ 1867 0305 0100     		.2byte	0x1
+ 1868 0307 54       		.byte	0x54
+ 1869 0308 70000000 		.4byte	.LVL49
+ 1870 030c 7C000000 		.4byte	.LFE3
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 37
+
+
+ 1871 0310 0100     		.2byte	0x1
+ 1872 0312 50       		.byte	0x50
+ 1873 0313 00000000 		.4byte	0
+ 1874 0317 00000000 		.4byte	0
+ 1875              	.LLST18:
+ 1876 031b 2A000000 		.4byte	.LVL38
+ 1877 031f 58000000 		.4byte	.LVL45
+ 1878 0323 0100     		.2byte	0x1
+ 1879 0325 59       		.byte	0x59
+ 1880 0326 58000000 		.4byte	.LVL45
+ 1881 032a 76000000 		.4byte	.LVL50
+ 1882 032e 0100     		.2byte	0x1
+ 1883 0330 58       		.byte	0x58
+ 1884 0331 00000000 		.4byte	0
+ 1885 0335 00000000 		.4byte	0
+ 1886              	.LLST19:
+ 1887 0339 00000000 		.4byte	.LVL51
+ 1888 033d 12000000 		.4byte	.LVL52
+ 1889 0341 0100     		.2byte	0x1
+ 1890 0343 50       		.byte	0x50
+ 1891 0344 12000000 		.4byte	.LVL52
+ 1892 0348 46000000 		.4byte	.LFE4
+ 1893 034c 0100     		.2byte	0x1
+ 1894 034e 5A       		.byte	0x5a
+ 1895 034f 00000000 		.4byte	0
+ 1896 0353 00000000 		.4byte	0
+ 1897              	.LLST20:
+ 1898 0357 00000000 		.4byte	.LVL51
+ 1899 035b 15000000 		.4byte	.LVL53-1
+ 1900 035f 0100     		.2byte	0x1
+ 1901 0361 51       		.byte	0x51
+ 1902 0362 15000000 		.4byte	.LVL53-1
+ 1903 0366 46000000 		.4byte	.LFE4
+ 1904 036a 0400     		.2byte	0x4
+ 1905 036c F3       		.byte	0xf3
+ 1906 036d 01       		.uleb128 0x1
+ 1907 036e 51       		.byte	0x51
+ 1908 036f 9F       		.byte	0x9f
+ 1909 0370 00000000 		.4byte	0
+ 1910 0374 00000000 		.4byte	0
+ 1911              	.LLST21:
+ 1912 0378 00000000 		.4byte	.LVL51
+ 1913 037c 15000000 		.4byte	.LVL53-1
+ 1914 0380 0100     		.2byte	0x1
+ 1915 0382 52       		.byte	0x52
+ 1916 0383 15000000 		.4byte	.LVL53-1
+ 1917 0387 1C000000 		.4byte	.LVL55
+ 1918 038b 0400     		.2byte	0x4
+ 1919 038d F3       		.byte	0xf3
+ 1920 038e 01       		.uleb128 0x1
+ 1921 038f 52       		.byte	0x52
+ 1922 0390 9F       		.byte	0x9f
+ 1923 0391 1C000000 		.4byte	.LVL55
+ 1924 0395 34000000 		.4byte	.LVL58
+ 1925 0399 0100     		.2byte	0x1
+ 1926 039b 55       		.byte	0x55
+ 1927 039c 36000000 		.4byte	.LVL59
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 38
+
+
+ 1928 03a0 46000000 		.4byte	.LFE4
+ 1929 03a4 0100     		.2byte	0x1
+ 1930 03a6 55       		.byte	0x55
+ 1931 03a7 00000000 		.4byte	0
+ 1932 03ab 00000000 		.4byte	0
+ 1933              	.LLST22:
+ 1934 03af 00000000 		.4byte	.LVL51
+ 1935 03b3 15000000 		.4byte	.LVL53-1
+ 1936 03b7 0100     		.2byte	0x1
+ 1937 03b9 53       		.byte	0x53
+ 1938 03ba 15000000 		.4byte	.LVL53-1
+ 1939 03be 46000000 		.4byte	.LFE4
+ 1940 03c2 0400     		.2byte	0x4
+ 1941 03c4 F3       		.byte	0xf3
+ 1942 03c5 01       		.uleb128 0x1
+ 1943 03c6 53       		.byte	0x53
+ 1944 03c7 9F       		.byte	0x9f
+ 1945 03c8 00000000 		.4byte	0
+ 1946 03cc 00000000 		.4byte	0
+ 1947              	.LLST23:
+ 1948 03d0 18000000 		.4byte	.LVL54
+ 1949 03d4 1C000000 		.4byte	.LVL55
+ 1950 03d8 0200     		.2byte	0x2
+ 1951 03da 30       		.byte	0x30
+ 1952 03db 9F       		.byte	0x9f
+ 1953 03dc 1C000000 		.4byte	.LVL55
+ 1954 03e0 38000000 		.4byte	.LVL60
+ 1955 03e4 0100     		.2byte	0x1
+ 1956 03e6 54       		.byte	0x54
+ 1957 03e7 3A000000 		.4byte	.LVL61
+ 1958 03eb 46000000 		.4byte	.LFE4
+ 1959 03ef 0100     		.2byte	0x1
+ 1960 03f1 54       		.byte	0x54
+ 1961 03f2 00000000 		.4byte	0
+ 1962 03f6 00000000 		.4byte	0
+ 1963              		.section	.debug_aranges,"",%progbits
+ 1964 0000 3C000000 		.4byte	0x3c
+ 1965 0004 0200     		.2byte	0x2
+ 1966 0006 00000000 		.4byte	.Ldebug_info0
+ 1967 000a 04       		.byte	0x4
+ 1968 000b 00       		.byte	0
+ 1969 000c 0000     		.2byte	0
+ 1970 000e 0000     		.2byte	0
+ 1971 0010 00000000 		.4byte	.LFB0
+ 1972 0014 1A000000 		.4byte	.LFE0-.LFB0
+ 1973 0018 00000000 		.4byte	.LFB1
+ 1974 001c 2A000000 		.4byte	.LFE1-.LFB1
+ 1975 0020 00000000 		.4byte	.LFB2
+ 1976 0024 2C000000 		.4byte	.LFE2-.LFB2
+ 1977 0028 00000000 		.4byte	.LFB3
+ 1978 002c 7C000000 		.4byte	.LFE3-.LFB3
+ 1979 0030 00000000 		.4byte	.LFB4
+ 1980 0034 46000000 		.4byte	.LFE4-.LFB4
+ 1981 0038 00000000 		.4byte	0
+ 1982 003c 00000000 		.4byte	0
+ 1983              		.section	.debug_ranges,"",%progbits
+ 1984              	.Ldebug_ranges0:
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 39
+
+
+ 1985 0000 00000000 		.4byte	.LFB0
+ 1986 0004 1A000000 		.4byte	.LFE0
+ 1987 0008 00000000 		.4byte	.LFB1
+ 1988 000c 2A000000 		.4byte	.LFE1
+ 1989 0010 00000000 		.4byte	.LFB2
+ 1990 0014 2C000000 		.4byte	.LFE2
+ 1991 0018 00000000 		.4byte	.LFB3
+ 1992 001c 7C000000 		.4byte	.LFE3
+ 1993 0020 00000000 		.4byte	.LFB4
+ 1994 0024 46000000 		.4byte	.LFE4
+ 1995 0028 00000000 		.4byte	0
+ 1996 002c 00000000 		.4byte	0
+ 1997              		.section	.debug_line,"",%progbits
+ 1998              	.Ldebug_line0:
+ 1999 0000 EC010000 		.section	.debug_str,"MS",%progbits,1
+ 1999      02003801 
+ 1999      00000201 
+ 1999      FB0E0D00 
+ 1999      01010101 
+ 2000              	.LASF26:
+ 2001 0000 785F6F66 		.ascii	"x_offset\000"
+ 2001      66736574 
+ 2001      00
+ 2002              	.LASF27:
+ 2003 0009 69735F66 		.ascii	"is_font_inverse_mode\000"
+ 2003      6F6E745F 
+ 2003      696E7665 
+ 2003      7273655F 
+ 2003      6D6F6465 
+ 2004              	.LASF65:
+ 2005 001e 64657374 		.ascii	"dest\000"
+ 2005      00
+ 2006              	.LASF48:
+ 2007 0023 7370695F 		.ascii	"spi_mode\000"
+ 2007      6D6F6465 
+ 2007      00
+ 2008              	.LASF39:
+ 2009 002c 63686970 		.ascii	"chip_enable_level\000"
+ 2009      5F656E61 
+ 2009      626C655F 
+ 2009      6C657665 
+ 2009      6C00
+ 2010              	.LASF24:
+ 2011 003e 666F6E74 		.ascii	"font\000"
+ 2011      00
+ 2012              	.LASF35:
+ 2013 0043 6465626F 		.ascii	"debounce_result_msg\000"
+ 2013      756E6365 
+ 2013      5F726573 
+ 2013      756C745F 
+ 2013      6D736700 
+ 2014              	.LASF74:
+ 2015 0057 75387838 		.ascii	"u8x8_CopyStringLine\000"
+ 2015      5F436F70 
+ 2015      79537472 
+ 2015      696E674C 
+ 2015      696E6500 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 40
+
+
+ 2016              	.LASF2:
+ 2017 006b 73686F72 		.ascii	"short int\000"
+ 2017      7420696E 
+ 2017      7400
+ 2018              	.LASF22:
+ 2019 0075 6770696F 		.ascii	"gpio_and_delay_cb\000"
+ 2019      5F616E64 
+ 2019      5F64656C 
+ 2019      61795F63 
+ 2019      6200
+ 2020              	.LASF52:
+ 2021 0087 74696C65 		.ascii	"tile_width\000"
+ 2021      5F776964 
+ 2021      746800
+ 2022              	.LASF45:
+ 2023 0092 7364615F 		.ascii	"sda_setup_time_ns\000"
+ 2023      73657475 
+ 2023      705F7469 
+ 2023      6D655F6E 
+ 2023      7300
+ 2024              	.LASF44:
+ 2025 00a4 706F7374 		.ascii	"post_reset_wait_ms\000"
+ 2025      5F726573 
+ 2025      65745F77 
+ 2025      6169745F 
+ 2025      6D7300
+ 2026              	.LASF7:
+ 2027 00b7 5F5F7569 		.ascii	"__uint32_t\000"
+ 2027      6E743332 
+ 2027      5F7400
+ 2028              	.LASF4:
+ 2029 00c2 5F5F7569 		.ascii	"__uint16_t\000"
+ 2029      6E743136 
+ 2029      5F7400
+ 2030              	.LASF63:
+ 2031 00cd 75387838 		.ascii	"u8x8_GetStringLineStart\000"
+ 2031      5F476574 
+ 2031      53747269 
+ 2031      6E674C69 
+ 2031      6E655374 
+ 2032              	.LASF73:
+ 2033 00e5 433A5C55 		.ascii	"C:\\Users\\brian\\Documents\\PSoC Creator\\Lab7\\La"
+ 2033      73657273 
+ 2033      5C627269 
+ 2033      616E5C44 
+ 2033      6F63756D 
+ 2034 0112 62372E63 		.ascii	"b7.cydsn\000"
+ 2034      7964736E 
+ 2034      00
+ 2035              	.LASF51:
+ 2036 011b 77726974 		.ascii	"write_pulse_width_ns\000"
+ 2036      655F7075 
+ 2036      6C73655F 
+ 2036      77696474 
+ 2036      685F6E73 
+ 2037              	.LASF12:
+ 2038 0130 75696E74 		.ascii	"uint8_t\000"
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 41
+
+
+ 2038      385F7400 
+ 2039              	.LASF41:
+ 2040 0138 706F7374 		.ascii	"post_chip_enable_wait_ns\000"
+ 2040      5F636869 
+ 2040      705F656E 
+ 2040      61626C65 
+ 2040      5F776169 
+ 2041              	.LASF67:
+ 2042 0151 75387838 		.ascii	"u8x8\000"
+ 2042      00
+ 2043              	.LASF72:
+ 2044 0156 2E2E5C75 		.ascii	"..\\u8g2\\csrc\\u8x8_string.c\000"
+ 2044      3867325C 
+ 2044      63737263 
+ 2044      5C753878 
+ 2044      385F7374 
+ 2045              	.LASF62:
+ 2046 0171 75387838 		.ascii	"u8x8_GetStringLineCnt\000"
+ 2046      5F476574 
+ 2046      53747269 
+ 2046      6E674C69 
+ 2046      6E65436E 
+ 2047              	.LASF23:
+ 2048 0187 6275735F 		.ascii	"bus_clock\000"
+ 2048      636C6F63 
+ 2048      6B00
+ 2049              	.LASF54:
+ 2050 0191 64656661 		.ascii	"default_x_offset\000"
+ 2050      756C745F 
+ 2050      785F6F66 
+ 2050      66736574 
+ 2050      00
+ 2051              	.LASF36:
+ 2052 01a2 75387838 		.ascii	"u8x8_display_info_t\000"
+ 2052      5F646973 
+ 2052      706C6179 
+ 2052      5F696E66 
+ 2052      6F5F7400 
+ 2053              	.LASF33:
+ 2054 01b6 6465626F 		.ascii	"debounce_last_pin_state\000"
+ 2054      756E6365 
+ 2054      5F6C6173 
+ 2054      745F7069 
+ 2054      6E5F7374 
+ 2055              	.LASF9:
+ 2056 01ce 6C6F6E67 		.ascii	"long long int\000"
+ 2056      206C6F6E 
+ 2056      6720696E 
+ 2056      7400
+ 2057              	.LASF31:
+ 2058 01dc 6770696F 		.ascii	"gpio_result\000"
+ 2058      5F726573 
+ 2058      756C7400 
+ 2059              	.LASF46:
+ 2060 01e8 73636B5F 		.ascii	"sck_pulse_width_ns\000"
+ 2060      70756C73 
+ 2060      655F7769 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 42
+
+
+ 2060      6474685F 
+ 2060      6E7300
+ 2061              	.LASF6:
+ 2062 01fb 6C6F6E67 		.ascii	"long int\000"
+ 2062      20696E74 
+ 2062      00
+ 2063              	.LASF3:
+ 2064 0204 5F5F7569 		.ascii	"__uint8_t\000"
+ 2064      6E74385F 
+ 2064      7400
+ 2065              	.LASF19:
+ 2066 020e 64697370 		.ascii	"display_cb\000"
+ 2066      6C61795F 
+ 2066      636200
+ 2067              	.LASF50:
+ 2068 0219 64617461 		.ascii	"data_setup_time_ns\000"
+ 2068      5F736574 
+ 2068      75705F74 
+ 2068      696D655F 
+ 2068      6E7300
+ 2069              	.LASF69:
+ 2070 022c 75387838 		.ascii	"u8x8_GetUTF8Len\000"
+ 2070      5F476574 
+ 2070      55544638 
+ 2070      4C656E00 
+ 2071              	.LASF15:
+ 2072 023c 6C6F6E67 		.ascii	"long double\000"
+ 2072      20646F75 
+ 2072      626C6500 
+ 2073              	.LASF53:
+ 2074 0248 74696C65 		.ascii	"tile_height\000"
+ 2074      5F686569 
+ 2074      67687400 
+ 2075              	.LASF1:
+ 2076 0254 756E7369 		.ascii	"unsigned char\000"
+ 2076      676E6564 
+ 2076      20636861 
+ 2076      7200
+ 2077              	.LASF0:
+ 2078 0262 7369676E 		.ascii	"signed char\000"
+ 2078      65642063 
+ 2078      68617200 
+ 2079              	.LASF10:
+ 2080 026e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2080      206C6F6E 
+ 2080      6720756E 
+ 2080      7369676E 
+ 2080      65642069 
+ 2081              	.LASF14:
+ 2082 0285 75696E74 		.ascii	"uint32_t\000"
+ 2082      33325F74 
+ 2082      00
+ 2083              	.LASF11:
+ 2084 028e 756E7369 		.ascii	"unsigned int\000"
+ 2084      676E6564 
+ 2084      20696E74 
+ 2084      00
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 43
+
+
+ 2085              	.LASF13:
+ 2086 029b 75696E74 		.ascii	"uint16_t\000"
+ 2086      31365F74 
+ 2086      00
+ 2087              	.LASF38:
+ 2088 02a4 75387838 		.ascii	"u8x8_display_info_struct\000"
+ 2088      5F646973 
+ 2088      706C6179 
+ 2088      5F696E66 
+ 2088      6F5F7374 
+ 2089              	.LASF64:
+ 2090 02bd 6C696E65 		.ascii	"line_idx\000"
+ 2090      5F696478 
+ 2090      00
+ 2091              	.LASF43:
+ 2092 02c6 72657365 		.ascii	"reset_pulse_width_ms\000"
+ 2092      745F7075 
+ 2092      6C73655F 
+ 2092      77696474 
+ 2092      685F6D73 
+ 2093              	.LASF16:
+ 2094 02db 75387838 		.ascii	"u8x8_t\000"
+ 2094      5F7400
+ 2095              	.LASF49:
+ 2096 02e2 6932635F 		.ascii	"i2c_bus_clock_100kHz\000"
+ 2096      6275735F 
+ 2096      636C6F63 
+ 2096      6B5F3130 
+ 2096      306B487A 
+ 2097              	.LASF47:
+ 2098 02f7 73636B5F 		.ascii	"sck_clock_hz\000"
+ 2098      636C6F63 
+ 2098      6B5F687A 
+ 2098      00
+ 2099              	.LASF5:
+ 2100 0304 73686F72 		.ascii	"short unsigned int\000"
+ 2100      7420756E 
+ 2100      7369676E 
+ 2100      65642069 
+ 2100      6E7400
+ 2101              	.LASF59:
+ 2102 0317 75387838 		.ascii	"u8x8_char_cb\000"
+ 2102      5F636861 
+ 2102      725F6362 
+ 2102      00
+ 2103              	.LASF61:
+ 2104 0324 63686172 		.ascii	"char\000"
+ 2104      00
+ 2105              	.LASF34:
+ 2106 0329 6465626F 		.ascii	"debounce_state\000"
+ 2106      756E6365 
+ 2106      5F737461 
+ 2106      746500
+ 2107              	.LASF17:
+ 2108 0338 64697370 		.ascii	"display_info\000"
+ 2108      6C61795F 
+ 2108      696E666F 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 44
+
+
+ 2108      00
+ 2109              	.LASF57:
+ 2110 0345 70697865 		.ascii	"pixel_height\000"
+ 2110      6C5F6865 
+ 2110      69676874 
+ 2110      00
+ 2111              	.LASF68:
+ 2112 0352 75387838 		.ascii	"u8x8_DrawUTF8Lines\000"
+ 2112      5F447261 
+ 2112      77555446 
+ 2112      384C696E 
+ 2112      657300
+ 2113              	.LASF56:
+ 2114 0365 70697865 		.ascii	"pixel_width\000"
+ 2114      6C5F7769 
+ 2114      64746800 
+ 2115              	.LASF30:
+ 2116 0371 75746638 		.ascii	"utf8_state\000"
+ 2116      5F737461 
+ 2116      746500
+ 2117              	.LASF37:
+ 2118 037c 75387838 		.ascii	"u8x8_struct\000"
+ 2118      5F737472 
+ 2118      75637400 
+ 2119              	.LASF8:
+ 2120 0388 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2120      20756E73 
+ 2120      69676E65 
+ 2120      6420696E 
+ 2120      7400
+ 2121              	.LASF21:
+ 2122 039a 62797465 		.ascii	"byte_cb\000"
+ 2122      5F636200 
+ 2123              	.LASF40:
+ 2124 03a2 63686970 		.ascii	"chip_disable_level\000"
+ 2124      5F646973 
+ 2124      61626C65 
+ 2124      5F6C6576 
+ 2124      656C00
+ 2125              	.LASF28:
+ 2126 03b5 6932635F 		.ascii	"i2c_address\000"
+ 2126      61646472 
+ 2126      65737300 
+ 2127              	.LASF55:
+ 2128 03c1 666C6970 		.ascii	"flipmode_x_offset\000"
+ 2128      6D6F6465 
+ 2128      5F785F6F 
+ 2128      66667365 
+ 2128      7400
+ 2129              	.LASF25:
+ 2130 03d3 656E636F 		.ascii	"encoding\000"
+ 2130      64696E67 
+ 2130      00
+ 2131              	.LASF29:
+ 2132 03dc 6932635F 		.ascii	"i2c_started\000"
+ 2132      73746172 
+ 2132      74656400 
+ARM GAS  C:\Users\brian\AppData\Local\Temp\ccZiDIUa.s 			page 45
+
+
+ 2133              	.LASF20:
+ 2134 03e8 6361645F 		.ascii	"cad_cb\000"
+ 2134      636200
+ 2135              	.LASF60:
+ 2136 03ef 6C696E65 		.ascii	"line_cnt\000"
+ 2136      5F636E74 
+ 2136      00
+ 2137              	.LASF66:
+ 2138 03f8 75387838 		.ascii	"u8x8_DrawUTF8Line\000"
+ 2138      5F447261 
+ 2138      77555446 
+ 2138      384C696E 
+ 2138      6500
+ 2139              	.LASF71:
+ 2140 040a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2140      43313120 
+ 2140      352E342E 
+ 2140      31203230 
+ 2140      31363036 
+ 2141 043d 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2141      20726576 
+ 2141      6973696F 
+ 2141      6E203233 
+ 2141      37373135 
+ 2142 0470 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2142      66756E63 
+ 2142      74696F6E 
+ 2142      2D736563 
+ 2142      74696F6E 
+ 2143              	.LASF32:
+ 2144 0498 6465626F 		.ascii	"debounce_default_pin_state\000"
+ 2144      756E6365 
+ 2144      5F646566 
+ 2144      61756C74 
+ 2144      5F70696E 
+ 2145              	.LASF58:
+ 2146 04b3 75387838 		.ascii	"u8x8_msg_cb\000"
+ 2146      5F6D7367 
+ 2146      5F636200 
+ 2147              	.LASF18:
+ 2148 04bf 6E657874 		.ascii	"next_cb\000"
+ 2148      5F636200 
+ 2149              	.LASF70:
+ 2150 04c7 75387838 		.ascii	"u8x8_DrawUTF8\000"
+ 2150      5F447261 
+ 2150      77555446 
+ 2150      3800
+ 2151              	.LASF42:
+ 2152 04d5 7072655F 		.ascii	"pre_chip_disable_wait_ns\000"
+ 2152      63686970 
+ 2152      5F646973 
+ 2152      61626C65 
+ 2152      5F776169 
+ 2153              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
